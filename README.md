@@ -42,7 +42,7 @@ shadcn : `/src/shared/shadcn.ts`에 있는 `cn()` 사용
 
 ### [Ky](https://github.com/sindresorhus/ky#readme)
 
-공통 인스턴스 사용하기 : `/src/shared/kyInstance.ts`
+`/src/shared/kyInstance.ts`의 공통 인스턴스를 사용합니다.
 
 ```ts
 import { api } from "@/src/shared/utils/kyInstance";
@@ -58,16 +58,17 @@ await api.post("/login", { json: { username, password } });
 ---
 
 ### [Zustand](https://zustand-demo.pmnd.rs/)
-/src의 각 feature별 stores 디렉토리 내에 store 파일을 생성하여 사용하시면 됩니다.
+`/src`의 각 feature별 `stores` 디렉토리 내에 store 파일을 생성하여 사용합니다.
 
 ---
 
 ### [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+`/src`의 각 feature별 `components` 디렉토리 내에 단위 테스트 코드를 작성합니다.
 
 ---
 
 ### [Playwright](https://playwright.dev/)
-
+`/tests`에 테스트 코드를 작성합니다.
 ```bash
 # 브라우저 설치
 npx playwright install
