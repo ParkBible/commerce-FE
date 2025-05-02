@@ -1,0 +1,8 @@
+{
+    "orders": {
+        "success": true,
+        "data": { "orderId": 12345 },
+        "error": null,
+        "message": "주문이 성공적으로 생성되었습니다."
+    }
+}

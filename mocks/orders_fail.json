@@ -1,0 +1,12 @@
+{
+    "data": {
+        "success": false,
+        "data": null,
+        "error": {
+            "code": "ORD-ERR-005",
+            "message": "재고가 부족하여 주문할 수 없습니다.",
+            "details": { "productId": 10, "requested": 5, "available": 3 }
+        },
+        "message": "재고 부족"
+    }
+}

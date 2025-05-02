@@ -1,18 +1,32 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-    testDir: "./tests",
     timeout: 30 * 1000,
+    retries: 1,
     expect: {
         timeout: 5 * 1000,
     },
     fullyParallel: true,
-    reporter: "html",
-    use: {
-        headless: false,
-        actionTimeout: 0,
-        baseURL: "http://localhost:3000",
-    },
-    retries: 0,
-    workers: 1,
+    reporter: [
+        ["list"],
+        ["html", { outputFolder: "playwright-report", open: "never" }],
+    ],
+    projects: [
+        {
+            name: "shop",
+            testDir: "apps/shop/tests",
+            use: {
+                headless: false,
+                baseURL: "http://localhost:3000",
+            },
+        },
+        {
+            name: "admin",
+            testDir: "apps/admin/tests",
+            use: {
+                headless: false,
+                baseURL: "http://localhost:5173",
+            },
+        },
+    ],
 });
