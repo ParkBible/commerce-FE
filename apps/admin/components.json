@@ -1,21 +1,21 @@
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",
-  "rsc": false,
-  "tsx": true,
-  "tailwind": {
-    "config": "",
-    "css": "src/index.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "aliases": {
-    "components": "@commerce-fe/utils/components",
-    "utils": "@commerce-fe/utils/lib/utils",
-    "ui": "@commerce-fe/utils/components/ui",
-    "lib": "@commerce-fe/utils/lib",
-    "hooks": "@commerce-fe/utils/hooks"
-  },
-  "iconLibrary": "lucide"
+    "$schema": "https://ui.shadcn.com/schema.json",
+    "style": "new-york",
+    "rsc": false,
+    "tsx": true,
+    "tailwind": {
+        "config": "",
+        "css": "src/index.css",
+        "baseColor": "neutral",
+        "cssVariables": true,
+        "prefix": ""
+    },
+    "aliases": {
+        "components": "@commerce-fe/utils/components",
+        "utils": "@commerce-fe/utils/lib/utils",
+        "ui": "@commerce-fe/utils/components/ui",
+        "lib": "@commerce-fe/utils/lib",
+        "hooks": "@commerce-fe/utils/hooks"
+    },
+    "iconLibrary": "lucide"
 }
