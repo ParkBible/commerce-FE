@@ -115,10 +115,10 @@ fetcher(api.get("users"))
 - 기존 ESLint + Prettier 조합을 대체하며, 빠른 실행 속도를 위해 사용하였습니다.
 ```bash
 # lint 검사하기
-npm run lint
+pnpm run lint
 
 # 자동 포맷팅하기
-npm run format
+pnpm run format
 ```
 
 - VSCode 사용시 Biome 익스텐션 설치하면 저장할 때 자동으로 포맷팅됩니다. (참고: `/.vscode/settings.json`)
