@@ -18,7 +18,7 @@ export const BannerCard: React.FC<BannerCardProps> = ({ image, title, descriptio
   ));
   
   return (
-    <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-[214px] h-[550px]">
+    <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-[214px] h-[580px]">
       <div className="flex relative flex-col justify-between h-full">
         <img
           src={image}

@@ -34,7 +34,7 @@ const Products: React.FC = () => {
       ],
       image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/8bbce382ddc1ef5815fb52b37f81695001108d91?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd',
       features: [
-        { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/ec3b1979ebd42585e8a43f121a5a2792cd9dc58c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '아이스 레시피' },
+        { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/ec3b1979ebd42585e8a43f121a5a2792cd9dc58c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '아이스' },
         { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/04dabf840c4cf0b87799c6e096929c365ec2909c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '80ml' }
       ],
       name: '액티브',
@@ -49,8 +49,8 @@ const Products: React.FC = () => {
       ],
       image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/8bbce382ddc1ef5815fb52b37f81695001108d91?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd',
       features: [
-        { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/04dabf840c4cf0b87799c6e096929c365ec2909c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '40ml' },
-        { strength: 8, value: '강도' }
+        { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/ec3b1979ebd42585e8a43f121a5a2792cd9dc58c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '아이스' },
+        { icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/04dabf840c4cf0b87799c6e096929c365ec2909c?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd', value: '80ml' }
       ],
       name: '일 카페',
       description: '강렬하고 풍부한 맛과 향의 이탈리아 에스프레소',

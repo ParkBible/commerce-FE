@@ -39,10 +39,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   outOfStock = false
 }) => {
   return (
-    <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[550px] min-w-[200px] w-[214px] overflow-hidden">
+    <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[580px] min-w-[200px] w-[214px] overflow-hidden">
       <div className="flex flex-col flex-1 w-full">
         <div className="w-full">
-          <div className="flex flex-wrap gap-1 items-start w-full text-xs tracking-tight leading-snug text-center h-[40px]">
+          <div className="flex flex-wrap gap-1 items-start w-full text-xs tracking-tight leading-snug text-center mb-4">
             {badges.map((badge, index) => (
               <Badge key={index} variant={badge.variant}>
                 {badge.text}
@@ -69,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </div>
 
-          <div className="mt-4 w-full">
+          <div className="mt-12 w-full">
             <div className="flex flex-col items-start w-full">
               <h3 className="text-base font-bold tracking-tight leading-snug text-black h-[24px] overflow-hidden">
                 {name}
@@ -90,7 +90,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        <div className="mt-auto pt-4 pb-2">
+        <div className="mt-auto pt-4 pb-8">
           <AddToCartButton disabled={outOfStock} />
         </div>
       </div>
