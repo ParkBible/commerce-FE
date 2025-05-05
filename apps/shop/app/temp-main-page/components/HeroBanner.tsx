@@ -12,7 +12,7 @@ function HeroBanner() {
         aria-hidden="true"
       />
       <div className="relative flex flex-col justify-center px-6 py-20 w-full min-h-[270px]">
-        <div className="mx-auto w-full max-w-[1240px]">
+        <div className="mx-auto w-full max-w-[1240px] text-center">
           <h1 className="text-6xl font-bold tracking-tight leading-tight text-white max-md:text-4xl">
             801 버츄오 커피
           </h1>

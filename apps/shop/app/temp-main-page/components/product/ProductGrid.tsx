@@ -12,7 +12,6 @@ type BannerItem = {
 };
 
 type ProductItem = ProductCardProps;
-
 type ProductGridItem = BannerItem | ProductItem;
 
 interface ProductGridProps {

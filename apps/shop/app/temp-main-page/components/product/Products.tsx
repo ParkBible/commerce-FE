@@ -4,13 +4,6 @@ import React from 'react';
 import { FilterBar } from './FilterBar';
 import { ProductGrid } from './ProductGrid';
 
-type Banner = {
-  type: 'banner';
-  image: string;
-  title: string;
-  description: string;
-};
-
 const Products: React.FC = () => {
   const products = [
     {

@@ -27,17 +27,30 @@ const categories = [
 
 export default function CategoryGrid() {
   return (
-    <section className="flex flex-col items-start gap-8 py-16 px-6">
-      <h2 className="text-3xl font-bold">카테고리</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-        {categories.map((category, index) => (
-          <CategoryItem
-            key={index}
-            title={category.title}
-            description={category.description}
-            imageUrl={category.imageUrl}
-          />
-        ))}
+    <section className="py-8 px-6">
+      <div className="mx-auto w-full max-w-[1240px]">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">카테고리</h2>
+          <div className="flex space-x-2">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300">
+              &lt;
+            </button>
+            <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300">
+              &gt;
+            </button>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+          {categories.map((category, index) => (
+            <CategoryItem
+              key={index}
+              title={category.title}
+              description={category.description}
+              imageUrl={category.imageUrl}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
