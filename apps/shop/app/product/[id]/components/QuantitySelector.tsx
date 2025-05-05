@@ -9,21 +9,19 @@ export const QuantitySelector = () => {
   const decrement = () => setQuantity(prev => Math.max(1, prev - 1));
 
   return (
-    <div className="flex overflow-hidden gap-10 justify-between items-center px-5 py-3.5 text-black whitespace-nowrap bg-zinc-100 min-h-[52px] rounded-[62px]">
-      <button onClick={decrement}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/73e8bbe3a4ae569926335bac1992ed85aa3eba42?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
-          className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
-          alt="Decrease quantity"
-        />
+    <div className="flex items-center border border-gray-200 rounded-lg w-[120px]">
+      <button 
+        onClick={decrement}
+        className="px-3 py-2 text-gray-500 hover:text-gray-700"
+      >
+        -
       </button>
-      <span className="self-stretch my-auto">{quantity}</span>
-      <button onClick={increment}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/402d7bbc33b2251467686672f2fc464f17608f16?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
-          className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
-          alt="Increase quantity"
-        />
+      <span className="flex-1 text-center">{quantity}</span>
+      <button 
+        onClick={increment}
+        className="px-3 py-2 text-gray-500 hover:text-gray-700"
+      >
+        +
       </button>
     </div>
   );

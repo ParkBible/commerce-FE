@@ -10,16 +10,17 @@ import Products from "./components/product/Products";
 import Footer from "./components/Footer";
 
 export default function TempMainPage() {
-
   return (
-    <div className="flex flex-col mx-auto w-[1440px] bg-white p-6 rounded-lg shadow-md border border-gray-200 mt-8 max-w-full">
-        <InputDesign />
-        <Tags />
+    <main className="flex flex-col bg-white">
+      <InputDesign />
+      <Tags />
+      <div className="flex flex-col mx-auto w-full max-w-[1240px]">
         <HeroBanner />
         <CategoryGrid />
         <CoffeeLetter />
         <Products />
-        <Footer />
-    </div>
+      </div>
+      <Footer />
+    </main>
   );
 } 

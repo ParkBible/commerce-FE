@@ -27,7 +27,7 @@ const categories = [
 
 export default function CategoryGrid() {
   return (
-    <section className="flex flex-col items-start gap-8 self-stretch px-40 py-16">
+    <section className="flex flex-col items-start gap-8 py-16 px-6">
       <h2 className="text-3xl font-bold">카테고리</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
         {categories.map((category, index) => (

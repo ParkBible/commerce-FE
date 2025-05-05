@@ -67,7 +67,7 @@ const Products: React.FC = () => {
   ];
 
   return (
-    <main className="flex flex-col items-start self-stretch px-40 py-16">
+    <main className="flex flex-col items-start w-full py-16 px-6">
       <FilterBar />
       <section className="mt-10 w-full">
         <ProductGrid products={products} />

@@ -3,7 +3,7 @@ import * as React from "react";
 
 export default function CoffeeLetter() {
   return (
-    <article className="flex items-center gap-10 self-stretch px-40 py-10">
+    <article className="flex flex-col md:flex-row items-center gap-10 py-10 px-6">
       <section className="overflow-hidden grow shrink self-stretch my-auto leading-snug text-black whitespace-nowrap rounded-xl min-w-60 w-[559px] max-md:max-w-full">
         <div className="flex relative flex-col items-start px-14 py-24 w-full min-h-[371px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
           <img
@@ -52,7 +52,7 @@ export default function CoffeeLetter() {
             여유를 찾아 떠나 보시는 건 어떨까요?
           </h3>
         </div>
-        <button className="gap-2.5 self-stretch mt-6 text-base font-semibold tracking-tight text-black whitespace-nowrap border-b-2 border-solid border-b-[color:var(--Normal-Strong,#000)] min-h-12 w-[55px]">
+        <button className="gap-2.5 self-start mt-6 text-base font-semibold tracking-tight text-black whitespace-nowrap border-b-2 border-solid border-b-[color:var(--Normal-Strong,#000)] min-h-12 w-[55px]">
           보러가기
         </button>
       </section>
