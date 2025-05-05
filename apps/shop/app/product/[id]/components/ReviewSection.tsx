@@ -68,7 +68,7 @@ export const ReviewSection = () => {
       </div>
 
       <button className="overflow-hidden gap-3 self-center px-11 py-4 mt-3.5 max-w-full text-base font-medium text-black border border-solid border-black border-opacity-10 min-h-[52px] rounded-[62px] w-[230px] max-md:px-5">
-        Load More Reviews
+        더보기
       </button>
     </section>
   );

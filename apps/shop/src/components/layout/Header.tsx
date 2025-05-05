@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 
-function PCHeaderTop() {
+function Header() {
   return (
     <div className="w-full bg-white border-b border-solid border-b-[color:var(--Line-Sub2,rgba(112,115,124,0.08))]">
       <header className="flex flex-wrap gap-8 items-center px-6 py-4 mx-auto max-w-[1240px]">
@@ -43,4 +43,4 @@ function PCHeaderTop() {
   );
 }
 
-export default PCHeaderTop;
+export default Header; 

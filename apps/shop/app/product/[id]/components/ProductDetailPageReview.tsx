@@ -1,7 +1,5 @@
 "use client";
 import * as React from "react";
-import { NavigationBar } from "./NavigationBar";
-// import { Breadcrumb } from "./Breadcrumb";
 import { ProductGallery } from "./ProductGallery";
 import { ProductInfo } from "./ProductInfo";
 import { ReviewSection } from "./ReviewSection";
@@ -16,7 +14,6 @@ export const ProductDetailPageReview = ({ productId }: ProductDetailPageReviewPr
 
   return (
     <main className="flex overflow-hidden flex-col bg-white">
-      <NavigationBar />
       <div className="flex flex-col mx-auto w-full max-w-[1240px] max-md:max-w-full">
         {/* <Breadcrumb /> */}
         <div className="mt-10 max-md:max-w-full">
@@ -52,18 +49,6 @@ export const ProductDetailPageReview = ({ productId }: ProductDetailPageReviewPr
 
         {activeTab === 'reviews' && <ReviewSection />}
       </div>
-      
-      <footer className="mt-20 w-full bg-black text-white py-10">
-        <div className="mx-auto max-w-[1240px] px-6">
-          <div className="flex flex-col items-start">
-            <h2 className="text-xl font-bold">801 COFFEE</h2>
-            <p className="mt-4 text-sm opacity-80">We are a residential interior design firm located in Portland. Our boutique studio offers more than.</p>
-            <div className="flex gap-4 mt-6">
-              {/* SNS 아이콘들 */}
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }; 
