@@ -7,7 +7,7 @@ export const Breadcrumb = () => {
           Home
         </a>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e"
           className="object-contain shrink-0 self-stretch my-auto w-4 aspect-square"
           alt="Breadcrumb separator"
         />
@@ -17,7 +17,7 @@ export const Breadcrumb = () => {
           Shop
         </a>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e"
           className="object-contain shrink-0 self-stretch my-auto w-4 aspect-square"
           alt="Breadcrumb separator"
         />
@@ -27,7 +27,7 @@ export const Breadcrumb = () => {
           Men
         </a>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0420c8252a0cfd051740f756610df1a404ea63e"
           className="object-contain shrink-0 self-stretch my-auto w-4 aspect-square"
           alt="Breadcrumb separator"
         />

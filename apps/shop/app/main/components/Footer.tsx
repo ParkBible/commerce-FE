@@ -17,22 +17,22 @@ function Footer() {
         </div>
         <nav className="flex gap-9 justify-between items-start mt-6 max-w-full w-[173px]">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3e078337bf1f31e629d97c47d1d3170861c10de5?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3e078337bf1f31e629d97c47d1d3170861c10de5"
             alt="Social Media Icon"
             className="object-contain shrink-0 w-4 aspect-square"
           />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9b4e7697a32324c8c6f90476755b5923bf64465a?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9b4e7697a32324c8c6f90476755b5923bf64465a"
             alt="Social Media Icon"
             className="object-contain shrink-0 w-4 aspect-square"
           />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2003206ccaacf8618b22aa73146d74de847f0f0f?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2003206ccaacf8618b22aa73146d74de847f0f0f"
             alt="Social Media Icon"
             className="object-contain shrink-0 w-4 aspect-square"
           />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c5001bf5c5a35a6e7b9b4af991c16445650d8b6d?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c5001bf5c5a35a6e7b9b4af991c16445650d8b6d"
             alt="Social Media Icon"
             className="object-contain shrink-0 w-4 aspect-square"
           />

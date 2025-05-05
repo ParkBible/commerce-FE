@@ -26,7 +26,7 @@ export const ReviewCard = ({
               <span className="self-stretch my-auto">{author}</span>
               {verified && (
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ace4c826578982eb5797cbeec9cc33d9e8c3bb96?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ace4c826578982eb5797cbeec9cc33d9e8c3bb96"
                   className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
                   alt="Verified purchaser"
                 />
@@ -39,7 +39,7 @@ export const ReviewCard = ({
         </div>
         <button className="flex gap-3.5 items-start w-6">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/745d047f17c2cf3a32a8cd364da6480bb8c625b1?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/745d047f17c2cf3a32a8cd364da6480bb8c625b1"
             className="object-contain w-6 aspect-square"
             alt="More options"
           />

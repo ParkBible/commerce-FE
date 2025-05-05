@@ -10,7 +10,7 @@ export const NavigationBar = () => {
             </h1>
             <div className="flex overflow-hidden gap-3 items-center px-4 py-2 text-base text-black bg-zinc-100 rounded-[32px] w-[500px]">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4980b5e907fdf8fae229011eb2af12e417640a5f?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4980b5e907fdf8fae229011eb2af12e417640a5f"
                 className="object-contain w-5 aspect-square"
                 alt="Search icon"
               />
@@ -23,14 +23,14 @@ export const NavigationBar = () => {
             <div className="flex gap-4 items-center">
               <button>
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6b5e3f50c44bce7c8563de675dc18441131747a3?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6b5e3f50c44bce7c8563de675dc18441131747a3"
                   className="object-contain w-5 aspect-square"
                   alt="장바구니"
                 />
               </button>
               <button>
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/97301dab40dc819ef659872c1b3cc1eb4fd0e9f2?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/97301dab40dc819ef659872c1b3cc1eb4fd0e9f2"
                   className="object-contain w-5 aspect-square"
                   alt="계정"
                 />

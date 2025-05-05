@@ -12,7 +12,7 @@ export const ReviewSection = () => {
         <div className="flex flex-1 gap-2.5 items-start">
           <button className="flex overflow-hidden justify-between items-center p-3 w-12 h-12 bg-zinc-100 min-h-12 rounded-[62px]">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/bab462c8b4146379e69dbbe7df32c0acfb2b5c5b?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/bab462c8b4146379e69dbbe7df32c0acfb2b5c5b"
               className="object-contain self-stretch my-auto w-6 aspect-square"
               alt="Filter"
             />
@@ -20,7 +20,7 @@ export const ReviewSection = () => {
           <button className="flex overflow-hidden gap-5 justify-between items-center px-5 py-4 text-base font-medium text-black whitespace-nowrap bg-zinc-100 min-h-12 rounded-[62px] w-[120px]">
             <span className="self-stretch my-auto">Latest</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/39bf37b5776bcb17763e8a8f1fb61bd1cae26c59?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/39bf37b5776bcb17763e8a8f1fb61bd1cae26c59"
               className="object-contain shrink-0 self-stretch my-auto w-4 aspect-square"
               alt="Sort"
             />

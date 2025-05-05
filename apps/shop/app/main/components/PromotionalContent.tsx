@@ -7,14 +7,14 @@ export default function CoffeeLetter() {
       <section className="overflow-hidden grow shrink self-stretch my-auto leading-snug text-black whitespace-nowrap rounded-xl min-w-60 w-[559px] max-md:max-w-full">
         <div className="flex relative flex-col items-start px-14 py-24 w-full min-h-[371px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39753b2bf47d65b84b124b51611257249f06b6fb?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39753b2bf47d65b84b124b51611257249f06b6fb"
             alt="Background pattern"
             className="object-cover absolute inset-0 size-full"
           />
           <div className="flex overflow-hidden relative gap-6 items-center p-4 bg-white rounded">
             <div className="flex gap-3 items-center self-stretch my-auto">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ebd7bc5ad020284f520fbe10b3c02ad5224ecb81?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ebd7bc5ad020284f520fbe10b3c02ad5224ecb81"
                 alt="Coffee product"
                 className="object-contain shrink-0 self-stretch my-auto rounded-sm aspect-square w-[60px]"
               />
@@ -24,18 +24,18 @@ export default function CoffeeLetter() {
               </div>
             </div>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c3389f8171eec06884ac09c240888fc650ef88dc?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c3389f8171eec06884ac09c240888fc650ef88dc"
               alt="Arrow icon"
               className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
             />
           </div>
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7390e55305441f67617e97da935194d032e660d?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7390e55305441f67617e97da935194d032e660d"
             alt="Decorative element 1"
             className="object-contain mt-1.5 ml-24 w-6 aspect-square max-md:ml-2.5"
           />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7390e55305441f67617e97da935194d032e660d?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f7390e55305441f67617e97da935194d032e660d"
             alt="Decorative element 2"
             className="object-contain self-center mt-5 ml-12 w-6 aspect-square"
           />

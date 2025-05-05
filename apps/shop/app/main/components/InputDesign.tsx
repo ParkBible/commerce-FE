@@ -11,7 +11,7 @@ function PCHeaderTop() {
 
         <div className="flex flex-wrap flex-1 shrink gap-2 items-center self-stretch p-4 my-auto text-sm tracking-tight leading-snug rounded-xl basis-0 bg-neutral-100 min-h-14 min-w-60 text-neutral-700 max-md:max-w-full">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb040e39632d075dcdf31086c7ed0bea3c66aeb6?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb040e39632d075dcdf31086c7ed0bea3c66aeb6"
             alt="Search"
             className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
           />
@@ -25,14 +25,14 @@ function PCHeaderTop() {
         <nav className="flex gap-6 justify-center items-center self-stretch my-auto">
           <button className="focus:outline-none">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83c3984fea3767c661c7b9a7ae20f706764920a?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83c3984fea3767c661c7b9a7ae20f706764920a"
               alt="Navigation Icon 1"
               className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
             />
           </button>
           <button className="focus:outline-none">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb40dd9fddf419c3fe59ba9750479588879625e9?placeholderIfAbsent=true&apiKey=95b922efedab48eaaced6331a37c6fcd"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb40dd9fddf419c3fe59ba9750479588879625e9"
               alt="Navigation Icon 2"
               className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
             />
