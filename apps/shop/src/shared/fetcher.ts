@@ -3,8 +3,6 @@ type ApiResponse<T> = {
     data: T | null;
     error: {
         code: string;
-        message?: string;
-        details?: Record<string, unknown>;
     } | null;
     message?: string;
 };
@@ -39,12 +37,9 @@ const createFetcher = (url: string, getHeaders?: () => HeadersInit) => {
         }
 
         if (!res.ok || !json.success) {
-            const baseError = new Error(
-                json.error?.message || "알 수 없는 오류",
-            );
+            const baseError = new Error();
             const error: CustomError = Object.assign(baseError, {
                 code: json.error?.code,
-                details: json.error?.details,
             });
 
             throw error;
