@@ -1,10 +1,10 @@
 "use client";
 
-import Tags from "./components/Tags";
-import HeroBanner from "./components/HeroBanner";
-import CategoryGrid from "./components/CategoryGrid";
-import CoffeeLetter from "./components/PromotionalContent";
-import Products from "./components/product/Products";
+import Tags from "@/src/features/main/components/Tags";
+import HeroBanner from "@/src/features/main/components/HeroBanner";
+import CategoryGrid from "@/src/features/main/components/CategoryGrid";
+import CoffeeLetter from "@/src/features/main/components/PromotionalContent";
+import Products from "@/src/features/main/components/product/Products";
 
 export default function TempMainPage() {
   return (
