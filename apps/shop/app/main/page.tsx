@@ -1,5 +1,3 @@
-"use client";
-
 import Tags from "@/src/features/main/components/Tags";
 import HeroBanner from "@/src/features/main/components/HeroBanner";
 import CategoryGrid from "@/src/features/main/components/CategoryGrid";

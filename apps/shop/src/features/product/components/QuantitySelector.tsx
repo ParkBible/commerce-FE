@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 
 // QuantitySelector 컴포넌트

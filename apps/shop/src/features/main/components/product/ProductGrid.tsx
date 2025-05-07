@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { BannerCard } from './BannerCard';
 import { ProductCard, ProductCardProps } from './ProductCard';

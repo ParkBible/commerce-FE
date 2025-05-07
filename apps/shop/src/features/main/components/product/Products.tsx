@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { FilterBar } from './FilterBar';
 import { ProductGrid } from './ProductGrid';

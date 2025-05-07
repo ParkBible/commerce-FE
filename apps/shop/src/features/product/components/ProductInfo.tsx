@@ -1,4 +1,3 @@
-"use client";
 import { StarRating } from "./StarRating";
 import { QuantitySelector } from "./QuantitySelector";
 
