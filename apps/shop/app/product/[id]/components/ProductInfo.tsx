@@ -12,9 +12,6 @@ export const ProductInfo = () => {
           <div className="flex gap-2 items-start">
             <StarRating rating={4.5} />
           </div>
-          <div className="text-sm text-black">
-            4.5/5
-          </div>
         </div>
         <div className="flex gap-1 mt-3 text-2xl font-bold text-green-700">
           <span>₩</span>
