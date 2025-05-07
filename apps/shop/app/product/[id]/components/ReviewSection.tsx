@@ -4,24 +4,24 @@ import { ReviewCard } from "./ReviewCard";
 export const ReviewSection = () => {
   return (
     <section className="mt-6 w-full max-md:max-w-full">
-      <div className="flex flex-wrap gap-10 w-full max-md:max-w-full">
-        <div className="flex flex-1 gap-1 my-auto">
-          <h2 className="grow text-2xl font-bold text-black">All Reviews</h2>
+      <div className="flex flex-wrap justify-between w-full max-md:max-w-full">
+        <div className="flex gap-1 my-auto">
+          <h2 className="text-2xl font-bold text-black">All Reviews</h2>
           <span className="my-auto text-base leading-none text-black">(451)</span>
         </div>
-        <div className="flex flex-1 gap-2.5 items-start">
-          <button className="flex overflow-hidden justify-between items-center p-3 w-12 h-12 bg-zinc-100 min-h-12 rounded-[62px]">
+        <div className="flex gap-2.5 items-center">
+          <button className="flex overflow-hidden justify-center items-center px-3 h-12 bg-zinc-100 min-h-12 rounded-[62px] w-12">
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/bab462c8b4146379e69dbbe7df32c0acfb2b5c5b"
-              className="object-contain self-stretch my-auto w-6 aspect-square"
+              className="object-contain w-6 aspect-square"
               alt="Filter"
             />
           </button>
-          <button className="flex overflow-hidden gap-5 justify-between items-center px-5 py-4 text-base font-medium text-black whitespace-nowrap bg-zinc-100 min-h-12 rounded-[62px] w-[120px]">
-            <span className="self-stretch my-auto">Latest</span>
+          <button className="flex overflow-hidden gap-5 justify-between items-center px-5 h-12 text-base font-medium text-black whitespace-nowrap bg-zinc-100 min-h-12 rounded-[62px] w-[120px]">
+            <span className="my-auto">Latest</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/39bf37b5776bcb17763e8a8f1fb61bd1cae26c59"
-              className="object-contain shrink-0 self-stretch my-auto w-4 aspect-square"
+              className="object-contain w-4 aspect-square"
               alt="Sort"
             />
           </button>
@@ -67,9 +67,11 @@ export const ReviewSection = () => {
         />
       </div>
 
-      <button className="overflow-hidden gap-3 self-center px-11 py-4 mt-3.5 max-w-full text-base font-medium text-black border border-solid border-black border-opacity-10 min-h-[52px] rounded-[62px] w-[230px] max-md:px-5">
-        더보기
-      </button>
+      <div className="flex justify-center mt-3.5">
+        <button className="overflow-hidden gap-3 px-11 py-4 max-w-full text-base font-medium text-black border border-solid border-black border-opacity-10 min-h-[52px] rounded-[62px] w-[230px] max-md:px-5">
+          더보기
+        </button>
+      </div>
     </section>
   );
 }; 
