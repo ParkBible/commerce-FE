@@ -16,7 +16,15 @@ const SAMPLE_PRODUCT = {
     "화사한 꽃향과 은은한 과일향, 달콤한 시트러스 산미가 특징입니다.",
     "직화 로스팅으로 고소한 풍미가 일품이며, 카페인 함량이 적어 밤에도 안심하고 즐기실 수 있습니다.",
     "아이스 커피로도 훌륭한 맛을 자랑합니다."
-  ]
+  ],
+  details: {
+    imageUrl: "/images/coffee.jpg",
+    imageAlt: "에티오피아 예가체프 G1 싱글 오리진 상세 이미지",
+    backgroundColor: "#e5d9c1",
+    title: "에티오피아 예가체프\nG1 싱글 오리진",
+    description: "화사한 꽃향과 달콤한 과일향이 어우러진 최고급 에티오피아 원두로 만든 프리미엄 커피",
+    notice: "* 로스팅 후 2주 이내의 신선한 원두로 배송됩니다."
+  }
 };
 
 // ProductDetailPageReview 컴포넌트
@@ -75,7 +83,16 @@ export const ProductDetailPageReview = ({ productId }: ProductDetailPageReviewPr
         </nav>
         <hr className="h-px border border-solid border-gray-200 border-opacity-50 max-md:max-w-full" />
 
-        {activeTab === 'details' && <ProductDetails />}
+        {activeTab === 'details' && (
+          <ProductDetails 
+            imageUrl={product.details.imageUrl}
+            imageAlt={product.details.imageAlt}
+            backgroundColor={product.details.backgroundColor}
+            title={product.details.title}
+            description={product.details.description}
+            notice={product.details.notice}
+          />
+        )}
         {activeTab === 'reviews' && <ReviewSection />}
       </div>
     </main>
