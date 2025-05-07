@@ -1,4 +1,4 @@
-import { ProductDetailPageReview } from "./components";
+import { ProductDetailPageReview } from "@/src/features/product/components";
 import { use } from "react";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
