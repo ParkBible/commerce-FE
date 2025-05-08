@@ -37,19 +37,51 @@ export default function CategoryGrid() {
         <section className="py-8 px-6">
             <div className="mx-auto w-full max-w-[1240px]">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-bold">카테고리</h2>
-                    <div className="flex space-x-2">
+                    <h2 className="text-2xl font-bold">버츄오</h2>
+                    <div className="flex space-x-4">
                         <button
                             type="button"
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300"
+                            className="flex items-center justify-center p-1"
+                            aria-label="이전"
                         >
-                            &lt;
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 32 32"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M20 8L12 16L20 24"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
                         </button>
                         <button
                             type="button"
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300"
+                            className="flex items-center justify-center p-1"
+                            aria-label="다음"
                         >
-                            &gt;
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 32 32"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 8L20 16L12 24"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
                         </button>
                     </div>
                 </div>
