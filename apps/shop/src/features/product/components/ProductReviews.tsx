@@ -21,7 +21,7 @@ export function ProductReviews({
             <div className="flex">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <svg
-                        key={`star-${rating}-${i}`}
+                        key={`star-position-${i}-filled-${i < rating}`}
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"

@@ -1,9 +1,0 @@
-export { ProductDetailPageReview } from "./ProductDetailPageReview";
-export { ProductInfo } from "./ProductInfo";
-export { StarRating } from "./StarRating";
-export { ProductDetails } from "./ProductDetails";
-export { ReviewCard } from "./ReviewCard";
-export { ProductGallery } from "./ProductGallery";
-export { Breadcrumb } from "./Breadcrumb";
-export { QuantitySelector } from "./QuantitySelector";
-export { ReviewSection } from "./ReviewSection";
