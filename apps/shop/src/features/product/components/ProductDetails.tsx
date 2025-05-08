@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState, Fragment } from "react";
 import type { ProductType } from "../types";
 
 interface ProductDetailsProps {
@@ -8,7 +8,7 @@ interface ProductDetailsProps {
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
-    const [isExpanded, setIsExpanded] = React.useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const getRatingBar = (level: number, maxLevel = 5) => {
         return (

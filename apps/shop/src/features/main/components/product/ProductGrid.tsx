@@ -1,4 +1,3 @@
-import type React from "react";
 import { BannerCard } from "./BannerCard";
 import { ProductCard, type ProductCardProps } from "./ProductCard";
 
@@ -17,7 +16,7 @@ interface ProductGridProps {
     products: ProductGridItem[];
 }
 
-export const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
+export const ProductGrid = ({ products }: ProductGridProps) => {
     return (
         <div className="flex flex-wrap gap-4 items-start w-full max-md:max-w-full">
             {products.map((product, index) => {

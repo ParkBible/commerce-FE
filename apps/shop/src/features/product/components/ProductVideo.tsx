@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export function ProductVideo() {
     return (
         <section className="bg-white py-16">

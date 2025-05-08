@@ -1,5 +1,3 @@
-import * as React from "react";
-
 function SubNav() {
     return (
         <div className="w-full bg-black text-white">

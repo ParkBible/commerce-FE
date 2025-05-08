@@ -1,5 +1,3 @@
-import * as React from "react";
-
 function HeroBanner() {
     return (
         <section className="relative w-full">

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ProductPage } from "@/src/features/product/components/ProductPage";
 import {
     mockProduct,

@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { RecommendedProductType } from "../types";
 
 interface RecommendedProductsProps {

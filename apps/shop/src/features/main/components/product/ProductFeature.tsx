@@ -1,5 +1,3 @@
-import type React from "react";
-
 interface ProductFeatureProps {
     icon?: string;
     value: string;
@@ -7,12 +5,12 @@ interface ProductFeatureProps {
     strength?: number;
 }
 
-export const ProductFeature: React.FC<ProductFeatureProps> = ({
+export const ProductFeature = ({
     icon,
     value,
     label,
     strength,
-}) => {
+}: ProductFeatureProps) => {
     if (strength) {
         return (
             <div className="flex flex-col items-center self-stretch my-auto w-12">

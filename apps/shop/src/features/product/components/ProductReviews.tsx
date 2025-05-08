@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import type { ReviewType } from "../types";
 
 interface ProductReviewsProps {
@@ -14,7 +14,7 @@ export function ProductReviews({
     totalRating,
     ratingCounts,
 }: ProductReviewsProps) {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     const renderStars = (rating: number) => {
         return (

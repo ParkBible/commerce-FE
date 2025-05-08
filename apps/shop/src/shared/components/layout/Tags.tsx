@@ -1,5 +1,3 @@
-import * as React from "react";
-
 function Tags() {
     return (
         <div className="w-full bg-white border-b border-gray-100">

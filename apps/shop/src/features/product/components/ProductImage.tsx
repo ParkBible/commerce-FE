@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 
 interface ProductImageProps {
     images: string[];
@@ -8,7 +8,7 @@ interface ProductImageProps {
 }
 
 export function ProductImage({ images, title }: ProductImageProps) {
-    const [currentImage, setCurrentImage] = React.useState(0);
+    const [currentImage, setCurrentImage] = useState(0);
 
     // 메인 이미지가 없는 경우 기본 이미지 사용
     const mainImage =

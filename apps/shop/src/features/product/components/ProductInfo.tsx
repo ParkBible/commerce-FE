@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import type { ProductType } from "../types";
 
 interface ProductInfoProps {
@@ -8,7 +8,7 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
-    const [quantity, setQuantity] = React.useState(10);
+    const [quantity, setQuantity] = useState(10);
 
     const handleQuantityChange = (newQuantity: number) => {
         setQuantity(newQuantity);

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export default function CoffeeLetter() {
     return (
         <article className="flex flex-col md:flex-row items-center gap-10 py-10 px-6">

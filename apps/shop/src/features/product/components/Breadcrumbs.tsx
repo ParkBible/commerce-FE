@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment } from "react";
 import Link from "next/link";
 
 interface BreadcrumbsProps {
@@ -14,7 +14,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         <nav className="py-10" aria-label="breadcrumbs">
             <ol className="flex items-center">
                 {items.map((item, index) => (
-                    <React.Fragment key={`${item.label}-${index}`}>
+                    <Fragment key={`${item.label}-${index}`}>
                         {index > 0 && (
                             <li className="mx-2">
                                 <svg
@@ -59,7 +59,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                                 </span>
                             )}
                         </li>
-                    </React.Fragment>
+                    </Fragment>
                 ))}
             </ol>
         </nav>

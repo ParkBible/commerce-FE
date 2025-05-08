@@ -1,6 +1,4 @@
-import type React from "react";
-
-export const FilterBar: React.FC = () => {
+export const FilterBar = () => {
     return (
         <div className="flex flex-wrap gap-6 items-center w-full text-base tracking-tight leading-snug whitespace-nowrap max-md:max-w-full">
             <button

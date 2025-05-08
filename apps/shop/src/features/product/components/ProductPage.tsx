@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { ProductImage } from "./ProductImage";
 import { ProductInfo } from "./ProductInfo";

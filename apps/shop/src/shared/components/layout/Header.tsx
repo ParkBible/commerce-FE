@@ -1,5 +1,4 @@
 import SearchProduct from "@/src/features/product/components/SearchProduct";
-import * as React from "react";
 import Tags from "./Tags";
 import SubNav from "./SubNav";
 
