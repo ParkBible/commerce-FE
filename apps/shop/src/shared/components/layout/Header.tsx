@@ -1,6 +1,6 @@
-"use client";
 import SearchProduct from "@/src/features/product/components/SearchProduct";
-import * as React from "react";
+import Tags from "./Tags";
+import SubNav from "./SubNav";
 
 function Header() {
     return (
@@ -29,6 +29,8 @@ function Header() {
                     </button>
                 </nav>
             </header>
+            <Tags />
+            <SubNav />
         </div>
     );
 }

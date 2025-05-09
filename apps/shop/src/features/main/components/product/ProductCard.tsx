@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import { AddToCartButton } from "./AddToCartButton";
 import { Badge } from "./Badge";
 import { ProductFeature } from "./ProductFeature";
@@ -26,7 +26,7 @@ export interface ProductCardProps {
     outOfStock?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
+export const ProductCard = ({
     badges,
     image,
     features,
@@ -35,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     price,
     unit,
     outOfStock = false,
-}) => {
+}: ProductCardProps) => {
     return (
         <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[580px] min-w-[200px] w-[214px] overflow-hidden">
             <div className="flex flex-col flex-1 w-full">
@@ -63,12 +63,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         {features.map((feature, index) => {
                             const featureKey = `feature-${index}-${feature.value.replace(/\s+/g, "-")}`;
                             return (
-                                <React.Fragment key={featureKey}>
+                                <Fragment key={featureKey}>
                                     {index > 0 && (
                                         <div className="shrink-0 self-stretch my-auto w-0 h-5 border border-solid bg-zinc-500 bg-opacity-20 border-zinc-500 border-opacity-20" />
                                     )}
                                     <ProductFeature {...feature} />
-                                </React.Fragment>
+                                </Fragment>
                             );
                         })}
                     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 interface BannerCardProps {
     image: string;
@@ -6,21 +6,17 @@ interface BannerCardProps {
     description: string;
 }
 
-export const BannerCard: React.FC<BannerCardProps> = ({
-    image,
-    title,
-    description,
-}) => {
+export const BannerCard = ({ image, title, description }: BannerCardProps) => {
     // 줄바꿈을 HTML <br> 태그로 변환 (New라는 텍스트 다음에 나오는 문장을 한칸 밑으로 내려야 해서)
     const titleWithLineBreaks = title.split("\n").map((line, i) => {
         // 각 라인에 고유한 키 생성 (내용 + 인덱스의 조합으로 고유성 확보)
         const uniqueKey = `line-${i}-${line.substring(0, 10).replace(/\s+/g, "-")}`;
 
         return (
-            <React.Fragment key={uniqueKey}>
+            <Fragment key={uniqueKey}>
                 {i > 0 && <br />}
                 {line}
-            </React.Fragment>
+            </Fragment>
         );
     });
 

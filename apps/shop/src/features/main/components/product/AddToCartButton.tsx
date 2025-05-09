@@ -1,14 +1,12 @@
-import type React from "react";
-
 interface AddToCartButtonProps {
     disabled?: boolean;
     onClick?: () => void;
 }
 
-export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
+export const AddToCartButton = ({
     disabled,
     onClick,
-}) => {
+}: AddToCartButtonProps) => {
     const baseClasses =
         "gap-2 self-center px-4 py-3 max-w-full text-sm font-semibold tracking-tight text-center rounded-lg w-full";
     const activeClasses =

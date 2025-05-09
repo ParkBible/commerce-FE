@@ -1,5 +1,3 @@
-import * as React from "react";
-
 interface CategoryItemProps {
     title: string;
     description: string;

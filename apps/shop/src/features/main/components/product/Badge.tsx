@@ -1,11 +1,11 @@
-import type React from "react";
+import type { ReactNode } from "react";
 
 interface BadgeProps {
     variant: "default" | "yellow" | "purple" | "red" | "green";
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ variant, children }) => {
+export const Badge = ({ variant, children }: BadgeProps) => {
     const baseClasses =
         "inline-block px-1.5 py-1 text-[10px] tracking-tight leading-none text-center rounded-md whitespace-nowrap";
 

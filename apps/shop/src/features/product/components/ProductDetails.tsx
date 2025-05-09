@@ -1,92 +1,139 @@
-import * as React from "react";
+"use client";
+
+import { useState, Fragment } from "react";
+import type { ProductType } from "../types";
 
 interface ProductDetailsProps {
-    imageUrl: string;
-    imageAlt: string;
-    backgroundColor?: string;
-    title: string;
-    description: string;
-    notice?: string;
+    product: ProductType;
 }
 
-export const ProductDetails = ({
-    imageUrl,
-    imageAlt,
-    backgroundColor = "#e5d9c1",
-    title,
-    description,
-    notice,
-}: ProductDetailsProps) => {
-    // title, description, notice에 줄바꿈 처리
-    const titleLines = title.split("\n");
-    const descriptionLines = description.split("\n");
-    const noticeLines = notice?.split("\n") || [];
+export function ProductDetails({ product }: ProductDetailsProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const getRatingBar = (level: number, maxLevel = 5) => {
+        return (
+            <div className="flex items-center gap-4">
+                <div className="flex w-[420px] h-1">
+                    {Array.from({ length: maxLevel }).map((_, i) => (
+                        <div
+                            key={`rating-bar-${level}-${i}-${Math.random()}`}
+                            className={`w-1/5 h-full ${
+                                i < level ? "bg-black" : "bg-[#f7f7f8]"
+                            }`}
+                        />
+                    ))}
+                </div>
+            </div>
+        );
+    };
 
     return (
-        <div className="flex flex-col w-full py-10">
-            {/* 제품 상세 이미지 섹션 */}
-            <div className="flex flex-col lg:flex-row w-full shadow-lg overflow-hidden">
-                {/* 왼쪽 이미지 */}
-                <div className="flex-1 rounded-tl-2xl rounded-bl-2xl overflow-hidden bg-white">
-                    <div
-                        className="w-full h-full flex items-center justify-center"
-                        style={{ minHeight: "500px" }}
-                    >
-                        <img
-                            src={imageUrl}
-                            alt={imageAlt}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-
-                {/* 오른쪽 제품 설명 */}
-                <div
-                    className="flex-shrink-0 lg:w-[435px] rounded-tr-2xl rounded-br-2xl flex items-center justify-center"
-                    style={{ backgroundColor }}
-                >
-                    <div className="flex flex-col items-center justify-center py-16 px-6 max-w-[370px] mx-auto">
-                        <h2 className="text-[#373439] text-3xl font-medium text-center mb-20">
-                            {titleLines.map((line, index) => (
-                                <React.Fragment
-                                    key={`title-${index}-${line.substring(0, 10)}`}
-                                >
-                                    {line}
-                                    {index < titleLines.length - 1 && <br />}
-                                </React.Fragment>
-                            ))}
+        <section className="bg-[#fafafa] py-16">
+            <div className="max-w-[1120px] mx-auto">
+                <div className="bg-white rounded-xl p-12">
+                    <div className="space-y-4">
+                        <h2 className="text-2xl font-bold text-black">
+                            {product.title}
                         </h2>
-
-                        <p className="text-[#9b9b9f] text-lg text-center mb-20">
-                            {descriptionLines.map((line, index) => (
-                                <React.Fragment
-                                    key={`desc-${index}-${line.substring(0, 10)}`}
-                                >
-                                    {line}
-                                    {index < descriptionLines.length - 1 && (
-                                        <br />
-                                    )}
-                                </React.Fragment>
-                            ))}
+                        <p className="text-sm text-[#37383c] opacity-60">
+                            *캡슐에는 그림에 표시된 원료가 들어있지 않습니다.
                         </p>
+                    </div>
 
-                        {noticeLines.length > 0 && (
-                            <p className="text-[#74767c] text-xs leading-5 text-center">
-                                {noticeLines.map((line, index) => (
-                                    <React.Fragment
-                                        key={`notice-${index}-${line.substring(0, 10)}`}
-                                    >
-                                        {line}
-                                        {index < noticeLines.length - 1 && (
-                                            <br />
-                                        )}
-                                    </React.Fragment>
-                                ))}
-                            </p>
-                        )}
+                    <div className="mt-10 grid grid-cols-2 gap-8">
+                        {/* 커피 사이즈 섹션 */}
+                        <div>
+                            <h3 className="text-xl font-bold mb-4">
+                                커피 사이즈
+                            </h3>
+                            <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-[#f7f7f8] flex items-center justify-center">
+                                    <div className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-sm">
+                                        {product.coffeeSize}
+                                    </p>
+                                    <p className="text-sm">더블 에스프레소</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 아로마 특징 섹션 */}
+                        <div>
+                            <h3 className="text-xl font-bold mb-4">
+                                주요 아로마 특징
+                            </h3>
+                            <div className="flex gap-6">
+                                {product.aromaFeatures?.map(
+                                    (feature, index) => (
+                                        <p
+                                            key={`feature-${feature.substring(0, 10)}-${index}`}
+                                            className="text-sm whitespace-pre-line"
+                                        >
+                                            {feature}
+                                        </p>
+                                    ),
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 커피 정보 섹션 */}
+                    <div className="mt-8">
+                        <h3 className="text-xl font-bold mb-4">커피 정보</h3>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                            <div>
+                                <h4 className="text-sm font-bold mb-2">
+                                    바디감
+                                </h4>
+                                {getRatingBar(product.bodyLevel || 0)}
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-bold mb-2">쓴맛</h4>
+                                {getRatingBar(product.bitterLevel || 0)}
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-bold mb-2">산미</h4>
+                                {getRatingBar(product.acidLevel || 0)}
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-bold mb-2">
+                                    로스팅
+                                </h4>
+                                {getRatingBar(product.roastLevel || 0)}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 추가 상세정보 버튼 */}
+                    <div className="mt-10 flex justify-center">
+                        <button
+                            type="button"
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2"
+                        >
+                            상세정보 보기
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`transform transition-transform ${
+                                    isExpanded ? "rotate-180" : ""
+                                }`}
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M8 10L4 6H12L8 10Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
-};
+}

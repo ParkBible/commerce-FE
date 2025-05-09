@@ -2,13 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import type { FormEvent } from "react";
 
 // 최초 렌더링 이후 partial rendering를 위해서 CSR로 구현
 export default function SearchProduct() {
     const router = useRouter();
 
     const handleSubmit = useCallback(
-        (e: React.FormEvent<HTMLFormElement>) => {
+        (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             const formData = new FormData(e.target as HTMLFormElement);
             const searchQuery = formData.get("searchQuery");

@@ -1,8 +1,7 @@
-import type React from "react";
 import { FilterBar } from "./FilterBar";
 import { ProductGrid } from "./ProductGrid";
 
-const Products: React.FC = () => {
+const Products = () => {
     const products = [
         {
             type: "banner" as const,
