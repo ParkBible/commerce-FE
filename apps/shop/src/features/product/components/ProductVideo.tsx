@@ -17,27 +17,9 @@ export function ProductVideo() {
                 <div className="relative w-full h-[460px] rounded-xl overflow-hidden">
                     <img
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6efa1b8d524b91891b772502f42519490e0b876"
-                        alt="에어로치노 사용 영상 썸네일"
+                        alt="에어로치노 이미지"
                         className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                        <button
-                            type="button"
-                            className="w-[120px] h-[120px] rounded-full border-2 border-white flex items-center justify-center"
-                            aria-label="비디오 재생"
-                        >
-                            <svg
-                                width="40"
-                                height="40"
-                                viewBox="0 0 40 40"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <path d="M15 10L30 20L15 30V10Z" fill="white" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>

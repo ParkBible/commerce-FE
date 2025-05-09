@@ -26,7 +26,7 @@ export function ProductImage({ images, title }: ProductImageProps) {
                 />
             </div>
 
-            {images.length > 1 && (
+            {/* {images.length > 1 && (
                 <div className="flex gap-2 mt-4">
                     {images.map((image, index) => (
                         <button
@@ -47,7 +47,7 @@ export function ProductImage({ images, title }: ProductImageProps) {
                         </button>
                     ))}
                 </div>
-            )}
+            )} */}
         </div>
     );
 }
