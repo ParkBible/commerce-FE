@@ -14,9 +14,9 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                     {products.map(product => (
                         <div
                             key={`recommended-${product.id}`}
-                            className="bg-white rounded-xl overflow-hidden"
+                            className="bg-white rounded-xl overflow-hidden h-[454px] relative"
                         >
-                            <div className="p-4">
+                            <div className="p-4 h-full">
                                 <div className="h-[200px] mb-6 flex justify-center">
                                     <img
                                         src={product.image}
@@ -25,7 +25,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     />
                                 </div>
 
-                                <div className="space-y-2 text-center mb-6">
+                                <div className="space-y-2 text-center">
                                     <h3 className="text-xl font-bold">
                                         {product.title}
                                     </h3>
@@ -34,25 +34,27 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     </p>
                                 </div>
 
-                                <div className="flex justify-center mb-6">
+                                <div className="absolute bottom-[90px] left-0 right-0 flex justify-center">
                                     <div className="text-[#257a57] font-bold text-2xl">
                                         ₩ {product.price.toLocaleString()}
                                     </div>
                                 </div>
 
-                                <button
-                                    type="button"
-                                    className={`w-full py-4 rounded-lg font-semibold ${
-                                        product.inStock
-                                            ? "bg-[#257a57] text-white"
-                                            : "bg-[#f4f4f5] text-[#37383c] opacity-30"
-                                    }`}
-                                    disabled={!product.inStock}
-                                >
-                                    {product.inStock
-                                        ? "장바구니 담기"
-                                        : "일시품절"}
-                                </button>
+                                <div className="absolute bottom-4 left-4 right-4">
+                                    <button
+                                        type="button"
+                                        className={`w-full py-4 rounded-lg font-semibold ${
+                                            product.inStock
+                                                ? "bg-[#257a57] text-white"
+                                                : "bg-[#f4f4f5] text-[#37383c] opacity-30"
+                                        }`}
+                                        disabled={!product.inStock}
+                                    >
+                                        {product.inStock
+                                            ? "장바구니 담기"
+                                            : "일시품절"}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
