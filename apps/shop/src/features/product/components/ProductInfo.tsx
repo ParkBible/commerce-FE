@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { ProductType } from "../types";
+import { useCartToast } from "../../../shared/hooks/useCartToast";
+import { CartToast } from "../../../shared/components/CartToast";
 
 interface ProductInfoProps {
     product: ProductType;
@@ -9,6 +11,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const [quantity, setQuantity] = useState(10);
+    const { isVisible, message, showAddToCartToast, hideToast } = useCartToast();
 
     const handleQuantityChange = (newQuantity: number) => {
         setQuantity(newQuantity);
@@ -16,6 +19,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
     const formatPrice = (price: number) => {
         return price.toLocaleString();
+    };
+
+    const handleAddToCart = () => {
+        showAddToCartToast(product.title);
+        // 여기에 장바구니 추가 로직 구현
+        console.log(`장바구니 추가: ${product.title}, 수량: ${quantity}`);
+    };
+
+    const handleGoToCart = () => {
+        // 장바구니 페이지로 이동하는 로직
+        alert("장바구니 페이지로 이동합니다.");
     };
 
     return (
@@ -28,11 +42,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                         className="px-[10px] py-[6px] rounded-md text-xs"
                         style={{
                             backgroundColor: badge.bgColor,
-                            color:
-                                badge.textColor ||
-                                (badge.bgColor === "#ffc000"
-                                    ? "#171719"
-                                    : "#fff"),
+                            color: badge.textColor || (badge.bgColor === "#ffc000" ? "#171719" : "#fff"),
                         }}
                     >
                         {badge.text}
@@ -42,27 +52,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
             {/* 제품 제목 및 설명 */}
             <div className="space-y-2">
-                <h1 className="text-[28px] font-bold leading-9 tracking-[-0.56px]">
-                    {product.title}
-                </h1>
-                <p className="text-base text-[#171719]">
-                    {product.description}
-                </p>
+                <h1 className="text-[28px] font-bold leading-9 tracking-[-0.56px]">{product.title}</h1>
+                <p className="text-base text-[#171719]">{product.description}</p>
             </div>
 
             {/* 가격 정보 */}
             <div className="space-y-2">
                 <div className="flex items-center">
                     <span className="text-2xl font-bold text-[#257a57]">₩</span>
-                    <span className="text-2xl font-bold text-[#257a57] ml-1">
-                        {formatPrice(product.price)}
-                    </span>
+                    <span className="text-2xl font-bold text-[#257a57] ml-1">{formatPrice(product.price)}</span>
                 </div>
-                {product.pricePerUnit && (
-                    <p className="text-sm text-[#37383c] opacity-60">
-                        {product.pricePerUnit}
-                    </p>
-                )}
+                {product.pricePerUnit && <p className="text-sm text-[#37383c] opacity-60">{product.pricePerUnit}</p>}
             </div>
 
             {/* 수량 선택 */}
@@ -73,9 +73,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                         type="button"
                         onClick={() => handleQuantityChange(0)}
                         className={`px-4 py-2 border rounded-md text-sm ${
-                            quantity === 0
-                                ? "border-black font-semibold"
-                                : "border-gray-300 opacity-90"
+                            quantity === 0 ? "border-black font-semibold" : "border-gray-300 opacity-90"
                         }`}
                     >
                         직접 입력
@@ -86,9 +84,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                             type="button"
                             onClick={() => handleQuantityChange(qty)}
                             className={`px-4 py-2 border rounded-md min-w-[60px] text-center text-sm ${
-                                quantity === qty
-                                    ? "border-black font-semibold"
-                                    : "border-gray-300 opacity-90"
+                                quantity === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
                             }`}
                         >
                             {qty}
@@ -100,22 +96,22 @@ export function ProductInfo({ product }: ProductInfoProps) {
             {/* 추가 설명 */}
             {(product.limitDescription || product.additionalDescription) && (
                 <div className="text-xs text-[#37383c] opacity-60 space-y-1">
-                    {product.limitDescription && (
-                        <p>{product.limitDescription}</p>
-                    )}
-                    {product.additionalDescription && (
-                        <p>{product.additionalDescription}</p>
-                    )}
+                    {product.limitDescription && <p>{product.limitDescription}</p>}
+                    {product.additionalDescription && <p>{product.additionalDescription}</p>}
                 </div>
             )}
 
             {/* 장바구니 버튼 */}
             <button
                 type="button"
-                className="w-full bg-[#257a57] text-white font-semibold py-4 rounded-lg"
+                className="w-full bg-[#257a57] text-white font-semibold py-4 rounded-lg hover:bg-[#1e6647] active:scale-[0.98] transition-all cursor-pointer"
+                onClick={handleAddToCart}
             >
                 장바구니 담기
             </button>
+
+            {/* 장바구니 토스트 컴포넌트 */}
+            <CartToast isVisible={isVisible} message={message} onClose={hideToast} onGoToCart={handleGoToCart} />
         </div>
     );
 }

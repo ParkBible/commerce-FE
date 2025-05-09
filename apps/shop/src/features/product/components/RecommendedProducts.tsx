@@ -1,10 +1,27 @@
+"use client";
+
 import type { RecommendedProductType } from "../types";
+import { useCartToast } from "../../../shared/hooks/useCartToast";
+import { CartToast } from "../../../shared/components/CartToast";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
 }
 
 export function RecommendedProducts({ products }: RecommendedProductsProps) {
+    const { isVisible, message, showAddToCartToast, hideToast } = useCartToast();
+
+    // 장바구니 추가
+    const handleAddToCart = (productId: number, productName: string) => {
+        showAddToCartToast(productName); // 토스트 메시지 표시
+        console.log(`장바구니 추가 (${productId})`); // 여기에 장바구니 추가 로직 구현
+    };
+
+    // 장바구니 페이지로 이동
+    const handleGoToCart = () => {
+        alert("장바구니 페이지로 이동합니다."); // 장바구니 페이지로 이동하는 로직
+    };
+
     return (
         <section className="py-16 bg-[#f7f7f8]">
             <div className="max-w-[1120px] mx-auto">
@@ -18,20 +35,12 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                         >
                             <div className="p-4 h-full">
                                 <div className="h-[200px] mb-6 flex justify-center">
-                                    <img
-                                        src={product.image}
-                                        alt={product.title}
-                                        className="h-full object-contain"
-                                    />
+                                    <img src={product.image} alt={product.title} className="h-full object-contain" />
                                 </div>
 
                                 <div className="space-y-2 text-center">
-                                    <h3 className="text-xl font-bold">
-                                        {product.title}
-                                    </h3>
-                                    <p className="text-sm text-[#171719]">
-                                        {product.description}
-                                    </p>
+                                    <h3 className="text-xl font-bold">{product.title}</h3>
+                                    <p className="text-sm text-[#171719]">{product.description}</p>
                                 </div>
 
                                 <div className="absolute bottom-[90px] left-0 right-0 flex justify-center">
@@ -43,16 +52,15 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                 <div className="absolute bottom-4 left-4 right-4">
                                     <button
                                         type="button"
-                                        className={`w-full py-4 rounded-lg font-semibold ${
+                                        className={`w-full py-4 rounded-lg font-semibold cursor-pointer ${
                                             product.inStock
-                                                ? "bg-[#257a57] text-white"
+                                                ? "bg-[#257a57] text-white hover:bg-[#1e6647] active:scale-[0.98] transition-all"
                                                 : "bg-[#f4f4f5] text-[#37383c] opacity-30"
                                         }`}
                                         disabled={!product.inStock}
+                                        onClick={() => product.inStock && handleAddToCart(product.id, product.title)}
                                     >
-                                        {product.inStock
-                                            ? "장바구니 담기"
-                                            : "일시품절"}
+                                        {product.inStock ? "장바구니 담기" : "일시품절"}
                                     </button>
                                 </div>
                             </div>
@@ -60,6 +68,9 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                     ))}
                 </div>
             </div>
+
+            {/* 장바구니 토스트 컴포넌트 */}
+            <CartToast isVisible={isVisible} message={message} onClose={hideToast} onGoToCart={handleGoToCart} />
         </section>
     );
 }
