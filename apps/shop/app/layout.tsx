@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import TanstackQueryProviders from "../src/shared/TanstackQueryProviders";
+import TanstackQueryProviders from "@/src/shared/TanstackQueryProviders";
 import Footer from "@/src/shared/components/layout/Footer";
 import Header from "@/src/shared/components/layout/Header";
 
@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <TanstackQueryProviders>
                     <Header />
                     <main>{children}</main>

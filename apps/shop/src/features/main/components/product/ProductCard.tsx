@@ -37,7 +37,7 @@ export const ProductCard = ({
     outOfStock = false,
 }: ProductCardProps) => {
     return (
-        <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[580px] min-w-[200px] w-[214px] overflow-hidden">
+        <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[36rem] min-w-48 w-52 overflow-hidden">
             <div className="flex flex-col flex-1 w-full">
                 <div className="w-full">
                     <div className="flex flex-wrap gap-1 items-start w-full text-xs tracking-tight leading-snug text-center mb-4">
@@ -51,15 +51,11 @@ export const ProductCard = ({
                         })}
                     </div>
 
-                    <div className="px-1.5 mt-4 w-full h-[180px] flex items-center justify-center">
-                        <img
-                            src={image}
-                            alt={name}
-                            className="object-contain max-h-full max-w-full"
-                        />
+                    <div className="px-1.5 mt-4 w-full h-44 flex items-center justify-center">
+                        <img src={image} alt={name} className="object-contain max-h-full max-w-full" />
                     </div>
 
-                    <div className="flex gap-4 justify-center items-center mt-4 w-full text-center text-neutral-700 h-[40px]">
+                    <div className="flex gap-4 justify-center items-center mt-4 w-full text-center text-neutral-700 h-10">
                         {features.map((feature, index) => {
                             const featureKey = `feature-${index}-${feature.value.replace(/\s+/g, "-")}`;
                             return (
@@ -75,10 +71,10 @@ export const ProductCard = ({
 
                     <div className="mt-12 w-full">
                         <div className="flex flex-col items-start w-full">
-                            <h3 className="text-base font-bold tracking-tight leading-snug text-black h-[24px] overflow-hidden">
+                            <h3 className="text-base font-bold tracking-tight leading-snug text-black h-6 overflow-hidden">
                                 {name}
                             </h3>
-                            <p className="mt-2 text-sm tracking-tight leading-5 text-neutral-900 h-[40px] overflow-hidden">
+                            <p className="mt-2 text-sm tracking-tight leading-5 text-neutral-900 h-10 overflow-hidden">
                                 {description}
                             </p>
                         </div>
@@ -87,9 +83,7 @@ export const ProductCard = ({
                                 <span>₩</span>
                                 <span>{price.toLocaleString()}</span>
                             </div>
-                            <p className="self-center text-sm tracking-tight text-neutral-700">
-                                {unit}
-                            </p>
+                            <p className="self-center text-sm tracking-tight text-neutral-700">{unit}</p>
                         </div>
                     </div>
                 </div>
