@@ -4,9 +4,8 @@ import React from "react";
 import { useState, useCallback, useRef } from "react";
 
 export function useToast() {
-    // 토스트 상태 관리
-    const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const timeoutRef = useRef<number | null>(null);
 
     // 토스트 표시 함수
