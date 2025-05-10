@@ -2,10 +2,27 @@ interface ItemProps {
     title: string;
     price: number;
     quantity: number;
+    stockQuantity: number;
     image: string;
 }
 
-export default function Item({ title, price, quantity, image }: ItemProps) {
+const LOW_STOCK_QUANTITY = 10;
+
+export default function Item({
+    title,
+    price,
+    quantity,
+    stockQuantity,
+    image,
+}: ItemProps) {
+    const getQuantityMessage = () => {
+        if (quantity <= 0) {
+            return "품절";
+        }
+
+        return `품절 임박! 남은 수량: ${stockQuantity}`;
+    };
+
     return (
         <div className="flex items-center gap-4 p-4 border-b border-gray-200">
             <img src={image} alt={title} className="w-16 h-16 object-cover" />
@@ -23,6 +40,11 @@ export default function Item({ title, price, quantity, image }: ItemProps) {
                     <p className="text-gray-600">가격: {price}원</p>
                     {/* 샤드 사용 */}
                     <button type="button">- {quantity} +</button>
+                </div>
+                <div>
+                    {stockQuantity < LOW_STOCK_QUANTITY && (
+                        <p className="text-red-500">{getQuantityMessage()}</p>
+                    )}
                 </div>
             </div>
         </div>

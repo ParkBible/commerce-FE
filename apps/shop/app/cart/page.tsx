@@ -9,6 +9,7 @@ export default function Page() {
             title: "예시 상품",
             price: 10000,
             quantity: 1,
+            stockQuantity: 10,
             image: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
         },
         {
@@ -16,6 +17,7 @@ export default function Page() {
             title: "예시 상품 2",
             price: 20000,
             quantity: 2,
+            stockQuantity: 5,
             image: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
         },
     ];
@@ -27,6 +29,7 @@ export default function Page() {
                     title={item.title}
                     price={item.price}
                     quantity={item.quantity}
+                    stockQuantity={item.stockQuantity}
                     image={item.image}
                 />
             ))}
