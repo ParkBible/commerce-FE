@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { ProductType } from "../types";
-import { useCartToast } from "../../../shared/hooks/useCartToast";
-import { CartToast } from "../../../shared/components/CartToast";
+import type { ProductType } from "@/src/features/product/types";
+import { CartToast } from "@/src/shared/components/CartToast";
 
 interface ProductInfoProps {
     product: ProductType;
@@ -11,7 +10,12 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const [quantity, setQuantity] = useState(10);
-    const { isVisible, message, showAddToCartToast, hideToast } = useCartToast();
+    const { toast, ToastUI } = CartToast({
+        onGoToCart: () => {
+            // 장바구니 페이지로 이동하는 로직
+            alert("장바구니 페이지로 이동합니다.");
+        },
+    });
 
     const handleQuantityChange = (newQuantity: number) => {
         setQuantity(newQuantity);
@@ -22,14 +26,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
     };
 
     const handleAddToCart = () => {
-        showAddToCartToast(product.title);
+        toast({
+            title: product.title,
+            action: "add-to-cart",
+        });
         // 여기에 장바구니 추가 로직 구현
         console.log(`장바구니 추가: ${product.title}, 수량: ${quantity}`);
-    };
-
-    const handleGoToCart = () => {
-        // 장바구니 페이지로 이동하는 로직
-        alert("장바구니 페이지로 이동합니다.");
     };
 
     return (
@@ -111,7 +113,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </button>
 
             {/* 장바구니 토스트 컴포넌트 */}
-            <CartToast isVisible={isVisible} message={message} onClose={hideToast} onGoToCart={handleGoToCart} />
+            {ToastUI}
         </div>
     );
 }

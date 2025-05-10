@@ -1,25 +1,26 @@
 "use client";
 
 import type { RecommendedProductType } from "../types";
-import { useCartToast } from "../../../shared/hooks/useCartToast";
-import { CartToast } from "../../../shared/components/CartToast";
+import { CartToast } from "@/src/shared/components/CartToast";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
 }
 
 export function RecommendedProducts({ products }: RecommendedProductsProps) {
-    const { isVisible, message, showAddToCartToast, hideToast } = useCartToast();
+    const { toast, ToastUI } = CartToast({
+        onGoToCart: () => {
+            alert("장바구니 페이지로 이동합니다."); // 장바구니 페이지로 이동하는 로직
+        },
+    });
 
     // 장바구니 추가
     const handleAddToCart = (productId: number, productName: string) => {
-        showAddToCartToast(productName); // 토스트 메시지 표시
+        toast({
+            title: productName,
+            action: "add-to-cart",
+        });
         console.log(`장바구니 추가 (${productId})`); // 여기에 장바구니 추가 로직 구현
-    };
-
-    // 장바구니 페이지로 이동
-    const handleGoToCart = () => {
-        alert("장바구니 페이지로 이동합니다."); // 장바구니 페이지로 이동하는 로직
     };
 
     return (
@@ -70,7 +71,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
             </div>
 
             {/* 장바구니 토스트 컴포넌트 */}
-            <CartToast isVisible={isVisible} message={message} onClose={hideToast} onGoToCart={handleGoToCart} />
+            {ToastUI}
         </section>
     );
 }
