@@ -51,7 +51,7 @@ export default async function Page() {
         return <UserList data={res.data} />;
     } catch (e) {
         const err = e as CustomError;
-        return <ErrorComponent message={err.message} />;
+        return <ErrorComponent code={err.code} message={err.message} />;
     }
 }
 ```
@@ -64,13 +64,14 @@ import { fetchClient, type CustomError } from "@/src/shared/fetcher";
 export default function TestComponent() {
     const handleClick = async () => {
         const fetch = fetchClient();
+
         try {
             const res = await fetch("/users");
             console.log(res);
         } catch (e) {
             const err = e as CustomError;
             console.error(
-                `${err.code} - ${err.message} - ${JSON.stringify(err.details)}`,
+                `${err.code} - ${err.message}`,
             );
         }
     };
@@ -87,13 +88,11 @@ export default function TestComponent() {
 ```ts
 import { api, fetcher, type CustomError } from "./shared/kyInstance";
 
-fetcher(api.get("users"))
+fetcher("users")
     .then(res => console.log(res))
     .catch(e => {
         const err = e as CustomError;
-        console.error(
-            `${err.code} - ${err.message} - ${JSON.stringify(err.details)}`,
-        );
+        console.error(`${err.code} - ${err.message}`);
     });
 ```
 
