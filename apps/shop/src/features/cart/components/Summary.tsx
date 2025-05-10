@@ -12,7 +12,7 @@ export default function Summary({
     totalPrice,
 }: SummaryProps) {
     return (
-        <div className="w-full max-w-2xl p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200">
             <h2 className="text-xl font-semibold">주문 요약</h2>
             <div className="flex justify-between items-center mt-4">
                 <p>총 상품 금액</p>
