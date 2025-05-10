@@ -1,25 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import type { RecommendedProductType } from "@/src/features/product/types";
-import { CartToast } from "@/src/shared/components/CartToast";
+import { Toast } from "@/src/shared/components/Toast";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
 }
 
 export function RecommendedProducts({ products }: RecommendedProductsProps) {
-    const { toast, ToastUI } = CartToast({
-        onGoToCart: () => {
-            alert("장바구니 페이지로 이동합니다."); // 장바구니 페이지로 이동하는 로직
-        },
-    });
+    const { toast, ToastUI } = Toast();
 
     // 장바구니 추가
     const handleAddToCart = (productId: number, productName: string) => {
         toast({
             title: productName,
-            action: "add-to-cart",
         });
         console.log(`장바구니 추가 (${productId})`); // 여기에 장바구니 추가 로직 구현
     };

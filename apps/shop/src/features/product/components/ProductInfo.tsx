@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ProductType } from "@/src/features/product/types";
-import { CartToast } from "@/src/shared/components/CartToast";
+import { Toast } from "@/src/shared/components/Toast";
 
 interface ProductInfoProps {
     product: ProductType;
@@ -10,12 +10,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const [quantity, setQuantity] = useState(10);
-    const { toast, ToastUI } = CartToast({
-        onGoToCart: () => {
-            // 장바구니 페이지로 이동하는 로직
-            alert("장바구니 페이지로 이동합니다.");
-        },
-    });
+    const { toast, ToastUI } = Toast();
 
     const handleQuantityChange = (newQuantity: number) => {
         setQuantity(newQuantity);
@@ -28,7 +23,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
     const handleAddToCart = () => {
         toast({
             title: product.title,
-            action: "add-to-cart",
         });
         // 여기에 장바구니 추가 로직 구현
         console.log(`장바구니 추가: ${product.title}, 수량: ${quantity}`);
