@@ -1,15 +1,11 @@
 type ApiResponse<T> = {
-    success: boolean;
     data: T | null;
-    error: {
-        code: string;
-    } | null;
-    message?: string;
+    error: CustomError | null;
 };
 
 export type CustomError = Error & {
-    code?: string;
-    details?: unknown;
+    code: string;
+    message: string;
 };
 
 const createFetcher = (url: string, getHeaders?: () => HeadersInit) => {
@@ -30,17 +26,15 @@ const createFetcher = (url: string, getHeaders?: () => HeadersInit) => {
 
         try {
             json = await res.json();
-        } catch (e) {
-            throw new Error("JSON 파싱에 실패했습니다.", {
-                cause: e,
-            });
+        } catch {
+            throw new Error("JSON 파싱에 실패했습니다.");
         }
 
-        if (!res.ok || !json.success) {
-            const baseError = new Error();
-            const error: CustomError = Object.assign(baseError, {
-                code: json.error?.code,
-            });
+        if (!res.ok || json.error) {
+            const error = new Error(
+                json.error?.message || "API 요청에 실패했습니다.",
+            ) as CustomError;
+            error.code = json.error?.code || "UNKNOWN_ERROR";
 
             throw error;
         }
