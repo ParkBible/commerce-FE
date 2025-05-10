@@ -5,7 +5,7 @@ import { ProductDetails } from "./ProductDetails";
 import { ProductVideo } from "./ProductVideo";
 import { ProductReviews } from "./ProductReviews";
 import { RecommendedProducts } from "./RecommendedProducts";
-import type { ProductType, RecommendedProductType, ReviewType } from "../types";
+import type { ProductType, RecommendedProductType, ReviewType } from "@/src/features/product/types";
 
 interface ProductPageProps {
     product: ProductType;

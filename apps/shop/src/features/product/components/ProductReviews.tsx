@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { ReviewType } from "../types";
+import { StarRating } from "@/src/shared/components/StarRating";
+import type { ReviewType } from "@/src/features/product/types";
 
 interface ProductReviewsProps {
     reviews: ReviewType[];

@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { getCartToastMessage } from "../utils/koreanUtils";
+import { getCartToastMessage } from "@/src/shared/utils/koreanUtils";
 
 /**
  * 장바구니 토스트 메시지 표시를 위한 커스텀 훅

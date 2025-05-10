@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
-import { isKorean, getKoreanSubjectParticle } from "../../utils/koreanUtils";
+import { isKorean, getKoreanSubjectParticle } from "@/src/shared/utils/koreanUtils";
 
 type CartToastProps = {
     onGoToCart?: () => void;

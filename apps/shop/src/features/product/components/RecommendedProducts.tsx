@@ -1,6 +1,7 @@
 "use client";
 
-import type { RecommendedProductType } from "../types";
+import { useState } from "react";
+import type { RecommendedProductType } from "@/src/features/product/types";
 import { CartToast } from "@/src/shared/components/CartToast";
 
 interface RecommendedProductsProps {

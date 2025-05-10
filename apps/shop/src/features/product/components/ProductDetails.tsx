@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, Fragment } from "react";
-import type { ProductType } from "../types";
+import { Tab } from "@headlessui/react";
+import type { ProductType } from "@/src/features/product/types";
 
 interface ProductDetailsProps {
     product: ProductType;
