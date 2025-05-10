@@ -7,10 +7,10 @@ function HeroBanner() {
                 className="object-cover absolute inset-0 w-full h-full"
                 aria-hidden="true"
             />
-            <div className="relative flex flex-col justify-center w-full min-h-[270px]">
-                <div className="mx-auto w-full max-w-[1440px] px-6 py-20">
-                    <div className="max-w-[1120px] mx-auto text-center">
-                        <h1 className="text-6xl font-bold tracking-tight leading-[72px] text-white max-md:text-4xl">
+            <div className="relative flex flex-col justify-center w-full min-h-[16.875rem]">
+                <div className="mx-auto w-full max-w-[90rem] px-6 py-20">
+                    <div className="max-w-[70rem] mx-auto text-center">
+                        <h1 className="text-6xl font-bold tracking-tight leading-[4.5rem] text-white max-md:text-4xl">
                             801 버츄오 커피
                         </h1>
                         <p className="mt-6 text-lg font-semibold leading-6 text-white">

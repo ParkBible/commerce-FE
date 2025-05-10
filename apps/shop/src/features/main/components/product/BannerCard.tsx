@@ -21,20 +21,12 @@ export const BannerCard = ({ image, title, description }: BannerCardProps) => {
     });
 
     return (
-        <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-[214px] h-[580px]">
+        <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-[13.375rem] h-[36.25rem]">
             <div className="flex relative flex-col justify-between h-full">
-                <img
-                    src={image}
-                    alt={title.replace(/\n/g, " ")}
-                    className="object-cover absolute inset-0 size-full"
-                />
+                <img src={image} alt={title.replace(/\n/g, " ")} className="object-cover absolute inset-0 size-full" />
                 <div className="relative mt-auto p-6 bg-gradient-to-t from-black/70 to-transparent">
-                    <h2 className="text-2xl font-bold tracking-tight leading-9">
-                        {titleWithLineBreaks}
-                    </h2>
-                    <p className="mt-3 text-sm tracking-tight leading-snug">
-                        {description}
-                    </p>
+                    <h2 className="text-2xl font-bold tracking-tight leading-9">{titleWithLineBreaks}</h2>
+                    <p className="mt-3 text-sm tracking-tight leading-snug">{description}</p>
                 </div>
             </div>
         </article>

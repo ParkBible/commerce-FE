@@ -1,8 +1,8 @@
 export default function CoffeeLetter() {
     return (
         <article className="flex flex-col md:flex-row items-center gap-10 py-10 px-6">
-            <section className="overflow-hidden grow shrink self-stretch my-auto leading-snug text-black whitespace-nowrap rounded-xl min-w-60 w-[559px] max-md:max-w-full">
-                <div className="flex relative flex-col items-start px-14 py-24 w-full min-h-[371px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
+            <section className="overflow-hidden grow shrink self-stretch my-auto leading-snug text-black whitespace-nowrap rounded-xl min-w-60 w-[34.9375rem] max-md:max-w-full">
+                <div className="flex relative flex-col items-start px-14 py-24 w-full min-h-[23.1875rem] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/39753b2bf47d65b84b124b51611257249f06b6fb"
                         alt="Background pattern"
@@ -13,15 +13,11 @@ export default function CoffeeLetter() {
                             <img
                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/ebd7bc5ad020284f520fbe10b3c02ad5224ecb81"
                                 alt="Coffee product"
-                                className="object-contain shrink-0 self-stretch my-auto rounded-sm aspect-square w-[60px]"
+                                className="object-contain shrink-0 self-stretch my-auto rounded-sm aspect-square w-[3.75rem]"
                             />
-                            <div className="self-stretch my-auto w-[68px]">
-                                <p className="text-sm tracking-tight">
-                                    에티오피아
-                                </p>
-                                <p className="text-base font-bold tracking-tight">
-                                    1,000
-                                </p>
+                            <div className="self-stretch my-auto w-[4.25rem]">
+                                <p className="text-sm tracking-tight">에티오피아</p>
+                                <p className="text-base font-bold tracking-tight">1,000</p>
                             </div>
                         </div>
                         <img
@@ -55,7 +51,7 @@ export default function CoffeeLetter() {
                 </div>
                 <button
                     type="button"
-                    className="gap-2.5 self-start mt-6 text-base font-semibold tracking-tight text-black whitespace-nowrap border-b-2 border-solid border-b-[color:var(--Normal-Strong,#000)] min-h-12 w-[55px]"
+                    className="gap-2.5 self-start mt-6 text-base font-semibold tracking-tight text-black whitespace-nowrap border-b-2 border-solid border-b-[color:var(--Normal-Strong,#000)] min-h-12 w-[3.4375rem]"
                 >
                     보러가기
                 </button>

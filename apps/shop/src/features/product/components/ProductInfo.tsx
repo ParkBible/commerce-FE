@@ -35,13 +35,13 @@ export function ProductInfo({ product }: ProductInfoProps) {
     };
 
     return (
-        <div className="flex flex-col gap-8 w-full max-w-[536px]">
+        <div className="flex flex-col gap-8 w-full max-w-[33.5rem]">
             {/* 뱃지 영역 */}
             <div className="flex flex-wrap gap-2">
                 {product.badges.map((badge, index) => (
                     <div
                         key={`${badge.text}-${index}`}
-                        className="px-[10px] py-[6px] rounded-md text-xs"
+                        className="px-[0.625rem] py-[0.375rem] rounded-md text-xs"
                         style={{
                             backgroundColor: badge.bgColor,
                             color: badge.textColor || (badge.bgColor === "#ffc000" ? "#171719" : "#fff"),
@@ -54,7 +54,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
             {/* 제품 제목 및 설명 */}
             <div className="space-y-2">
-                <h1 className="text-[28px] font-bold leading-9 tracking-[-0.56px]">{product.title}</h1>
+                <h1 className="text-[1.75rem] font-bold leading-9 tracking-[-0.035rem]">{product.title}</h1>
                 <p className="text-base text-[#171719]">{product.description}</p>
             </div>
 
@@ -85,7 +85,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                             key={`qty-${qty}`}
                             type="button"
                             onClick={() => handleQuantityChange(qty)}
-                            className={`px-4 py-2 border rounded-md min-w-[60px] text-center text-sm ${
+                            className={`px-4 py-2 border rounded-md min-w-[3.75rem] text-center text-sm ${
                                 quantity === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
                             }`}
                         >

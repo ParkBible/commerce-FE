@@ -25,17 +25,17 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
 
     return (
         <section className="py-16 bg-[#f7f7f8]">
-            <div className="max-w-[1120px] mx-auto">
+            <div className="max-w-[70rem] mx-auto">
                 <h2 className="text-2xl font-bold mb-8">추천 제품</h2>
 
                 <div className="grid grid-cols-3 gap-8">
                     {products.map(product => (
                         <div
                             key={`recommended-${product.id}`}
-                            className="bg-white rounded-xl overflow-hidden h-[454px] relative"
+                            className="bg-white rounded-xl overflow-hidden h-[28.375rem] relative"
                         >
                             <div className="p-4 h-full">
-                                <div className="h-[200px] mb-6 flex justify-center">
+                                <div className="h-[12.5rem] mb-6 flex justify-center">
                                     <img src={product.image} alt={product.title} className="h-full object-contain" />
                                 </div>
 
@@ -44,7 +44,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     <p className="text-sm text-[#171719]">{product.description}</p>
                                 </div>
 
-                                <div className="absolute bottom-[90px] left-0 right-0 flex justify-center">
+                                <div className="absolute bottom-[5.625rem] left-0 right-0 flex justify-center">
                                     <div className="text-[#257a57] font-bold text-2xl">
                                         ₩ {product.price.toLocaleString()}
                                     </div>
