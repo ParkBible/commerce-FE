@@ -26,17 +26,17 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
 
     return (
         <section className="py-16 bg-[#f7f7f8]">
-            <div className="max-w-[70rem] mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <h2 className="text-2xl font-bold mb-8">추천 제품</h2>
 
                 <div className="grid grid-cols-3 gap-8">
                     {products.map(product => (
                         <div
                             key={`recommended-${product.id}`}
-                            className="bg-white rounded-xl overflow-hidden h-[28.375rem] relative"
+                            className="bg-white rounded-xl overflow-hidden h-[28rem] relative"
                         >
                             <div className="p-4 h-full">
-                                <div className="h-[12.5rem] mb-6 flex justify-center">
+                                <div className="h-48 mb-6 flex justify-center">
                                     <img src={product.image} alt={product.title} className="h-full object-contain" />
                                 </div>
 

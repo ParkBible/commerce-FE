@@ -7,9 +7,9 @@ function HeroBanner() {
                 className="object-cover absolute inset-0 w-full h-full"
                 aria-hidden="true"
             />
-            <div className="relative flex flex-col justify-center w-full min-h-[16.875rem]">
-                <div className="mx-auto w-full max-w-[90rem] px-6 py-20">
-                    <div className="max-w-[70rem] mx-auto text-center">
+            <div className="relative flex flex-col justify-center w-full min-h-64">
+                <div className="mx-auto w-full max-w-screen-xl px-6 py-20">
+                    <div className="max-w-6xl mx-auto text-center">
                         <h1 className="text-6xl font-bold tracking-tight leading-[4.5rem] text-white max-md:text-4xl">
                             801 버츄오 커피
                         </h1>

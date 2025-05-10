@@ -21,7 +21,7 @@ export const BannerCard = ({ image, title, description }: BannerCardProps) => {
     });
 
     return (
-        <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-[13.375rem] h-[36.25rem]">
+        <article className="overflow-hidden grow shrink text-center text-white rounded-xl bg-neutral-300 min-w-60 w-52 h-[36rem]">
             <div className="flex relative flex-col justify-between h-full">
                 <img src={image} alt={title.replace(/\n/g, " ")} className="object-cover absolute inset-0 size-full" />
                 <div className="relative mt-auto p-6 bg-gradient-to-t from-black/70 to-transparent">

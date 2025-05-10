@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, Fragment } from "react";
-import { Tab } from "@headlessui/react";
+import { useState } from "react";
 import type { ProductType } from "@/src/features/product/types";
 
 interface ProductDetailsProps {
@@ -14,7 +13,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     const getRatingBar = (level: number, maxLevel = 5) => {
         return (
             <div className="flex items-center gap-4">
-                <div className="flex w-[26.25rem] h-1">
+                <div className="flex w-96 h-1">
                     {Array.from({ length: maxLevel }).map((_, i) => (
                         <div
                             key={`rating-bar-${level}-${i}-${Math.random()}`}
@@ -28,7 +27,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     return (
         <section className="bg-[#fafafa] py-16">
-            <div className="max-w-[70rem] mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <div className="bg-white rounded-xl p-12">
                     <div className="space-y-4">
                         <h2 className="text-2xl font-bold text-black">{product.title}</h2>

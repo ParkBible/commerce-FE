@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { StarRating } from "@/src/shared/components/StarRating";
 import type { ReviewType } from "@/src/features/product/types";
 
 interface ProductReviewsProps {
@@ -43,7 +42,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
 
     return (
         <section className="py-16">
-            <div className="max-w-[70rem] mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold">리뷰</h2>
                     <svg
@@ -66,7 +65,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
 
                 <div className="flex gap-8 mb-12">
                     {/* 평점 요약 */}
-                    <div className="w-[11.5rem] h-[12.375rem] bg-[#f7f7f8] rounded-lg flex flex-col items-center justify-center">
+                    <div className="w-44 h-48 bg-[#f7f7f8] rounded-lg flex flex-col items-center justify-center">
                         <div className="text-5xl font-bold mb-4">{totalRating.toFixed(1)}</div>
                         <div className="text-sm text-[#37383c] opacity-30 mb-4">
                             of {ratingCounts.reduce((a, b) => a + b, 0)} reviews
@@ -79,7 +78,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                         {[5, 4, 3, 2, 1].map(rating => (
                             <div key={`rating-dist-${rating}`} className="flex items-center mb-4">
                                 <span className="w-3 font-bold mr-4">{rating}</span>
-                                <div className="flex-1 relative h-[0.3125rem] bg-[#d9d9d9] rounded-full overflow-hidden">
+                                <div className="flex-1 relative h-0.5 bg-[#d9d9d9] rounded-full overflow-hidden">
                                     <div
                                         className="absolute left-0 top-0 h-full bg-[#ffb547] rounded-full"
                                         style={{
@@ -100,7 +99,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                     {reviews.slice(0, expanded ? reviews.length : 3).map(review => (
                         <div key={`review-${review.id}`} className="p-6 bg-[#f7f7f8] rounded-lg">
                             <div className="flex gap-4 mb-4">
-                                <div className="w-[3.5rem] h-[3.5rem] bg-gray-300 rounded-full overflow-hidden" />
+                                <div className="w-14 h-14 bg-gray-300 rounded-full overflow-hidden" />
                                 <div className="flex-1">
                                     <div className="flex justify-between">
                                         <h3 className="font-bold">{review.userName}</h3>

@@ -30,7 +30,7 @@ const categories = [
 export default function CategoryGrid() {
     return (
         <section className="py-8 px-6">
-            <div className="mx-auto w-full max-w-[77.5rem]">
+            <div className="mx-auto w-full max-w-7xl">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">버츄오</h2>
                     <div className="flex space-x-4">

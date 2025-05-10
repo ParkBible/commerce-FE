@@ -17,8 +17,8 @@ export function ProductImage({ images, title }: ProductImageProps) {
             : "https://cdn.builder.io/api/v1/image/assets/TEMP/e6efa1b8d524b91891b772502f42519490e0b876";
 
     return (
-        <div className="w-full max-w-[33.5rem]">
-            <div className="relative w-full h-[32.25rem] bg-white rounded-lg overflow-hidden">
+        <div className="w-full max-w-xl">
+            <div className="relative w-full h-[32rem] bg-white rounded-lg overflow-hidden">
                 <img src={mainImage} alt={title} className="w-full h-full object-cover" />
             </div>
 

@@ -27,7 +27,7 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
     return (
         <div className="flex flex-col min-h-screen bg-white">
             <main>
-                <div className="max-w-[90rem] mx-auto px-6">
+                <div className="max-w-screen-xl mx-auto px-6">
                     <Breadcrumbs items={breadcrumbItems} />
 
                     <section className="py-10 flex flex-wrap lg:flex-nowrap gap-12 mb-16 justify-center">

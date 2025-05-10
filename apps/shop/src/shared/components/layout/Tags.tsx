@@ -2,7 +2,7 @@ function Tags() {
     return (
         <div className="w-full bg-white border-b border-gray-100">
             <nav
-                className="flex flex-wrap gap-8 justify-center items-center py-4 mx-auto max-w-[77.5rem] text-xl font-bold tracking-tight leading-snug text-center whitespace-nowrap text-neutral-700"
+                className="flex flex-wrap gap-8 justify-center items-center py-4 mx-auto max-w-7xl text-xl font-bold tracking-tight leading-snug text-center whitespace-nowrap text-neutral-700"
                 aria-label="Content categories"
             >
                 <ul className="flex flex-wrap gap-8 justify-center items-center list-none p-0 m-0">

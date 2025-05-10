@@ -35,7 +35,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
     };
 
     return (
-        <div className="flex flex-col gap-8 w-full max-w-[33.5rem]">
+        <div className="flex flex-col gap-8 w-full max-w-xl">
             {/* 뱃지 영역 */}
             <div className="flex flex-wrap gap-2">
                 {product.badges.map((badge, index) => (
