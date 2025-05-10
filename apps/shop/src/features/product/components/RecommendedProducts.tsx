@@ -13,7 +13,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
     // 장바구니 추가
     const handleAddToCart = (productId: number, productName: string) => {
         toast({
-            title: productName,
+            message: `${productName} 상품이 장바구니에 추가되었습니다.`,
         });
         console.log(`장바구니 추가 (${productId})`); // 여기에 장바구니 추가 로직 구현
     };

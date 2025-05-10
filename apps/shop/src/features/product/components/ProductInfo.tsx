@@ -22,7 +22,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
     const handleAddToCart = () => {
         toast({
-            title: product.title,
+            message: `${product.title} 상품이 장바구니에 추가되었습니다.`,
         });
         // 여기에 장바구니 추가 로직 구현
         console.log(`장바구니 추가: ${product.title}, 수량: ${quantity}`);

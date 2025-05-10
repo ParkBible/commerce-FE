@@ -8,37 +8,23 @@ export function Toast() {
     const [message, setMessage] = useState("");
     const timeoutRef = useRef<number | null>(null);
 
-    // 토스트 숨기기
-    const hideToast = useCallback(() => {
-        setIsVisible(false);
-    }, []);
-
-    // 토스트 메시지 생성
-    const getToastMessage = useCallback((itemName: string): string => {
-        return `${itemName} 상품이 장바구니에 추가되었습니다.`;
-    }, []);
-
     // 토스트 표시 함수
-    const toast = useCallback(
-        ({ title, duration = 3000 }: { title: string; duration?: number }) => {
-            // 기존 타이머가 있다면 제거
-            if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
-            }
+    const toast = useCallback(({ message, duration = 3000 }: { message: string; duration?: number }) => {
+        // 기존 타이머가 있다면 제거
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
 
-            const toastMessage = getToastMessage(title);
-            setMessage(toastMessage);
-            setIsVisible(true);
+        setMessage(message);
+        setIsVisible(true);
 
-            // 지정된 시간 후 토스트 숨기기
-            if (duration > 0) {
-                timeoutRef.current = window.setTimeout(() => {
-                    setIsVisible(false);
-                }, duration);
-            }
-        },
-        [getToastMessage],
-    );
+        // 지정된 시간 후 토스트 숨기기
+        if (duration > 0) {
+            timeoutRef.current = window.setTimeout(() => {
+                setIsVisible(false);
+            }, duration);
+        }
+    }, []);
 
     return {
         toast,
