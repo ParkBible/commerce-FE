@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ProductType } from "@/src/features/product/types";
-import { Toast } from "@/src/shared/components/Toast";
+import { useToast } from "@/src/shared/hooks/useToast";
 
 interface ProductInfoProps {
     product: ProductType;
@@ -10,7 +10,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const [quantity, setQuantity] = useState(10);
-    const { toast, ToastUI } = Toast();
+    const { toast, ToastUI } = useToast();
 
     const handleQuantityChange = (newQuantity: number) => {
         setQuantity(newQuantity);

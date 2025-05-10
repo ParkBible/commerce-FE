@@ -1,8 +1,9 @@
 "use client";
 
+import React from "react";
 import { useState, useCallback, useRef } from "react";
 
-export function Toast() {
+export function useToast() {
     // 토스트 상태 관리
     const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState("");

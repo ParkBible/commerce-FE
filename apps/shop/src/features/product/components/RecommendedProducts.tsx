@@ -1,14 +1,14 @@
 "use client";
 
 import type { RecommendedProductType } from "@/src/features/product/types";
-import { Toast } from "@/src/shared/components/Toast";
+import { useToast } from "@/src/shared/hooks/useToast";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
 }
 
 export function RecommendedProducts({ products }: RecommendedProductsProps) {
-    const { toast, ToastUI } = Toast();
+    const { toast, ToastUI } = useToast();
 
     // 장바구니 추가
     const handleAddToCart = (productId: number, productName: string) => {
