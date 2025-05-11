@@ -1,3 +1,4 @@
+import AddToCart from "../../main/components/product/AddToCart";
 import type { RecommendedProductType } from "../types";
 
 interface RecommendedProductsProps {
@@ -40,19 +41,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     </div>
                                 </div>
 
-                                <button
-                                    type="button"
-                                    className={`w-full py-4 rounded-lg font-semibold ${
-                                        product.inStock
-                                            ? "bg-[#257a57] text-white"
-                                            : "bg-[#f4f4f5] text-[#37383c] opacity-30"
-                                    }`}
-                                    disabled={!product.inStock}
-                                >
-                                    {product.inStock
-                                        ? "장바구니 담기"
-                                        : "일시품절"}
-                                </button>
+                                <AddToCart inStock={product.inStock} />
                             </div>
                         </div>
                     ))}

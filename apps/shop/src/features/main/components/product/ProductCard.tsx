@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { AddToCartButton } from "./AddToCartButton";
 import { Badge } from "./Badge";
 import { ProductFeature } from "./ProductFeature";
+import AddToCart from "./AddToCart";
 
 interface ProductBadge {
     text: string;
@@ -95,7 +96,7 @@ export const ProductCard = ({
                 </div>
 
                 <div className="mt-auto pt-4 pb-8">
-                    <AddToCartButton disabled={outOfStock} />
+                    <AddToCart inStock={!outOfStock} />
                 </div>
             </div>
         </article>
