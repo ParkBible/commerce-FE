@@ -1,19 +1,11 @@
-"use client";
-
-import { useState } from "react";
 import type { ProductType } from "../types";
+import ProductQuantity from "./ProductQuantity";
 
 interface ProductInfoProps {
     product: ProductType;
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
-    const [quantity, setQuantity] = useState(10);
-
-    const handleQuantityChange = (newQuantity: number) => {
-        setQuantity(newQuantity);
-    };
-
     const formatPrice = (price: number) => {
         return price.toLocaleString();
     };
@@ -66,36 +58,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
 
             {/* 수량 선택 */}
-            <div>
-                <h3 className="text-base font-bold mb-3">수량</h3>
-                <div className="flex flex-wrap gap-2">
-                    <button
-                        type="button"
-                        onClick={() => handleQuantityChange(0)}
-                        className={`px-4 py-2 border rounded-md text-sm ${
-                            quantity === 0
-                                ? "border-black font-semibold"
-                                : "border-gray-300 opacity-90"
-                        }`}
-                    >
-                        직접 입력
-                    </button>
-                    {[10, 20, 30, 40, 50, 60].map(qty => (
-                        <button
-                            key={`qty-${qty}`}
-                            type="button"
-                            onClick={() => handleQuantityChange(qty)}
-                            className={`px-4 py-2 border rounded-md min-w-[60px] text-center text-sm ${
-                                quantity === qty
-                                    ? "border-black font-semibold"
-                                    : "border-gray-300 opacity-90"
-                            }`}
-                        >
-                            {qty}
-                        </button>
-                    ))}
-                </div>
-            </div>
+            <ProductQuantity />
 
             {/* 추가 설명 */}
             {(product.limitDescription || product.additionalDescription) && (
