@@ -6,6 +6,9 @@ import React from "react";
 export default function AddToCart({ title, inStock }: { title: string; inStock: boolean }) {
     const { toast, ToastUI } = useToast();
     const [isOpen, setIsOpen] = React.useState(false);
+    const [selectedQuantity, setSelectedQuantity] = React.useState(10);
+
+    const quantities = [10, 20, 30, 40, 50, 60];
 
     const handleClick = () => {
         if (inStock) {
@@ -23,6 +26,18 @@ export default function AddToCart({ title, inStock }: { title: string; inStock: 
         });
 
         setIsOpen(false);
+    };
+
+    const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!Number.isNaN(event.target.value)) {
+            const value = Number.parseInt(event.target.value, 10);
+
+            setSelectedQuantity(value);
+        }
+    };
+
+    const handleQuantitySelect = (quantity: number) => {
+        setSelectedQuantity(quantity);
     };
 
     return (
@@ -73,43 +88,32 @@ export default function AddToCart({ title, inStock }: { title: string; inStock: 
                                     type="number"
                                     placeholder="수량을 입력해 주세요.(10개 단위로 입력 가능합니다.)"
                                     className="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[552px] h-10 relative gap-2.5 px-1 pb-2 border-t-0 border-r-0 border-b border-l-0 border-black"
+                                    value={selectedQuantity}
+                                    onChange={handleQuantityChange}
                                 />
                                 <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 gap-2">
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            0
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-black">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm font-semibold text-center text-black">
-                                            10
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            20
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            30
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            40
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            50
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border border-[#70737c]/[0.22]">
-                                        <p className="flex-grow-0 flex-shrink-0 text-sm text-center text-[#2e2f33]/[0.88]">
-                                            60
-                                        </p>
-                                    </div>
+                                    {quantities.map(quantity => (
+                                        <button
+                                            key={quantity}
+                                            type="button"
+                                            className={`flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border ${
+                                                selectedQuantity === quantity
+                                                    ? "border-black"
+                                                    : "border-[#70737c]/[0.22]"
+                                            }`}
+                                            onClick={() => handleQuantitySelect(quantity)}
+                                        >
+                                            <p
+                                                className={`flex-grow-0 flex-shrink-0 text-sm text-center ${
+                                                    selectedQuantity === quantity
+                                                        ? "font-semibold text-black"
+                                                        : "text-[#2e2f33]/[0.88]"
+                                                }`}
+                                            >
+                                                {quantity}
+                                            </p>
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                             <button
