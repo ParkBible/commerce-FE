@@ -46,7 +46,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     </div>
                                 </div>
 
-                                <AddToCart inStock={product.inStock} />
+                                <AddToCart title={product.title} inStock={product.inStock} />
                             </div>
                         </div>
                     ))}

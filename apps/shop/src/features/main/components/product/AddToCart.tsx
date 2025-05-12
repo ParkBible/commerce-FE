@@ -1,18 +1,27 @@
 "use client";
 
+import { useToast } from "@/src/shared/hooks/useToast";
 import React from "react";
 
-export default function AddToCart({ inStock }: { inStock: boolean }) {
+export default function AddToCart({ title, inStock }: { title: string; inStock: boolean }) {
+    const { toast, ToastUI } = useToast();
     const [isOpen, setIsOpen] = React.useState(false);
 
     const handleClick = () => {
         if (inStock) {
             setIsOpen(true);
-            console.log("장바구니에 담기 클릭");
         }
     };
 
     const handleClose = () => {
+        setIsOpen(false);
+    };
+
+    const handleAddToCart = () => {
+        toast({
+            message: `${title} 상품이 장바구니에 담겼습니다.`,
+        });
+
         setIsOpen(false);
     };
 
@@ -21,9 +30,7 @@ export default function AddToCart({ inStock }: { inStock: boolean }) {
             <button
                 type="button"
                 className={`w-full py-4 rounded-lg font-semibold ${
-                    inStock
-                        ? "bg-[#257a57] text-white"
-                        : "bg-[#f4f4f5] text-[#37383c] opacity-30"
+                    inStock ? "bg-[#257a57] text-white" : "bg-[#f4f4f5] text-[#37383c] opacity-30"
                 }`}
                 disabled={!inStock}
                 onClick={handleClick}
@@ -105,15 +112,18 @@ export default function AddToCart({ inStock }: { inStock: boolean }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 h-12 relative gap-2 px-4 py-3 rounded-lg bg-[#257a57]">
-                                <p className="flex-grow-0 flex-shrink-0 text-sm font-semibold text-center text-white">
-                                    장바구니 담기
-                                </p>
-                            </div>
+                            <button
+                                type="button"
+                                className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 h-12 relative gap-2 px-4 py-3 rounded-lg bg-[#257a57] text-white text-sm font-semibold"
+                                onClick={handleAddToCart}
+                            >
+                                장바구니 담기
+                            </button>
                         </div>
                     </div>
                 </div>
             )}
+            {ToastUI}
         </>
     );
 }

@@ -90,7 +90,7 @@ export const ProductCard = ({
                 </div>
 
                 <div className="mt-auto pt-4 pb-8">
-                    <AddToCart inStock={!outOfStock} />
+                    <AddToCart title={name} inStock={!outOfStock} />
                 </div>
             </div>
         </article>

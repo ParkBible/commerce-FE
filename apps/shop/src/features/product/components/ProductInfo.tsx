@@ -1,14 +1,12 @@
 import type { ProductType } from "@/src/features/product/types";
-import { useToast } from "@/src/shared/hooks/useToast";
 import ProductQuantity from "./ProductQuantity";
+import AddToCart from "./AddToCart";
 
 interface ProductInfoProps {
     product: ProductType;
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
-    const { toast, ToastUI } = useToast();
-
     const formatPrice = (price: number) => {
         return price.toLocaleString();
     };
@@ -58,16 +56,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             )}
 
             {/* 장바구니 버튼 */}
-            <button
-                type="button"
-                className="w-full bg-[#257a57] text-white font-semibold py-4 rounded-lg hover:bg-[#1e6647] active:scale-[0.98] transition-all cursor-pointer"
-                // onClick={handleAddToCart}
-            >
-                장바구니 담기
-            </button>
-
-            {/* 장바구니 토스트 컴포넌트 */}
-            {/* {ToastUI} */}
+            <AddToCart title={product.title} />
         </div>
     );
 }
