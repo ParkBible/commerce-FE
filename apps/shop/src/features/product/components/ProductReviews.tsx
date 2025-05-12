@@ -45,21 +45,8 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
             <div className="max-w-6xl mx-auto">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold">리뷰</h2>
-                    <svg
-                        width="32"
-                        height="32"
-                        viewBox="0 0 32 32"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M12 8L20 16L12 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 8L20 16L12 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </div>
 
@@ -67,9 +54,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                     {/* 평점 요약 */}
                     <div className="w-44 h-48 bg-[#f7f7f8] rounded-lg flex flex-col items-center justify-center">
                         <div className="text-5xl font-bold mb-4">{totalRating.toFixed(1)}</div>
-                        <div className="text-sm text-[#37383c] opacity-30 mb-4">
-                            of {ratingCounts.reduce((a, b) => a + b, 0)} reviews
-                        </div>
+                        <div className="text-sm text-[#37383c] opacity-30 mb-4">of {ratingCounts.reduce((a, b) => a + b, 0)} reviews</div>
                         {renderStars(Math.round(totalRating))}
                     </div>
 
@@ -86,9 +71,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                                         }}
                                     />
                                 </div>
-                                <span className="ml-4 w-8 text-right text-[#37383c] opacity-60">
-                                    {ratingCounts[5 - rating]}
-                                </span>
+                                <span className="ml-4 w-8 text-right text-[#37383c] opacity-60">{ratingCounts[5 - rating]}</span>
                             </div>
                         ))}
                     </div>
@@ -136,15 +119,8 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                             {review.images && review.images.length > 0 && (
                                 <div className="flex gap-2 mt-4">
                                     {review.images.map((image, index) => (
-                                        <div
-                                            key={`review-img-${review.id}-${index}`}
-                                            className="w-20 h-20 bg-gray-200 rounded-md overflow-hidden"
-                                        >
-                                            <img
-                                                src={image}
-                                                alt={`리뷰 이미지 ${index + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
+                                        <div key={`review-img-${review.id}-${index}`} className="w-20 h-20 bg-gray-200 rounded-md overflow-hidden">
+                                            <img src={image} alt={`리뷰 이미지 ${index + 1}`} className="w-full h-full object-cover" />
                                         </div>
                                     ))}
                                 </div>
@@ -153,21 +129,22 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                     ))}
                 </div>
 
-                {/* 더보기 버튼 */}
-                {reviews.length > 3 && !expanded && (
+                {/* 더보기/접기 버튼 */}
+                {reviews.length > 3 && (
                     <div className="flex justify-center mt-8">
                         <button
                             type="button"
-                            onClick={() => setExpanded(true)}
+                            onClick={() => setExpanded(!expanded)}
                             className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2"
                         >
-                            전체 리뷰 보기
+                            {expanded ? "리뷰 접기" : "전체 리뷰 보기"}
                             <svg
                                 width="16"
                                 height="16"
                                 viewBox="0 0 16 16"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
+                                className={`transform transition-transform ${expanded ? "rotate-180" : ""}`}
                                 aria-hidden="true"
                             >
                                 <path d="M8 10L4 6H12L8 10Z" fill="currentColor" />
