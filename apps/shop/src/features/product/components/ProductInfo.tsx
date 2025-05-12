@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import type { ProductType } from "@/src/features/product/types";
 import { useToast } from "@/src/shared/hooks/useToast";
 
@@ -10,30 +10,27 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const [quantity, setQuantity] = useState(0);
-    const [selectedButton, setSelectedButton] = useState<number | null>(10);
+    const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [isInputActive, setIsInputActive] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const { toast, ToastUI } = useToast();
 
-    // 숫자 버튼 클릭시 선택 상태만 변경하고 입력창 포커스 해제
+    // 숫자 버튼 클릭시
     const handleButtonSelect = (buttonValue: number) => {
+        setQuantity(buttonValue);
         setSelectedButton(buttonValue);
-        setIsInputActive(false);
         if (inputRef.current) {
             inputRef.current.blur();
         }
     };
 
     const handleCustomQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // 숫자만 입력 허용 (정규식으로 검사)
-        const value = e.target.value.replace(/[^0-9]/g, "");
+        const value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 입력 허용 (정규식으로 검사)
 
         if (value === "") {
             setQuantity(0);
         } else {
             let numValue = Number.parseInt(value, 10);
-
-            // 999보다 큰 값은 999로 제한
             if (numValue > 999) {
                 numValue = 999;
             }
