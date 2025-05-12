@@ -34,7 +34,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
             if (numValue > 999) {
                 numValue = 999;
             }
-
             setQuantity(numValue);
         }
         setSelectedButton(null); // 직접 입력 시 선택된 버튼 초기화
@@ -72,7 +71,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 {product.badges.map((badge, index) => (
                     <div
                         key={`${badge.text}-${index}`}
-                        className="px-[0.625rem] py-[0.375rem] rounded-md text-xs"
+                        className="px-2.5 py-1.5 rounded-md text-xs"
                         style={{
                             backgroundColor: badge.bgColor,
                             color: badge.textColor || (badge.bgColor === "#ffc000" ? "#171719" : "#fff"),
@@ -85,17 +84,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
             {/* 제품 제목 및 설명 */}
             <div className="space-y-2">
-                <h1 className="text-[1.75rem] font-bold leading-9 tracking-[-0.035rem]">{product.title}</h1>
-                <p className="text-base text-[#171719]">{product.description}</p>
+                <h1 className="text-3xl font-bold leading-9 tracking-tight">{product.title}</h1>
+                <p className="text-base text-gray-900">{product.description}</p>
             </div>
 
             {/* 가격 정보 */}
             <div className="space-y-2">
                 <div className="flex items-center">
-                    <span className="text-2xl font-bold text-[#257a57]">₩</span>
-                    <span className="text-2xl font-bold text-[#257a57] ml-1">{formatPrice(product.price)}</span>
+                    <span className="text-2xl font-bold text-emerald-700">₩</span>
+                    <span className="text-2xl font-bold text-emerald-700 ml-1">{formatPrice(product.price)}</span>
                 </div>
-                {product.pricePerUnit && <p className="text-sm text-[#37383c] opacity-60">{product.pricePerUnit}</p>}
+                {product.pricePerUnit && <p className="text-sm text-gray-600">{product.pricePerUnit}</p>}
             </div>
 
             {/* 수량 선택 */}
@@ -142,7 +141,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
             {/* 추가 설명 */}
             {(product.limitDescription || product.additionalDescription) && (
-                <div className="text-xs text-[#37383c] opacity-60 space-y-1">
+                <div className="text-xs text-gray-600 space-y-1">
                     {product.limitDescription && <p>{product.limitDescription}</p>}
                     {product.additionalDescription && <p>{product.additionalDescription}</p>}
                 </div>
@@ -151,7 +150,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             {/* 장바구니 버튼 */}
             <button
                 type="button"
-                className="w-full bg-[#257a57] text-white font-semibold py-4 rounded-lg hover:bg-[#1e6647] active:scale-[0.98] transition-all cursor-pointer"
+                className="w-full bg-emerald-700 text-white font-semibold py-4 rounded-lg hover:bg-emerald-800 active:scale-[0.98] transition-all cursor-pointer"
                 onClick={handleAddToCart}
             >
                 장바구니 담기
