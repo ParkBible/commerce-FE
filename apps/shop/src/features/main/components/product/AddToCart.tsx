@@ -1,12 +1,12 @@
 "use client";
 
 import { useToast } from "@/src/shared/hooks/useToast";
-import React from "react";
+import { useState } from "react";
 
 export default function AddToCart({ title, inStock }: { title: string; inStock: boolean }) {
     const { toast, ToastUI } = useToast();
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [selectedQuantity, setSelectedQuantity] = React.useState(10);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedQuantity, setSelectedQuantity] = useState<number | "">("");
 
     const quantities = [10, 20, 30, 40, 50, 60];
 
@@ -29,10 +29,12 @@ export default function AddToCart({ title, inStock }: { title: string; inStock: 
     };
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!Number.isNaN(event.target.value)) {
-            const value = Number.parseInt(event.target.value, 10);
+        const value = Number.parseInt(event.target.value);
 
+        if (!Number.isNaN(value)) {
             setSelectedQuantity(value);
+        } else {
+            setSelectedQuantity("");
         }
     };
 
