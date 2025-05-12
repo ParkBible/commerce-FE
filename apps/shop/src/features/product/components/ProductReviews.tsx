@@ -135,7 +135,7 @@ export function ProductReviews({ reviews, totalRating, ratingCounts }: ProductRe
                         <button
                             type="button"
                             onClick={() => setExpanded(!expanded)}
-                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2"
+                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2 cursor-pointer"
                         >
                             {expanded ? "리뷰 접기" : "전체 리뷰 보기"}
                             <svg

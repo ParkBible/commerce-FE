@@ -114,7 +114,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <button
                             type="button"
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2"
+                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2 cursor-pointer"
                         >
                             {isExpanded ? "상세정보 닫기" : "상세정보 보기"}
                             <svg

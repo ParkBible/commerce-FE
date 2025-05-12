@@ -33,8 +33,7 @@ export const mockProduct: ProductType = {
     acidLevel: 2,
     roastLevel: 2,
     quantity: 10,
-    limitDescription:
-        "*스페셜 리저브 하와이 코나는 한정 수량 준비되어 버츄오/오리지널 각각 1계정 당 최대 6개 슬리브 구매 가능합니다.",
+    limitDescription: "*스페셜 리저브 하와이 코나는 한정 수량 준비되어 매진될 수 있습니다.",
     additionalDescription: "*재활용 알류미늄 85% 포함된 캡슐 사용",
 };
 

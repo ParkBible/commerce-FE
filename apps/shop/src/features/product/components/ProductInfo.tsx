@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { ProductType } from "@/src/features/product/types";
 import { useToast } from "@/src/shared/hooks/useToast";
 
@@ -9,11 +9,44 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
-    const [quantity, setQuantity] = useState(10);
+    const [quantity, setQuantity] = useState(0);
+    const [selectedButton, setSelectedButton] = useState<number | null>(10);
+    const [isInputActive, setIsInputActive] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
     const { toast, ToastUI } = useToast();
 
-    const handleQuantityChange = (newQuantity: number) => {
-        setQuantity(newQuantity);
+    // 숫자 버튼 클릭시 선택 상태만 변경하고 입력창 포커스 해제
+    const handleButtonSelect = (buttonValue: number) => {
+        setSelectedButton(buttonValue);
+        setIsInputActive(false);
+        if (inputRef.current) {
+            inputRef.current.blur();
+        }
+    };
+
+    const handleCustomQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // 숫자만 입력 허용 (정규식으로 검사)
+        const value = e.target.value.replace(/[^0-9]/g, "");
+
+        if (value === "") {
+            setQuantity(0);
+        } else {
+            let numValue = Number.parseInt(value, 10);
+
+            // 999보다 큰 값은 999로 제한
+            if (numValue > 999) {
+                numValue = 999;
+            }
+
+            setQuantity(numValue);
+        }
+        setSelectedButton(null); // 직접 입력 시 선택된 버튼 초기화
+    };
+
+    // 입력창 클릭시 선택된 버튼 해제 및 입력창 활성화
+    const handleInputFocus = () => {
+        setSelectedButton(null);
+        setIsInputActive(true);
     };
 
     const formatPrice = (price: number) => {
@@ -21,6 +54,13 @@ export function ProductInfo({ product }: ProductInfoProps) {
     };
 
     const handleAddToCart = () => {
+        if (quantity <= 0) {
+            toast({
+                message: "수량을 1개 이상 선택해주세요.",
+            });
+            return;
+        }
+
         toast({
             message: `${product.title} 상품이 장바구니에 추가되었습니다.`,
         });
@@ -65,22 +105,36 @@ export function ProductInfo({ product }: ProductInfoProps) {
             <div>
                 <h3 className="text-base font-bold mb-3">수량</h3>
                 <div className="flex flex-wrap gap-2">
-                    <button
-                        type="button"
-                        onClick={() => handleQuantityChange(0)}
-                        className={`px-4 py-2 border rounded-md text-sm ${
-                            quantity === 0 ? "border-black font-semibold" : "border-gray-300 opacity-90"
-                        }`}
+                    <div
+                        className={`flex items-center h-10 w-[4.5rem] border rounded-md box-border ${isInputActive ? "border-black" : "border-gray-300"}`}
                     >
-                        직접 입력
-                    </button>
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            value={quantity === 0 ? "" : quantity}
+                            onChange={handleCustomQuantityChange}
+                            onFocus={handleInputFocus}
+                            className="w-full h-full px-2 text-sm focus:outline-none text-center appearance-none bg-transparent"
+                            placeholder="입력"
+                            style={{
+                                margin: 0,
+                                border: "none",
+                                lineHeight: "normal",
+                            }}
+                            maxLength={3}
+                        />
+                    </div>
+
+                    {/* 수량 버튼들 */}
                     {[10, 20, 30, 40, 50, 60].map(qty => (
                         <button
                             key={`qty-${qty}`}
                             type="button"
-                            onClick={() => handleQuantityChange(qty)}
-                            className={`px-4 py-2 border rounded-md min-w-[3.75rem] text-center text-sm ${
-                                quantity === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
+                            onClick={() => handleButtonSelect(qty)}
+                            className={`h-10 px-4 border rounded-md min-w-[3.75rem] text-center text-sm cursor-pointer ${
+                                selectedButton === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
                             }`}
                         >
                             {qty}
