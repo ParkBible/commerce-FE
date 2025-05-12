@@ -6,7 +6,7 @@ function Header() {
     return (
         <div className="w-full bg-white border-b border-solid border-b-[color:var(--Line-Sub2,rgba(112,115,124,0.08))]">
             <header className="flex flex-wrap gap-8 items-center px-6 py-4 mx-auto max-w-7xl">
-                <div className="self-stretch my-auto text-2xl font-bold tracking-tight leading-snug text-center text-black w-32">
+                <div className="self-stretch my-auto text-2xl font-bold tracking-tight leading-snug text-center text-black w-33">
                     <h1 className="self-stretch text-black">801 COFFEE</h1>
                 </div>
 

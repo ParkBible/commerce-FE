@@ -1,5 +1,5 @@
 import type { ProductType } from "@/src/features/product/types";
-import { CartToast } from "@/src/shared/components/CartToast";
+import { useToast } from "@/src/shared/hooks/useToast";
 import ProductQuantity from "./ProductQuantity";
 
 interface ProductInfoProps {
@@ -7,18 +7,11 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
+    const { toast, ToastUI } = useToast();
+
     const formatPrice = (price: number) => {
         return price.toLocaleString();
     };
-
-    // const handleAddToCart = () => {
-    //     toast({
-    //         title: product.title,
-    //         action: "add-to-cart",
-    //     });
-    //     // 여기에 장바구니 추가 로직 구현
-    //     console.log(`장바구니 추가: ${product.title}, 수량: ${quantity}`);
-    // };
 
     return (
         <div className="flex flex-col gap-8 w-full max-w-xl">

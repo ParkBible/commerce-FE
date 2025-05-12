@@ -33,13 +33,3 @@ export function getKoreanObjectParticle(str: string): string {
     const hasFinalConsonant = (charCode - 0xac00) % 28 > 0;
     return hasFinalConsonant ? "을" : "를";
 }
-
-/**
- * 장바구니 토스트 메시지 생성 함수
- */
-export function getCartToastMessage(productName: string): string {
-    if (isKorean(productName)) {
-        return `${productName}${getKoreanSubjectParticle(productName)} 장바구니에 추가되었습니다.`;
-    }
-    return `${productName} 상품이 장바구니에 추가되었습니다.`;
-}
