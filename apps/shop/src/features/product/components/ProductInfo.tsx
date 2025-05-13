@@ -112,13 +112,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
                             value={quantity === 0 ? "" : quantity}
                             onChange={handleCustomQuantityChange}
                             onFocus={handleInputFocus}
-                            className="w-full h-full px-2 text-sm focus:outline-none text-center appearance-none bg-transparent"
+                            className="w-full h-full px-2 text-sm focus:outline-none text-center appearance-none bg-transparent m-0 border-none leading-normal"
                             placeholder="입력"
-                            style={{
-                                margin: 0,
-                                border: "none",
-                                lineHeight: "normal",
-                            }}
                             maxLength={3}
                         />
                     </div>
