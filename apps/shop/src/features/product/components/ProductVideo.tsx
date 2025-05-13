@@ -3,11 +3,11 @@ export function ProductVideo() {
         <section className="bg-white py-16">
             <div className="max-w-6xl mx-auto">
                 <div className="space-y-4 mb-8">
-                    <h2 className="text-[1.75rem] font-bold text-black">라테 러버들의 필수템! 에어로치노</h2>
+                    <h2 className="text-[1.75rem] font-bold text-black">커피 애호가들의 꿈, 스페셜 리저브 하와이 코나</h2>
                     <p className="text-base text-[#171719]">
-                        한번의 터치로 완성되는 최상의 라테. 입문자도 쉽게 따라할 수 있는 모드별 대표 레시피를 확인하고
+                        이국적인 열대 과일향과 고소한 견과류향이 완벽하게 어우러진 프리미엄 싱글 오리진 커피.
                         <br />
-                        에어로치노로 홈 카페를 완전 정복해보세요.
+                        하와이 화산 비옥한 토양에서 자란 최상급 코나 커피로 특별한 홈 카페 경험을 선사합니다.
                     </p>
                 </div>
 

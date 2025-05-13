@@ -31,9 +31,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 <div className="bg-white rounded-xl p-12">
                     <div className="space-y-4">
                         <h2 className="text-2xl font-bold text-black">{product.title}</h2>
-                        <p className="text-sm text-[#37383c] opacity-60">
-                            *캡슐에는 그림에 표시된 원료가 들어있지 않습니다.
-                        </p>
+                        <p className="text-sm text-[#37383c] opacity-60">*캡슐에는 그림에 표시된 원료가 들어있지 않습니다.</p>
                     </div>
 
                     <div className="mt-10 grid grid-cols-2 gap-8">
@@ -56,10 +54,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             <h3 className="text-xl font-bold mb-4">주요 아로마 특징</h3>
                             <div className="flex gap-6">
                                 {product.aromaFeatures?.map((feature, index) => (
-                                    <p
-                                        key={`feature-${feature.substring(0, 10)}-${index}`}
-                                        className="text-sm whitespace-pre-line"
-                                    >
+                                    <p key={`feature-${feature.substring(0, 10)}-${index}`} className="text-sm whitespace-pre-line">
                                         {feature}
                                     </p>
                                 ))}
@@ -90,14 +85,38 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         </div>
                     </div>
 
+                    {/* 제품 상세정보 섹션 - isExpanded 상태에 따라 표시 */}
+                    {isExpanded && (
+                        <div className="mt-10">
+                            <h3 className="text-xl font-bold mb-4">제품 상세정보</h3>
+                            <div className="text-sm leading-relaxed">
+                                <div className="space-y-2">
+                                    <p>○ 제품명: {product.title}</p>
+                                    <p>○ 식품유형: 커피</p>
+                                    <p>○ 원산지: 스위스</p>
+                                    <p>○ 품질유지기한: 제품 측면 별도 표기(읽는법: 일.월.년순)</p>
+                                    <p>○ 내용량: 10개입(102g)</p>
+                                    <p>○ 원재료명: 커피원두 100%</p>
+                                    <p>○ 반품 및 교환: 801 전용 클럽 080-734-1111 (매일, 9시~18시/ 수신자 부담)</p>
+                                    <p>○ 보관방법: 직사광선을 피하여 건조하고 서늘한 실온에 보관</p>
+                                    <p>○ 포장재질: 바디-알루미늄/코팅-폴리프로필렌(내면)</p> <br />
+                                    <p>※ 재활용한 알루미늄 85% 포함된 캡슐 사용</p>
+                                    <p>※ 수입 식품 안전 관리 특별법에 의한 수입신고를 필함</p>
+                                    <p>※ 본 제품은 공정거래위원회 고시 소비자 분쟁 해결 기준에 의거, 교환 또는 보상 받으실 수 있습니다.</p>
+                                    <p>※ 부정, 불량식품 신고는 국번없이 1399</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* 추가 상세정보 버튼 */}
                     <div className="mt-10 flex justify-center">
                         <button
                             type="button"
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2"
+                            className="px-8 py-3 border border-black rounded-lg font-semibold text-sm flex items-center gap-2 cursor-pointer"
                         >
-                            상세정보 보기
+                            {isExpanded ? "상세정보 닫기" : "상세정보 보기"}
                             <svg
                                 width="16"
                                 height="16"
