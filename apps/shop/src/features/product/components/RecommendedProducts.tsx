@@ -2,7 +2,7 @@
 
 import type { RecommendedProductType } from "@/src/features/product/types";
 import { useToast } from "@/src/shared/hooks/useToast";
-import AddToCart from "@/src/features/main/components/product/AddToCart";
+import AddToCart from "@/src/features/product/components/AddToCart";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
@@ -46,7 +46,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     </div>
                                 </div>
 
-                                <AddToCart title={product.title} inStock={product.inStock} />
+                                <AddToCart title={product.title} inStock={product.inStock} withPopup={true} />
                             </div>
                         </div>
                     ))}

@@ -1,25 +1,49 @@
 "use client";
 
+import AddCartPopup from "@/src/features/product/components/AddCartPopup";
+import AddToCartButton from "@/src/features/product/components/AddToCartButton";
 import { useToast } from "@/src/shared/hooks/useToast";
+import { useState } from "react";
 
-export default function AddToCart({ title }: { title: string }) {
+export default function AddToCart({
+    title,
+    inStock,
+    withPopup = false,
+}: { title: string; inStock: boolean; withPopup?: boolean }) {
     const { toast, ToastUI } = useToast();
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    const handleAddToCart = () => {
+    const onButtonClick = () => {
+        if (!inStock) {
+            return;
+        }
+
+        if (withPopup) {
+            setIsPopupOpen(true);
+        } else {
+            AddToCart();
+        }
+    };
+
+    const AddToCart = () => {
+        console.log("장바구니에 담기 로직");
+        showToast();
+    };
+
+    const showToast = () => {
         toast({
             message: `${title} 상품이 장바구니에 담겼습니다.`,
         });
     };
 
+    const handlePopupClose = () => {
+        setIsPopupOpen(false);
+    };
+
     return (
         <>
-            <button
-                type="button"
-                className="w-full bg-[#257a57] text-white font-semibold py-4 rounded-lg hover:bg-[#1e6647] active:scale-[0.98] transition-all cursor-pointer"
-                onClick={handleAddToCart}
-            >
-                장바구니 담기
-            </button>
+            <AddToCartButton inStock={inStock} onClick={onButtonClick} />
+            {isPopupOpen && <AddCartPopup onClose={handlePopupClose} onAddToCart={AddToCart} />}
             {ToastUI}
         </>
     );

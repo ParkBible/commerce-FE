@@ -56,7 +56,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             )}
 
             {/* 장바구니 버튼 */}
-            <AddToCart title={product.title} />
+            <AddToCart title={product.title} inStock={product.inStock} />
         </div>
     );
 }

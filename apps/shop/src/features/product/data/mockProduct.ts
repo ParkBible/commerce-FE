@@ -26,6 +26,7 @@ export const mockProduct: ProductType = {
             textColor: "#ffffff",
         },
     ],
+    inStock: true,
     coffeeSize: "80ml",
     aromaFeatures: ["과일향\n이그조틱", "견과류향\n트로피컬 ", "곡물향"],
     bodyLevel: 3,
