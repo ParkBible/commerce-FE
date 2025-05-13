@@ -11,6 +11,7 @@ export interface ProductType {
         bgColor: string;
         textColor?: string;
     }>;
+    inStock: boolean;
     coffeeSize?: string;
     aromaFeatures?: string[];
     bodyLevel?: number;
@@ -38,4 +39,9 @@ export interface RecommendedProductType {
     price: number;
     image: string;
     inStock: boolean;
+}
+
+export interface ProductCategoryType {
+    id: number;
+    label: string;
 }

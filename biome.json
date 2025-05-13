@@ -14,7 +14,7 @@
         "indentStyle": "space",
         "indentWidth": 4,
         "lineEnding": "lf",
-        "lineWidth": 100
+        "lineWidth": 150
     },
     "organizeImports": {
         "enabled": true
@@ -22,7 +22,11 @@
     "linter": {
         "enabled": true,
         "rules": {
-            "recommended": true
+            "recommended": true,
+            "a11y": {
+                "useKeyWithClickEvents": "off",
+                "useKeyWithMouseEvents": "off"
+            }
         }
     },
     "javascript": {
@@ -30,7 +34,7 @@
             "quoteStyle": "double",
             "semicolons": "always",
             "bracketSpacing": true,
-            "lineWidth": 80,
+            "lineWidth": 150,
             "bracketSameLine": false,
             "arrowParentheses": "asNeeded",
             "trailingCommas": "all",
