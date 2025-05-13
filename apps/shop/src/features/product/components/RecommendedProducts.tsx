@@ -26,10 +26,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
 
                 <div className="grid grid-cols-3 gap-8">
                     {products.map(product => (
-                        <div
-                            key={`recommended-${product.id}`}
-                            className="bg-white rounded-xl overflow-hidden h-[28rem] relative"
-                        >
+                        <div key={`recommended-${product.id}`} className="bg-white rounded-xl overflow-hidden h-[28rem] relative">
                             <div className="p-4 h-full">
                                 <div className="h-48 mb-6 flex justify-center">
                                     <img src={product.image} alt={product.title} className="h-full object-contain" />
@@ -41,9 +38,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                 </div>
 
                                 <div className="absolute bottom-[5.625rem] left-0 right-0 flex justify-center">
-                                    <div className="text-[#257a57] font-bold text-2xl">
-                                        ₩ {product.price.toLocaleString()}
-                                    </div>
+                                    <div className="text-[#257a57] font-bold text-2xl">₩ {product.price.toLocaleString()}</div>
                                 </div>
 
                                 <AddToCart title={product.title} inStock={product.inStock} withPopup={true} />

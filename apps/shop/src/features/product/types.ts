@@ -40,3 +40,8 @@ export interface RecommendedProductType {
     image: string;
     inStock: boolean;
 }
+
+export interface ProductCategoryType {
+    id: number;
+    label: string;
+}
