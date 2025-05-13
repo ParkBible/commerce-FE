@@ -2,6 +2,7 @@
 
 import type { RecommendedProductType } from "@/src/features/product/types";
 import { useToast } from "@/src/shared/hooks/useToast";
+import AddToCart from "@/src/features/product/components/AddToCart";
 
 interface RecommendedProductsProps {
     products: RecommendedProductType[];
@@ -40,20 +41,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                                     <div className="text-[#257a57] font-bold text-2xl">₩ {product.price.toLocaleString()}</div>
                                 </div>
 
-                                <div className="absolute bottom-4 left-4 right-4">
-                                    <button
-                                        type="button"
-                                        className={`w-full py-4 rounded-lg font-semibold ${
-                                            product.inStock
-                                                ? "bg-[#257a57] text-white hover:bg-[#1e6647] active:scale-[0.98] transition-all cursor-pointer"
-                                                : "bg-[#f4f4f5] text-[#37383c] opacity-30 cursor-not-allowed"
-                                        }`}
-                                        disabled={!product.inStock}
-                                        onClick={() => product.inStock && handleAddToCart(product.id, product.title)}
-                                    >
-                                        {product.inStock ? "장바구니 담기" : "일시품절"}
-                                    </button>
-                                </div>
+                                <AddToCart title={product.title} inStock={product.inStock} withPopup={true} />
                             </div>
                         </div>
                     ))}
