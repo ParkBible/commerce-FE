@@ -26,7 +26,7 @@ export default function AddToCart({
     };
 
     const AddToCart = () => {
-        console.log("장바구니에 담기 로직");
+        //todo: 장바구니 추가 로직 구현
         showToast();
     };
 

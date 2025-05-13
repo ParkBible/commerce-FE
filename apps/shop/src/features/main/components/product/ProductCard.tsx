@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Badge } from "./Badge";
 import { ProductFeature } from "./ProductFeature";
-import AddToCart from "../../../product/components/AddToCart";
+import AddToCart from "@/src/features/product/components/AddToCart";
 
 interface ProductBadge {
     text: string;
