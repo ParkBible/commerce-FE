@@ -10,9 +10,8 @@ interface CreateReviewModalProps {
     product: ProductType;
     isOpen: boolean;
     onClickClose: () => void;
-    onSubmit: (productId: number, rating: number, content: string) => void;
 }
-export default function CreateReviewModal({ product, isOpen, onClickClose, onSubmit }: CreateReviewModalProps) {
+export default function CreateReviewModal({ product, isOpen, onClickClose }: CreateReviewModalProps) {
     const [rating, setRating] = useState(0);
 
     const [content, setContent] = useState("");
@@ -29,7 +28,6 @@ export default function CreateReviewModal({ product, isOpen, onClickClose, onSub
 
     const handleSubmit = () => {
         if (content.length === 0) return;
-        onSubmit(product.id, rating, content);
         onClickClose();
     };
 
