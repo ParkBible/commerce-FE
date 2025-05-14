@@ -1,40 +1,29 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { OrderHistoryList } from "./OrderHistoryList";
+import { getOrderHistory } from "@/src/features/order/api/orderApi";
+import { useEffect, useState } from "react";
+import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 
 export const OrderHistoryPage = (): ReactNode => {
-    // 더미 데이터 (실제로는 API에서 가져올 데이터)
-    const orders = [
-        {
-            id: "1",
-            status: "준비중" as const,
-            productName: "스페셜 리저브 하와이 코나 외 3건",
-            price: 35000,
-            imageSrc: "https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?q=80&w=2069",
-        },
-        {
-            id: "2",
-            status: "배송중" as const,
-            productName: "스페셜 리저브 하와이 코나 외 3건",
-            price: 35000,
-            imageSrc: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2070",
-        },
-        {
-            id: "3",
-            status: "배송완료" as const,
-            statusDate: "5/11 도착",
-            productName: "스페셜 리저브 하와이 코나 외 3건",
-            price: 35000,
-            imageSrc: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1887",
-        },
-        {
-            id: "4",
-            status: "반품완료" as const,
-            statusDate: "5/11 취소",
-            productName: "스페셜 리저브 하와이 코나 외 3건",
-            price: 35000,
-            imageSrc: "https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?q=80&w=1887",
-        },
-    ];
+    const [orders, setOrders] = useState<OrderHistoryItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const data = await getOrderHistory();
+                setOrders(data);
+            } catch (error) {
+                console.error("주문 내역을 불러오는데 실패했습니다:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        void fetchOrders();
+    }, []);
 
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-8">
@@ -77,7 +66,7 @@ export const OrderHistoryPage = (): ReactNode => {
                 </div>
             </div>
 
-            <OrderHistoryList orders={orders} />
+            {isLoading ? <div className="text-center py-8">주문 내역을 불러오는 중...</div> : <OrderHistoryList orders={orders} />}
         </div>
     );
 };

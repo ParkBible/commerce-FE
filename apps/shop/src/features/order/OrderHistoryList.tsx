@@ -1,18 +1,10 @@
 import { Button } from "@/src/shared/components/shared/button";
 import Image from "next/image";
 import type { ReactNode } from "react";
-
-interface OrderItem {
-    id: string;
-    status: "준비중" | "배송중" | "배송완료" | "반품완료";
-    statusDate?: string;
-    productName: string;
-    price: number;
-    imageSrc: string;
-}
+import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 
 interface OrderHistoryListProps {
-    orders: OrderItem[];
+    orders: OrderHistoryItem[];
 }
 
 export const OrderHistoryList = ({ orders }: OrderHistoryListProps): ReactNode => {
@@ -48,7 +40,9 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps): ReactNode =
                                 <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
                                     주문 취소
                                 </Button>
-                                <Button className="flex-1 h-10 text-sm font-semibold">배송 조회</Button>
+                                <Button className="flex-1 h-10 text-sm font-semibold bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]">
+                                    배송 조회
+                                </Button>
                             </>
                         )}
 
@@ -57,7 +51,9 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps): ReactNode =
                                 <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
                                     반품 신청
                                 </Button>
-                                <Button className="flex-1 h-10 text-sm font-semibold">배송 조회</Button>
+                                <Button className="flex-1 h-10 text-sm font-semibold bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]">
+                                    배송 조회
+                                </Button>
                             </>
                         )}
 
