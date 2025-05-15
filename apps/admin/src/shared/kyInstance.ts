@@ -1,8 +1,13 @@
-import ky from "ky";
+import ky, { type Options } from "ky";
+
+type ApiResponse<T> = {
+    data: T | null;
+    error: CustomError | null;
+};
 
 export type CustomError = Error & {
-    code?: string;
-    details?: unknown;
+    code: string;
+    message: string;
 };
 
 export const api = ky.create({
@@ -13,16 +18,25 @@ export const api = ky.create({
     throwHttpErrors: false,
 });
 
-export async function fetcher<T>(request: Promise<Response>): Promise<T> {
-    const res = await request;
-    const json = await res.json();
+export async function fetcher<T>(path: string, options?: Options): Promise<T> {
+    const res = await api(path, {
+        ...options,
+        method: options?.method ?? "GET",
+    });
 
-    if (!res.ok || !json.success) {
-        const baseError = new Error(json.error?.message || "알 수 없는 오류");
+    let json: ApiResponse<T>;
 
+    try {
+        json = await res.json();
+    } catch {
+        throw new Error("JSON 파싱에 실패했습니다.");
+    }
+
+    if (!res.ok || json.error) {
+        const baseError = new Error();
         const error: CustomError = Object.assign(baseError, {
-            code: json.error?.code,
-            details: json.error?.details,
+            code: json?.error?.code || "UNKNOWN_ERROR",
+            message: json?.error?.message || "API 요청에 실패했습니다.",
         });
 
         throw error;
