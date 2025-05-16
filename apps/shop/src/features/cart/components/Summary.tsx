@@ -6,7 +6,8 @@ interface SummaryProps {
 }
 
 export default function Summary({ cartItems, shippingFee }: SummaryProps) {
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * (item.quantity / 10), 0) + shippingFee;
+    const QUANTITY_STEP = 10;
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * (item.quantity / QUANTITY_STEP), 0) + shippingFee;
 
     return (
         <div
