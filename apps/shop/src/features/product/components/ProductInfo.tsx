@@ -8,7 +8,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     const formatPrice = (price: number) => {
-        return price.toLocaleString();
+        return price.toLocaleString("ko-KR");
     };
 
     return (

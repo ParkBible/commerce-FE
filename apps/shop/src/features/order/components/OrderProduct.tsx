@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import Image from "next/image";
 
 interface Product {
@@ -14,7 +13,7 @@ interface OrderProductProps {
     products: Product[];
 }
 
-export const OrderProduct = ({ products }: OrderProductProps): ReactNode => {
+export const OrderProduct = ({ products }: OrderProductProps) => {
     return (
         <div className="mb-10">
             <h2 className="text-xl font-bold mb-4">주문 상품</h2>
@@ -37,9 +36,9 @@ export const OrderProduct = ({ products }: OrderProductProps): ReactNode => {
                                 <h3 className="font-bold mb-2">{product.name}</h3>
                                 <div className="flex items-center">
                                     <span className="text-[#257a57] font-bold">₩</span>
-                                    <span className="text-[#257a57] font-bold ml-1">{product.price.toLocaleString()}</span>
+                                    <span className="text-[#257a57] font-bold ml-1">{product.price.toLocaleString("ko-KR")}</span>
                                     <span className="text-[#257a57] ml-2 text-xs">
-                                        ({product.quantity} x ₩{product.unitPrice.toLocaleString()})
+                                        ({product.quantity} x ₩{product.unitPrice.toLocaleString("ko-KR")})
                                     </span>
                                 </div>
                             </div>

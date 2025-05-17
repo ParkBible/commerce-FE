@@ -7,7 +7,7 @@ import { getMockOrderHistory } from "@/src/features/order/mocks/orderHistoryMock
  * 주문 상세 정보를 가져오는 API 함수
  * 현재는 목 데이터를 반환하지만, 실제 API 연동 시 수정 예정
  */
-export async function getOrderDetail(orderId: string): Promise<OrderDetailData> {
+export async function getOrderDetail(orderId: string) {
     // 개발 환경이나 목 데이터 사용 설정 시 목 데이터 반환
     if (process.env.NODE_ENV === "development") {
         await new Promise(resolve => setTimeout(resolve, 300)); // 실제 API 호출 시뮬레이션을 위한 인위적 지연
@@ -33,7 +33,7 @@ export async function getOrderDetail(orderId: string): Promise<OrderDetailData> 
  * 주문 내역 목록을 가져오는 API 함수
  * 현재는 목 데이터를 반환하지만, 실제 API 연동 시 수정 예정
  */
-export async function getOrderHistory(): Promise<OrderHistoryItem[]> {
+export async function getOrderHistory() {
     // 개발 환경이나 목 데이터 사용 설정 시 목 데이터 반환
     if (process.env.NODE_ENV === "development") {
         // 실제 API 호출 시뮬레이션을 위한 인위적 지연

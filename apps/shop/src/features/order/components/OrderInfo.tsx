@@ -1,12 +1,10 @@
-import type { ReactNode } from "react";
-
 interface OrderInfoProps {
     orderId: string;
     orderDate: string;
     orderStatus: string;
 }
 
-export const OrderInfo = ({ orderId, orderDate, orderStatus }: OrderInfoProps): ReactNode => {
+export const OrderInfo = ({ orderId, orderDate, orderStatus }: OrderInfoProps) => {
     return (
         <div className="mb-10">
             <p className="text-[#2e2f33] opacity-90 text-base">{orderDate}</p>

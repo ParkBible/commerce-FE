@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { OrderHistoryList } from "./OrderHistoryList";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 
@@ -6,7 +5,7 @@ interface OrderHistoryPageProps {
     initialOrders: OrderHistoryItem[];
 }
 
-export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps): ReactNode => {
+export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps) => {
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-8">
             <div className="flex items-center gap-2 mb-6">

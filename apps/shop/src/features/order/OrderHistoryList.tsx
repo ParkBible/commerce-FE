@@ -68,7 +68,7 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps) => {
                         </div>
                         <div className="flex flex-col justify-between">
                             <h3 className="font-bold text-sm">{order.productName}</h3>
-                            <div className="text-emerald-700 font-bold text-sm">₩ {order.price.toLocaleString()}</div>
+                            <div className="text-emerald-700 font-bold text-sm">₩ {order.price.toLocaleString("ko-KR")}</div>
                         </div>
                     </div>
 

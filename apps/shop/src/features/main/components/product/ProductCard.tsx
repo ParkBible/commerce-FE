@@ -26,16 +26,7 @@ export interface ProductCardProps {
     outOfStock?: boolean;
 }
 
-export const ProductCard = ({
-    badges,
-    image,
-    features,
-    name,
-    description,
-    price,
-    unit,
-    outOfStock = false,
-}: ProductCardProps) => {
+export const ProductCard = ({ badges, image, features, name, description, price, unit, outOfStock = false }: ProductCardProps) => {
     return (
         <article className="flex flex-col grow shrink justify-between px-4 py-5 bg-white rounded-xl border border-solid border-[color:var(--Line-Sub2,rgba(112,115,124,0.08))] h-[36rem] min-w-48 w-52 overflow-hidden">
             <div className="flex flex-col flex-1 w-full">
@@ -71,17 +62,13 @@ export const ProductCard = ({
 
                     <div className="mt-12 w-full">
                         <div className="flex flex-col items-start w-full">
-                            <h3 className="text-base font-bold tracking-tight leading-snug text-black h-6 overflow-hidden">
-                                {name}
-                            </h3>
-                            <p className="mt-2 text-sm tracking-tight leading-5 text-neutral-900 h-10 overflow-hidden">
-                                {description}
-                            </p>
+                            <h3 className="text-base font-bold tracking-tight leading-snug text-black h-6 overflow-hidden">{name}</h3>
+                            <p className="mt-2 text-sm tracking-tight leading-5 text-neutral-900 h-10 overflow-hidden">{description}</p>
                         </div>
                         <div className="flex flex-col mt-4 w-full leading-snug">
                             <div className="flex gap-1 justify-center items-start w-full text-2xl font-bold tracking-tight text-green-700 whitespace-nowrap">
                                 <span>₩</span>
-                                <span>{price.toLocaleString()}</span>
+                                <span>{price.toLocaleString("ko-KR")}</span>
                             </div>
                             <p className="self-center text-sm tracking-tight text-neutral-700">{unit}</p>
                         </div>

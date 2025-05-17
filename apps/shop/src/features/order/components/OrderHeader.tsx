@@ -1,10 +1,8 @@
-import type { ReactNode } from "react";
-
 interface OrderHeaderProps {
     title: string;
 }
 
-export const OrderHeader = ({ title }: OrderHeaderProps): ReactNode => {
+export const OrderHeader = ({ title }: OrderHeaderProps) => {
     return (
         <div className="flex items-center gap-2 mb-10">
             <button type="button" className="focus:outline-none" aria-label="뒤로 가기">

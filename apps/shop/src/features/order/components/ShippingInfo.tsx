@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 interface ShippingInfoProps {
     name: string;
     address: string;
@@ -7,7 +5,7 @@ interface ShippingInfoProps {
     memo?: string;
 }
 
-export const ShippingInfo = ({ name, address, phone, memo }: ShippingInfoProps): ReactNode => {
+export const ShippingInfo = ({ name, address, phone, memo }: ShippingInfoProps) => {
     return (
         <div className="mb-10">
             <div className="flex flex-col gap-2">
