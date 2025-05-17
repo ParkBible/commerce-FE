@@ -7,7 +7,45 @@ interface OrderHistoryListProps {
     orders: OrderHistoryItem[];
 }
 
-export const OrderHistoryList = ({ orders }: OrderHistoryListProps): ReactNode => {
+interface ButtonConfig {
+    text: string;
+    variant?: "outline" | "default";
+    isGreen?: boolean;
+}
+
+export const OrderHistoryList = ({ orders }: OrderHistoryListProps) => {
+    // 주문 상태별 버튼 구성 정의
+    const getButtonsByStatus = (status: string): ButtonConfig[] => {
+        switch (status) {
+            case "준비중":
+                return [
+                    { text: "주문 취소", variant: "outline" },
+                    { text: "배송 조회", isGreen: true },
+                ];
+            case "배송중":
+                return [
+                    { text: "반품 신청", variant: "outline" },
+                    { text: "배송 조회", isGreen: true },
+                ];
+            case "배송완료":
+                return [
+                    { text: "반품 신청", variant: "outline" },
+                    { text: "배송 조회", variant: "outline" },
+                ];
+            case "반품완료":
+                return [
+                    { text: "반품 정보", variant: "outline" },
+                    { text: "장바구니 담기", variant: "outline" },
+                ];
+            default:
+                return [];
+        }
+    };
+
+    // 공통 버튼 스타일 클래스
+    const baseButtonClass = "flex-1 h-10 text-sm font-semibold";
+    const greenButtonClass = "bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]";
+
     return (
         <div className="flex flex-col w-full gap-4">
             {orders.map(order => (
@@ -35,49 +73,15 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps): ReactNode =
                     </div>
 
                     <div className="flex gap-4">
-                        {order.status === "준비중" && (
-                            <>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    주문 취소
-                                </Button>
-                                <Button className="flex-1 h-10 text-sm font-semibold bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]">
-                                    배송 조회
-                                </Button>
-                            </>
-                        )}
-
-                        {order.status === "배송중" && (
-                            <>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    반품 신청
-                                </Button>
-                                <Button className="flex-1 h-10 text-sm font-semibold bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]">
-                                    배송 조회
-                                </Button>
-                            </>
-                        )}
-
-                        {order.status === "배송완료" && (
-                            <>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    반품 신청
-                                </Button>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    배송 조회
-                                </Button>
-                            </>
-                        )}
-
-                        {order.status === "반품완료" && (
-                            <>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    반품 정보
-                                </Button>
-                                <Button variant="outline" className="flex-1 h-10 text-sm font-semibold">
-                                    장바구니 담기
-                                </Button>
-                            </>
-                        )}
+                        {getButtonsByStatus(order.status).map(button => (
+                            <Button
+                                key={`${order.id}-${button.text}`}
+                                variant={button.variant}
+                                className={`${baseButtonClass} ${button.isGreen ? greenButtonClass : ""}`}
+                            >
+                                {button.text}
+                            </Button>
+                        ))}
                     </div>
                 </div>
             ))}
