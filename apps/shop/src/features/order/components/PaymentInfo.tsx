@@ -23,7 +23,7 @@ export const PaymentInfo = ({ items, discount, total }: PaymentInfoProps) => {
                 ))}
                 <div className="flex justify-between">
                     <p>할인 금액</p>
-                    <p className="text-[#257a57]">{discount > 0 ? `-${discount.toLocaleString("ko-KR")}원` : "-0원"}</p>
+                    <p className="text-[#257a57]">{`-${discount.toLocaleString("ko-KR")}원`}</p>
                 </div>
             </div>
             <hr className="my-4 border-t border-gray-400 opacity-20" />
