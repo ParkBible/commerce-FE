@@ -29,12 +29,12 @@ export interface ProductCardProps {
 
 export const ProductCard = ({ badges, image, features, name, description, price, unit, outOfStock = false }: ProductCardProps) => {
     return (
-        <article className="w-full h-full pt-4 pb-6 px-4 bg-white rounded-xl border border-[rgba(112,115,124,0.08)] flex flex-col justify-start items-start gap-4">
+        <article className="w-full h-full pt-4 pb-6 px-4 bg-white rounded-xl border border-gray-200/10 flex flex-col justify-start items-start gap-4">
             <div className="self-stretch flex-1 flex flex-col justify-between items-center gap-3">
                 <div className="self-stretch flex flex-col justify-start items-start gap-3">
                     {/* 이미지 영역 */}
                     <div className="self-stretch flex items-center justify-center overflow-hidden aspect-[136/117]">
-                        <img src={image} alt={name} className="w-full h-full  object-cover" />
+                        <img src={image} alt={name} className="w-full h-full object-cover" />
                     </div>
 
                     {/* 특징 영역 */}
@@ -53,15 +53,15 @@ export const ProductCard = ({ badges, image, features, name, description, price,
                     {/* 제품 정보 영역 */}
                     <div className="self-stretch flex flex-col justify-start items-start gap-4">
                         <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                            <h3 className="self-stretch text-center text-black text-base font-bold leading-[22.4px]">{name}</h3>
-                            <p className="self-stretch h-10 text-center text-[#171719] text-sm font-normal leading-[19.6px] overflow-hidden">
+                            <h3 className="self-stretch text-center text-black text-base font-bold leading-normal">{name}</h3>
+                            <p className="self-stretch h-10 text-center text-neutral-900 text-sm font-normal leading-relaxed overflow-hidden">
                                 {description}
                             </p>
                         </div>
-                        <div className="self-stretch flex flex-col justify-start items-center gap-[2px]">
+                        <div className="self-stretch flex flex-col justify-start items-center gap-0.5">
                             <div className="self-stretch flex justify-center items-start gap-1">
-                                <span className="text-center text-[#257A57] text-2xl font-bold leading-[33.6px]">₩</span>
-                                <span className="text-center text-[#257A57] text-2xl font-bold leading-[33.6px]">
+                                <span className="text-center text-emerald-700 text-2xl font-bold leading-relaxed">₩</span>
+                                <span className="text-center text-emerald-700 text-2xl font-bold leading-relaxed">
                                     {price.toLocaleString("ko-KR")}
                                 </span>
                             </div>
@@ -71,7 +71,7 @@ export const ProductCard = ({ badges, image, features, name, description, price,
                 </div>
 
                 {/* 버튼 영역 */}
-                <div className="self-stretch h-12 px-1 py-0.75">
+                <div className="self-stretch h-12 px-1 py-0.5">
                     <AddToCartButton disabled={outOfStock} />
                 </div>
             </div>
