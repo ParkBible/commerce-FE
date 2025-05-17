@@ -23,7 +23,7 @@ export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () =
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
             <div className="flex flex-col justify-start items-end w-[600px] overflow-hidden rounded-2xl">
-                <div className="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative px-6 py-4 bg-white border-t-0 border-r-0 border-b border-l-0 border-[#70737c]/[0.22]">
+                <div className="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative px-6 py-4 bg-white border-t-0 border-r-0 border-b border-l-0 border-[#E8E8EA]">
                     <p className="flex-grow-0 flex-shrink-0 text-2xl font-bold text-center text-black">장바구니 담기</p>
                     <svg
                         width="32"
@@ -60,15 +60,13 @@ export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () =
                                     key={quantity}
                                     type="button"
                                     className={`flex justify-center items-center flex-grow-0 flex-shrink-0 w-[60px] h-8 relative gap-2 px-4 py-3 rounded border ${
-                                        selectedQuantity === quantity ? "border-black" : "border-[#70737c]/[0.22]"
+                                        selectedQuantity === quantity ? "border-black" : "border-[#E8E8EA]"
                                     }`}
                                     onClick={() => handleQuantitySelect(quantity)}
                                 >
                                     <p
                                         className={`flex-grow-0 flex-shrink-0 text-sm text-center ${
-                                            selectedQuantity === quantity
-                                                ? "font-semibold text-black"
-                                                : "text-[#2e2f33]/[0.88]"
+                                            selectedQuantity === quantity ? "font-semibold text-black" : "text-[#47484C]"
                                         }`}
                                     >
                                         {quantity}

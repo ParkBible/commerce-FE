@@ -25,7 +25,7 @@ export default function Item({ title, price, quantity, stockQuantity, image }: I
     return (
         <div className="md:min-w-md">
             <div className="flex justify-between items-center">
-                <input type="checkbox" className="w-[18px] h-[18px]" />
+                <input type="checkbox" className="w-4.5 h-4.5" />
                 <button type="button">
                     <svg
                         width="24"
@@ -49,7 +49,7 @@ export default function Item({ title, price, quantity, stockQuantity, image }: I
                 <img src={image} alt={title} className="w-16 h-16 object-cover" />
                 <div className="flex flex-col flex-grow">
                     <div className="flex flex-col justify-start items-start flex-grow gap-2">
-                        <h2 className="flex-grow-0 flex-shrink-0 w-[212px] text-sm font-bold text-left text-black">{title}</h2>
+                        <h2 className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-black">{title}</h2>
                         <div className="flex gap-1 items-center">
                             <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-center text-[#257a57]">&#8361; {price.toLocaleString()}</p>
                             <p className="flex-grow-0 flex-shrink-0 text-xs text-center text-[#257a57]">

@@ -13,19 +13,19 @@ export default function Summary({ cartItems, shippingFee }: SummaryProps) {
         <div
             className="
                 p-4 border-t border-gray-200 w-full 
-                lg:flex lg:flex-col lg:justify-start lg:items-start lg:relative lg:px-12 lg:py-10 lg:rounded-2xl lg:border lg:border-[#70737c]/[0.16] lg:min-w-md"
+                lg:flex lg:flex-col lg:justify-start lg:items-start lg:relative lg:px-12 lg:py-10 lg:rounded-2xl lg:border lg:border-[#E8E8EA] lg:min-w-md"
         >
-            <h2 className="self-stretch flex-shrink-0 w-[343px] text-xl font-bold text-left text-black mb-6">구매 금액</h2>
+            <h2 className="text-xl font-bold text-left text-black mb-6">구매 금액</h2>
             {cartItems.map(item => (
                 <div key={item.id} className="flex justify-between w-full items-center mt-2">
-                    <p className="text-sm text-left text-[#2e2f33]/[0.88]">
+                    <p className="text-sm text-left text-[#47484C]">
                         {item.title}(x{item.quantity})
                     </p>
                     <p>&#8361; {item.price.toLocaleString()}</p>
                 </div>
             ))}
             <div className="flex justify-between w-full items-center mt-2">
-                <p className="text-sm text-left text-[#2e2f33]/[0.88]">배송비</p>
+                <p className="text-sm text-left text-[#47484C]">배송비</p>
                 <p>&#8361; {shippingFee.toLocaleString()}</p>
             </div>
             <hr className="border-t border-gray-200 my-4" />
