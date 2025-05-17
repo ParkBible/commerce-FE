@@ -1,30 +1,12 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { OrderHistoryList } from "./OrderHistoryList";
-import { getOrderHistory } from "@/src/features/order/api/orderApi";
-import { useEffect, useState } from "react";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 
-export const OrderHistoryPage = (): ReactNode => {
-    const [orders, setOrders] = useState<OrderHistoryItem[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+interface OrderHistoryPageProps {
+    initialOrders: OrderHistoryItem[];
+}
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const data = await getOrderHistory();
-                setOrders(data);
-            } catch (error) {
-                console.error("주문 내역을 불러오는데 실패했습니다:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        void fetchOrders();
-    }, []);
-
+export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps): ReactNode => {
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-8">
             <div className="flex items-center gap-2 mb-6">
@@ -66,7 +48,7 @@ export const OrderHistoryPage = (): ReactNode => {
                 </div>
             </div>
 
-            {isLoading ? <div className="text-center py-8">주문 내역을 불러오는 중...</div> : <OrderHistoryList orders={orders} />}
+            <OrderHistoryList orders={initialOrders} />
         </div>
     );
 };
