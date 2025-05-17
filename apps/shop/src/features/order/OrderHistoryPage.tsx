@@ -1,5 +1,6 @@
 import { OrderHistoryList } from "./OrderHistoryList";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
+import { ArrowIcon, FilterIcon, SearchIcon } from "@/src/shared/components/shared/Icon";
 
 interface OrderHistoryPageProps {
     initialOrders: OrderHistoryItem[];
@@ -10,9 +11,7 @@ export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps) => {
         <div className="w-full max-w-7xl mx-auto px-4 py-8">
             <div className="flex items-center gap-2 mb-6">
                 <button type="button" className="p-1">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                        <path d="M20 24L12 16L20 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <ArrowIcon direction="left" size="lg" strokeWidth={2} title="뒤로 가기" />
                 </button>
                 <h1 className="text-2xl font-bold">주문내역</h1>
             </div>
@@ -20,15 +19,7 @@ export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps) => {
             <div className="mb-6">
                 <div className="relative mb-4">
                     <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path
-                                d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <SearchIcon title="검색" />
                     </div>
                     <input
                         type="text"
@@ -40,9 +31,7 @@ export const OrderHistoryPage = ({ initialOrders }: OrderHistoryPageProps) => {
                 <div>
                     <button type="button" className="h-10 px-4 border border-gray-300/30 rounded text-base flex items-center gap-2">
                         필터
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M3 7H21M6 12H18M10 17H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <FilterIcon title="필터" />
                     </button>
                 </div>
             </div>
