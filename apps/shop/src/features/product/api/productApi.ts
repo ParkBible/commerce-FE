@@ -24,6 +24,9 @@ const emptyProduct: ProductType = {
     quantity: 0,
     limitDescription: "",
     additionalDescription: "",
+    productDetails: {
+        detailText: "",
+    },
 };
 
 /**
