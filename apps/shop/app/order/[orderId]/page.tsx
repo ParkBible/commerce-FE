@@ -1,8 +1,14 @@
 import { OrderHeader, OrderInfo, ShippingInfo, OrderProduct, PaymentInfo } from "@/src/features/order/components";
 import { getOrderDetail } from "@/src/features/order/api/orderApi";
 
-export default async function OrderDetailPage({ params }: { params: { orderId: string } }) {
-    const orderId = params.orderId;
+interface OrderDetailPageParams {
+    params: Promise<{ orderId: string }>;
+}
+
+export default async function OrderDetailPage({ params }: OrderDetailPageParams) {
+    // params를 먼저 await
+    const resolvedParams = await params;
+    const orderId = resolvedParams.orderId;
 
     // API를 통해 주문 정보 가져오기
     const orderDetail = await getOrderDetail(orderId);
