@@ -1,6 +1,5 @@
 import { Button } from "@/src/shared/components/shared/button";
 import Image from "next/image";
-import type { ReactNode } from "react";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 
