@@ -3,6 +3,7 @@ import { AddToCartButton } from "./AddToCartButton";
 import { Badge } from "./Badge";
 import { ProductFeature } from "./ProductFeature";
 import AddToCart from "@/src/features/product/components/AddToCart";
+import { formatCurrency } from "@/src/shared/utils/formatUtils";
 
 interface ProductBadge {
     text: string;
@@ -60,10 +61,7 @@ export const ProductCard = ({ badges, image, features, name, description, price,
                         </div>
                         <div className="self-stretch flex flex-col justify-start items-center gap-0.5">
                             <div className="self-stretch flex justify-center items-start gap-1">
-                                <span className="text-center text-emerald-700 text-2xl font-bold leading-relaxed">₩</span>
-                                <span className="text-center text-emerald-700 text-2xl font-bold leading-relaxed">
-                                    {price.toLocaleString("ko-KR")}
-                                </span>
+                                <span className="text-center text-emerald-700 text-2xl font-bold leading-relaxed">{formatCurrency(price)}</span>
                             </div>
                             <p className="text-center text-neutral-700 text-sm">{unit}</p>
                         </div>

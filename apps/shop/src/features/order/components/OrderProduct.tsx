@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { formatNumber } from "@/src/shared/utils/formatUtils";
 
 interface Product {
     id: string;
@@ -36,9 +37,9 @@ export const OrderProduct = ({ products }: OrderProductProps) => {
                                 <h3 className="font-bold mb-2">{product.name}</h3>
                                 <div className="flex items-center">
                                     <span className="text-[#257a57] font-bold">₩</span>
-                                    <span className="text-[#257a57] font-bold ml-1">{product.price.toLocaleString("ko-KR")}</span>
+                                    <span className="text-[#257a57] font-bold ml-1">{formatNumber(product.price)}</span>
                                     <span className="text-[#257a57] ml-2 text-xs">
-                                        ({product.quantity} x ₩{product.unitPrice.toLocaleString("ko-KR")})
+                                        ({product.quantity} x ₩{formatNumber(product.unitPrice)})
                                     </span>
                                 </div>
                             </div>

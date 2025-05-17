@@ -38,7 +38,7 @@ export async function getOrderDetail(orderId: string): Promise<OrderDetailData> 
 
         // 개발 환경에서는 API 실패 시 목 데이터로 폴백
         if (process.env.NODE_ENV === "development") {
-            console.log("===== API 실패로 주문상세 목 데이터로 폴백 ======");
+            console.log("===== [개발기] API 실패로 주문상세 목 데이터로 폴백 ======");
             return getMockOrderDetail(orderId);
         }
 
@@ -62,7 +62,7 @@ export async function getOrderHistory(): Promise<OrderHistoryItem[]> {
 
         // 개발 환경에서는 API 실패 시 목 데이터로 폴백
         if (process.env.NODE_ENV === "development") {
-            console.log("===== API 실패로 주문내역 목 데이터로 폴백 ======");
+            console.log("===== [개발기] API 실패로 주문내역 목 데이터로 폴백 ======");
             return getMockOrderHistory();
         }
 

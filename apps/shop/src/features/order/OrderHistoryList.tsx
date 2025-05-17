@@ -2,6 +2,7 @@ import { Button } from "@/src/shared/components/shared/button";
 import Image from "next/image";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
+import { formatCurrency } from "@/src/shared/utils/formatUtils";
 
 interface OrderHistoryListProps {
     orders: OrderHistoryItem[];
@@ -66,7 +67,7 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps) => {
                         </div>
                         <div className="flex flex-col justify-between">
                             <h3 className="font-bold text-sm">{order.productName}</h3>
-                            <div className="text-emerald-700 font-bold text-sm">₩ {order.price.toLocaleString("ko-KR")}</div>
+                            <div className="text-emerald-700 font-bold text-sm">{formatCurrency(order.price)}</div>
                         </div>
                     </div>
 
