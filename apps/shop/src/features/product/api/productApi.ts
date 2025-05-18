@@ -1,4 +1,4 @@
-import { fetchServer } from "@/src/shared/fetcher";
+import { fetchData } from "@/src/shared/utils/api";
 import { getMockProduct, getMockReviews, getMockReviewStats, getMockRecommendedProducts } from "@/src/features/product/mocks/productMock";
 import type { ProductType, ReviewType, RecommendedProductType } from "@/src/features/product/types";
 
@@ -33,55 +33,28 @@ const emptyProduct: ProductType = {
  * 제품 상세 정보를 가져오는 API 함수
  */
 export async function getProduct(id: string): Promise<ProductType> {
-    try {
-        const fetch = fetchServer();
-        const response = await fetch<ProductType>(`/api/products/${id}`);
-        if (response.data === null) {
-            console.error(`제품 정보를 찾을 수 없습니다 (id: ${id})`);
-            // 개발 환경에서는 목 데이터로 폴백
-            if (process.env.NODE_ENV === "development") {
-                console.log(`===== [개발기] 제품 정보 없음, 목 데이터로 폴백 (id: ${id}) ======`);
-                return getMockProduct(id);
-            }
-            return emptyProduct;
-        }
-        return response.data;
-    } catch (error: unknown) {
-        console.error(`제품 정보 조회 실패 (id: ${id}):`, error);
+    // 제품 ID 기반 목 데이터 생성 함수
+    const mockFn = () => getMockProduct(id);
 
-        // 개발 환경에서는 API 실패 시 목 데이터로 폴백
-        if (process.env.NODE_ENV === "development") {
-            console.log(`===== [개발기] API 실패로 제품 목 데이터로 폴백 (id: ${id}) ======`);
-            return getMockProduct(id);
-        }
-
-        // 프로덕션에서는 빈 제품 정보 반환
-        return emptyProduct;
-    }
+    return fetchData({
+        endpoint: `/api/products/${id}`, // 제품 상세 조회 API 주소
+        defaultValue: emptyProduct, // 실패 시 반환할 기본값
+        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
+    });
 }
 
 /**
  * 제품 리뷰를 가져오는 API 함수
  */
 export async function getProductReviews(productId: string): Promise<ReviewType[]> {
-    try {
-        const fetch = fetchServer();
-        const response = await fetch<ReviewType[]>(`/api/products/${productId}/reviews`);
-        if (response.data === null) {
-            return [];
-        }
-        return response.data;
-    } catch (error: unknown) {
-        console.error(`제품 리뷰 조회 실패 (productId: ${productId}):`, error);
+    // 제품 ID 기반 목 데이터 생성 함수
+    const mockFn = () => getMockReviews(productId);
 
-        // 개발 환경에서는 API 실패 시 목 데이터로 폴백
-        if (process.env.NODE_ENV === "development") {
-            console.log(`===== [개발기] API 실패로 리뷰 목 데이터로 폴백 (productId: ${productId}) ======`);
-            return getMockReviews(productId);
-        }
-
-        return [];
-    }
+    return fetchData({
+        endpoint: `/api/products/${productId}/reviews`, // 제품 리뷰 조회 API 주소
+        defaultValue: [], // 실패 시 반환할 기본값
+        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
+    });
 }
 
 type ReviewStats = {
@@ -93,59 +66,31 @@ type ReviewStats = {
  * 제품 리뷰 통계를 가져오는 API 함수
  */
 export async function getProductReviewStats(productId: string): Promise<ReviewStats> {
-    try {
-        const fetch = fetchServer();
-        const response = await fetch<ReviewStats>(`/api/products/${productId}/review-stats`);
-        if (response.data === null) {
-            console.error(`리뷰 통계 정보를 찾을 수 없습니다 (productId: ${productId})`);
-            // 개발 환경에서는 목 데이터로 폴백
-            if (process.env.NODE_ENV === "development") {
-                console.log(`===== [개발기] 리뷰 통계 정보 없음, 목 데이터로 폴백 (productId: ${productId}) ======`);
-                return getMockReviewStats(productId);
-            }
-            return {
-                totalRating: 0,
-                ratingCounts: [0, 0, 0, 0, 0],
-            };
-        }
-        return response.data;
-    } catch (error: unknown) {
-        console.error(`리뷰 통계 조회 실패 (productId: ${productId}):`, error);
+    const emptyStats: ReviewStats = {
+        totalRating: 0,
+        ratingCounts: [0, 0, 0, 0, 0],
+    };
 
-        // 개발 환경에서는 API 실패 시 목 데이터로 폴백
-        if (process.env.NODE_ENV === "development") {
-            console.log(`===== [개발기] API 실패로 리뷰 통계 목 데이터로 폴백 (productId: ${productId}) ======`);
-            return getMockReviewStats(productId);
-        }
+    // 제품 ID 기반 목 데이터 생성 함수
+    const mockFn = () => getMockReviewStats(productId);
 
-        // 기본 통계 값 반환
-        return {
-            totalRating: 0,
-            ratingCounts: [0, 0, 0, 0, 0],
-        };
-    }
+    return fetchData({
+        endpoint: `/api/products/${productId}/review-stats`, // 리뷰 통계 조회 API 주소
+        defaultValue: emptyStats, // 실패 시 반환할 기본값
+        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
+    });
 }
 
 /**
  * 추천 제품 목록을 가져오는 API 함수
  */
 export async function getRecommendedProducts(productId: string): Promise<RecommendedProductType[]> {
-    try {
-        const fetch = fetchServer();
-        const response = await fetch<RecommendedProductType[]>(`/api/products/${productId}/recommendations`);
-        if (response.data === null) {
-            return [];
-        }
-        return response.data;
-    } catch (error: unknown) {
-        console.error(`추천 제품 조회 실패 (productId: ${productId}):`, error);
+    // 제품 ID 기반 목 데이터 생성 함수
+    const mockFn = () => getMockRecommendedProducts(productId);
 
-        // 개발 환경에서는 API 실패 시 목 데이터로 폴백
-        if (process.env.NODE_ENV === "development") {
-            console.log(`===== [개발기] API 실패로 추천 제품 목 데이터로 폴백 (productId: ${productId}) ======`);
-            return getMockRecommendedProducts(productId);
-        }
-
-        return [];
-    }
+    return fetchData({
+        endpoint: `/api/products/${productId}/recommendations`, // 추천 제품 조회 API 주소
+        defaultValue: [], // 실패 시 반환할 기본값
+        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
+    });
 }
