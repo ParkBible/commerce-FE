@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ProductType } from "@/src/features/product/types";
+import { CupSizeCircleIcon } from "@/src/shared/components/shared/Icon";
 
 interface ProductDetailsProps {
     product: ProductType;
@@ -40,7 +41,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             <h3 className="text-xl font-bold mb-4">커피 사이즈</h3>
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-[#f7f7f8] flex items-center justify-center">
-                                    <div className="w-5 h-5" />
+                                    <CupSizeCircleIcon size="md" />
                                 </div>
                                 <div>
                                     <p className="text-sm">{product.coffeeSize}</p>

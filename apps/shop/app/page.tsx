@@ -7,6 +7,9 @@ export default function Page() {
             <Link href="/login">
                 <Button className="w-auto">(임시) 로그인 페이지로 이동</Button>
             </Link>
+            <Link href="/search">
+                <Button className="w-auto">(임시) 검색 결과 페이지로 이동</Button>
+            </Link>
             <Link href="/main">
                 <Button className="w-auto">(임시) 디자이너가 준 시안A 메인 페이지로 이동</Button>
             </Link>
