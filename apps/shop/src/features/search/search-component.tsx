@@ -6,18 +6,18 @@ export default function SearchComponent() {
     return (
         <div className="w-full min-h-screen flex flex-col px-4 sm:px-6 md:px-8">
             {/* 메인 콘텐츠 */}
-            <main className="flex-1 bg-white py-[4rem]">
+            <main className="flex-1 bg-white py-16">
                 <div className="max-w-[75rem] mx-auto">
                     {/* 검색 결과 타이틀 */}
-                    <div className="flex flex-col items-center mb-[4rem]">
+                    <div className="flex flex-col items-center mb-16">
                         <p className="text-[#37383c]/60 text-base mb-1">10개의 검색 결과</p>
                         <h2 className="text-2xl font-bold">버츄오</h2>
                     </div>
 
                     {/* 필터 및 상품 목록 영역 */}
-                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-[3.5rem]">
+                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-14">
                         {/* 필터 */}
-                        <div className="w-full lg:w-[20rem] lg:flex-shrink-0">
+                        <div className="w-full lg:w-80 lg:flex-shrink-0">
                             <h3 className="text-lg font-bold mb-8">필터</h3>
 
                             {/* 강도 필터 */}
@@ -27,22 +27,16 @@ export default function SearchComponent() {
                                     <ArrowIcon direction="down" title="강도 필터 펼치기" />
                                 </div>
                                 <div className="flex flex-wrap gap-2">
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         라이트 0-5
                                     </button>
                                     <button
                                         type="button"
-                                        className="py-[0.625rem] px-4 bg-white text-black border border-black rounded-md text-base font-bold"
+                                        className="py-2.5 px-4 bg-white text-black border border-black rounded-md text-base font-bold"
                                     >
                                         마일드 6-8
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         인텐스 9-11
                                     </button>
                                 </div>
@@ -55,40 +49,22 @@ export default function SearchComponent() {
                                     <ArrowIcon direction="down" title="컵사이즈 필터 펼치기" />
                                 </div>
                                 <div className="flex flex-wrap gap-2">
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         80ml
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         버츄오 아이스 레시피
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         230ml
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         40ml
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         150ml
                                     </button>
-                                    <button
-                                        type="button"
-                                        className="py-[0.625rem] px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm"
-                                    >
+                                    <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
                                         25ml
                                     </button>
                                 </div>
@@ -97,22 +73,16 @@ export default function SearchComponent() {
 
                         {/* 상품 목록 */}
                         <div className="flex-1 min-w-0">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[1rem]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-4">
                                 {/* 상품 아이템 1 */}
                                 <div className="border border-gray-200/70 rounded-xl p-4">
                                     <div className="mb-4">
-                                        <div className="flex gap-2 mb-[1.5rem]">
-                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                머그
-                                            </span>
-                                            <span className="inline-block bg-[#ffc000] text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                신제품
-                                            </span>
-                                            <span className="inline-block bg-[#a80000] text-white px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                디카페인
-                                            </span>
+                                        <div className="flex gap-2 mb-6">
+                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-2.5 py-1.5 rounded-md text-xs">머그</span>
+                                            <span className="inline-block bg-[#ffc000] text-[#171719] px-2.5 py-1.5 rounded-md text-xs">신제품</span>
+                                            <span className="inline-block bg-[#a80000] text-white px-2.5 py-1.5 rounded-md text-xs">디카페인</span>
                                         </div>
-                                        <div className="h-[10rem] bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                                        <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                                             <Image
                                                 src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=1000"
                                                 alt="스위트 바닐라향 디카페나토 커피"
@@ -136,14 +106,12 @@ export default function SearchComponent() {
                                             </div>
                                         </div>
                                         <h4 className="text-base font-bold text-center mb-1">스위트 바닐라향* 디카페나토</h4>
-                                        <p className="text-sm text-center text-[#171719] mb-[1.5rem]">
-                                            카페인 부담 없이, 달콤한 바닐라향과 함께하는 여유
-                                        </p>
+                                        <p className="text-sm text-center text-[#171719] mb-6">달콤한 바닐라향과 함께하는 여유</p>
                                         <div className="text-center mb-1">
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 11,500</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-[0.875rem] bg-[#257a57] text-white rounded-lg font-bold">
+                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
                                             장바구니 담기
                                         </button>
                                     </div>
@@ -152,18 +120,14 @@ export default function SearchComponent() {
                                 {/* 상품 아이템 2 */}
                                 <div className="border border-gray-200/70 rounded-xl p-4">
                                     <div className="mb-4">
-                                        <div className="flex gap-2 mb-[1.5rem]">
-                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
+                                        <div className="flex gap-2 mb-6">
+                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-2.5 py-1.5 rounded-md text-xs">
                                                 에스프레소
                                             </span>
-                                            <span className="inline-block bg-[#7030a0] text-white px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                베스트
-                                            </span>
-                                            <span className="inline-block bg-[#a80000] text-white px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                디카페인
-                                            </span>
+                                            <span className="inline-block bg-[#7030a0] text-white px-2.5 py-1.5 rounded-md text-xs">베스트</span>
+                                            <span className="inline-block bg-[#a80000] text-white px-2.5 py-1.5 rounded-md text-xs">디카페인</span>
                                         </div>
-                                        <div className="h-[10rem] bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                                        <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                                             <Image
                                                 src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?q=80&w=1000"
                                                 alt="알티시오 디카페나토 커피"
@@ -187,12 +151,12 @@ export default function SearchComponent() {
                                             </div>
                                         </div>
                                         <h4 className="text-base font-bold text-center mb-1">알티시오 디카페나토</h4>
-                                        <p className="text-sm text-center text-[#171719] mb-[1.5rem]">풍부한 바디감의 디카페인</p>
+                                        <p className="text-sm text-center text-[#171719] mb-6">풍부한 바디감의 디카페인</p>
                                         <div className="text-center mb-1">
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 8,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-[0.875rem] bg-[#257a57] text-white rounded-lg font-bold">
+                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
                                             장바구니 담기
                                         </button>
                                     </div>
@@ -201,15 +165,11 @@ export default function SearchComponent() {
                                 {/* 상품 아이템 3 */}
                                 <div className="border border-gray-200/70 rounded-xl p-4">
                                     <div className="mb-4">
-                                        <div className="flex gap-2 mb-[1.5rem]">
-                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                머그
-                                            </span>
-                                            <span className="inline-block bg-[#ffc000] text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                신제품
-                                            </span>
+                                        <div className="flex gap-2 mb-6">
+                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-2.5 py-1.5 rounded-md text-xs">머그</span>
+                                            <span className="inline-block bg-[#ffc000] text-[#171719] px-2.5 py-1.5 rounded-md text-xs">신제품</span>
                                         </div>
-                                        <div className="h-[10rem] bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                                        <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                                             <Image
                                                 src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?q=80&w=1000"
                                                 alt="비비다 커피"
@@ -233,12 +193,12 @@ export default function SearchComponent() {
                                             </div>
                                         </div>
                                         <h4 className="text-base font-bold text-center mb-1">비비다</h4>
-                                        <p className="text-sm text-center text-[#171719] mb-[1.5rem]">비타민 B12를 함유한 고소한 비스킷향 커피</p>
+                                        <p className="text-sm text-center text-[#171719] mb-6">고소한 비스킷향 커피</p>
                                         <div className="text-center mb-1">
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 12,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-[0.875rem] bg-[#257a57] text-white rounded-lg font-bold">
+                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
                                             장바구니 담기
                                         </button>
                                     </div>
@@ -247,12 +207,10 @@ export default function SearchComponent() {
                                 {/* 상품 아이템 4 */}
                                 <div className="border border-gray-200/70 rounded-xl p-4">
                                     <div className="mb-4">
-                                        <div className="flex gap-2 mb-[1.5rem]">
-                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-[0.625rem] py-[0.375rem] rounded-md text-xs">
-                                                머그
-                                            </span>
+                                        <div className="flex gap-2 mb-6">
+                                            <span className="inline-block bg-[#37383c]/16 text-[#171719] px-2.5 py-1.5 rounded-md text-xs">머그</span>
                                         </div>
-                                        <div className="h-[10rem] bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                                        <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                                             <Image
                                                 src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1000"
                                                 alt="엘살바도르 커피"
@@ -276,12 +234,12 @@ export default function SearchComponent() {
                                             </div>
                                         </div>
                                         <h4 className="text-base font-bold text-center mb-1">엘살바도르</h4>
-                                        <p className="text-sm text-center text-[#171719] mb-[1.5rem]">레드 허니 가공의 과일잼향</p>
+                                        <p className="text-sm text-center text-[#171719] mb-6">레드 허니 가공의 과일잼향</p>
                                         <div className="text-center mb-1">
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 11,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-[0.875rem] bg-[#257a57] text-white rounded-lg font-bold">
+                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
                                             장바구니 담기
                                         </button>
                                     </div>
