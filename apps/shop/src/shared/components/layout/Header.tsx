@@ -23,13 +23,15 @@ function Header() {
                             className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
                         />
                     </button>
-                    <button type="button" className="focus:outline-none">
-                        <img
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb40dd9fddf419c3fe59ba9750479588879625e9"
-                            alt="Navigation Icon 2"
-                            className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
-                        />
-                    </button>
+                    <Link href="/mypage">
+                        <button type="button" className="focus:outline-none">
+                            <img
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb40dd9fddf419c3fe59ba9750479588879625e9"
+                                alt="Navigation Icon 2"
+                                className="object-contain shrink-0 self-stretch my-auto w-8 aspect-square"
+                            />
+                        </button>
+                    </Link>
                 </nav>
             </header>
             <Tags />
