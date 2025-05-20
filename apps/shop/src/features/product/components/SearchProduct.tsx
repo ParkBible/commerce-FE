@@ -9,6 +9,7 @@ export default function SearchProduct() {
     const router = useRouter();
     const formRef = useRef<HTMLFormElement>(null);
 
+    // form submit 이벤트 핸들러 (Enter키 및 돋보기 아이콘 클릭 모두 처리)
     const handleSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
@@ -22,23 +23,13 @@ export default function SearchProduct() {
         [router],
     );
 
-    const handleSearch = useCallback(() => {
-        if (formRef.current) {
-            const searchQuery = new FormData(formRef.current).get("searchQuery");
-
-            if (!searchQuery) return;
-
-            router.push(`/search?query=${searchQuery}`);
-        }
-    }, [router]);
-
     return (
         <form
             ref={formRef}
             onSubmit={handleSubmit}
             className="flex flex-wrap flex-1 shrink gap-2 items-center self-stretch p-4 my-auto text-sm tracking-tight leading-snug rounded-xl basis-0 bg-neutral-100 min-h-14 min-w-60 text-neutral-700 max-md:max-w-full"
         >
-            <button type="button" onClick={handleSearch} className="border-none bg-transparent cursor-pointer p-0">
+            <button type="submit" className="border-none bg-transparent cursor-pointer p-0">
                 <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb040e39632d075dcdf31086c7ed0bea3c66aeb6"
                     alt="Search"

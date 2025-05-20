@@ -1,7 +1,22 @@
 import type { HTMLAttributes } from "react";
+import { useId } from "react";
 
 export type IconDirection = "left" | "right" | "up" | "down";
 export type IconSize = "sm" | "md" | "lg";
+
+// 아이콘 크기별 치수 설정 (중복 코드 제거)
+export const ICON_DIMENSIONS = {
+    sm: 16,
+    md: 24,
+    lg: 32,
+};
+
+// 소셜 아이콘 치수 설정
+export const SOCIAL_ICON_DIMENSIONS = {
+    sm: 16,
+    md: 20,
+    lg: 24,
+};
 
 export interface IconProps extends HTMLAttributes<SVGElement> {
     /**
@@ -30,15 +45,13 @@ export interface IconProps extends HTMLAttributes<SVGElement> {
 }
 
 export const ArrowIcon = ({ direction = "right", size = "md", strokeWidth = 2, title = "화살표 아이콘", ...props }: IconProps) => {
-    // 크기에 따른 width, height 결정
-    const dimensions = {
-        sm: 16,
-        md: 24,
-        lg: 32,
-    };
+    // 고유 ID 생성
+    const uniqueId = useId();
+    const titleId = `arrow-icon-${direction}-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
+    // 크기에 따른 width, height 결정
+    const width = ICON_DIMENSIONS[size];
+    const height = ICON_DIMENSIONS[size];
 
     // 방향에 따른 path 결정
     const paths = {
@@ -58,7 +71,7 @@ export const ArrowIcon = ({ direction = "right", size = "md", strokeWidth = 2, t
     // 크기에 따라 path 데이터를 조정 (16px, 24px일 경우)
     if (size === "sm" || size === "md") {
         // 크기 비율 계산
-        const scale = dimensions[size] / viewBoxSize;
+        const scale = ICON_DIMENSIONS[size] / viewBoxSize;
 
         // path 데이터의 좌표 조정
         pathData = pathData.replace(/(\d+)/g, match => {
@@ -66,8 +79,6 @@ export const ArrowIcon = ({ direction = "right", size = "md", strokeWidth = 2, t
             return Math.round(num * scale).toString();
         });
     }
-
-    const titleId = `arrow-icon-${direction}`;
 
     return (
         <svg
@@ -90,15 +101,11 @@ export const ArrowIcon = ({ direction = "right", size = "md", strokeWidth = 2, t
  * 필터 아이콘 (OrderHistoryPage.tsx에서 사용)
  */
 export const FilterIcon = ({ size = "md", strokeWidth = 2, title = "필터 아이콘", ...props }: Omit<IconProps, "direction">) => {
-    const dimensions = {
-        sm: 16,
-        md: 24,
-        lg: 32,
-    };
+    const uniqueId = useId();
+    const titleId = `filter-icon-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
-    const titleId = "filter-icon";
+    const width = ICON_DIMENSIONS[size];
+    const height = ICON_DIMENSIONS[size];
 
     return (
         <svg
@@ -121,15 +128,11 @@ export const FilterIcon = ({ size = "md", strokeWidth = 2, title = "필터 아�
  * 검색 아이콘 (OrderHistoryPage.tsx에서 사용)
  */
 export const SearchIcon = ({ size = "md", strokeWidth = 2, title = "검색 아이콘", ...props }: Omit<IconProps, "direction">) => {
-    const dimensions = {
-        sm: 16,
-        md: 24,
-        lg: 32,
-    };
+    const uniqueId = useId();
+    const titleId = `search-icon-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
-    const titleId = "search-icon";
+    const width = ICON_DIMENSIONS[size];
+    const height = ICON_DIMENSIONS[size];
 
     return (
         <svg
@@ -158,7 +161,8 @@ export const SearchIcon = ({ size = "md", strokeWidth = 2, title = "검색 아�
  * 카카오 로그인 아이콘
  */
 export const KakaoIcon = ({ title = "카카오 로고", ...props }: Omit<IconProps, "direction" | "size" | "strokeWidth">) => {
-    const titleId = "kakao-icon";
+    const uniqueId = useId();
+    const titleId = `kakao-icon-${uniqueId}`;
 
     return (
         <svg
@@ -167,7 +171,6 @@ export const KakaoIcon = ({ title = "카카오 로고", ...props }: Omit<IconPro
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
             role="img"
             aria-labelledby={titleId}
             {...props}
@@ -187,7 +190,8 @@ export const KakaoIcon = ({ title = "카카오 로고", ...props }: Omit<IconPro
  * 네이버 로그인 아이콘
  */
 export const NaverIcon = ({ title = "네이버 로고", ...props }: Omit<IconProps, "direction" | "size" | "strokeWidth">) => {
-    const titleId = "naver-icon";
+    const uniqueId = useId();
+    const titleId = `naver-icon-${uniqueId}`;
 
     return (
         <svg
@@ -196,7 +200,6 @@ export const NaverIcon = ({ title = "네이버 로고", ...props }: Omit<IconPro
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
             role="img"
             aria-labelledby={titleId}
             {...props}
@@ -211,7 +214,8 @@ export const NaverIcon = ({ title = "네이버 로고", ...props }: Omit<IconPro
  * 구글 로그인 아이콘
  */
 export const GoogleIcon = ({ title = "구글 로고", ...props }: Omit<IconProps, "direction" | "size" | "strokeWidth">) => {
-    const titleId = "google-icon";
+    const uniqueId = useId();
+    const titleId = `google-icon-${uniqueId}`;
 
     return (
         <svg
@@ -220,7 +224,6 @@ export const GoogleIcon = ({ title = "구글 로고", ...props }: Omit<IconProps
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
             role="img"
             aria-labelledby={titleId}
             {...props}
@@ -250,15 +253,11 @@ export const GoogleIcon = ({ title = "구글 로고", ...props }: Omit<IconProps
  * 커피컵 아이콘
  */
 export const CoffeeIcon = ({ size = "md", title = "커피 아이콘", ...props }: Omit<IconProps, "direction" | "strokeWidth">) => {
-    const dimensions = {
-        sm: 16,
-        md: 20,
-        lg: 24,
-    };
+    const uniqueId = useId();
+    const titleId = `coffee-icon-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
-    const titleId = "coffee-icon";
+    const width = SOCIAL_ICON_DIMENSIONS[size];
+    const height = SOCIAL_ICON_DIMENSIONS[size];
 
     return (
         <svg
@@ -296,15 +295,11 @@ export const CoffeeIcon = ({ size = "md", title = "커피 아이콘", ...props }
  * 머그컵 모양의 아이콘
  */
 export const CupSizeIcon = ({ size = "md", title = "컵 사이즈 아이콘", ...props }: Omit<IconProps, "direction" | "strokeWidth">) => {
-    const dimensions = {
-        sm: 16,
-        md: 20,
-        lg: 24,
-    };
+    const uniqueId = useId();
+    const titleId = `cup-size-icon-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
-    const titleId = "cup-size-icon";
+    const width = SOCIAL_ICON_DIMENSIONS[size];
+    const height = SOCIAL_ICON_DIMENSIONS[size];
 
     // 제공된 이미지 URL과 유사한 머그컵 아이콘 구현
     return (
@@ -342,16 +337,12 @@ export const CupSizeIcon = ({ size = "md", title = "컵 사이즈 아이콘", ..
  * 컵 사이즈 아이콘 (원형 디자인)
  * 머그컵 모양의 아이콘 (원형 배경 안에 사용될 때)
  */
-export const CupSizeCircleIcon = ({ size = "md", title = "컵 사이즈 아이콘", ...props }: Omit<IconProps, "direction" | "strokeWidth">) => {
-    const dimensions = {
-        sm: 16,
-        md: 20,
-        lg: 24,
-    };
+export const CupSizeCircleIcon = ({ size = "md", title = "원형 컵 사이즈 아이콘", ...props }: Omit<IconProps, "direction" | "strokeWidth">) => {
+    const uniqueId = useId();
+    const titleId = `cup-size-circle-icon-${uniqueId}`;
 
-    const width = dimensions[size];
-    const height = dimensions[size];
-    const titleId = "cup-size-circle-icon";
+    const width = SOCIAL_ICON_DIMENSIONS[size];
+    const height = SOCIAL_ICON_DIMENSIONS[size];
 
     // 제공된 이미지 URL과 유사한 머그컵 아이콘 구현
     return (
