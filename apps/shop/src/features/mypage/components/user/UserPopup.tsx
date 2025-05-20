@@ -5,7 +5,13 @@ import WithDrawPopup from "./WithDrawPopup";
 import { CancelIcon } from "@/src/shared/icons/Cancel";
 import type { UserInfoType } from "../UserInfo";
 
-export default function UserPopup({ user, onClose, onSave }: { user: UserInfoType; onClose: () => void; onSave: (newNickname: string) => void }) {
+type UserPopupProps = {
+    user: UserInfoType;
+    onClose: () => void;
+    onSave: (newNickname: string) => void;
+};
+
+export default function UserPopup({ user, onClose, onSave }: UserPopupProps) {
     const [isWithdrawPopupOpen, setIsWithdrawPopupOpen] = useState(false);
     const [nickname, setNickname] = useState(user.nickname);
     const [newNickname, setNewNickname] = useState(user.nickname);

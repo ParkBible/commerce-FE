@@ -1,6 +1,11 @@
 "use client";
 
-export default function WithDrawPopup({ onClose, onWithDraw }: { onClose: () => void; onWithDraw: () => void }) {
+type WithDrawPopupProps = {
+    onClose: () => void;
+    onWithDraw: () => void;
+};
+
+export default function WithDrawPopup({ onClose, onWithDraw }: WithDrawPopupProps) {
     const onWithDrawClick = () => {
         onWithDraw();
     };
