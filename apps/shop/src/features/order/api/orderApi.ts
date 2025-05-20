@@ -30,7 +30,7 @@ export async function getOrderDetail(orderId: string): Promise<OrderDetailData> 
     const mockFn = () => getMockOrderDetail(orderId);
 
     return fetchData({
-        endpoint: `/api/orders/${orderId}`, // 주문 상세 조회 API 주소
+        endpoint: `/orders/${orderId}`, // 주문 상세 조회 API 주소
         defaultValue: emptyOrderDetail, // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
@@ -41,7 +41,7 @@ export async function getOrderDetail(orderId: string): Promise<OrderDetailData> 
  */
 export async function getOrderHistory(): Promise<OrderHistoryItem[]> {
     return fetchData({
-        endpoint: "/api/orders", // 주문 내역 목록 조회 API 주소
+        endpoint: "/orders", // 주문 내역 목록 조회 API 주소
         defaultValue: [], // 실패 시 반환할 기본값
         mockDataFn: getMockOrderHistory, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });

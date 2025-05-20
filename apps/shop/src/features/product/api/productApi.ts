@@ -37,7 +37,7 @@ export async function getProduct(id: string): Promise<ProductType> {
     const mockFn = () => getMockProduct(id);
 
     return fetchData({
-        endpoint: `/api/products/${id}`, // 제품 상세 조회 API 주소
+        endpoint: `/products/${id}`, // 제품 상세 조회 API 주소
         defaultValue: emptyProduct, // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
@@ -51,7 +51,7 @@ export async function getProductReviews(productId: string): Promise<ReviewType[]
     const mockFn = () => getMockReviews(productId);
 
     return fetchData({
-        endpoint: `/api/products/${productId}/reviews`, // 제품 리뷰 조회 API 주소
+        endpoint: `/products/${productId}/reviews`, // 제품 리뷰 조회 API 주소
         defaultValue: [], // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
@@ -75,7 +75,7 @@ export async function getProductReviewStats(productId: string): Promise<ReviewSt
     const mockFn = () => getMockReviewStats(productId);
 
     return fetchData({
-        endpoint: `/api/products/${productId}/review-stats`, // 리뷰 통계 조회 API 주소
+        endpoint: `/products/${productId}/reviews`, // 리뷰 통계 조회 API 주소
         defaultValue: emptyStats, // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
@@ -89,7 +89,7 @@ export async function getRecommendedProducts(productId: string): Promise<Recomme
     const mockFn = () => getMockRecommendedProducts(productId);
 
     return fetchData({
-        endpoint: `/api/products/${productId}/recommendations`, // 추천 제품 조회 API 주소
+        endpoint: `/products/${productId}/recommendations`, // 추천 제품 조회 API 주소
         defaultValue: [], // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
