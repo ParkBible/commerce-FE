@@ -16,7 +16,7 @@ export default function EditUserInfo({ user }: { user: UserInfoType }) {
         setIsPopupOpen(false);
     };
 
-    const onSaveClick = () => {
+    const onSaveClick = (newNickname: string) => {
         setIsPopupOpen(false);
         showToast();
     };

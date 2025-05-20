@@ -5,9 +5,10 @@ import WithDrawPopup from "./WithDrawPopup";
 import { CancelIcon } from "@/src/shared/icons/Cancel";
 import type { UserInfoType } from "../UserInfo";
 
-export default function UserPopup({ user, onClose, onSave }: { user: UserInfoType; onClose: () => void; onSave: () => void }) {
+export default function UserPopup({ user, onClose, onSave }: { user: UserInfoType; onClose: () => void; onSave: (newNickname: string) => void }) {
     const [isWithdrawPopupOpen, setIsWithdrawPopupOpen] = useState(false);
     const [nickname, setNickname] = useState(user.nickname);
+    const [newNickname, setNewNickname] = useState(user.nickname);
 
     const onNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNickname(e.target.value);
@@ -15,6 +16,7 @@ export default function UserPopup({ user, onClose, onSave }: { user: UserInfoTyp
 
     const onNicknameEditClick = () => {
         // todo: 닉네임 유효성 검사 로직
+        setNewNickname(nickname);
     };
 
     const onWithdrawClick = () => {
@@ -31,7 +33,7 @@ export default function UserPopup({ user, onClose, onSave }: { user: UserInfoTyp
     };
 
     const onSaveClick = () => {
-        onSave();
+        onSave(newNickname);
     };
 
     const handleClose = () => {
