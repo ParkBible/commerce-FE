@@ -3,17 +3,12 @@ import { Button } from "@/src/shared/components/shared/button";
 import { useModal } from "@/src/shared/hooks/useModal";
 import { useEffect } from "react";
 
-interface SelectShippingInfoProps {
-    onChange: (addressId: number) => void;
-    addressId: number;
-}
-
-export default function SelectShippingInfo({ onChange, addressId }: SelectShippingInfoProps) {
+export default function SelectShippingInfo() {
     const { openModal, closeModal, Modal } = useModal();
 
     // TODO: 배송지 정보 가져오기
     const address = {
-        id: addressId,
+        id: 1,
         name: "집",
         address1: "서울특별시 강남구 테헤란로 14길 6",
         address2: "남도빌딩 2층 201호",
