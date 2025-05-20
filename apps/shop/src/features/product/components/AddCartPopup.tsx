@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CancelIcon } from "@/src/features/cart/icons/Cancel";
+import { CancelIcon } from "@/src/shared/icons/Cancel";
 
 export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () => void; onAddToCart: () => void }) {
     const [selectedQuantity, setSelectedQuantity] = useState<number | "">("");
