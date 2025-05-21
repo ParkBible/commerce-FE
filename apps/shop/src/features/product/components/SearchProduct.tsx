@@ -1,13 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import type { FormEvent } from "react";
 
 // 최초 렌더링 이후 partial rendering를 위해서 CSR로 구현
 export default function SearchProduct() {
     const router = useRouter();
+    const formRef = useRef<HTMLFormElement>(null);
 
+    // form submit 이벤트 핸들러 (Enter키 및 돋보기 아이콘 클릭 모두 처리)
     const handleSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
@@ -16,21 +18,24 @@ export default function SearchProduct() {
 
             if (!searchQuery) return;
 
-            router.push(`/product?query=${searchQuery}`);
+            router.push(`/search?query=${searchQuery}`);
         },
         [router],
     );
 
     return (
         <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="flex flex-wrap flex-1 shrink gap-2 items-center self-stretch p-4 my-auto text-sm tracking-tight leading-snug rounded-xl basis-0 bg-neutral-100 min-h-14 min-w-60 text-neutral-700 max-md:max-w-full"
         >
-            <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb040e39632d075dcdf31086c7ed0bea3c66aeb6"
-                alt="Search"
-                className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
-            />
+            <button type="submit" className="border-none bg-transparent cursor-pointer p-0">
+                <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb040e39632d075dcdf31086c7ed0bea3c66aeb6"
+                    alt="Search"
+                    className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
+                />
+            </button>
             <input
                 type="text"
                 placeholder="'인기 캡슐' 을 검색해 보세요."
