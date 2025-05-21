@@ -18,7 +18,7 @@ const itemContainer = cva("border-b border-gray-200", {
         },
     },
 });
-export default function OrderCheckList({ items }: OrderCheckListProps) {
+export default function OrderCheckoutList({ items }: OrderCheckListProps) {
     return (
         <div>
             {items.map((item, index) => (
