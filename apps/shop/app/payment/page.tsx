@@ -1,8 +1,8 @@
 import PaymentForm from "@/src/features/payment/components/PaymentForm";
-import ShippingInfoForm from "@/src/features/order/components/ShippingInfoForm";
 import OrderList from "@/src/features/order/components/OrderList";
 import { OrderItemList } from "@/src/features/payment/components/OrderItemList";
 import { PurchaseSummary } from "@/src/features/payment/components/PurchaseSummary";
+import SelectPaymentMethod from "@/src/features/order/components/SelectPaymentMethod";
 
 export default function Page() {
     return (
@@ -10,8 +10,6 @@ export default function Page() {
             <h1>주문서</h1>
             <div className="grid grid-cols-2 gap-10">
                 <div>
-                    <ShippingInfoForm />
-                    {/* <OrderList orders={[]} /> */}
                     <OrderItemList
                         orderItems={[
                             {
@@ -29,7 +27,6 @@ export default function Page() {
                         ]}
                     />
                     <PurchaseSummary />
-                    {/* <SelectPaymentMethod /> */}
                 </div>
                 <div>
                     <PaymentForm />

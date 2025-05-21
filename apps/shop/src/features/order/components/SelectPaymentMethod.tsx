@@ -2,20 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-interface SelectPaymentMethodProps {
-    onChange: (paymentMethod: string) => void;
-}
+type SelectPaymentMethodProps = {};
 
-export default function SelectPaymentMethod({ onChange }: SelectPaymentMethodProps) {
+export default function SelectPaymentMethod({}: SelectPaymentMethodProps) {
     const [paymentMethod, setPaymentMethod] = useState<string>("toss");
 
     const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPaymentMethod(e.target.value);
     };
 
-    useEffect(() => {
-        onChange(paymentMethod);
-    }, [paymentMethod, onChange]);
+    // useEffect(() => {
+    // onChange(paymentMethod);
+    // }, [paymentMethod, onChange]);
 
     return (
         <div>
