@@ -1,4 +1,7 @@
+"use client";
+
 import type { CartItem } from "@/app/cart/page";
+import { useRouter } from "next/navigation";
 
 interface SummaryProps {
     cartItems: CartItem[];
@@ -8,6 +11,11 @@ interface SummaryProps {
 export default function Summary({ cartItems, shippingFee }: SummaryProps) {
     const QUANTITY_STEP = 10;
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * (item.quantity / QUANTITY_STEP), 0) + shippingFee;
+    const router = useRouter();
+
+    const handleCheckout = () => {
+        router.push("/order/checkout");
+    };
 
     return (
         <div
@@ -36,6 +44,7 @@ export default function Summary({ cartItems, shippingFee }: SummaryProps) {
             <button
                 type="button"
                 className="flex justify-center items-center self-stretch flex-shrink-0 mt-4 w-full h-12 relative gap-2 px-4 py-3 rounded-lg bg-[#257a57] text-sm font-semibold text-center text-white"
+                onClick={handleCheckout}
             >
                 {totalPrice.toLocaleString()}원 구매하기
             </button>

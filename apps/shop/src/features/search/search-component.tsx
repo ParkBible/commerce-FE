@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowIcon, CupSizeCircleIcon } from "@/src/shared/components/shared/Icon";
+import AddToCart from "@/src/features/product/components/AddToCart";
 
 export default function SearchComponent() {
     return (
@@ -111,9 +112,7 @@ export default function SearchComponent() {
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 11,500</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
-                                            장바구니 담기
-                                        </button>
+                                        <AddToCart title="스위트 바닐라향* 디카페나토" inStock={true} withPopup={true} />
                                     </div>
                                 </div>
 
@@ -156,9 +155,7 @@ export default function SearchComponent() {
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 8,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
-                                            장바구니 담기
-                                        </button>
+                                        <AddToCart title="알티시오 디카페나토" inStock={true} withPopup={true} />
                                     </div>
                                 </div>
 
@@ -198,9 +195,7 @@ export default function SearchComponent() {
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 12,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
-                                            장바구니 담기
-                                        </button>
+                                        <AddToCart title="비비다" inStock={true} withPopup={true} />
                                     </div>
                                 </div>
 
@@ -239,9 +234,7 @@ export default function SearchComponent() {
                                             <span className="text-[#257a57] font-bold text-2xl">₩ 11,000</span>
                                         </div>
                                         <p className="text-center text-[#37383c]/60 text-sm mb-4">10 캡슐</p>
-                                        <button type="button" className="w-full py-3.5 bg-[#257a57] text-white rounded-lg font-bold">
-                                            장바구니 담기
-                                        </button>
+                                        <AddToCart title="엘살바도르" inStock={true} withPopup={true} />
                                     </div>
                                 </div>
                             </div>

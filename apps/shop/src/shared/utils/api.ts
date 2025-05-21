@@ -37,13 +37,14 @@ export async function fetchData<T>(options: FetchDataOptions<T>): Promise<T> {
         return response.data;
     } catch (error: unknown) {
         console.error(error);
+        return mockDataFn ? mockDataFn() : defaultValue;
 
         // 개발 환경에서는 API 실패 시 목 데이터로 폴백
-        if (process.env.NODE_ENV === "development" && mockDataFn) {
-            console.log("===== [개발기] API 실패로 목 데이터로 폴백 ======");
-            return mockDataFn();
-        }
-
-        return defaultValue;
+        // if (process.env.NODE_ENV === "development" && mockDataFn) {
+        //     console.log("===== [개발기] API 실패로 목 데이터로 폴백 ======");
+        //     return mockDataFn();
+        // }
+        //
+        // return defaultValue;
     }
 }
