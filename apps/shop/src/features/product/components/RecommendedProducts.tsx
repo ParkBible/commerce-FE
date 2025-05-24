@@ -1,7 +1,6 @@
 "use client";
 
 import type { RecommendedProductType } from "@/src/features/product/types";
-import { useToast } from "@/src/shared/hooks/useToast";
 import AddToCart from "@/src/features/product/components/AddToCart";
 import { formatCurrency } from "@/src/shared/utils/formatUtils";
 
@@ -10,16 +9,6 @@ interface RecommendedProductsProps {
 }
 
 export function RecommendedProducts({ products }: RecommendedProductsProps) {
-    const { toast, ToastUI } = useToast();
-
-    // 장바구니 추가
-    const handleAddToCart = (productId: number, productName: string) => {
-        toast({
-            message: `${productName} 상품이 장바구니에 추가되었습니다.`,
-        });
-        console.log(`장바구니 추가 (${productId})`); // 여기에 장바구니 추가 로직 구현
-    };
-
     return (
         <section className="py-16 bg-[#f7f7f8]">
             <div className="max-w-6xl mx-auto">
@@ -48,9 +37,6 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                     ))}
                 </div>
             </div>
-
-            {/* 장바구니 토스트 컴포넌트 */}
-            {ToastUI}
         </section>
     );
 }

@@ -37,7 +37,7 @@ export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () =
                         </div>
                         <input
                             type="number"
-                            placeholder="수량을 입력해 주세요.(10개 단위로 입력 가능합니다.)"
+                            placeholder="10개 단위로 수량을 입력해 주세요."
                             className="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[552px] h-10 relative gap-2.5 px-1 pb-2 border-t-0 border-r-0 border-b border-l-0 border-black"
                             value={selectedQuantity}
                             onChange={handleQuantityChange}
