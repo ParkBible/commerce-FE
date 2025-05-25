@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { OrderHistoryItem } from "@/src/features/order/mocks/orderHistoryMock";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 import { formatCurrency } from "@/src/shared/utils/formatUtils";
+import Link from "next/link";
 
 interface OrderHistoryListProps {
     orders: OrderHistoryItem[];
@@ -56,9 +57,11 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps) => {
                             <span className="font-bold text-base">{order.status}</span>
                             {order.statusDate && <span className="text-emerald-700 text-sm">{order.statusDate}</span>}
                         </div>
-                        <button type="button" className="p-1.5">
-                            <ArrowIcon direction="right" title="주문 상세 보기" />
-                        </button>
+                        <Link href="/order/123456456789">
+                            <button type="button" className="p-1.5">
+                                <ArrowIcon direction="right" title="주문 상세 보기" />
+                            </button>
+                        </Link>
                     </div>
 
                     <div className="flex gap-4 mb-4">
@@ -73,13 +76,11 @@ export const OrderHistoryList = ({ orders }: OrderHistoryListProps) => {
 
                     <div className="flex gap-4">
                         {getButtonsByStatus(order.status).map(button => (
-                            <Button
-                                key={`${order.id}-${button.text}`}
-                                variant={button.variant}
-                                className={`${baseButtonClass} ${button.isGreen ? greenButtonClass : ""}`}
-                            >
-                                {button.text}
-                            </Button>
+                            <Link key={`${order.id}-${button.text}`} href="/order/123456456789" className="flex-1">
+                                <Button variant={button.variant} className={`${baseButtonClass} ${button.isGreen ? greenButtonClass : ""} w-full`}>
+                                    {button.text}
+                                </Button>
+                            </Link>
                         ))}
                     </div>
                 </div>

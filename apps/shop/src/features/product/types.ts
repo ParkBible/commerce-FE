@@ -21,6 +21,11 @@ export interface ProductType {
     quantity?: number;
     limitDescription?: string;
     additionalDescription?: string;
+    productDetails?: ProductDetails;
+}
+
+export interface ProductDetails {
+    detailText: string;
 }
 
 export interface ReviewType {
