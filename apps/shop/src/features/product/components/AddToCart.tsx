@@ -5,11 +5,7 @@ import AddToCartButton from "@/src/features/product/components/AddToCartButton";
 import { useToast } from "@/src/shared/hooks/useToast";
 import { useState } from "react";
 
-export default function AddToCart({
-    title,
-    inStock,
-    withPopup = false,
-}: { title: string; inStock: boolean; withPopup?: boolean }) {
+export default function AddToCart({ title, inStock, withPopup = false }: { title: string; inStock: boolean; withPopup?: boolean }) {
     const { toast, ToastUI } = useToast();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -24,7 +20,6 @@ export default function AddToCart({
             AddToCart();
         }
     };
-
     const AddToCart = () => {
         //todo: 장바구니 추가 로직 구현
         showToast();

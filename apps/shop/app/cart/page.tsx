@@ -1,6 +1,5 @@
+import CartProduct from "@/src/features/cart/components/CartProduct";
 import CartSectionLayout from "@/src/features/cart/components/CartSectionLayout";
-import CartProductLayout from "@/src/features/cart/components/CartProductLayout";
-import Item from "@/src/features/cart/components/Item";
 import Summary from "@/src/features/cart/components/Summary";
 
 export interface CartItem {
@@ -35,18 +34,7 @@ export default function Page() {
         <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto px-2 lg:px-8">
             <CartSectionLayout>
                 <h1 className="self-stretch flex-grow-0 flex-shrink-0 w-[343px] text-xl font-bold text-left">장바구니</h1>
-                <CartProductLayout>
-                    {cartItems.map(item => (
-                        <Item
-                            key={item.id}
-                            title={item.title}
-                            price={item.price}
-                            quantity={item.quantity}
-                            stockQuantity={item.stockQuantity}
-                            image={item.image}
-                        />
-                    ))}
-                </CartProductLayout>
+                <CartProduct cartItems={cartItems} />
             </CartSectionLayout>
             <div className="self-stretch flex-grow-0 flex-shrink-0 h-3 bg-[#70737c]/[0.08]" />
             <CartSectionLayout>
