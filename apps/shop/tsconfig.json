@@ -25,13 +25,6 @@
         },
         "outDir": "dist"
     },
-    "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "apps/shop/.next/types/**/*.ts",
-        "next-env.d.ts",
-        ".next/types/**/*.ts",
-        "../admin/src/shared/kyInstance.ts"
-    ],
+    "include": ["**/*.ts", "**/*.tsx", "apps/shop/.next/types/**/*.ts", "next-env.d.ts", ".next/types/**/*.ts"],
     "exclude": ["node_modules"]
 }
