@@ -3,7 +3,8 @@
         "baseUrl": ".",
         "paths": {
             "@commerce-fe/utils": ["packages/utils"],
-            "@commerce-fe/stores": ["packages/stores"]
+            "@commerce-fe/stores": ["packages/stores"],
+            "@commerce-fe/types": ["packages/types"]
         }
     }
 }
