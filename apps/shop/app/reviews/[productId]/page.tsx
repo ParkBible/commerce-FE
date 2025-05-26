@@ -1,6 +1,6 @@
 import ReviewList from "@/src/features/reviews/components/ReviewList";
 import type { Review } from "@/src/features/reviews/components/ReviewCard";
-import { getProductReviews } from "@/src/features/product/api/productApi";
+import { getProduct, getProductReviews } from "@/src/features/product/api/productApi";
 import type { ReviewType } from "@/src/features/product/types";
 
 // ProductType의 ReviewType을 reviews의 Review 타입으로 변환하는 함수
@@ -24,8 +24,8 @@ export default async function ReviewsPage({ params }: ReviewsPageProps) {
     const resolvedParams = await params;
     const productId = resolvedParams.productId;
 
-    // 특정 제품의 리뷰 데이터 가져오기
-    const reviewsData = await getProductReviews(productId);
+    // 제품 정보와 리뷰 데이터 동시에 가져오기
+    const [product, reviewsData] = await Promise.all([getProduct(productId), getProductReviews(productId)]);
 
     // ReviewType을 Review 타입으로 변환
     const reviews = reviewsData.map(convertToReview);
@@ -37,7 +37,7 @@ export default async function ReviewsPage({ params }: ReviewsPageProps) {
                 <div className="w-[70rem] mx-auto">
                     {/* 페이지 제목 */}
                     <div className="mb-12">
-                        <h1 className="text-2xl font-bold text-black">리뷰 관리 - 제품 {productId}</h1>
+                        <h1 className="text-2xl font-bold text-black">{product.title}</h1>
                     </div>
 
                     {/* 리뷰 목록 */}
