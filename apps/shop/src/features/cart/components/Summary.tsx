@@ -25,9 +25,9 @@ export default function Summary({ cartItems, shippingFee }: SummaryProps) {
         >
             <h2 className="text-xl font-bold text-left text-black mb-6">구매 금액</h2>
             {cartItems.map(item => (
-                <div key={item.id} className="flex justify-between w-full items-center mt-2">
+                <div key={item.cartItemId} className="flex justify-between w-full items-center mt-2">
                     <p className="text-sm text-left text-[#47484C]">
-                        {item.title}(x{item.quantity})
+                        {item.name}(x{item.quantity})
                     </p>
                     <p>&#8361; {item.price.toLocaleString()}</p>
                 </div>

@@ -4,7 +4,8 @@ import { CancelIcon } from "@/src/shared/icons/Cancel";
 import QuantityChange from "./QuantityChange";
 
 interface ItemProps {
-    title: string;
+    productId: number;
+    name: string;
     price: number;
     quantity: number;
     stockQuantity: number;
@@ -16,7 +17,7 @@ interface ItemProps {
 
 const LOW_STOCK_QUANTITY = 10;
 
-export default function Item({ title, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
+export default function Item({ name, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
     const getQuantityMessage = () => {
         if (quantity <= 0) {
             return "품절";
@@ -34,10 +35,10 @@ export default function Item({ title, price, quantity, stockQuantity, image, sel
                 </button>
             </div>
             <div className="flex items-center gap-4 p-4 border-b border-gray-200">
-                <img src={image} alt={title} className="w-16 h-16 object-cover" />
+                <img src={image} alt={name} className="w-16 h-16 object-cover" />
                 <div className="flex flex-col flex-grow">
                     <div className="flex flex-col justify-start items-start flex-grow gap-2">
-                        <h2 className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-black">{title}</h2>
+                        <h2 className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-black">{name}</h2>
                         <div className="flex gap-1 items-center">
                             <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-center text-[#257a57]">&#8361; {price.toLocaleString()}</p>
                             <p className="flex-grow-0 flex-shrink-0 text-xs text-center text-[#257a57]">
