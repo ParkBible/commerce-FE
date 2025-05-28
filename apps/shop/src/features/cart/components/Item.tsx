@@ -19,8 +19,8 @@ const LOW_STOCK_QUANTITY = 10;
 
 export default function Item({ name, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
     const getQuantityMessage = () => {
-        if (quantity <= 0) {
-            return "품절";
+        if (stockQuantity === 0) {
+            return "상품이 품절되었습니다.";
         }
 
         return `품절 임박! 남은 수량: ${stockQuantity}`;
@@ -45,9 +45,9 @@ export default function Item({ name, price, quantity, stockQuantity, image, sele
                                 ({quantity} x &#8361;{price.toLocaleString()})
                             </p>
                         </div>
-                        <QuantityChange initQuantity={quantity} />
+                        <QuantityChange initQuantity={quantity} stockQuantity={stockQuantity} />
                     </div>
-                    <div>{stockQuantity < LOW_STOCK_QUANTITY && <p className="text-red-500 text-xs font-bold">{getQuantityMessage()}</p>}</div>
+                    <div>{stockQuantity < LOW_STOCK_QUANTITY && <p className="text-red-500 text-xs font-bold mt-2">{getQuantityMessage()}</p>}</div>
                 </div>
             </div>
         </div>

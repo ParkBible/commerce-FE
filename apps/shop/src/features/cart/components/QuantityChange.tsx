@@ -2,26 +2,24 @@
 
 import { useState } from "react";
 
-export default function QuantityChange({ initQuantity }: { initQuantity: number }) {
+type QuantityChangeProps = {
+    initQuantity: number;
+    stockQuantity: number;
+};
+
+export default function QuantityChange({ initQuantity, stockQuantity }: QuantityChangeProps) {
     const [quantity, setQuantity] = useState<number>(initQuantity);
     const QUANTITY_STEP = 10;
 
     const onMinusClick = () => {
-        if (quantity > 0) {
+        if (quantity - QUANTITY_STEP > 0) {
             setQuantity(quantity - QUANTITY_STEP);
         }
     };
 
     const onPlusClick = () => {
-        setQuantity(quantity + QUANTITY_STEP);
-    };
-
-    // todo: 제출시 유효성 검사 필요 - 수량이 QUANTITY_STEP의 배수가 아니라면 경고 메시지 표시
-    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number.parseInt(e.target.value);
-
-        if (!Number.isNaN(value) && value >= 0) {
-            setQuantity(value);
+        if (quantity + QUANTITY_STEP <= stockQuantity) {
+            setQuantity(quantity + QUANTITY_STEP);
         }
     };
 
@@ -45,7 +43,8 @@ export default function QuantityChange({ initQuantity }: { initQuantity: number 
                 type="number"
                 className="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 w-[4rem] h-8 relative gap-2 px-4 py-2 rounded border-[0.5px] border-[#70737c]/[0.22] text-base font-semibold text-center text-black"
                 value={quantity}
-                onChange={onInputChange}
+                readOnly
+                tabIndex={-1}
             />
             <button type="button" onClick={onPlusClick}>
                 <svg
