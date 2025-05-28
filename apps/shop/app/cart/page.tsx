@@ -6,23 +6,7 @@ import Summary from "@/src/features/cart/components/Summary";
 import ErrorComponent from "@/src/shared/components/shared/ErrorComponent";
 import { useCart } from "@/src/features/cart/hooks/useCart";
 import Loading from "@/src/shared/components/shared/Loading";
-
-export interface CartItem {
-    cartItemId: number;
-    productId: number;
-    name: string;
-    price: number;
-    quantity: number;
-    stockQuantity: number;
-    thumbnail: string;
-    isAvailable: boolean;
-}
-
-export interface GetCartResponse {
-    items: CartItem[];
-    totalPrice: number;
-    deliveryPrice: number;
-}
+import { ErrorBoundary } from "@/src/shared/components/shared/ErrorBoundary";
 
 function CartPageClient() {
     const userId = 1;
@@ -31,7 +15,7 @@ function CartPageClient() {
     const items = data?.items ?? [];
 
     return (
-        <>
+        <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto px-2 lg:px-8">
             <CartSectionLayout>
                 {isLoading ? (
                     <Loading />
@@ -45,19 +29,17 @@ function CartPageClient() {
             <CartSectionLayout>
                 <Summary cartItems={items} shippingFee={0} />
             </CartSectionLayout>
-        </>
+        </div>
     );
 }
 
 export default function Page() {
     return (
-        <>
+        <ErrorBoundary>
             <div className="flex flex-col lg:flex-row justify-start items-start max-w-screen-xl mx-auto px-8 lg:px-14 my-8">
                 <h1 className="text-xl font-bold text-left">장바구니</h1>
             </div>
-            <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto px-2 lg:px-8">
-                <CartPageClient />
-            </div>
-        </>
+            <CartPageClient />
+        </ErrorBoundary>
     );
 }

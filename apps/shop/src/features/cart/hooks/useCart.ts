@@ -1,6 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import type { GetCartResponse } from "@/app/cart/page";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
+import type { GetCartResponse } from "@/src/features/cart/types/cart";
+
+export function useCart(userId: number) {
+    return useQuery<GetCartResponse>({
+        queryKey: ["cart", userId],
+        queryFn: () => fetchCart(userId),
+    });
+}
 
 async function fetchCart(userId: number): Promise<GetCartResponse> {
     const fetch = fetchClient();
@@ -17,11 +24,4 @@ async function fetchCart(userId: number): Promise<GetCartResponse> {
         const err = e as CustomError;
         throw new Error(`${err.code} - ${err.message}`);
     }
-}
-
-export function useCart(userId: number) {
-    return useQuery<GetCartResponse>({
-        queryKey: ["cart", userId],
-        queryFn: () => fetchCart(userId),
-    });
 }

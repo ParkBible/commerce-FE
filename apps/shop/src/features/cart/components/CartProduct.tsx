@@ -1,30 +1,28 @@
 "use client";
 
-import type { CartItem } from "@/app/cart/page";
 import Item from "./Item";
 import { useState } from "react";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
-
-interface DeleteCartItemsRequest {
-    productIds: number[];
-}
+import type { CartItem } from "@/src/features/cart/types/cart";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const [selectedItemIds, setSelectedItemIds] = useState<number[]>([]);
+    const queryClient = useQueryClient();
 
     const fetch = fetchClient();
-    const isAllSelected = cartItems.length > 0 && selectedItems.length === cartItems.length;
+    const isAllSelected = cartItems.length > 0 && selectedItemIds.length === cartItems.length;
 
     const onSelectAllClick = () => {
         if (isAllSelected) {
-            setSelectedItems([]);
+            setSelectedItemIds([]);
         } else {
-            setSelectedItems(cartItems.map(item => item.cartItemId));
+            setSelectedItemIds(cartItems.map(item => item.cartItemId));
         }
     };
 
     const onItemSelectChange = (id: number) => {
-        setSelectedItems(prev => {
+        setSelectedItemIds(prev => {
             if (prev.includes(id)) {
                 return prev.filter(itemId => itemId !== id);
             }
@@ -33,35 +31,31 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
         });
     };
 
-    const onDelete = (id: number) => {
-        requestDelete(id);
-    };
-
-    const onDeleteAll = async () => {
-        if (selectedItems.length === 0) return;
-
-        try {
+    const deleteCartItems = useMutation({
+        mutationFn: async (productIds: number[]) => {
             await fetch("/cart/items", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ productIds: selectedItems }),
+                body: JSON.stringify({ productIds }),
             });
-            setSelectedItems([]);
-        } catch (e) {
+        },
+        onSuccess: () => {
+            setSelectedItemIds([]);
+            queryClient.invalidateQueries({ queryKey: ["cart"] });
+        },
+        onError: (e: unknown) => {
             const err = e as CustomError;
             console.error(`${err.code} - ${err.message}`);
-        }
+        },
+    });
+
+    const onDelete = (id: number) => {
+        deleteCartItems.mutate([id]);
     };
 
-    const requestDelete = async (cartItemId: number) => {
-        return fetch(`/cart/items/${cartItemId}`, {
-            method: "DELETE",
-        })
-            .then(() => setSelectedItems(prev => prev.filter(itemId => itemId !== cartItemId)))
-            .catch(e => {
-                const err = e as CustomError;
-                console.error(`${err.code} - ${err.message}`);
-            });
+    const onDeleteAll = () => {
+        if (selectedItemIds.length === 0) return;
+        deleteCartItems.mutate(selectedItemIds);
     };
 
     return (
@@ -73,9 +67,9 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
                 </div>
                 <button
                     type="button"
-                    className="flex-grow-0 flex-shrink-0 text-sm font-semibold text-center text-[#47484C] p-2 rounded-md border border-[#E8E8EA] disabled:bg-[#E8E8EA] disabled:text-[#858588] hover:bg-[#F2F2F2]"
+                    className="flex-grow-0 flex-shrink-0 text-sm font-semibold text-center text-[#47484C] p-2 rounded-md border border-[#E8E8EA] disabled:bg-[#E8E8EA] disabled:text-[#858588]"
                     onClick={onDeleteAll}
-                    disabled={selectedItems.length === 0}
+                    disabled={selectedItemIds.length === 0}
                 >
                     전체 삭제
                 </button>
@@ -89,7 +83,7 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
                     quantity={item.quantity}
                     stockQuantity={item.stockQuantity}
                     image={item.thumbnail}
-                    selected={selectedItems.includes(item.cartItemId)}
+                    selected={selectedItemIds.includes(item.cartItemId)}
                     onSelectChange={() => onItemSelectChange(item.cartItemId)}
                     onDelete={() => onDelete(item.cartItemId)}
                 />

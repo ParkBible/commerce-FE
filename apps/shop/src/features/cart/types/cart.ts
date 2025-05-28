@@ -1,3 +1,20 @@
+export interface CartItem {
+    cartItemId: number;
+    productId: number;
+    name: string;
+    price: number;
+    quantity: number;
+    stockQuantity: number;
+    thumbnail: string;
+    isAvailable: boolean;
+}
+
+export interface GetCartResponse {
+    items: CartItem[];
+    totalPrice: number;
+    deliveryPrice: number;
+}
+
 // 상품 추가 (POST /cart/items?userId={})
 export interface AddCartItemRequest {
     productId: number;
