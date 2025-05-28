@@ -1,7 +1,7 @@
 "use client";
 
-import type { CartItem } from "@/app/cart/page";
 import { useRouter } from "next/navigation";
+import type { CartItem } from "@/src/features/cart/types/cart";
 
 interface SummaryProps {
     cartItems: CartItem[];
