@@ -14,7 +14,6 @@ export type Feature = {
 
 export type BannerProduct = {
     type: "banner";
-    productId: number;
     image: string;
     title: string;
     description: string;
