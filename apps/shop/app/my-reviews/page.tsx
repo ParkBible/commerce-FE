@@ -1,5 +1,5 @@
-import { getUserReviews } from "@/src/features/userReview/api/userReviewApi";
-import UserReviewList from "@/src/features/userReview/components/UserReviewList";
+import { getUserReviews } from "@/src/features/myReviews/api/userReviewApi";
+import MyReviewList from "@/src/features/myReviews/components/MyReviewList";
 
 export default async function ReviewManagePage() {
     // 사용자의 리뷰 목록
@@ -35,7 +35,7 @@ export default async function ReviewManagePage() {
                     </div>
 
                     {/* 리뷰 목록 */}
-                    <UserReviewList reviews={reviews} hasMore={(reviewsData.page || 0) < (reviewsData.totalPages || 0) - 1} />
+                    <MyReviewList reviews={reviews} hasMore={(reviewsData.page || 0) < (reviewsData.totalPages || 0) - 1} />
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
-import ReviewList from "@/src/features/reviews/components/ReviewList";
-import type { Review } from "@/src/features/reviews/components/ReviewCard";
+import ProductReviewList from "@/src/features/productReviews/components/ProductReviewList";
+import type { Review } from "@/src/features/productReviews/components/ProductReviewCard";
 import { getProduct, getProductReviews } from "@/src/features/product/api/productApi";
 import type { ReviewType } from "@/src/features/product/types";
 
-// ProductType의 ReviewType을 reviews의 Review 타입으로 변환하는 함수
+// ProductType의 ReviewType을 productReviews의 Review 타입으로 변환하는 함수
 function convertToReview(review: ReviewType): Review {
     return {
         id: review.id.toString(),
@@ -41,7 +41,7 @@ export default async function ReviewsPage({ params }: ReviewsPageProps) {
                     </div>
 
                     {/* 리뷰 목록 */}
-                    <ReviewList reviews={reviews} hasMore={true} />
+                    <ProductReviewList reviews={reviews} hasMore={true} />
                 </div>
             </div>
         </div>

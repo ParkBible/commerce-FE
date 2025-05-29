@@ -13,11 +13,11 @@ export interface Review {
     images?: string[];
 }
 
-interface ReviewCardProps {
+interface ProductReviewCardProps {
     review: Review;
 }
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+export default function ProductReviewCard({ review }: ProductReviewCardProps) {
     const [showMenu, setShowMenu] = useState(false);
 
     const handleEdit = () => {
