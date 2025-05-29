@@ -434,3 +434,4 @@ export const QuantityDecreaseIcon = ({ size = "md", title = "수량 감소 아�
             <path d="M5.33398 10.6666V9.33325H14.6673V10.6666H5.33398Z" fill="black" />
         </svg>
     );
+};
