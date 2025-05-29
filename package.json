@@ -7,7 +7,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "preinstall": "npx only-allow pnpm",
         "lint": "biome check .",
-        "format": "biome format --write ."
+        "format": "biome format --write .",
+        "chat": "node simple-chat-server.js"
     },
     "keywords": [],
     "author": "",
@@ -27,6 +28,7 @@
     },
     "dependencies": {
         "@tanstack/react-query": "^5.74.11",
-        "zustand": "^5.0.3"
+        "zustand": "^5.0.3",
+        "ws": "^8.14.2"
     }
 }
