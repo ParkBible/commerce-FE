@@ -128,7 +128,7 @@ export function getMockRecommendedProducts(productId?: string): RecommendedProdu
             description: "최상의 밀크 레시피로 당신의 커피 경험을 업그레이드 해보세요",
             price: 149000,
             image: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-            inStock: true,
+            stockQuantity: 100,
         },
         {
             id: 2,
@@ -136,7 +136,7 @@ export function getMockRecommendedProducts(productId?: string): RecommendedProdu
             description: "넉넉한 용량의 버츄오 머그",
             price: 39000,
             image: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-            inStock: true,
+            stockQuantity: 50,
         },
         {
             id: 3,
@@ -144,7 +144,7 @@ export function getMockRecommendedProducts(productId?: string): RecommendedProdu
             description: "당신의 커피 경험을 업그레이드 시켜줄 바리스타 컬렉션",
             price: 32000,
             image: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-            inStock: false,
+            stockQuantity: 0,
         },
     ];
 }
