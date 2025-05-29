@@ -9,18 +9,18 @@ import { useState } from "react";
 type AddToCartProps = {
     productId: number;
     title: string;
-    inStock: boolean;
+    stockQuantity: number;
     withPopup?: boolean;
     quantity?: number;
 };
 
-export default function AddToCart({ productId, title, inStock, withPopup = false, quantity }: AddToCartProps) {
+export default function AddToCart({ productId, title, stockQuantity, withPopup = false, quantity }: AddToCartProps) {
     const { toast, ToastUI } = useToast();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const fetch = fetchClient();
+    const inStock = stockQuantity > 0;
 
     const onButtonClick = () => {
-        console.log("AddToCart button clicked");
         if (!inStock) {
             return;
         }
@@ -68,7 +68,7 @@ export default function AddToCart({ productId, title, inStock, withPopup = false
     return (
         <>
             <AddToCartButton inStock={inStock} onClick={onButtonClick} />
-            {isPopupOpen && <AddCartPopup onClose={handlePopupClose} onAddToCart={addToCart} />}
+            {isPopupOpen && <AddCartPopup stockQuantity={stockQuantity} onClose={handlePopupClose} onAddToCart={addToCart} />}
             {ToastUI}
         </>
     );

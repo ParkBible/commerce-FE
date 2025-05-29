@@ -41,7 +41,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
 
             {/* 수량 선택 */}
-            <ProductQuantity />
+            <ProductQuantity stockQuantity={product.stockQuantity} />
 
             {/* 추가 설명 */}
             {(product.limitDescription || product.additionalDescription) && (
@@ -52,7 +52,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             )}
 
             {/* 장바구니 버튼 */}
-            <AddToCart productId={product.id} title={product.title} inStock={product.inStock} />
+            <AddToCart productId={product.id} title={product.title} stockQuantity={product.stockQuantity} />
         </div>
     );
 }

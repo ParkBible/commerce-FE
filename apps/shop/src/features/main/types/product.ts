@@ -31,6 +31,7 @@ export type RegularProduct = {
     price: number;
     unit: string;
     outOfStock?: boolean;
+    stockQuantity: number;
 };
 
 export type ProductType = BannerProduct | RegularProduct;

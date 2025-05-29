@@ -38,7 +38,7 @@ export function getMockProduct(id?: string): ProductType {
         bitterLevel: 2,
         acidLevel: 2,
         roastLevel: 2,
-        quantity: 10,
+        stockQuantity: 50,
         limitDescription: "*스페셜 리저브 하와이 코나는 한정 수량 준비되어 매진될 수 있습니다.",
         additionalDescription: "*재활용 알류미늄 85% 포함된 캡슐 사용",
         productDetails: {

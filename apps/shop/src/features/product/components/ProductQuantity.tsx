@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-export default function ProductQuantity() {
+export default function ProductQuantity({ stockQuantity }: { stockQuantity: number }) {
     const [quantity, setQuantity] = useState(0);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [isInputActive, setIsInputActive] = useState(false);
@@ -64,18 +64,20 @@ export default function ProductQuantity() {
                 </div>
 
                 {/* 수량 버튼들 */}
-                {[10, 20, 30, 40, 50, 60].map(qty => (
-                    <button
-                        key={`qty-${qty}`}
-                        type="button"
-                        onClick={() => handleButtonSelect(qty)}
-                        className={`h-10 px-4 border rounded-md min-w-[3.75rem] text-center text-sm cursor-pointer ${
-                            selectedButton === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
-                        }`}
-                    >
-                        {qty}
-                    </button>
-                ))}
+                {[10, 20, 30, 40, 50, 60]
+                    .filter(qty => qty <= stockQuantity)
+                    .map(qty => (
+                        <button
+                            key={`qty-${qty}`}
+                            type="button"
+                            onClick={() => handleButtonSelect(qty)}
+                            className={`h-10 px-4 border rounded-md min-w-[3.75rem] text-center text-sm cursor-pointer ${
+                                selectedButton === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
+                            }`}
+                        >
+                            {qty}
+                        </button>
+                    ))}
             </div>
         </div>
     );

@@ -3,9 +3,15 @@
 import { useState } from "react";
 import { CancelIcon } from "@/src/shared/icons/Cancel";
 
-export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () => void; onAddToCart: (quantity: number) => void }) {
+type AddToCartPopupProps = {
+    stockQuantity: number;
+    onClose: () => void;
+    onAddToCart: (quantity: number) => void;
+};
+
+export default function AddToCartPopup({ stockQuantity, onClose, onAddToCart }: AddToCartPopupProps) {
     const [selectedQuantity, setSelectedQuantity] = useState<number | "">("");
-    const quantities = [10, 20, 30, 40, 50, 60];
+    const quantities = [10, 20, 30, 40, 50, 60].filter(quantity => quantity <= stockQuantity);
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = Number.parseInt(event.target.value);
