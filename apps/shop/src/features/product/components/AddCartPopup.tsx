@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CancelIcon } from "@/src/shared/icons/Cancel";
 
-export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () => void; onAddToCart: () => void }) {
+export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () => void; onAddToCart: (quantity: number) => void }) {
     const [selectedQuantity, setSelectedQuantity] = useState<number | "">("");
     const quantities = [10, 20, 30, 40, 50, 60];
 
@@ -19,6 +19,13 @@ export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () =
 
     const handleQuantitySelect = (quantity: number) => {
         setSelectedQuantity(quantity);
+    };
+
+    const handleAddToCart = () => {
+        if (selectedQuantity && selectedQuantity > 0) {
+            onAddToCart(selectedQuantity);
+            onClose();
+        }
     };
 
     return (
@@ -66,7 +73,7 @@ export default function AddToCartPopup({ onClose, onAddToCart }: { onClose: () =
                     <button
                         type="button"
                         className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 h-12 relative gap-2 px-4 py-3 rounded-lg bg-[#257a57] text-white text-sm font-semibold"
-                        onClick={onAddToCart}
+                        onClick={handleAddToCart}
                     >
                         장바구니 담기
                     </button>

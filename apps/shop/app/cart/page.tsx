@@ -13,6 +13,7 @@ function CartPageClient() {
     const { data, isLoading, isError, error } = useCart(userId);
 
     const items = data?.items ?? [];
+    const inStockItems = items.filter(item => item.stockQuantity >= item.quantity);
 
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto px-2 lg:px-8">
@@ -27,7 +28,7 @@ function CartPageClient() {
             </CartSectionLayout>
             <div className="self-stretch flex-grow-0 flex-shrink-0 h-3 bg-[#70737c]/[0.08]" />
             <CartSectionLayout>
-                <Summary cartItems={items} shippingFee={0} />
+                <Summary cartItems={inStockItems} />
             </CartSectionLayout>
         </div>
     );

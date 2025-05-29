@@ -88,8 +88,8 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
                     onDelete={() => onDelete(item.cartItemId)}
                 />
             ))}
-            <div className="flex-grow-0 flex-shrink-0 text-xs text-gray-400 mt-4 gap-2">
-                <p>*수량은 10개 단위로만 변경이 가능합니다.</p>
+            <div className="flex-grow-0 flex-shrink-0 text-xs text-gray-400 gap-2">
+                <p>*수량은 각 제품 캡슐 단위로 변경이 가능합니다.</p>
             </div>
         </>
     );

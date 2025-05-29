@@ -14,13 +14,14 @@ export type Feature = {
 
 export type BannerProduct = {
     type: "banner";
-    id?: string;
+    productId: number;
     image: string;
     title: string;
     description: string;
 };
 
 export type RegularProduct = {
+    productId: number;
     type: "product";
     badges: Badge[];
     image: string;

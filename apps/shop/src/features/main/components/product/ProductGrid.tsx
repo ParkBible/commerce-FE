@@ -3,7 +3,7 @@ import { ProductCard, type ProductCardProps } from "./ProductCard";
 
 type BannerItem = {
     type: "banner";
-    id?: string;
+    productId: number;
     image: string;
     title: string;
     description: string;
