@@ -22,6 +22,7 @@ export interface ProductType {
     limitDescription?: string;
     additionalDescription?: string;
     productDetails?: ProductDetails;
+    stockQuantity: number;
 }
 
 export interface ProductDetails {
