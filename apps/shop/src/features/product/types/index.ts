@@ -44,7 +44,7 @@ export interface RecommendedProductType {
     description: string;
     price: number;
     image: string;
-    inStock: boolean;
+    stockQuantity: number;
 }
 
 export interface ProductCategoryType {
