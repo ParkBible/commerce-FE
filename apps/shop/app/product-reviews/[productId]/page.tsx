@@ -1,4 +1,4 @@
-import ProductReviewList from "@/src/features/productReviews/components/ProductReviewList";
+import ProductReviewsPage from "@/src/features/productReviews/components/ProductReviewsPage";
 import type { Review } from "@/src/features/productReviews/components/ProductReviewCard";
 import { getProduct, getProductReviews } from "@/src/features/product/api/productApi";
 import type { ReviewType } from "@/src/features/product/types";
@@ -31,19 +31,10 @@ export default async function ReviewsPage({ params }: ReviewsPageProps) {
     const reviews = reviewsData.map(convertToReview);
 
     return (
-        <div className="min-h-screen bg-white">
-            {/* 메인 콘텐츠 */}
-            <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="w-[70rem] mx-auto">
-                    {/* 페이지 제목 */}
-                    <div className="mb-12">
-                        <h1 className="text-2xl font-bold text-black">{product.title}</h1>
-                    </div>
-
-                    {/* 리뷰 목록 */}
-                    <ProductReviewList reviews={reviews} hasMore={true} />
-                </div>
-            </div>
-        </div>
+        <ProductReviewsPage
+            productTitle={product.title}
+            reviews={reviews}
+            hasMore={true}
+        />
     );
 }
