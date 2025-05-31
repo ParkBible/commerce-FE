@@ -22,6 +22,10 @@ async function fetchCart(userId: number): Promise<GetCartResponse> {
         return res.data;
     } catch (e) {
         const err = e as CustomError;
-        throw new Error(`${err.code} - ${err.message}`);
+        if (err.code && err.message) {
+            throw new Error(`${err.code} - ${err.message}`);
+        }
+
+        throw new Error("카트 정보를 가져오는 중 오류가 발생했습니다.");
     }
 }

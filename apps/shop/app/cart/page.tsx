@@ -21,7 +21,7 @@ function CartPageClient() {
                 {isLoading ? (
                     <Loading />
                 ) : isError ? (
-                    <ErrorComponent code={"500"} message={error?.message || "장바구니 불러오기 실패"} />
+                    <ErrorComponent message={error?.message || "장바구니 불러오기 실패"} />
                 ) : (
                     <CartProduct cartItems={items} />
                 )}
