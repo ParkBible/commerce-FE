@@ -41,7 +41,7 @@ const ChatButton = ({ productInfo, isFloating = false }: ChatButtonProps) => {
                     </svg>
                 </button>
 
-                {isOpen && <ChatDialog onClose={handleClose} />}
+                {isOpen && <ChatDialog onClose={handleClose} productInfo={productInfo} />}
             </>
         );
     }
@@ -69,7 +69,7 @@ const ChatButton = ({ productInfo, isFloating = false }: ChatButtonProps) => {
                 </div>
             </button>
 
-            {isOpen && <ChatDialog onClose={handleClose} />}
+            {isOpen && <ChatDialog onClose={handleClose} productInfo={productInfo} />}
         </>
     );
 };

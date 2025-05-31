@@ -4,6 +4,12 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 interface ChatDialogProps {
     onClose: () => void;
+    productInfo?: {
+        id: string;
+        title: string;
+        price: number;
+        image: string;
+    };
 }
 
 interface Message {
@@ -14,7 +20,7 @@ interface Message {
     type: "user" | "system";
 }
 
-const ChatDialog = ({ onClose }: ChatDialogProps) => {
+const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const [isConnected, setIsConnected] = useState(false);
@@ -71,7 +77,7 @@ const ChatDialog = ({ onClose }: ChatDialogProps) => {
                         sender: messageData.sender,
                         message: messageData.message,
                         timestamp: messageData.timestamp,
-                        type: messageData.sender === "고객" ? "user" : "system",
+                        type: messageData.type,
                     };
 
                     setMessages(prev => [...prev, newMessage]);
@@ -160,7 +166,7 @@ const ChatDialog = ({ onClose }: ChatDialogProps) => {
                         <span className="text-xs text-[#666668]">{new Date().toLocaleDateString()}</span>
                     </div>
 
-                    {/* 상품 정보 (더미 데이터) */}
+                    {/* 상품 정보 */}
                     <div className="w-full mb-8">
                         {/* 상품 정보 */}
                         <div className="mb-4">
@@ -169,8 +175,11 @@ const ChatDialog = ({ onClose }: ChatDialogProps) => {
                                     {/* 상품 이미지 */}
                                     <div className="w-[4.5rem] sm:w-[5rem] h-[3.5rem] relative overflow-hidden">
                                         <img
-                                            src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=200&auto=format&fit=crop"
-                                            alt="커피 제품 이미지"
+                                            src={
+                                                productInfo?.image ||
+                                                "https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=200&auto=format&fit=crop"
+                                            }
+                                            alt={productInfo?.title ? `${productInfo.title} 이미지` : "커피 제품 이미지"}
                                             className="w-full h-full object-cover rounded-md"
                                         />
                                     </div>
@@ -178,16 +187,14 @@ const ChatDialog = ({ onClose }: ChatDialogProps) => {
                                     {/* 상품 정보 */}
                                     <div className="flex flex-col justify-between flex-1">
                                         <div>
-                                            <h3 className="font-bold text-base leading-[1.4]">
-                                                801 프리미엄 블렌드
-                                                <br />
-                                                커피 캡슐
+                                            <h3 className="font-bold text-base leading-[1.4] whitespace-pre-line">
+                                                {productInfo?.title || "801 프리미엄 블렌드\n커피 캡슐"}
                                             </h3>
                                         </div>
                                         <div>
                                             <div className="flex items-center text-[#257A57] font-bold">
                                                 <span>₩</span>
-                                                <span>11,500</span>
+                                                <span>{productInfo?.price?.toLocaleString() || "11,500"}</span>
                                             </div>
                                             <div className="text-xs text-[#37383C] text-opacity-60">10 캡슐</div>
                                         </div>
