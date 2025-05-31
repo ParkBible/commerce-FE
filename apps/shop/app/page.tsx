@@ -22,11 +22,14 @@ export default function Page() {
             <Link href="/order/123456456789">
                 <Button className="w-auto">(임시) 주문 상세 페이지로 이동</Button>
             </Link>
-            <Link href="/product-reviews/1">
+            <Link href="/review/products/1">
                 <Button className="w-auto">(임시) 상품의 리뷰 리스트 페이지로 이동</Button>
             </Link>
-            <Link href="/my-reviews">
+            <Link href="/review/my">
                 <Button className="w-auto">(임시) 내 리뷰 리스트 페이지로 이동</Button>
+            </Link>
+            <Link href="/review/create">
+                <Button className="w-auto">(임시) 리뷰 작성 팝업창 미리보기</Button>
             </Link>
         </div>
     );

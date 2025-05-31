@@ -24,4 +24,4 @@ export default async function ReviewsPage({ params }: ReviewsPageProps) {
             hasMore={true}
         />
     );
-}
+} 

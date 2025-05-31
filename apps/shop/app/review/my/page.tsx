@@ -14,4 +14,4 @@ export default async function ReviewManagePage() {
             currentPage={reviewsData.page || 0}
         />
     );
-}
+} 
