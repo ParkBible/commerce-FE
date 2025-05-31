@@ -1,6 +1,7 @@
 "use client";
 
-import ProductReviewCard, { type Review } from "./ProductReviewCard";
+import ProductReviewCard from "./ProductReviewCard";
+import type { Review } from "@/src/shared/entities/review/types";
 
 interface ProductReviewListProps {
     reviews: Review[];

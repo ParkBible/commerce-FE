@@ -2,16 +2,7 @@
 
 import { useState } from "react";
 import StarRating from "@/src/shared/components/ui/StarRating";
-
-export interface Review {
-    id: string;
-    reviewer: string;
-    rating: number;
-    date: string;
-    content: string;
-    profileImage: string;
-    images?: string[];
-}
+import type { Review } from "@/src/shared/entities/review/types";
 
 interface ProductReviewCardProps {
     review: Review;

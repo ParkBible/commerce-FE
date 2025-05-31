@@ -1,5 +1,5 @@
 import ProductReviewList from "@/src/features/productReviews/components/ProductReviewList";
-import type { Review } from "@/src/features/productReviews/components/ProductReviewCard";
+import type { Review } from "@/src/shared/entities/review/types";
 
 interface ProductReviewsPageProps {
     productTitle: string;
