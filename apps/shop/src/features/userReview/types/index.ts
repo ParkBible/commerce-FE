@@ -7,14 +7,14 @@ export interface UserReviewListRequest {
 
 // 본인 작성 리뷰 목록 조회 응답
 export interface UserReviewResponse {
-    content: ReviewContent[];
+    content: UserReview[];
     page: number;
     size: number;
     totalPages: number;
     totalElements: number;
 }
 
-interface ReviewContent {
+export interface UserReview {
     reviewId: number;
     productId: number;
     productName: string;
