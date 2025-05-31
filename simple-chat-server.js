@@ -6,6 +6,7 @@ class GroupChatServer {
         this.wss = new WebSocketServer({ port: 8080 });
         this.clients = new Map(); // 연결된 모든 클라이언트
         this.messages = []; // 전체 메시지 기록
+        this.MAX_MESSAGES = 500; // 최대 메시지 개수
         this.setupServer();
 
         console.log("💬 그룹 채팅 서버가 ws://localhost:8080에서 실행 중입니다");
@@ -57,6 +58,7 @@ class GroupChatServer {
         };
 
         this.clients.set(userId, userInfo);
+        ws.userInfo = userInfo; // 역참조 저장
         console.log(`${userName} 입장 (총 ${this.clients.size}명)`);
 
         // 입장 메시지를 모든 사용자에게 브로드캐스트
@@ -69,20 +71,14 @@ class GroupChatServer {
         };
 
         this.broadcastMessage(joinMessage);
-        this.messages.push(joinMessage);
+        this.addMessage(joinMessage);
     }
 
     handleSendMessage(ws, data) {
         const { message: messageText } = data;
 
         // 발신자 찾기
-        let senderName = "익명";
-        for (const [id, info] of this.clients.entries()) {
-            if (info.ws === ws) {
-                senderName = info.name;
-                break;
-            }
-        }
+        const senderName = ws.userInfo?.name ?? "익명";
 
         // 메시지 생성
         const message = {
@@ -97,7 +93,7 @@ class GroupChatServer {
 
         // 모든 클라이언트에게 메시지 브로드캐스트
         this.broadcastMessage(message);
-        this.messages.push(message);
+        this.addMessage(message);
     }
 
     handleDisconnection(ws) {
@@ -117,7 +113,7 @@ class GroupChatServer {
 
                 this.clients.delete(id);
                 this.broadcastMessage(leaveMessage);
-                this.messages.push(leaveMessage);
+                this.addMessage(leaveMessage);
                 break;
             }
         }
@@ -134,6 +130,13 @@ class GroupChatServer {
                 // WebSocket.OPEN
                 info.ws.send(JSON.stringify(messageData));
             }
+        }
+    }
+
+    addMessage(message) {
+        this.messages.push(message);
+        if (this.messages.length > this.MAX_MESSAGES) {
+            this.messages.shift(); // 가장 오래된 메시지 삭제
         }
     }
 }

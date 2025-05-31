@@ -26,6 +26,7 @@ const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
     const [isConnected, setIsConnected] = useState(false);
     const wsRef = useRef<WebSocket | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const reconnectTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const connectWebSocket = useCallback(() => {
         if (wsRef.current?.readyState === WebSocket.OPEN) {
@@ -51,8 +52,13 @@ const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
             console.log("WebSocket 연결 해제됨", event);
             setIsConnected(false);
 
+            // 기존 타이머 제거
+            if (reconnectTimerRef.current) {
+                clearTimeout(reconnectTimerRef.current);
+            }
+
             // 3초 후 재연결 시도
-            setTimeout(() => {
+            reconnectTimerRef.current = setTimeout(() => {
                 if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
                     console.log("재연결 시도 중...");
                     connectWebSocket();
@@ -112,7 +118,7 @@ const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
     };
 
     // Enter 키로 메시지 전송
-    const handleKeyPress = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
@@ -255,7 +261,7 @@ const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
                                 type="text"
                                 value={message}
                                 onChange={e => setMessage(e.target.value)}
-                                onKeyPress={handleKeyPress}
+                                onKeyDown={handleKeyDown}
                                 placeholder={isConnected ? "채팅을 입력하세요" : "서버 연결 중..."}
                                 aria-label="채팅 메시지 입력"
                                 className="w-full h-12 pl-4 pr-10 border border-[#EEEEEE] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#257A57]"
