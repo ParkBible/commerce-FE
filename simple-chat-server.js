@@ -19,7 +19,21 @@ class GroupChatServer {
             ws.on("message", data => {
                 try {
                     const message = JSON.parse(data.toString());
-                    this.handleMessage(ws, message);
+                    const { type, data: payload } = message;
+
+                    // 간단한 검증 추가
+                    if (type === "join" && typeof payload?.userName === "string" && payload.userName.length <= 50) {
+                        this.handleMessage(ws, message);
+                    } else if (
+                        type === "sendMessage" &&
+                        typeof payload?.message === "string" &&
+                        payload.message.trim().length > 0 &&
+                        payload.message.length <= 500
+                    ) {
+                        this.handleMessage(ws, message);
+                    } else {
+                        ws.send(JSON.stringify({ error: "INVALID_PAYLOAD" }));
+                    }
                 } catch (error) {
                     console.error("메시지 파싱 오류:", error);
                 }
@@ -145,8 +159,9 @@ class GroupChatServer {
 const chatServer = new GroupChatServer();
 
 // 프로세스 종료 처리
-process.on("SIGINT", () => {
+const gracefulShutdown = () => {
     console.log("\n채팅 서버를 종료합니다...");
-    chatServer.wss.close();
-    process.exit(0);
-});
+    chatServer.wss.close(() => process.exit(0));
+};
+process.on("SIGINT", gracefulShutdown);
+process.on("SIGTERM", gracefulShutdown);

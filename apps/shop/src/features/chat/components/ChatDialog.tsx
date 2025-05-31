@@ -129,9 +129,13 @@ const ChatDialog = ({ onClose, productInfo }: ChatDialogProps) => {
     useEffect(() => {
         connectWebSocket();
 
+        // cleanup 함수
         return () => {
             if (wsRef.current) {
                 wsRef.current.close();
+            }
+            if (reconnectTimerRef.current) {
+                clearTimeout(reconnectTimerRef.current);
             }
         };
     }, [connectWebSocket]);
