@@ -85,7 +85,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     const showToast = (res: AddCartItemResponse) => {
         if (res.requiresQuantityAdjustment) {
             toast({
-                message: `죄송합니다. 재고가 ${res.stockQuantity}개로 한정되어 ${res.quantity}개만 장바구니에 추가되었습니다.`,
+                message: `재고가 ${res.stockQuantity}개로 한정되어 ${res.quantity}개만 장바구니에 추가되었습니다.`,
             });
         } else {
             toast({
