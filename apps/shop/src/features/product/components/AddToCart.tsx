@@ -105,8 +105,10 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
 
     const showErrorToast = (error: CustomError) => {
         toast({
-            message: `장바구니에 추가하는 데 실패했습니다: ${error.code ?? ""} ${error instanceof Error ? error.message : "알 수 없는 오류"}`,
+            message: "장바구니에 추가하는 데 실패했습니다.",
         });
+
+        console.error(`장바구니 추가 실패: ${error.code} - ${error.message}`);
     };
 
     const handlePopupClose = () => {

@@ -63,8 +63,10 @@ export default function QuantityChange({ productId, initQuantity, stockQuantity 
             })
             .catch(error => {
                 toast({
-                    message: `수량 변경에 실패했습니다: ${error.code ?? ""} ${error instanceof Error ? error.message : "알 수 없는 오류"}`,
+                    message: "수량 변경에 실패했습니다.",
                 });
+
+                console.error(`수량 변경 실패: ${error.code} - ${error.message || "알 수 없는 오류"}`);
             });
     };
 
