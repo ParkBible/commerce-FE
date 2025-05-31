@@ -1,4 +1,5 @@
-const { WebSocketServer } = require("ws");
+const WebSocket = require("ws");
+const { WebSocketServer } = WebSocket;
 const { randomUUID } = require("node:crypto");
 
 class GroupChatServer {
@@ -140,7 +141,7 @@ class GroupChatServer {
         };
 
         for (const [id, info] of this.clients.entries()) {
-            if (info.ws.readyState === 1) {
+            if (info.ws.readyState === WebSocket.OPEN) {
                 // WebSocket.OPEN
                 info.ws.send(JSON.stringify(messageData));
             }
