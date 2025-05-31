@@ -4,6 +4,7 @@ import { QuantityDecreaseIcon, QuantityIncreaseIcon } from "@/src/shared/compone
 import { fetchClient } from "@/src/shared/fetcher";
 import { useToast } from "@/src/shared/hooks/useToast";
 import { useEffect, useState } from "react";
+import type { UpdateCartItemRequest, UpdateCartItemResponse } from "../types/cart";
 
 type QuantityChangeProps = {
     productId: number;
@@ -37,13 +38,28 @@ export default function QuantityChange({ productId, initQuantity, stockQuantity 
     };
 
     const changeQuantity = (newQuantity: number) => {
-        fetch(`/cart/items/${productId}`, {
+        const requestBody: UpdateCartItemRequest = {
+            productId,
+            quantity: newQuantity,
+        };
+
+        fetch<UpdateCartItemResponse>("/cart/items", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ quantity: newQuantity }),
+            body: JSON.stringify(requestBody),
         })
-            .then(() => {
-                setQuantity(newQuantity);
+            .then(res => {
+                if (!res.data) {
+                    throw new Error();
+                }
+
+                if (res.data.requiresQuantityAdjustment) {
+                    toast({
+                        message: `수량이 ${QUANTITY_STEP}의 배수가 아니거나 재고가 부족하여 ${res.data.quantity}개로 조정되었습니다.`,
+                    });
+                }
+
+                setQuantity(res.data.quantity);
             })
             .catch(error => {
                 toast({

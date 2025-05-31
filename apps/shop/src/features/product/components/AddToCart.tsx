@@ -5,6 +5,7 @@ import AddToCartButton from "@/src/features/product/components/AddToCartButton";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
 import { useToast } from "@/src/shared/hooks/useToast";
 import { useState } from "react";
+import type { AddCartItemResponse } from "../../cart/types/cart";
 
 type AddToCartProps = {
     productId: number;
@@ -36,9 +37,9 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     };
 
     const validateQuantity = (quantity: number) => {
-        if (quantity <= 0) {
+        if (quantity < 10) {
             toast({
-                message: "수량은 1개 이상이어야 합니다.",
+                message: "수량은 10개 이상이어야 합니다.",
             });
 
             return false;
@@ -63,7 +64,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     };
 
     const addToCart = (quantity: number) => {
-        fetch("/cart/items", {
+        fetch<AddCartItemResponse>("/cart/items", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -71,8 +72,10 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
                 quantity: quantity,
             }),
         })
-            .then(() => {
-                showToast();
+            .then(res => {
+                if (res.data) {
+                    showToast(res.data);
+                }
             })
             .catch(error => {
                 showErrorToast(error as CustomError);
@@ -88,10 +91,16 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
         setIsPopupOpen(false);
     };
 
-    const showToast = () => {
-        toast({
-            message: `${title} 상품이 장바구니에 담겼습니다.`,
-        });
+    const showToast = (res: AddCartItemResponse) => {
+        if (res.requiresQuantityAdjustment) {
+            toast({
+                message: `수량이 ${QUANTITY_STEP}의 배수가 아니거나 재고가 부족하여 ${res.quantity}개로 조정되었습니다.`,
+            });
+        } else {
+            toast({
+                message: `${title} 상품이 장바구니에 담겼습니다.`,
+            });
+        }
     };
 
     const showErrorToast = (error: CustomError) => {

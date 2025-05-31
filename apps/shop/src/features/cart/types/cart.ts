@@ -22,12 +22,17 @@ export interface AddCartItemRequest {
 }
 
 export interface AddCartItemResponse {
-    stockQuantity: number;
+    quantity: number;
     requiresQuantityAdjustment: boolean;
 }
 
 // 수량 수정 (PATCH /cart/items/{cartItemid})
 export interface UpdateCartItemRequest {
+    productId: number;
+    quantity: number;
+}
+
+export interface UpdateCartItemResponse {
     userId: number;
     quantity: number;
     stockQuantity: number;

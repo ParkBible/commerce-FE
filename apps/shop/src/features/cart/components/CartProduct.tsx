@@ -5,10 +5,12 @@ import { useState } from "react";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
 import type { CartItem } from "@/src/features/cart/types/cart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/src/shared/hooks/useToast";
 
 export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
     const [selectedItemIds, setSelectedItemIds] = useState<number[]>([]);
     const queryClient = useQueryClient();
+    const { toast, ToastUI } = useToast();
 
     const fetch = fetchClient();
     const isAllSelected = cartItems.length > 0 && selectedItemIds.length === cartItems.length;
@@ -33,10 +35,12 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
 
     const deleteCartItems = useMutation({
         mutationFn: async (productIds: number[]) => {
+            const requestBody: { productIds: number[] } = { productIds };
+
             await fetch("/cart/items", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ productIds }),
+                body: JSON.stringify(requestBody),
             });
         },
         onSuccess: () => {
@@ -45,7 +49,11 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
         },
         onError: (e: unknown) => {
             const err = e as CustomError;
-            console.error(`${err.code} - ${err.message}`);
+            console.error(`장바구니 아이템 삭제 실패: ${err.code} - ${err.message}`);
+
+            toast({
+                message: "장바구니 아이템 삭제 중 오류가 발생했습니다.",
+            });
         },
     });
 
@@ -91,6 +99,7 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
             <div className="flex-grow-0 flex-shrink-0 text-xs text-gray-400 gap-2">
                 <p>*수량은 각 제품 캡슐 단위로 변경이 가능합니다.</p>
             </div>
+            {ToastUI}
         </>
     );
 }
