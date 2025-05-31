@@ -15,8 +15,6 @@ type AddToCartProps = {
     quantity?: number;
 };
 
-const QUANTITY_STEP = 10;
-
 export default function AddToCart({ productId, title, stockQuantity, withPopup = false, quantity }: AddToCartProps) {
     const { toast, ToastUI } = useToast();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -37,18 +35,11 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     };
 
     const validateQuantity = (quantity: number) => {
-        if (quantity < 10) {
+        if (quantity < 1) {
             toast({
-                message: "수량은 10개 이상이어야 합니다.",
+                message: "수량은 1개 이상이어야 합니다.",
             });
 
-            return false;
-        }
-
-        if (quantity / QUANTITY_STEP !== Math.floor(quantity / QUANTITY_STEP)) {
-            toast({
-                message: `수량은 ${QUANTITY_STEP}의 배수로 입력해야 합니다.`,
-            });
             return false;
         }
 
@@ -94,7 +85,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     const showToast = (res: AddCartItemResponse) => {
         if (res.requiresQuantityAdjustment) {
             toast({
-                message: `수량이 ${QUANTITY_STEP}의 배수가 아니거나 재고가 부족하여 ${res.quantity}개로 조정되었습니다.`,
+                message: `죄송합니다. 재고가 ${res.stockQuantity}개로 한정되어 ${res.quantity}개만 장바구니에 추가되었습니다.`,
             });
         } else {
             toast({
