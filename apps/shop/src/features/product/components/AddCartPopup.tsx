@@ -10,7 +10,8 @@ type AddToCartPopupProps = {
 };
 
 export default function AddToCartPopup({ stockQuantity, onClose, onAddToCart }: AddToCartPopupProps) {
-    const [selectedQuantity, setSelectedQuantity] = useState<number | "">("");
+    const [selectedQuantity, setSelectedQuantity] = useState<number | "">(0);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const quantities = [10, 20, 30, 40, 50, 60].filter(quantity => quantity <= stockQuantity);
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,20 +19,22 @@ export default function AddToCartPopup({ stockQuantity, onClose, onAddToCart }: 
 
         if (!Number.isNaN(value)) {
             setSelectedQuantity(value);
+            setErrorMessage(null);
         } else {
             setSelectedQuantity("");
+            setErrorMessage(null);
         }
     };
 
     const handleQuantitySelect = (quantity: number) => {
         setSelectedQuantity(quantity);
+        setErrorMessage(null);
     };
 
     const handleAddToCart = () => {
-        if (selectedQuantity && selectedQuantity > 0) {
-            onAddToCart(selectedQuantity);
-            onClose();
-        }
+        if (!selectedQuantity && selectedQuantity !== 0) return;
+
+        onAddToCart(selectedQuantity);
     };
 
     return (
@@ -55,6 +58,7 @@ export default function AddToCartPopup({ stockQuantity, onClose, onAddToCart }: 
                             value={selectedQuantity}
                             onChange={handleQuantityChange}
                         />
+                        {errorMessage && <p className="text-xs text-red-500 mt-1">{errorMessage}</p>}
                         <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 gap-2">
                             {quantities.map(quantity => (
                                 <button

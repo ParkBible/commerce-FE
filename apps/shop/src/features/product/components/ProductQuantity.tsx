@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
+import AddToCart from "./AddToCart";
+import type { ProductType } from "../types";
 
-export default function ProductQuantity({ stockQuantity }: { stockQuantity: number }) {
+export default function ProductQuantity({ product }: { product: ProductType }) {
     const [quantity, setQuantity] = useState(0);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [isInputActive, setIsInputActive] = useState(false);
@@ -38,12 +40,8 @@ export default function ProductQuantity({ stockQuantity }: { stockQuantity: numb
         setIsInputActive(true);
     };
 
-    const handleQuantityChange = (newQuantity: number) => {
-        setQuantity(newQuantity);
-    };
-
     return (
-        <div>
+        <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-4">
             <h3 className="text-base font-bold mb-3">수량</h3>
             <div className="flex flex-wrap gap-2">
                 <div
@@ -65,7 +63,7 @@ export default function ProductQuantity({ stockQuantity }: { stockQuantity: numb
 
                 {/* 수량 버튼들 */}
                 {[10, 20, 30, 40, 50, 60]
-                    .filter(qty => qty <= stockQuantity)
+                    .filter(qty => qty <= product.stockQuantity)
                     .map(qty => (
                         <button
                             key={`qty-${qty}`}
@@ -79,6 +77,17 @@ export default function ProductQuantity({ stockQuantity }: { stockQuantity: numb
                         </button>
                     ))}
             </div>
+
+            {/* 추가 설명 */}
+            {(product.limitDescription || product.additionalDescription) && (
+                <div className="text-xs text-gray-400 space-y-1">
+                    {product.limitDescription && <p>{product.limitDescription}</p>}
+                    {product.additionalDescription && <p>{product.additionalDescription}</p>}
+                </div>
+            )}
+
+            {/* 장바구니 버튼 */}
+            <AddToCart productId={product.id} title={product.title} stockQuantity={product.stockQuantity} quantity={quantity} />
         </div>
     );
 }

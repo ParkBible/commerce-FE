@@ -16,7 +16,7 @@ async function fetchCart(userId: number): Promise<GetCartResponse> {
         const res = await fetch<GetCartResponse>(`/cart?userId=${userId}`);
 
         if (!res.data) {
-            throw new Error();
+            throw new Error("카트 데이터를 불러올 수 없습니다");
         }
 
         return res.data;

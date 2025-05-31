@@ -14,6 +14,8 @@ type AddToCartProps = {
     quantity?: number;
 };
 
+const QUANTITY_STEP = 10;
+
 export default function AddToCart({ productId, title, stockQuantity, withPopup = false, quantity }: AddToCartProps) {
     const { toast, ToastUI } = useToast();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -28,8 +30,36 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
         if (withPopup) {
             setIsPopupOpen(true);
         } else {
-            addToCart(quantity ?? 10);
+            if (!quantity && quantity !== 0) return;
+            validateQuantity(quantity) && addToCart(quantity);
         }
+    };
+
+    const validateQuantity = (quantity: number) => {
+        if (quantity <= 0) {
+            toast({
+                message: "수량은 1개 이상이어야 합니다.",
+            });
+
+            return false;
+        }
+
+        if (quantity / QUANTITY_STEP !== Math.floor(quantity / QUANTITY_STEP)) {
+            toast({
+                message: `수량은 ${QUANTITY_STEP}의 배수로 입력해야 합니다.`,
+            });
+            return false;
+        }
+
+        if (quantity > stockQuantity) {
+            toast({
+                message: `재고가 부족합니다. 현재 재고는 ${stockQuantity}개입니다.`,
+            });
+
+            return false;
+        }
+
+        return true;
     };
 
     const addToCart = (quantity: number) => {
@@ -47,6 +77,15 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
             .catch(error => {
                 showErrorToast(error as CustomError);
             });
+    };
+
+    const onAddToCartInPopup = (quantity: number) => {
+        if (!validateQuantity(quantity)) {
+            return;
+        }
+
+        addToCart(quantity);
+        setIsPopupOpen(false);
     };
 
     const showToast = () => {
@@ -68,7 +107,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     return (
         <>
             <AddToCartButton inStock={inStock} onClick={onButtonClick} />
-            {isPopupOpen && <AddCartPopup stockQuantity={stockQuantity} onClose={handlePopupClose} onAddToCart={addToCart} />}
+            {isPopupOpen && <AddCartPopup stockQuantity={stockQuantity} onClose={handlePopupClose} onAddToCart={onAddToCartInPopup} />}
             {ToastUI}
         </>
     );
