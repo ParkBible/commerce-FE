@@ -23,6 +23,7 @@ export interface AddCartItemRequest {
 
 export interface AddCartItemResponse {
     quantity: number;
+    stockQuantity: number;
     requiresQuantityAdjustment: boolean;
 }
 

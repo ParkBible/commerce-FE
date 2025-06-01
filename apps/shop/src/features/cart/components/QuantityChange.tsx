@@ -12,8 +12,6 @@ type QuantityChangeProps = {
     stockQuantity: number;
 };
 
-const QUANTITY_STEP = 10;
-
 export default function QuantityChange({ productId, initQuantity, stockQuantity }: QuantityChangeProps) {
     const [quantity, setQuantity] = useState<number>(initQuantity);
     const { toast, ToastUI } = useToast();
@@ -26,14 +24,14 @@ export default function QuantityChange({ productId, initQuantity, stockQuantity 
     }, [initQuantity, quantity]);
 
     const onMinusClick = () => {
-        if (quantity - QUANTITY_STEP > 0) {
-            changeQuantity(quantity - QUANTITY_STEP);
+        if (quantity - 1 > 0) {
+            changeQuantity(quantity - 1);
         }
     };
 
     const onPlusClick = () => {
-        if (quantity + QUANTITY_STEP <= stockQuantity) {
-            changeQuantity(quantity + QUANTITY_STEP);
+        if (quantity + 1 <= stockQuantity) {
+            changeQuantity(quantity + 1);
         }
     };
 
@@ -55,7 +53,7 @@ export default function QuantityChange({ productId, initQuantity, stockQuantity 
 
                 if (res.data.requiresQuantityAdjustment) {
                     toast({
-                        message: `수량이 ${QUANTITY_STEP}의 배수가 아니거나 재고가 부족하여 ${res.data.quantity}개로 조정되었습니다.`,
+                        message: `재고가 ${res.data.stockQuantity}개로 한정되어 ${res.data.quantity}개만 장바구니에 추가되었습니다.`,
                     });
                 }
 
