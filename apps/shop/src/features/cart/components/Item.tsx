@@ -16,11 +16,8 @@ interface ItemProps {
     onDelete: () => void;
 }
 
-const LOW_STOCK_QUANTITY = 10;
-const QUANTITY_STEP = 10;
-
 export default function Item({ productId, name, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
-    const totalPrice = (quantity / QUANTITY_STEP) * price;
+    const totalPrice = quantity * price;
 
     const getQuantityMessage = () => {
         if (stockQuantity === 0) {
@@ -53,7 +50,7 @@ export default function Item({ productId, name, price, quantity, stockQuantity, 
                         </div>
                         <QuantityChange productId={productId} initQuantity={quantity} stockQuantity={stockQuantity} />
                     </div>
-                    <div>{stockQuantity < LOW_STOCK_QUANTITY && <p className="text-red-500 text-xs font-bold mt-2">{getQuantityMessage()}</p>}</div>
+                    <div>{stockQuantity < 1 && <p className="text-red-500 text-xs font-bold mt-2">{getQuantityMessage()}</p>}</div>
                 </div>
             </div>
         </div>

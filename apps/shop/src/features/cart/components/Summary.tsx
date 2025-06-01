@@ -6,8 +6,7 @@ import { formatNumber } from "@/src/shared/utils/formatUtils";
 import { useCheckoutCartStore } from "@/src/features/cart/stores/checkoutCartStore";
 
 export default function Summary({ cartItems }: { cartItems: CartItem[] }) {
-    const QUANTITY_STEP = 10;
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * (item.quantity / QUANTITY_STEP), 0);
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const router = useRouter();
 
     const handleCheckout = () => {
