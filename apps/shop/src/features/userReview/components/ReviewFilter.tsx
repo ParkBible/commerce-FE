@@ -20,9 +20,13 @@ export default function ReviewFilter() {
     const changeMonthRange = (monthRange: MonthRange) => {
         const newParams = new URLSearchParams(params.toString());
 
-        newParams.set("monthRange", monthRange);
-        router.replace(`/review?${newParams.toString()}`);
+        if (monthRange === "all") {
+            newParams.delete("monthRange");
+        } else {
+            newParams.set("monthRange", monthRange);
+        }
 
+        router.replace(`/review?${newParams.toString()}`);
         setValue(monthRange);
     };
 

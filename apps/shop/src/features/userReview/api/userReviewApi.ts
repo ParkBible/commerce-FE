@@ -18,7 +18,7 @@ export async function getUserReviews({ monthRange, page }: UserReviewListRequest
     const mockFn = () => getMockUserReviews(page, 10);
 
     return fetchData({
-        endpoint: `/users/me/reviews?monthRange=${monthRange}&page=${page}`,
+        endpoint: `/users/me/reviews?${monthRange ? `monthRange=${monthRange}` : ""}&page=${page}`,
         defaultValue,
         mockDataFn: mockFn,
     });

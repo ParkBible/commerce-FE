@@ -3,14 +3,17 @@ import UserReviewList from "@/src/features/userReview/components/UserReviewList"
 import ReviewFilter from "@/src/features/userReview/components/ReviewFilter";
 import Pagination from "@/src/shared/components/shared/Pagination";
 
-interface ReviewSearchParams {
-    monthRange?: string; // 최근 몇 개월의 리뷰를 조회할지
-    page?: string; // 페이지 번호
-}
+type PageProps = {
+    searchParams?: Promise<{
+        monthRange?: string | string[];
+        page?: string | string[];
+    }>;
+};
+export default async function ReviewManagePage({ searchParams }: PageProps) {
+    const parsedParams = await searchParams;
 
-export default async function ReviewManagePage({ searchParams }: { searchParams: ReviewSearchParams }) {
-    const monthRange = searchParams.monthRange ? Number.parseInt(searchParams.monthRange, 10) : 3;
-    const page = searchParams.page ? Number.parseInt(searchParams.page, 10) : 0;
+    const monthRange = Number.parseInt(String(parsedParams?.monthRange));
+    const page = Number.parseInt(String(parsedParams?.page)) || 0;
 
     // 사용자의 리뷰 목록
     const reviewsData = await getUserReviews({ monthRange, page });
