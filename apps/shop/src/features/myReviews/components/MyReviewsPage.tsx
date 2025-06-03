@@ -1,11 +1,22 @@
 import MyReviewList from "@/src/features/myReviews/components/MyReviewList";
+import ReviewFilter from "@/src/features/userReview/components/ReviewFilter";
+import Pagination from "@/src/shared/components/shared/Pagination";
 
-interface MyReviewsPageProps {
-    reviews: any[];
-    totalElements: number;
-    totalPages: number;
-    currentPage: number;
-}
+type PageProps = {
+    searchParams?: Promise<{
+        monthRange?: string | string[];
+        page?: string | string[];
+    }>;
+};
+export default async function ReviewManagePage({ searchParams }: PageProps) {
+    const parsedParams = await searchParams;
+
+    const monthRange = Number.parseInt(String(parsedParams?.monthRange));
+    const page = Number.parseInt(String(parsedParams?.page)) || 0;
+
+    // 사용자의 리뷰 목록
+    const reviewsData = await getUserReviews({ monthRange, page });
+    const reviews = reviewsData.content || [];
 
 export default function MyReviewsPage({ reviews, totalElements, totalPages, currentPage }: MyReviewsPageProps) {
     return (
@@ -28,7 +39,7 @@ export default function MyReviewsPage({ reviews, totalElements, totalPages, curr
                             </div>
                             <div className="text-right">
                                 <div className="text-sm text-gray-600">이번 달 작성</div>
-                                <div className="text-lg font-semibold text-blue-600 mt-1">
+                                <div className="text-lg font-semibold text-[#257A57] mt-1">
                                     {/* TODO: 이번 달 작성한 리뷰 수 계산 */}
                                     0개
                                 </div>
@@ -36,8 +47,14 @@ export default function MyReviewsPage({ reviews, totalElements, totalPages, curr
                         </div>
                     </div>
 
+                    {/* 리뷰 필터 */}
+                    <ReviewFilter />
+
                     {/* 리뷰 목록 */}
                     <MyReviewList reviews={reviews} hasMore={currentPage < totalPages - 1} />
+
+                    {/* 페이지네이션 */}
+                    <Pagination page={page} totalPages={reviewsData.totalPages || 0} />
                 </div>
             </div>
         </div>

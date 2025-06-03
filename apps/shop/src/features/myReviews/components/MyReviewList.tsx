@@ -3,6 +3,8 @@
 import { useState } from "react";
 import MyReviewCard from "./MyReviewCard";
 import type { UserReview } from "@/src/features/myReviews/types";
+import { fetchClient } from "@/src/shared/fetcher";
+import CreateReviewModal from "../../review/components/CreateReviewModal";
 
 interface MyReviewListProps {
     reviews: UserReview[];
@@ -11,10 +13,11 @@ interface MyReviewListProps {
 
 export default function MyReviewList({ reviews, hasMore = false }: MyReviewListProps) {
     const [reviewList, setReviewList] = useState(reviews);
+    const [editingReview, setEditingReview] = useState<UserReview | null>(null);
+    const fetch = fetchClient();
 
-    const handleEdit = (reviewId: number) => {
-        // TODO: 리뷰 수정 기능 구현
-        console.log("리뷰 수정:", reviewId);
+    const handleEdit = (review: UserReview) => {
+        setEditingReview(review);
     };
 
     const handleDelete = (reviewId: number) => {
@@ -22,7 +25,6 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
         const confirmDelete = confirm("정말 이 리뷰를 삭제하시겠습니까?");
         if (confirmDelete) {
             setReviewList(prev => prev.filter(review => review.reviewId !== reviewId));
-            console.log("리뷰 삭제:", reviewId);
         }
     };
 
@@ -36,22 +38,44 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
     }
 
     return (
-        <div className="space-y-6">
-            {/* 리뷰 목록 */}
-            <div className="space-y-4">
-                {reviewList.map(review => (
-                    <MyReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={handleDelete} />
-                ))}
-            </div>
-
-            {/* 더보기 버튼 */}
-            {hasMore && (
-                <div className="text-center pt-8">
-                    <button type="button" className="px-8 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                        더보기
-                    </button>
+        <>
+            <div className="space-y-6">
+                {/* 리뷰 목록 */}
+                <div className="space-y-4">
+                    {reviewList.map(review => (
+                        <UserReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={handleDelete} />
+                    ))}
                 </div>
+
+                {/* 더보기 버튼 */}
+                {hasMore && (
+                    <div className="text-center pt-8">
+                        <button
+                            type="button"
+                            className="px-8 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                            더보기
+                        </button>
+                    </div>
+                )}
+            </div>
+            {editingReview && (
+                <CreateReviewModal
+                    isEdit={true}
+                    reviewInfo={{
+                        reviewId: editingReview.reviewId,
+                        rating: editingReview.rating,
+                        content: editingReview.content || "",
+                    }}
+                    product={{
+                        productId: editingReview.productId,
+                        title: editingReview.productName,
+                        imageUrl: editingReview.productThumbnail || "",
+                    }}
+                    isOpen={!!editingReview}
+                    onClickClose={() => setEditingReview(null)}
+                />
             )}
-        </div>
+        </>
     );
 }
