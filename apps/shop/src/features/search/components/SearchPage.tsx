@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import SearchFilter from "@/src/features/search/components/SearchFilter";
 import SearchResultHeader from "@/src/features/search/components/SearchResultHeader";
 import ProductList from "@/src/features/search/components/ProductList";
-import { searchProducts } from "@/src/features/search/api/searchProductApi";
 import type { Product } from "@/src/features/search/types";
 
 interface SearchPageProps {
@@ -13,34 +12,18 @@ interface SearchPageProps {
     initialSearchTerm?: string;
 }
 
-export default function SearchPage({ initialProducts = [], initialTotalElements = 0, initialSearchTerm = "버츄오" }: SearchPageProps) {
+export default function SearchPage({ initialProducts = [], initialTotalElements = 0, initialSearchTerm = "" }: SearchPageProps) {
     const [products, setProducts] = useState<Product[]>(initialProducts);
     const [totalElements, setTotalElements] = useState(initialTotalElements);
     const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        // 초기 데이터가 있으면 API 호출 스킵
-        if (initialProducts.length > 0) {
-            return;
-        }
-
-        const fetchSearchResults = async () => {
-            try {
-                setIsLoading(true);
-                const searchResult = await searchProducts(searchTerm, 0, 10);
-
-                setProducts(searchResult.content || []);
-                setTotalElements(searchResult.totalElements || 0);
-            } catch (error) {
-                console.error("검색 결과를 가져오는데 실패했습니다:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchSearchResults();
-    }, [searchTerm, initialProducts.length]);
+        // 서버에서 받은 초기 데이터 사용
+        setProducts(initialProducts);
+        setTotalElements(initialTotalElements);
+        setSearchTerm(initialSearchTerm);
+    }, [initialProducts, initialTotalElements, initialSearchTerm]);
 
     if (isLoading) {
         return (

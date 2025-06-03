@@ -29,14 +29,12 @@ export async function fetchData<T>(options: FetchDataOptions<T>): Promise<T> {
     try {
         const fetch = fetchServer();
         const response = await fetch<T>(endpoint);
-        console.log("===== response ======", response);
         if (response.data === null) {
             return defaultValue as T;
         }
 
         return response.data;
     } catch (error: unknown) {
-        console.log("===== error ======", error);
         console.error(error);
         return mockDataFn ? mockDataFn() : defaultValue;
 
