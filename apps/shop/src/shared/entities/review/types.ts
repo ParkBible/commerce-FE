@@ -1,9 +1,9 @@
 // 기본 리뷰 인터페이스 (모든 리뷰 타입의 기본)
 export interface BaseReview {
     id: string | number;
-    rating?: number;
-    content?: string;
-    createdAt?: string;
+    rating: number;
+    content: string;
+    createdAt: string;
 }
 
 // 프론트엔드 UI용 리뷰 (ProductReviewCard에서 사용)
@@ -29,11 +29,11 @@ export interface ReviewType {
 
 // 사용자 리뷰 (myReviews에서 사용)
 export interface UserReview extends BaseReview {
-    reviewId?: number;
-    productId?: number;
-    productName?: string;
-    productThumbnail?: string;
-    adminReply?: AdminReply | null;
+    reviewId: number;
+    productId: number;
+    productName: string;
+    productThumbnail: string;
+    adminReply: AdminReply | null;
 }
 
 // 관리자 답변 인터페이스
@@ -46,23 +46,46 @@ export interface AdminReply {
 
 // API Response 타입들
 export interface ReviewWithAdminReply extends BaseReview {
-    reviewId?: number;
-    nickname?: string;
-    adminReply?: AdminReply;
+    reviewId: number;
+    nickname: string;
+    adminReply: AdminReply | null;
 }
 
-// 리뷰 생성/수정을 위한 payload 타입들
-export interface ReviewCreatePayload {
+// 리뷰 작성 요청 (POST /reviews)
+export interface AddReviewRequest {
     orderNumber?: string;
     orderItemId?: number;
     rating?: number;
     content?: string;
 }
 
-export interface ReviewUpdatePayload {
-    rating?: number;
-    content?: string;
+// 리뷰 작성 응답
+export interface AddReviewResponse {
+    reviewId: 0;
+    createdAt: string;
 }
+
+// 리뷰 수정 요청 (PUT /reviews/:reviewId)
+export interface UpdateReviewRequest {
+    rating: number;
+    content: string;
+}
+
+// 리뷰 수정 응답
+export interface UpdateReviewResponse {
+    updatedAt: string;
+}
+
+// 리뷰 통계 응답 (GET /products/:productId/reviews/rating)
+export interface ProductReviewRatingResponse {
+    averageRating: number;
+    ratingDistribution: {
+        [key in RatingKey]: number;
+    };
+}
+
+const ratingKeys = ["oneStarCount", "twoStarsCount", "threeStarsCount", "fourStarsCount", "fiveStarsCount"] as const;
+type RatingKey = (typeof ratingKeys)[number];
 
 // 타입 변환 유틸리티 함수들
 export function convertToReview(review: ReviewType): Review {
@@ -77,11 +100,13 @@ export function convertToReview(review: ReviewType): Review {
     };
 }
 
-export function convertToUserReview(review: ReviewWithAdminReply & {
-    productId?: number;
-    productName?: string;
-    productThumbnail?: string;
-}): UserReview {
+export function convertToUserReview(
+    review: ReviewWithAdminReply & {
+        productId: number;
+        productName: string;
+        productThumbnail: string;
+    },
+): UserReview {
     return {
         id: review.reviewId?.toString() || "",
         reviewId: review.reviewId,
@@ -93,4 +118,4 @@ export function convertToUserReview(review: ReviewWithAdminReply & {
         createdAt: review.createdAt,
         adminReply: review.adminReply,
     };
-} 
+}

@@ -1,22 +1,14 @@
 import MyReviewList from "@/src/features/myReviews/components/MyReviewList";
-import ReviewFilter from "@/src/features/userReview/components/ReviewFilter";
 import Pagination from "@/src/shared/components/shared/Pagination";
+import ReviewFilter from "@/src/features/myReviews/components/ReviewFilter";
+import type { UserReview } from "@/src/shared/entities/review/types";
 
-type PageProps = {
-    searchParams?: Promise<{
-        monthRange?: string | string[];
-        page?: string | string[];
-    }>;
-};
-export default async function ReviewManagePage({ searchParams }: PageProps) {
-    const parsedParams = await searchParams;
-
-    const monthRange = Number.parseInt(String(parsedParams?.monthRange));
-    const page = Number.parseInt(String(parsedParams?.page)) || 0;
-
-    // 사용자의 리뷰 목록
-    const reviewsData = await getUserReviews({ monthRange, page });
-    const reviews = reviewsData.content || [];
+interface MyReviewsPageProps {
+    reviews: UserReview[];
+    totalElements: number;
+    totalPages: number;
+    currentPage: number;
+}
 
 export default function MyReviewsPage({ reviews, totalElements, totalPages, currentPage }: MyReviewsPageProps) {
     return (
@@ -54,9 +46,9 @@ export default function MyReviewsPage({ reviews, totalElements, totalPages, curr
                     <MyReviewList reviews={reviews} hasMore={currentPage < totalPages - 1} />
 
                     {/* 페이지네이션 */}
-                    <Pagination page={page} totalPages={reviewsData.totalPages || 0} />
+                    <Pagination page={currentPage} totalPages={totalPages || 0} />
                 </div>
             </div>
         </div>
     );
-} 
+}

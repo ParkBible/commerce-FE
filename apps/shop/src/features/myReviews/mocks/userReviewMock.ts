@@ -1,4 +1,4 @@
-import type { UserReviewListResponse } from "@/src/features/myReviews/types";
+import type { UserReviewResponse } from "@/src/features/myReviews/types";
 
 /**
  * 사용자 리뷰 목 데이터를 반환하는 함수

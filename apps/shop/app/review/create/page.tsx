@@ -12,10 +12,9 @@ const mockProduct: ProductType = {
     price: 11500,
     images: ["https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=200&auto=format&fit=crop"],
     tags: ["프리미엄", "아라비카"],
-    badges: [
-        { text: "베스트셀러", bgColor: "#FF6B6B", textColor: "#FFFFFF" }
-    ],
+    badges: [{ text: "베스트셀러", bgColor: "#FF6B6B", textColor: "#FFFFFF" }],
     inStock: true,
+    stockQuantity: 0,
 };
 
 export default function ReviewCreatePage() {
@@ -29,10 +28,14 @@ export default function ReviewCreatePage() {
     return (
         <div>
             <CreateReviewModal
-                product={mockProduct}
+                product={{
+                    productId: mockProduct.id,
+                    title: mockProduct.title,
+                    imageUrl: mockProduct.images[0],
+                }}
                 isOpen={true}
                 onClickClose={handleClose}
             />
         </div>
     );
-} 
+}

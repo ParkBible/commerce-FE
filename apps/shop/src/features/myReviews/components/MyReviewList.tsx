@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import MyReviewCard from "./MyReviewCard";
 import type { UserReview } from "@/src/features/myReviews/types";
 import { fetchClient } from "@/src/shared/fetcher";
-import CreateReviewModal from "../../review/components/CreateReviewModal";
+import MyReviewCard from "@/src/features/myReviews/components/MyReviewCard";
+import CreateReviewModal from "@/src/features/reviewCreate/components/CreateReviewModal";
 
 interface MyReviewListProps {
     reviews: UserReview[];
@@ -43,7 +43,7 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
                 {/* 리뷰 목록 */}
                 <div className="space-y-4">
                     {reviewList.map(review => (
-                        <UserReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={handleDelete} />
+                        <MyReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={handleDelete} />
                     ))}
                 </div>
 
