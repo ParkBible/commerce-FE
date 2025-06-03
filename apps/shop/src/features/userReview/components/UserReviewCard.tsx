@@ -6,7 +6,7 @@ import type { UserReview } from "@/src/features/userReview/types";
 
 interface UserReviewCardProps {
     review: UserReview;
-    onEdit?: (reviewId: number) => void;
+    onEdit?: (review: UserReview) => void;
     onDelete?: (reviewId: number) => void;
 }
 
@@ -53,7 +53,7 @@ export default function UserReviewCard({ review, onEdit, onDelete }: UserReviewC
                 <div className="flex gap-2">
                     <button
                         type="button"
-                        onClick={() => review.reviewId && onEdit?.(review.reviewId)}
+                        onClick={() => review.reviewId && onEdit?.(review)}
                         className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
                         title="리뷰 수정"
                     >
