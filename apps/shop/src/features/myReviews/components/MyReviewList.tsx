@@ -5,6 +5,8 @@ import type { UserReview } from "@/src/features/myReviews/types";
 import { fetchClient } from "@/src/shared/fetcher";
 import MyReviewCard from "@/src/features/myReviews/components/MyReviewCard";
 import CreateReviewModal from "@/src/features/reviewCreate/components/CreateReviewModal";
+import ConfirmDialog from "@/src/shared/components/shared/ConfirmDialog";
+import { useToast } from "@/src/shared/hooks/useToast";
 
 interface MyReviewListProps {
     reviews: UserReview[];
@@ -14,17 +16,37 @@ interface MyReviewListProps {
 export default function MyReviewList({ reviews, hasMore = false }: MyReviewListProps) {
     const [reviewList, setReviewList] = useState(reviews);
     const [editingReview, setEditingReview] = useState<UserReview | null>(null);
+    const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
     const fetch = fetchClient();
+    const { toast, ToastUI } = useToast();
 
     const handleEdit = (review: UserReview) => {
         setEditingReview(review);
     };
 
-    const handleDelete = (reviewId: number) => {
+    const onDeleteClick = () => {
         // TODO: 리뷰 삭제 API 호출
-        const confirmDelete = confirm("정말 이 리뷰를 삭제하시겠습니까?");
-        if (confirmDelete) {
+        setIsDeleteAlertOpen(true);
+    };
+
+    const onDeleteConfirm = () => {
+        setIsDeleteAlertOpen(false);
+        requestDelete();
+    };
+
+    const requestDelete = async () => {
+        const reviewId = editingReview?.reviewId;
+
+        try {
+            await fetch(`/reviews/${reviewId}`, {
+                method: "DELETE",
+            });
             setReviewList(prev => prev.filter(review => review.reviewId !== reviewId));
+        } catch (error) {
+            console.error("리뷰 삭제 실패:", error);
+            toast({
+                message: "리뷰 삭제 중 오류가 발생했습니다.",
+            });
         }
     };
 
@@ -43,7 +65,7 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
                 {/* 리뷰 목록 */}
                 <div className="space-y-4">
                     {reviewList.map(review => (
-                        <MyReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={handleDelete} />
+                        <MyReviewCard key={`review-${review.reviewId}`} review={review} onEdit={handleEdit} onDelete={onDeleteClick} />
                     ))}
                 </div>
 
@@ -76,6 +98,18 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
                     onClickClose={() => setEditingReview(null)}
                 />
             )}
+            <ConfirmDialog
+                open={isDeleteAlertOpen}
+                title="리뷰 삭제"
+                description={<span className="text-gray-700">정말 리뷰를 삭제하시겠습니까?</span>}
+                cancelText="취소"
+                confirmText="삭제"
+                onCancel={() => setIsDeleteAlertOpen(false)}
+                onConfirm={() => {
+                    onDeleteConfirm();
+                }}
+            />
+            {ToastUI}
         </>
     );
 }
