@@ -1,25 +1,9 @@
-import React from "react";
 import Image from "next/image";
 import { CupSizeCircleIcon } from "@/src/shared/components/shared/Icon";
 import AddToCart from "@/src/features/product/components/AddToCart";
+import type { Product, Badge } from "@/src/features/search/types";
 
-interface Badge {
-    text: string;
-    type: "category" | "new" | "best" | "decaf";
-}
-
-interface ProductItemProps {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    capsuleCount: number;
-    intensity: number;
-    cupSize: string;
-    imageUrl: string;
-    badges: Badge[];
-    inStock: boolean;
-}
+interface ProductItemProps extends Product {}
 
 export default function ProductItem({ title, description, price, capsuleCount, intensity, cupSize, imageUrl, badges, inStock }: ProductItemProps) {
     const getBadgeStyle = (type: Badge["type"]) => {

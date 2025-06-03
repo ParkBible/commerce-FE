@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 
 export default function SearchFilter() {

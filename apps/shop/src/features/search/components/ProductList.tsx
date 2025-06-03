@@ -1,23 +1,5 @@
-import React from "react";
 import ProductItem from "@/src/features/search/components/ProductItem";
-
-interface Badge {
-    text: string;
-    type: "category" | "new" | "best" | "decaf";
-}
-
-interface Product {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    capsuleCount: number;
-    intensity: number;
-    cupSize: string;
-    imageUrl: string;
-    badges: Badge[];
-    inStock: boolean;
-}
+import type { Product } from "@/src/features/search/types";
 
 interface ProductListProps {
     products: Product[];
