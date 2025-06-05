@@ -18,6 +18,14 @@ export interface Review {
 }
 
 // 백엔드 API용 리뷰 타입 (product API에서 사용)
+export interface ReviewResponse {
+    content: ReviewType[];
+    page: number;
+    size: number;
+    totalPages: number;
+    totalElements: number;
+}
+
 export interface ReviewType {
     id: number;
     userName: string;
@@ -74,6 +82,15 @@ export interface UpdateReviewRequest {
 // 리뷰 수정 응답
 export interface UpdateReviewResponse {
     updatedAt: string;
+}
+
+// 평점 분포 인터페이스 (ProductReviews 컴포넌트에서 사용)
+export interface RatingDistribution {
+    oneStarCount: number;
+    twoStarsCount: number;
+    threeStarsCount: number;
+    fourStarsCount: number;
+    fiveStarsCount: number;
 }
 
 // 리뷰 통계 응답 (GET /products/:productId/reviews/rating)
