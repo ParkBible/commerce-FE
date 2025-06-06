@@ -4,8 +4,7 @@ import { ProductInfo } from "./ProductInfo";
 import { ProductDetails } from "./ProductDetails";
 import { ProductVideo } from "./ProductVideo";
 import { ProductReviews } from "./ProductReviews";
-import { RecommendedProducts } from "./RecommendedProducts";
-import type { ProductType, RecommendedProductType, ReviewType } from "@/src/features/product/types";
+import type { ProductType, ReviewType } from "@/src/features/product/types";
 
 interface ProductPageProps {
     product: ProductType;
@@ -14,7 +13,6 @@ interface ProductPageProps {
         averageRating: number;
         ratingDistribution: RatingDistribution;
     };
-    recommendedProducts: RecommendedProductType[];
 }
 
 interface RatingDistribution {
@@ -25,7 +23,7 @@ interface RatingDistribution {
     fiveStarsCount: number;
 }
 
-export function ProductPage({ product, reviews, reviewStats, recommendedProducts }: ProductPageProps) {
+export function ProductPage({ product, reviews, reviewStats }: ProductPageProps) {
     const breadcrumbItems = [
         { label: "버츄오", href: "/category/virtuo" },
         { label: "New 시즌 한정 커피", href: "/category/seasonal" },
