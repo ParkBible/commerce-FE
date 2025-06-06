@@ -1,5 +1,7 @@
 import MyReviewsPage from "@/src/features/myReviews/components/MyReviewsPage";
 import ReviewFilter from "@/src/features/myReviews/components/ReviewFilter";
+import Loading from "@/src/shared/components/shared/Loading";
+import { Suspense } from "react";
 
 export default function ReviewManagePage() {
     return (
@@ -14,10 +16,14 @@ export default function ReviewManagePage() {
                     </div>
 
                     {/* 리뷰 필터 */}
-                    <ReviewFilter />
+                    <Suspense fallback={<Loading />}>
+                        <ReviewFilter />
+                    </Suspense>
 
                     {/* 데이터 페칭 및 리뷰 목록 */}
-                    <MyReviewsPage />
+                    <Suspense fallback={<Loading />}>
+                        <MyReviewsPage />
+                    </Suspense>
                 </div>
             </div>
         </div>

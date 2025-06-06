@@ -27,19 +27,17 @@ export default function ReviewFilter() {
     };
 
     return (
-        <>
-            <div className="flex gap-2 mb-6">
-                {monthRanges.map(monthRange => (
-                    <button
-                        key={monthRange}
-                        type="button"
-                        onClick={() => changeMonthRange(monthRange)}
-                        className={`px-4 py-2 rounded ${value === monthRange ? "bg-[#257A57] text-white" : "bg-gray-100 text-black"}`}
-                    >
-                        {monthRangeLabels[monthRange]}
-                    </button>
-                ))}
-            </div>
-        </>
+        <div className="flex gap-2 mb-6">
+            {monthRanges.map(monthRange => (
+                <button
+                    key={monthRange}
+                    type="button"
+                    onClick={() => changeMonthRange(monthRange)}
+                    className={`px-4 py-2 rounded ${value === monthRange ? "bg-[#257A57] text-white" : "bg-gray-100 text-black"}`}
+                >
+                    {monthRangeLabels[monthRange]}
+                </button>
+            ))}
+        </div>
     );
 }
