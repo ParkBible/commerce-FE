@@ -5,7 +5,7 @@ import type { Product, Badge } from "@/src/features/search/types";
 
 interface ProductItemProps extends Product {}
 
-export default function ProductItem({ title, description, price, capsuleCount, intensity, cupSize, imageUrl, badges, inStock }: ProductItemProps) {
+export default function ProductItem({ productId, title, description, price, capsuleCount, intensity, cupSize, imageUrl, badges, stockQuantity }: ProductItemProps) {
     const getBadgeStyle = (type: Badge["type"]) => {
         switch (type) {
             case "category":
@@ -55,7 +55,7 @@ export default function ProductItem({ title, description, price, capsuleCount, i
                     <span className="text-[#257a57] font-bold text-2xl">₩ {price.toLocaleString()}</span>
                 </div>
                 <p className="text-center text-[#37383c]/60 text-sm mb-4">{capsuleCount} 캡슐</p>
-                <AddToCart title={title} inStock={inStock} withPopup={true} />
+                <AddToCart productId={productId} title={title} stockQuantity={stockQuantity} withPopup={true} />
             </div>
         </div>
     );

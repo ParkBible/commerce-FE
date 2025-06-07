@@ -7,6 +7,7 @@ export interface Badge {
 // Product 타입 정의
 export interface Product {
     id: string;
+    productId: number;
     title: string;
     description: string;
     price: number;
@@ -15,7 +16,7 @@ export interface Product {
     cupSize: string;
     imageUrl: string;
     badges: Badge[];
-    inStock: boolean;
+    stockQuantity: number;
 }
 
 // 검색 결과 응답 타입
