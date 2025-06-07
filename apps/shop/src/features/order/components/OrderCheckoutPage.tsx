@@ -3,28 +3,32 @@ import OrderCheckoutList from "@/src/features/order/components/OrderCheckoutList
 import PaymentSummary from "@/src/features/order/components/PaymentSummary";
 import SelectPaymentMethod from "@/src/features/order/components/SelectPaymentMethod";
 import SelectShippingInfo from "@/src/features/order/components/SelectShippingInfo";
-import type { CartItem } from "@/app/cart/page";
 import type { AddressType } from "../types";
 import useCreateOrder from "../hooks/useCreateOrder";
 import { useToast } from "@/src/shared/hooks/useToast";
+import type { CartItem } from "@/src/features/cart/types/cart";
 
 export default function OrderCheckoutPage() {
     const cartItems: CartItem[] = [
         {
-            id: 1,
-            title: "상품 1",
+            cartItemId: 1,
+            productId: 1,
+            name: "상품 1",
             price: 10000,
-            image: "/images/product/product-1.png",
-            quantity: 1,
-            stockQuantity: 10,
+            quantity: 2,
+            stockQuantity: 5,
+            thumbnail: "/images/product/product-1.png",
+            isAvailable: true,
         },
         {
-            id: 2,
-            title: "상품 2",
+            cartItemId: 2,
+            productId: 2,
+            name: "상품 2",
             price: 20000,
-            image: "/images/product/product-1.png",
             quantity: 1,
-            stockQuantity: 10,
+            stockQuantity: 3,
+            thumbnail: "/images/product/product-2.png",
+            isAvailable: true,
         },
     ];
     const paymentMethods: { code: string; label: string }[] = [
@@ -87,7 +91,7 @@ export default function OrderCheckoutPage() {
         createOrderMutate({
             addressId: Number(addressId),
             deliveryMessage,
-            cartItemIds: cartItems.map(item => item.id),
+            cartItemIds: cartItems.map(item => item.cartItemId),
         });
     };
     return (
@@ -107,11 +111,11 @@ export default function OrderCheckoutPage() {
                                 <div className="p-4 rounded-2xl border border-gray-200">
                                     <OrderCheckoutList
                                         items={cartItems.map(item => ({
-                                            id: item.id,
-                                            name: item.title,
+                                            id: item.cartItemId,
+                                            name: item.name,
                                             price: item.price,
                                             quantity: item.quantity,
-                                            image: item.image,
+                                            image: item.thumbnail,
                                         }))}
                                     />
                                 </div>
