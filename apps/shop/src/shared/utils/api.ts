@@ -29,7 +29,6 @@ export async function fetchData<T>(options: FetchDataOptions<T>): Promise<T> {
     try {
         const fetch = fetchServer();
         const response = await fetch<T>(endpoint);
-
         if (response.data === null) {
             return defaultValue as T;
         }

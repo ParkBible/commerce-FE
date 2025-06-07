@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
+import AddToCart from "./AddToCart";
+import type { ProductType } from "../types";
 
-export default function ProductQuantity() {
+export default function ProductQuantity({ product }: { product: ProductType }) {
     const [quantity, setQuantity] = useState(0);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [isInputActive, setIsInputActive] = useState(false);
@@ -38,18 +40,18 @@ export default function ProductQuantity() {
         setIsInputActive(true);
     };
 
-    const handleQuantityChange = (newQuantity: number) => {
-        setQuantity(newQuantity);
-    };
-
     return (
-        <div>
+        <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-4">
             <h3 className="text-base font-bold mb-3">수량</h3>
-            <div className="flex flex-wrap gap-2">
-                <div
-                    className={`flex items-center h-10 w-[4.5rem] border rounded-md box-border ${isInputActive ? "border-black" : "border-gray-300"}`}
-                >
+
+            {/* 직접 입력 필드 */}
+            <div className="flex flex-col gap-2">
+                <label htmlFor="quantity-input" className="text-sm text-gray-600">
+                    직접 입력
+                </label>
+                <div className="relative">
                     <input
+                        id="quantity-input"
                         ref={inputRef}
                         type="text"
                         inputMode="numeric"
@@ -57,26 +59,50 @@ export default function ProductQuantity() {
                         value={quantity === 0 ? "" : quantity}
                         onChange={handleCustomQuantityChange}
                         onFocus={handleInputFocus}
-                        className="w-full h-full px-2 text-sm focus:outline-none text-center appearance-none bg-transparent m-0 border-none leading-normal"
-                        placeholder="입력"
+                        onBlur={() => setIsInputActive(false)}
+                        className={`w-24 h-10 px-3 text-sm border-2 rounded-lg focus:outline-none transition-colors ${
+                            isInputActive ? "border-[#257a57]" : "border-gray-300 bg-white hover:border-gray-400"
+                        }`}
+                        placeholder="0"
                         maxLength={3}
                     />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">개</span>
                 </div>
-
-                {/* 수량 버튼들 */}
-                {[10, 20, 30, 40, 50, 60].map(qty => (
-                    <button
-                        key={`qty-${qty}`}
-                        type="button"
-                        onClick={() => handleButtonSelect(qty)}
-                        className={`h-10 px-4 border rounded-md min-w-[3.75rem] text-center text-sm cursor-pointer ${
-                            selectedButton === qty ? "border-black font-semibold" : "border-gray-300 opacity-90"
-                        }`}
-                    >
-                        {qty}
-                    </button>
-                ))}
             </div>
+
+            {/* 빠른 선택 버튼들 */}
+            <div className="flex flex-col gap-2">
+                <span className="text-sm text-gray-600">빠른 선택</span>
+                <div className="flex flex-wrap gap-2">
+                    {[10, 20, 30, 40, 50, 60]
+                        .filter(qty => qty <= product.stockQuantity)
+                        .map(qty => (
+                            <button
+                                key={`qty-${qty}`}
+                                type="button"
+                                onClick={() => handleButtonSelect(qty)}
+                                className={`h-10 px-4 border rounded-md min-w-[3.75rem] text-center text-sm cursor-pointer transition-colors ${
+                                    selectedButton === qty
+                                        ? "border-[#257a57] bg-[#257a57] text-white font-semibold"
+                                        : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50"
+                                }`}
+                            >
+                                {qty}
+                            </button>
+                        ))}
+                </div>
+            </div>
+
+            {/* 추가 설명 */}
+            {(product.limitDescription || product.additionalDescription) && (
+                <div className="text-xs text-gray-400 space-y-1">
+                    {product.limitDescription && <p>{product.limitDescription}</p>}
+                    {product.additionalDescription && <p>{product.additionalDescription}</p>}
+                </div>
+            )}
+
+            {/* 장바구니 버튼 */}
+            <AddToCart productId={product.id} title={product.title} stockQuantity={product.stockQuantity} quantity={quantity} />
         </div>
     );
 }
