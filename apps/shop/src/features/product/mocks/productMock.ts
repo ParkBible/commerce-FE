@@ -31,7 +31,6 @@ export function getMockProduct(id?: string): ProductType {
                 textColor: "#ffffff",
             },
         ],
-        inStock: true,
         coffeeSize: "80ml",
         aromaFeatures: ["과일향\n이그조틱", "견과류향\n트로피컬 ", "곡물향"],
         bodyLevel: 3,
@@ -40,7 +39,7 @@ export function getMockProduct(id?: string): ProductType {
         roastLevel: 2,
         stockQuantity: 50,
         limitDescription: "*스페셜 리저브 하와이 코나는 한정 수량 준비되어 매진될 수 있습니다.",
-        additionalDescription: "*재활용 알류미늄 85% 포함된 캡슐 사용",
+        additionalDescription: "*재활용 알루미늄 85% 포함된 캡슐 사용",
         productDetails: {
             detailText: `
                 ○ 제품명: 스페셜 리저브 하와이 코나
