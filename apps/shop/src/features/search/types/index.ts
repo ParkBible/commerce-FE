@@ -6,17 +6,18 @@ export interface Badge {
 
 // Product 타입 정의
 export interface Product {
-    id: string;
-    productId: number;
-    title: string;
-    description: string;
+    id: number;
+    name: string;
     price: number;
-    capsuleCount: number;
-    intensity: number;
+    quantity: number;
+    thumbnail: string;
+    detail_image: string;
+    intensity: string;
     cupSize: string;
-    imageUrl: string;
-    badges: Badge[];
-    stockQuantity: number;
+    status: "ON_SALE" | "STOPPED" | "HIDDEN";
+    is_deleted: boolean;
+    created_at: string;
+    updated_at: string;
 }
 
 // 검색 결과 응답 타입

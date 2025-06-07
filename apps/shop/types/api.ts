@@ -1,14 +1,12 @@
-// 상품 관련 타입
-export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    thumbnail: string;
-    detail_image: string;
-    status: "ON_SALE" | "STOPPED" | "HIDDEN";
-    is_deleted: boolean;
-    created_at: string;
-    updated_at: string;
+// 검색 관련 타입
+export interface SearchParams {
+    name?: string;
+    intensityId?: number;
+    cupSizeId?: number;
+    status?: string;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface Category {
@@ -24,32 +22,18 @@ export interface CategoryGroup {
     categories: Category[];
 }
 
-// 검색 관련 타입
-export interface SearchParams {
-    name?: string;
-    intensityId?: number;
-    cupSizeId?: number;
-    status?: string;
-    page?: number;
-    size?: number;
-    sort?: string;
-}
-
-export interface SearchResponse {
-    products: Product[];
-    totalElements: number;
-    totalPages: number;
-    currentPage: number;
-    size: number;
-}
-
 // 장바구니 관련 타입
 export interface CartItem {
     id: number;
     user_id: number;
     product_id: number;
     quantity: number;
-    product: Product;
+    product: {
+        id: number;
+        name: string;
+        price: number;
+        thumbnail: string;
+    };
 }
 
 export interface CartResponse {
@@ -69,9 +53,11 @@ export interface Order {
 
 // API 응답 타입
 export interface ApiResponse<T> {
-    data: T;
-    message?: string;
-    success: boolean;
+    data: T | null;
+    error: {
+        code: string;
+        message: string;
+    } | null;
 }
 
 export interface ApiError {
