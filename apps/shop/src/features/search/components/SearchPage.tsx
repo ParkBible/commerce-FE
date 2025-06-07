@@ -38,7 +38,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
     return (
         <div className="w-full min-h-screen flex flex-col px-4 sm:px-6 md:px-8">
             {/* 메인 콘텐츠 */}
-            <main className="flex-1 bg-white py-16">
+            <main className="flex-1 bg-white py-8">
                 <div className="max-w-[75rem] mx-auto">
                     {/* 검색 결과 타이틀 */}
                     <SearchResultHeader resultCount={totalElements} searchTerm={searchTerm} />
@@ -46,7 +46,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
                     {/* 필터 및 상품 목록 */}
                     <div className="flex flex-col lg:flex-row gap-6 lg:gap-14">
                         {/* 필터 */}
-                        <SearchFilter />
+                        <SearchFilter resultCount={totalElements} />
 
                         {/* 상품 목록 */}
                         <ProductList products={products} />

@@ -137,23 +137,20 @@ export async function GET(request: NextRequest) {
             db.query(countQuery, countParams)
         ]);
 
-        // 백엔드 원본 필드명 그대로 응답 (변환 없음)
-        const products = productsResult.rows.map((row: ProductRow, index: number) => {
+        // 백엔드 Example Value 형식에 맞춰 응답 생성
+        const products = productsResult.rows.map((row: ProductRow) => {
             const quantity = row.quantity ?? 0;
             
             const product = {
-                id: row.id,  // ✅ number 그대로
-                name: row.name,  // ✅ name 그대로 (title 변환 안함)
+                id: row.id,
+                name: row.name,
                 price: row.price,
-                quantity: quantity,  // ✅ 백엔드 필드명 그대로
-                thumbnail: row.thumbnail,  // ✅ thumbnail 그대로 (imageUrl 변환 안함)
-                detail_image: row.detail_image,  // ✅ 백엔드 필드명 그대로
-                intensity: "Medium",  // 기본값으로 설정 (추후 별도 API로 분리 가능)
-                cupSize: "Large",   // 기본값으로 설정
-                status: row.status,  // ✅ 백엔드 필드명 추가
-                is_deleted: row.is_deleted,  // ✅ 백엔드 필드명 추가
-                created_at: row.created_at,  // ✅ 백엔드 필드명 추가
-                updated_at: row.updated_at,  // ✅ 백엔드 필드명 추가
+                quantity: quantity,
+                thumbnail: row.thumbnail,
+                detailImage: row.detail_image,  // 🔄 detailImage로 변경 (백엔드 형식)
+                intensity: "Medium",  // 기본값 (추후 카테고리 API 연동)
+                cupSize: "Large",     // 기본값 (추후 카테고리 API 연동)
+                isSoldOut: quantity === 0,  // 🔄 isSoldOut 추가 (백엔드 형식)
             };
             
             return product;

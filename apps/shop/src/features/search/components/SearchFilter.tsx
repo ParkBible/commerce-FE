@@ -1,9 +1,20 @@
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 
-export default function SearchFilter() {
+interface SearchFilterProps {
+    resultCount?: number;
+}
+
+export default function SearchFilter({ resultCount }: SearchFilterProps) {
     return (
         <div className="w-full lg:w-80 lg:flex-shrink-0">
-            <h3 className="text-lg font-bold mb-8">필터</h3>
+            <h3 className="text-lg font-bold mb-8">
+                필터
+                {resultCount !== undefined && (
+                    <span className="text-sm font-normal text-[#37383c]/60 ml-2">
+                        ({resultCount}개 결과)
+                    </span>
+                )}
+            </h3>
 
             {/* 강도 필터 */}
             <div className="mb-8">
