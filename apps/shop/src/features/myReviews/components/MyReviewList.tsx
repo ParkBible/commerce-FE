@@ -117,7 +117,12 @@ export default function MyReviewList({ reviews, hasMore = false }: MyReviewListP
                 <ConfirmDialog
                     open={deletingReviewId !== null}
                     title="리뷰 삭제"
-                    description="정말로 이 리뷰를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+                    description={
+                        <>
+                            <span className="block mb-1">정말로 이 리뷰를 삭제하시겠습니까?</span>
+                            <span>이 작업은 되돌릴 수 없습니다.</span>
+                        </>
+                    }
                     confirmText="삭제"
                     cancelText="취소"
                     onConfirm={onDeleteConfirm}
