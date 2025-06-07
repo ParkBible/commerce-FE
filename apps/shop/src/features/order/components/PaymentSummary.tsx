@@ -2,7 +2,7 @@
 
 import { Button } from "@/src/shared/components/shared/button";
 import { useToast } from "@/src/shared/hooks/useToast";
-import type { CartItem } from "@/app/cart/page";
+import type { CartItem } from "@/src/features/cart/types/cart";
 
 interface PaymentSummaryProps {
     cartItems: CartItem[];
@@ -17,8 +17,8 @@ export default function PaymentSummary({ cartItems }: PaymentSummaryProps) {
             <div>
                 <ul>
                     {cartItems.map(item => (
-                        <li key={item.id} className="flex justify-between mb-2 ">
-                            <span>{item.title}</span>
+                        <li key={item.cartItemId} className="flex justify-between items-center mb-4">
+                            <span>{item.name}</span>
                             <span>₩ {item.price}</span>
                         </li>
                     ))}
