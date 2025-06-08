@@ -37,7 +37,7 @@ export default function SearchProduct() {
             </button>
             <input
                 type="text"
-                placeholder="'라떼'를 검색해 보세요. (빈값: 전체상품 조회)"
+                placeholder="'라떼'를 검색해 보세요  (빈값을 넣으면 전체상품을 조회합니다)"
                 className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-500 w-full"
                 name="searchQuery"
             />

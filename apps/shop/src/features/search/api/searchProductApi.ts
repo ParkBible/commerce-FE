@@ -2,11 +2,8 @@ import { getMockSearchProducts } from "@/src/features/search/mocks/searchProduct
 import { fetchServer } from "@/src/shared/fetcher";
 import type { SearchResultResponse, Product } from "@/src/features/search/types";
 
-// 백엔드 원본 응답 (Product 타입과 동일)
-interface BackendProduct extends Product {}
-
 interface BackendSearchData {
-    content: BackendProduct[];
+    content: Product[];
     totalElements: number;
     totalPages: number;
     page: number;
@@ -16,7 +13,7 @@ interface BackendSearchData {
 /**
  * 상품 검색 API 함수
  */
-export async function searchProducts(searchTerm = "", page = 0, size = 10): Promise<SearchResultResponse> {
+export async function searchProducts(searchTerm = "", page = 0, size = 10, intensityId?: string, cupSizeId?: string): Promise<SearchResultResponse> {
     try {
         const fetcher = fetchServer();
 
@@ -25,8 +22,15 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10): Prom
             name: searchTerm,
             page: page.toString(),
             size: size.toString(),
-            status: "ON_SALE",
         });
+
+        // 필터 파라미터 추가
+        if (intensityId) {
+            searchParams.append("intensityId", intensityId);
+        }
+        if (cupSizeId) {
+            searchParams.append("cupSizeId", cupSizeId);
+        }
 
         const response = await fetcher<BackendSearchData>(`/api/products?${searchParams}`);
         if (response.data?.content && Array.isArray(response.data.content)) {
@@ -40,14 +44,14 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10): Prom
                 totalElements: backendData.totalElements,
                 searchTerm: searchTerm,
             };
-            
+
             return finalData;
         }
 
         console.log("API 응답 구조가 예상과 다름, 목 데이터 사용");
-        return getMockSearchProducts(searchTerm, page, size);
+        return getMockSearchProducts(searchTerm, page, size, intensityId, cupSizeId);
     } catch (error) {
         console.error("검색 API 오류:", error);
-        return getMockSearchProducts(searchTerm, page, size);
+        return getMockSearchProducts(searchTerm, page, size, intensityId, cupSizeId);
     }
 }

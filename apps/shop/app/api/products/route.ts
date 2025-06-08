@@ -34,6 +34,10 @@ export async function GET(request: NextRequest) {
             sort: searchParams.get("sort") || "created_at,desc",
         };
 
+        // 문자열 필터 파라미터 추가
+        const intensity = searchParams.get("intensity") || undefined;
+        const cupSize = searchParams.get("cupSize") || undefined;
+
         // 목데이터 필터링
         const filteredProducts = MOCK_PRODUCTS.filter(product => {
             // 삭제되지 않고 판매 중인 상품만
@@ -46,20 +50,24 @@ export async function GET(request: NextRequest) {
                 return false;
             }
 
-            // 강도 필터링 (import한 매핑 사용)
+            // 강도 필터링
             if (params.intensityId) {
                 const allowedIntensities = INTENSITY_MAP[params.intensityId];
                 if (allowedIntensities && !allowedIntensities.includes(product.intensity)) {
                     return false;
                 }
+            } else if (intensity && product.intensity !== intensity) {
+                return false;
             }
 
-            // 컵사이즈 필터링 (import한 매핑 사용)
+            // 컵사이즈 필터링
             if (params.cupSizeId) {
                 const allowedCupSizes = CUP_SIZE_MAP[params.cupSizeId];
                 if (allowedCupSizes && !allowedCupSizes.includes(product.cupSize)) {
                     return false;
                 }
+            } else if (cupSize && product.cupSize !== cupSize) {
+                return false;
             }
 
             return true;

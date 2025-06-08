@@ -156,15 +156,17 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     },
 ];
 
-// 필터링을 위한 매핑 상수들
+// 필터링을 위한 매핑 상수들 (실제 DB Categories ID와 매치)
 export const INTENSITY_MAP: Record<number, string[]> = {
-    1: ["Light", "Mild"], // 라이트 0-5
-    2: ["Medium"], // 마일드 6-8
-    3: ["Strong", "Very Strong"], // 인텐스 9-11
+    1: ["Light"], // DB id:1 - 연함 (강도 0-5)
+    2: ["Mild", "Medium"], // DB id:2 - 중간 (강도 6-8)
+    3: ["Strong", "Very Strong"], // DB id:3 - 진함 (강도 9-11, Strong과 Very Strong 모두 포함)
+    4: ["Very Strong"], // DB id:4 - 매우진함 (혹시 별도로 쓰일 경우)
 };
 
 export const CUP_SIZE_MAP: Record<number, string[]> = {
-    1: ["30ml", "110ml"], // 에스프레소, 룽고 사이즈
-    2: ["250ml", "350ml"], // 스몰, 미디엄 사이즈
-    3: ["470ml"], // 라지 사이즈
+    5: ["30ml"], // DB id:5 - SHORT
+    6: ["110ml"], // DB id:6 - TALL
+    7: ["250ml", "350ml"], // DB id:7 - GRANDE
+    8: ["470ml"], // DB id:8 - VENTI
 };

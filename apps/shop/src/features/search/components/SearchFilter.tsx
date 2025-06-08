@@ -3,22 +3,26 @@ import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 
 interface SearchFilterProps {
     resultCount?: number;
+    selectedIntensity?: string | null;
+    selectedCupSize?: string | null;
+    onIntensityChange?: (intensity: string | null) => void;
+    onCupSizeChange?: (cupSize: string | null) => void;
 }
 
-export default function SearchFilter({ resultCount }: SearchFilterProps) {
+export default function SearchFilter({ resultCount, selectedIntensity, selectedCupSize, onIntensityChange, onCupSizeChange }: SearchFilterProps) {
     const [isIntensityOpen, setIsIntensityOpen] = useState(true);
     const [isCupSizeOpen, setIsCupSizeOpen] = useState(true);
-    const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
-    const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
 
     const handleIntensityClick = (intensity: string) => {
         // 같은 버튼을 클릭하면 선택 해제, 다른 버튼을 클릭하면 해당 버튼 선택
-        setSelectedIntensity(prev => (prev === intensity ? null : intensity));
+        const newIntensity = selectedIntensity === intensity ? null : intensity;
+        onIntensityChange?.(newIntensity);
     };
 
     const handleCupSizeClick = (cupSize: string) => {
         // 같은 버튼을 클릭하면 선택 해제, 다른 버튼을 클릭하면 해당 버튼 선택
-        setSelectedCupSize(prev => (prev === cupSize ? null : cupSize));
+        const newCupSize = selectedCupSize === cupSize ? null : cupSize;
+        onCupSizeChange?.(newCupSize);
     };
     return (
         <div className="w-full lg:w-80 lg:flex-shrink-0">
