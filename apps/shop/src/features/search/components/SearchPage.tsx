@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchFilter from "./SearchFilter";
-import SearchResultHeader from "./SearchResultHeader";
 import ProductList from "./ProductList";
 import { searchProducts } from "@/src/features/search/api/searchProductApi";
 import type { SearchResultResponse } from "@/src/features/search/types";
@@ -77,9 +76,6 @@ export default function SearchPage() {
             {/* 메인 콘텐츠 */}
             <main className="flex-1 bg-white py-8">
                 <div className="max-w-[75rem] mx-auto">
-                    {/* 검색 결과 타이틀 */}
-                    <SearchResultHeader resultCount={searchResults?.totalElements || 0} searchTerm={query} />
-
                     {/* 필터 및 상품 목록 */}
                     <div className="flex flex-col lg:flex-row gap-6 lg:gap-14">
                         {/* 필터 */}
@@ -89,6 +85,7 @@ export default function SearchPage() {
                             selectedCupSize={selectedCupSize}
                             onIntensityChange={handleIntensityChange}
                             onCupSizeChange={handleCupSizeChange}
+                            searchTerm={query}
                         />
 
                         {/* 상품 목록 */}

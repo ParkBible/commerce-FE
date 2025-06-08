@@ -7,9 +7,17 @@ interface SearchFilterProps {
     selectedCupSize?: string | null;
     onIntensityChange?: (intensity: string | null) => void;
     onCupSizeChange?: (cupSize: string | null) => void;
+    searchTerm?: string;
 }
 
-export default function SearchFilter({ resultCount, selectedIntensity, selectedCupSize, onIntensityChange, onCupSizeChange }: SearchFilterProps) {
+export default function SearchFilter({
+    resultCount,
+    selectedIntensity,
+    selectedCupSize,
+    onIntensityChange,
+    onCupSizeChange,
+    searchTerm,
+}: SearchFilterProps) {
     const [isIntensityOpen, setIsIntensityOpen] = useState(true);
     const [isCupSizeOpen, setIsCupSizeOpen] = useState(true);
 
@@ -26,9 +34,12 @@ export default function SearchFilter({ resultCount, selectedIntensity, selectedC
     };
     return (
         <div className="w-full lg:w-80 lg:flex-shrink-0">
-            <h3 className="text-lg font-bold mb-8">
-                필터
-                {resultCount !== undefined && <span className="text-sm font-normal text-[#37383c]/60 ml-2">({resultCount}개 결과)</span>}
+            <h3 className="text-lg font-bold mb-8 flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                    <span className="text-sm font-normal text-[#37383c]/60 bg-gray-100 px-2 py-1 rounded">
+                        {searchTerm ? `'${searchTerm}' 검색결과: ${resultCount}개` : `검색결과: ${resultCount}개`}
+                    </span>
+                </span>
             </h3>
 
             {/* 강도 필터 */}
