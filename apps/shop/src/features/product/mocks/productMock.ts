@@ -71,21 +71,30 @@ export function getMockReviews(page = 0, size = 20): ReviewResponse {
         content: [
             {
                 id: 1,
-                userName: "커피러버",
+                user: {
+                    userId: "user123",
+                    nickname: "커피러버",
+                },
                 rating: 4,
                 date: "2023-01-24",
                 content: "향이 정말 좋고 산미가 적절해요. 아침에 마시기 좋은 커피입니다.",
             },
             {
                 id: 2,
-                userName: "카페인중독자",
+                user: {
+                    userId: "user456",
+                    nickname: "카페인중독자",
+                },
                 rating: 5,
                 date: "2023-02-15",
                 content: "시즌 한정이라 아쉽지만 매번 구매하는 제품입니다. 열대과일향이 특히 좋아요!",
             },
             {
                 id: 3,
-                userName: "홈카페장인",
+                user: {
+                    userId: "user789",
+                    nickname: "홈카페장인",
+                },
                 rating: 4,
                 date: "2023-03-02",
                 content: "하와이 코나는 처음 마셔봤는데 기대 이상이네요. 부드러운 맛이 일품입니다.",
@@ -93,7 +102,10 @@ export function getMockReviews(page = 0, size = 20): ReviewResponse {
             },
             {
                 id: 4,
-                userName: "커피매니아",
+                user: {
+                    userId: "user101",
+                    nickname: "커피매니아",
+                },
                 rating: 3,
                 date: "2023-03-15",
                 content: "품질은 좋지만 가격이 조금 비싼 편입니다. 특별한 날에 마시기 좋아요.",

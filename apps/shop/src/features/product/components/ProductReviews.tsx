@@ -117,7 +117,7 @@ export function ProductReviews({ productId, reviews, reviewStats }: ProductRevie
                                 <div className="w-14 h-14 bg-gray-300 rounded-full overflow-hidden" />
                                 <div className="flex-1">
                                     <div className="flex justify-between">
-                                        <h3 className="font-bold">{review.userName}</h3>
+                                        <h3 className="font-bold">{review.user.nickname}</h3>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <div className="flex scale-75 origin-left">{renderStars(review.rating, review.id)}</div>

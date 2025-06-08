@@ -28,11 +28,16 @@ export interface ReviewResponse {
 
 export interface ReviewType {
     id: number;
-    userName: string;
+    user: User;
     rating: number;
     date: string;
     content: string;
     images?: string[];
+}
+
+interface User {
+    userId: string;
+    nickname: string;
 }
 
 // 사용자 리뷰 (myReviews에서 사용)
@@ -108,7 +113,7 @@ type RatingKey = (typeof ratingKeys)[number];
 export function convertToReview(review: ReviewType): Review {
     return {
         id: review.id.toString(),
-        reviewer: review.userName,
+        reviewer: review.user.nickname,
         rating: review.rating,
         date: review.date,
         content: review.content,
