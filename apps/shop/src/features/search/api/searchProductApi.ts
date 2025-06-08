@@ -1,4 +1,3 @@
-import { getMockSearchProducts } from "@/src/features/search/mocks/searchProductMock";
 import { fetchServer } from "@/src/shared/fetcher";
 import type { SearchResultResponse, Product } from "@/src/features/search/types";
 
@@ -48,10 +47,26 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10, inten
             return finalData;
         }
 
-        console.log("API 응답 구조가 예상과 다름, 목 데이터 사용");
-        return getMockSearchProducts(searchTerm, page, size, intensityId, cupSizeId);
+        // API 응답 구조가 예상과 다른 경우 빈 결과 반환
+        console.log("API 응답 구조가 예상과 다름");
+        return {
+            content: [],
+            page: page,
+            size: size,
+            totalPages: 0,
+            totalElements: 0,
+            searchTerm: searchTerm,
+        };
     } catch (error) {
         console.error("검색 API 오류:", error);
-        return getMockSearchProducts(searchTerm, page, size, intensityId, cupSizeId);
+        // 오류 발생 시 빈 결과 반환
+        return {
+            content: [],
+            page: page,
+            size: size,
+            totalPages: 0,
+            totalElements: 0,
+            searchTerm: searchTerm,
+        };
     }
 }

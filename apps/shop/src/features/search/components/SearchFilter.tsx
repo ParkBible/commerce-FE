@@ -45,36 +45,36 @@ export default function SearchFilter({ resultCount, selectedIntensity, selectedC
                     <div className="flex flex-wrap gap-2">
                         <button
                             type="button"
-                            onClick={() => handleIntensityClick("라이트 0-5")}
+                            onClick={() => handleIntensityClick("연함")}
                             className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "라이트 0-5"
+                                selectedIntensity === "연함"
                                     ? "bg-white text-black border border-black font-bold"
                                     : "text-[#2e2f33]/88 border border-gray-200/30"
                             }`}
                         >
-                            라이트 0-5
+                            연함
                         </button>
                         <button
                             type="button"
-                            onClick={() => handleIntensityClick("마일드 6-8")}
+                            onClick={() => handleIntensityClick("중간")}
                             className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "마일드 6-8"
+                                selectedIntensity === "중간"
                                     ? "bg-white text-black border border-black font-bold"
                                     : "text-[#2e2f33]/88 border border-gray-200/30"
                             }`}
                         >
-                            마일드 6-8
+                            중간
                         </button>
                         <button
                             type="button"
-                            onClick={() => handleIntensityClick("인텐스 9-11")}
+                            onClick={() => handleIntensityClick("진함")}
                             className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "인텐스 9-11"
+                                selectedIntensity === "진함"
                                     ? "bg-white text-black border border-black font-bold"
                                     : "text-[#2e2f33]/88 border border-gray-200/30"
                             }`}
                         >
-                            인텐스 9-11
+                            진함
                         </button>
                     </div>
                 )}
@@ -92,7 +92,7 @@ export default function SearchFilter({ resultCount, selectedIntensity, selectedC
                 </button>
                 {isCupSizeOpen && (
                     <div className="flex flex-wrap gap-2">
-                        {["30ml", "110ml", "250ml", "350ml", "470ml"].map(cupSize => (
+                        {["Small", "Medium", "Large"].map(cupSize => (
                             <button
                                 key={cupSize}
                                 type="button"

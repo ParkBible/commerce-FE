@@ -4,20 +4,17 @@ export interface Badge {
     type: "category" | "new" | "best" | "decaf";
 }
 
-// Product 타입 정의
+// Product 타입 정의 (백엔드 API 구조에 맞춤)
 export interface Product {
     id: number;
     name: string;
     price: number;
     quantity: number;
     thumbnail: string;
-    detail_image: string;
+    detailImage: string;
     intensity: string;
     cupSize: string;
-    status: "ON_SALE" | "STOPPED" | "HIDDEN";
-    is_deleted: boolean;
-    created_at: string;
-    updated_at: string;
+    isSoldOut: boolean;
 }
 
 // 검색 결과 응답 타입

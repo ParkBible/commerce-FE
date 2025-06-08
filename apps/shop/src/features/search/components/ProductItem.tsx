@@ -5,7 +5,7 @@ import type { Product } from "@/src/features/search/types";
 
 interface ProductItemProps extends Product {}
 
-export default function ProductItem({ id, name, price, quantity, thumbnail, detail_image, intensity, cupSize, status }: ProductItemProps) {
+export default function ProductItem({ id, name, price, quantity, thumbnail, detailImage, intensity, cupSize, isSoldOut }: ProductItemProps) {
     // 동적으로 배지 생성 (프론트에서 처리) - 모든 배지 제거
     const getBadges = () => {
         const badges: { text: string; type: "category" | "new" | "best" | "decaf" }[] = [];
@@ -17,7 +17,7 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
         //     badges.push({ text: "머그", type: "category" as const });
         // }
 
-        // if (quantity === 0 || status !== "ON_SALE") {
+        // if (isSoldOut) {
         //     badges.push({ text: "품절", type: "decaf" as const });
         // }
 
@@ -34,7 +34,6 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
             Light: 3,
             Medium: 6,
             Strong: 9,
-            "Very Strong": 11,
         };
         return intensityMap[intensity] || 6;
     };
@@ -58,7 +57,7 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
                 <div className="flex justify-center items-center gap-4 mb-4">
                     <div className="flex flex-col items-center">
                         <div className="w-10 h-10 rounded-full bg-[#f7f7f8] flex items-center justify-center mb-1">
-                            <span className="text-[#37383c]/60 text-base">{intensityNumber}</span>
+                            <span className="text-[#37383c]/60 text-base font-medium">{intensityNumber}</span>
                         </div>
                         <span className="text-[#37383c]/60 text-xs">강도</span>
                     </div>

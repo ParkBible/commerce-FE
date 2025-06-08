@@ -11,11 +11,9 @@ import type { SearchResultResponse } from "@/src/features/search/types";
 // 컵사이즈 매핑 (UI 텍스트 -> 실제 DB Categories ID)
 const getCupSizeId = (cupSize: string): string => {
     const cupSizeMapping: Record<string, string> = {
-        "30ml": "5", // DB id:5 - SHORT
-        "110ml": "6", // DB id:6 - TALL
-        "250ml": "7", // DB id:7 - GRANDE
-        "350ml": "7", // DB id:7 - GRANDE (350ml도 GRANDE로 매핑)
-        "470ml": "8", // DB id:8 - VENTI
+        Small: "5", // DB id:5 - SHORT
+        Medium: "7", // DB id:7 - GRANDE
+        Large: "8", // DB id:8 - VENTI
     };
     return cupSizeMapping[cupSize] || "5";
 };
@@ -31,9 +29,9 @@ export default function SearchPage() {
 
     // 강도 매핑 (UI 텍스트 -> 실제 DB Categories ID)
     const strengthMapping: Record<string, string> = {
-        "라이트 0-5": "1", // DB id:1 - 연함
-        "마일드 6-8": "2", // DB id:2 - 중간
-        "인텐스 9-11": "3", // DB id:3 - 진함 (매우진함은 4번이지만 UI에 없음)
+        연함: "1", // DB id:1 - 연함
+        중간: "2", // DB id:2 - 중간
+        진함: "3", // DB id:3 - 진함
     };
 
     const fetchSearchResults = useCallback(async () => {

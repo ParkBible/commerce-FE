@@ -10,13 +10,10 @@ interface ProductRow {
     price: number;
     quantity: number;
     thumbnail: string;
-    detail_image: string;
-    status: "ON_SALE" | "STOPPED" | "HIDDEN";
-    is_deleted: boolean;
-    created_at: string;
-    updated_at: string;
+    detailImage: string;
     intensity: string;
     cupSize: string;
+    isSoldOut: boolean;
 }
 
 export async function GET(request: NextRequest) {
@@ -31,7 +28,7 @@ export async function GET(request: NextRequest) {
             status: searchParams.get("status") || "ON_SALE",
             page: Number.parseInt(searchParams.get("page") || "0"),
             size: Number.parseInt(searchParams.get("size") || "20"),
-            sort: searchParams.get("sort") || "created_at,desc",
+            sort: searchParams.get("sort") || "id,desc",
         };
 
         // 문자열 필터 파라미터 추가
@@ -40,11 +37,6 @@ export async function GET(request: NextRequest) {
 
         // 목데이터 필터링
         const filteredProducts = MOCK_PRODUCTS.filter(product => {
-            // 삭제되지 않고 판매 중인 상품만
-            if (product.is_deleted || product.status !== params.status) {
-                return false;
-            }
-
             // 이름 검색
             if (params.name && !product.name.toLowerCase().includes(params.name.toLowerCase())) {
                 return false;
@@ -74,7 +66,7 @@ export async function GET(request: NextRequest) {
         });
 
         // 정렬 처리
-        const sortParts = params.sort?.split(",") || ["created_at", "desc"];
+        const sortParts = params.sort?.split(",") || ["id", "desc"];
         const [sortField, sortDirection] = sortParts;
 
         filteredProducts.sort((a, b) => {
@@ -88,7 +80,7 @@ export async function GET(request: NextRequest) {
                     comparison = a.price - b.price;
                     break;
                 default:
-                    comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+                    comparison = a.id - b.id;
                     break;
             }
 
@@ -104,25 +96,9 @@ export async function GET(request: NextRequest) {
         const endIndex = startIndex + size;
         const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
-        // 백엔드 Example Value 형식에 맞춰 응답 생성
-        const products = paginatedProducts.map((row: ProductRow) => {
-            const quantity = row.quantity ?? 0;
-
-            return {
-                id: row.id,
-                name: row.name,
-                price: row.price,
-                quantity: quantity,
-                thumbnail: row.thumbnail,
-                detailImage: row.detail_image,
-                intensity: row.intensity,
-                cupSize: row.cupSize,
-                isSoldOut: quantity === 0,
-            };
-        });
-
+        // 백엔드 API 응답 형식에 맞춰 반환
         const response = {
-            content: products,
+            content: paginatedProducts,
             page,
             size,
             totalPages,

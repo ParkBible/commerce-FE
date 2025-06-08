@@ -4,13 +4,10 @@ interface MockProduct {
     price: number;
     quantity: number;
     thumbnail: string;
-    detail_image: string;
-    status: "ON_SALE" | "STOPPED" | "HIDDEN";
-    is_deleted: boolean;
-    created_at: string;
-    updated_at: string;
+    detailImage: string;
     intensity: string;
     cupSize: string;
+    isSoldOut: boolean;
 }
 
 export const MOCK_PRODUCTS: MockProduct[] = [
@@ -20,13 +17,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 2500,
         quantity: 100,
         thumbnail: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Very Strong",
-        cupSize: "30ml",
+        detailImage: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=400&fit=crop&crop=center",
+        intensity: "Strong",
+        cupSize: "Small",
+        isSoldOut: false,
     },
     {
         id: 2,
@@ -34,13 +28,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 3000,
         quantity: 150,
         thumbnail: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
+        detailImage: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop&crop=center",
         intensity: "Medium",
-        cupSize: "350ml",
+        cupSize: "Large",
+        isSoldOut: false,
     },
     {
         id: 3,
@@ -48,13 +39,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 4000,
         quantity: 80,
         thumbnail: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Mild",
-        cupSize: "470ml",
+        detailImage: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&h=400&fit=crop&crop=center",
+        intensity: "Light",
+        cupSize: "Large",
+        isSoldOut: false,
     },
     {
         id: 4,
@@ -62,13 +50,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 4200,
         quantity: 120,
         thumbnail: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
+        detailImage: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&h=400&fit=crop&crop=center",
         intensity: "Medium",
-        cupSize: "250ml",
+        cupSize: "Medium",
+        isSoldOut: false,
     },
     {
         id: 5,
@@ -76,13 +61,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 4500,
         quantity: 60,
         thumbnail: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
+        detailImage: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&h=400&fit=crop&crop=center",
         intensity: "Strong",
-        cupSize: "110ml",
+        cupSize: "Small",
+        isSoldOut: false,
     },
     {
         id: 6,
@@ -90,13 +72,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 4800,
         quantity: 90,
         thumbnail: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
+        detailImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop&crop=center",
         intensity: "Light",
-        cupSize: "470ml",
+        cupSize: "Large",
+        isSoldOut: false,
     },
     {
         id: 7,
@@ -104,13 +83,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 5000,
         quantity: 70,
         thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Medium",
-        cupSize: "350ml",
+        detailImage: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=400&fit=crop&crop=center",
+        intensity: "Light",
+        cupSize: "Large",
+        isSoldOut: false,
     },
     {
         id: 8,
@@ -118,13 +94,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 3200,
         quantity: 85,
         thumbnail: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Strong",
-        cupSize: "470ml",
+        detailImage: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&h=400&fit=crop&crop=center",
+        intensity: "Medium",
+        cupSize: "Large",
+        isSoldOut: false,
     },
     {
         id: 9,
@@ -132,41 +105,34 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         price: 3800,
         quantity: 95,
         thumbnail: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Very Strong",
-        cupSize: "250ml",
+        detailImage: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&h=400&fit=crop&crop=center",
+        intensity: "Strong",
+        cupSize: "Medium",
+        isSoldOut: false,
     },
     {
         id: 10,
         name: "플랫 화이트",
         price: 3500,
-        quantity: 0, // 품절 상품
+        quantity: 0,
         thumbnail: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&h=300&fit=crop&crop=center",
-        detail_image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&h=400&fit=crop&crop=center",
-        status: "ON_SALE",
-        is_deleted: false,
-        created_at: "2025-06-03T21:32:04.590Z",
-        updated_at: "2025-06-03T21:32:04.590Z",
-        intensity: "Mild",
-        cupSize: "350ml",
+        detailImage: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&h=400&fit=crop&crop=center",
+        intensity: "Medium",
+        cupSize: "Large",
+        isSoldOut: true,
     },
 ];
 
 // 필터링을 위한 매핑 상수들 (실제 DB Categories ID와 매치)
 export const INTENSITY_MAP: Record<number, string[]> = {
-    1: ["Light"], // DB id:1 - 연함 (강도 0-5)
-    2: ["Mild", "Medium"], // DB id:2 - 중간 (강도 6-8)
-    3: ["Strong", "Very Strong"], // DB id:3 - 진함 (강도 9-11, Strong과 Very Strong 모두 포함)
-    4: ["Very Strong"], // DB id:4 - 매우진함 (혹시 별도로 쓰일 경우)
+    1: ["Light"], // DB id:1 - 연함
+    2: ["Medium"], // DB id:2 - 중간
+    3: ["Strong"], // DB id:3 - 진함
 };
 
 export const CUP_SIZE_MAP: Record<number, string[]> = {
-    5: ["30ml"], // DB id:5 - SHORT
-    6: ["110ml"], // DB id:6 - TALL
-    7: ["250ml", "350ml"], // DB id:7 - GRANDE
-    8: ["470ml"], // DB id:8 - VENTI
+    5: ["Small"], // DB id:5 - SHORT
+    6: ["Small"], // DB id:6 - TALL
+    7: ["Medium"], // DB id:7 - GRANDE
+    8: ["Large"], // DB id:8 - VENTI
 };
