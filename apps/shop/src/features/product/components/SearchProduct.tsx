@@ -14,11 +14,10 @@ export default function SearchProduct() {
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             const formData = new FormData(e.target as HTMLFormElement);
-            const searchQuery = formData.get("searchQuery");
+            const searchQuery = formData.get("searchQuery") || "";
 
-            if (!searchQuery) return;
-
-            router.push(`/search?query=${searchQuery}`);
+            // 빈 검색어일 때도 전체 상품을 보여주기 위해 리다이렉트
+            router.push(`/search?q=${searchQuery}`);
         },
         [router],
     );
@@ -38,8 +37,8 @@ export default function SearchProduct() {
             </button>
             <input
                 type="text"
-                placeholder="'인기 캡슐' 을 검색해 보세요."
-                className="flex-1 bg-transparent border-none outline-none opacity-50 placeholder-neutral-700 w-full"
+                placeholder="'라떼'를 검색해 보세요. (빈값: 전체상품 조회)"
+                className="flex-1 bg-transparent border-none outline-none text-gray-900 placeholder-gray-500 w-full"
                 name="searchQuery"
             />
         </form>
