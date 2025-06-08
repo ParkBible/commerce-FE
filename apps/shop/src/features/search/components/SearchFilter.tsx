@@ -8,6 +8,18 @@ interface SearchFilterProps {
 export default function SearchFilter({ resultCount }: SearchFilterProps) {
     const [isIntensityOpen, setIsIntensityOpen] = useState(true);
     const [isCupSizeOpen, setIsCupSizeOpen] = useState(true);
+    const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
+    const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
+
+    const handleIntensityClick = (intensity: string) => {
+        // 같은 버튼을 클릭하면 선택 해제, 다른 버튼을 클릭하면 해당 버튼 선택
+        setSelectedIntensity(prev => (prev === intensity ? null : intensity));
+    };
+
+    const handleCupSizeClick = (cupSize: string) => {
+        // 같은 버튼을 클릭하면 선택 해제, 다른 버튼을 클릭하면 해당 버튼 선택
+        setSelectedCupSize(prev => (prev === cupSize ? null : cupSize));
+    };
     return (
         <div className="w-full lg:w-80 lg:flex-shrink-0">
             <h3 className="text-lg font-bold mb-8">
@@ -27,13 +39,37 @@ export default function SearchFilter({ resultCount }: SearchFilterProps) {
                 </button>
                 {isIntensityOpen && (
                     <div className="flex flex-wrap gap-2">
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
+                        <button
+                            type="button"
+                            onClick={() => handleIntensityClick("라이트 0-5")}
+                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
+                                selectedIntensity === "라이트 0-5"
+                                    ? "bg-white text-black border border-black font-bold"
+                                    : "text-[#2e2f33]/88 border border-gray-200/30"
+                            }`}
+                        >
                             라이트 0-5
                         </button>
-                        <button type="button" className="py-2.5 px-4 bg-white text-black border border-black rounded-md text-base font-bold">
+                        <button
+                            type="button"
+                            onClick={() => handleIntensityClick("마일드 6-8")}
+                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
+                                selectedIntensity === "마일드 6-8"
+                                    ? "bg-white text-black border border-black font-bold"
+                                    : "text-[#2e2f33]/88 border border-gray-200/30"
+                            }`}
+                        >
                             마일드 6-8
                         </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
+                        <button
+                            type="button"
+                            onClick={() => handleIntensityClick("인텐스 9-11")}
+                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
+                                selectedIntensity === "인텐스 9-11"
+                                    ? "bg-white text-black border border-black font-bold"
+                                    : "text-[#2e2f33]/88 border border-gray-200/30"
+                            }`}
+                        >
                             인텐스 9-11
                         </button>
                     </div>
@@ -52,24 +88,20 @@ export default function SearchFilter({ resultCount }: SearchFilterProps) {
                 </button>
                 {isCupSizeOpen && (
                     <div className="flex flex-wrap gap-2">
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            80ml
-                        </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            버츄오 아이스 레시피
-                        </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            230ml
-                        </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            40ml
-                        </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            150ml
-                        </button>
-                        <button type="button" className="py-2.5 px-4 text-[#2e2f33]/88 border border-gray-200/30 rounded-md text-sm">
-                            25ml
-                        </button>
+                        {["80ml", "버츄오 아이스 레시피", "230ml", "40ml", "150ml", "25ml"].map(cupSize => (
+                            <button
+                                key={cupSize}
+                                type="button"
+                                onClick={() => handleCupSizeClick(cupSize)}
+                                className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
+                                    selectedCupSize === cupSize
+                                        ? "bg-white text-black border border-black font-bold"
+                                        : "text-[#2e2f33]/88 border border-gray-200/30"
+                                }`}
+                            >
+                                {cupSize}
+                            </button>
+                        ))}
                     </div>
                 )}
             </div>
