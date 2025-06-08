@@ -88,7 +88,7 @@ export default function SearchFilter({ resultCount }: SearchFilterProps) {
                 </button>
                 {isCupSizeOpen && (
                     <div className="flex flex-wrap gap-2">
-                        {["80ml", "버츄오 아이스 레시피", "230ml", "40ml", "150ml", "25ml"].map(cupSize => (
+                        {["30ml", "110ml", "250ml", "350ml", "470ml"].map(cupSize => (
                             <button
                                 key={cupSize}
                                 type="button"

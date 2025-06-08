@@ -1,19 +1,22 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+// import { db } from "@/lib/db"; // DB 제거
 import type { SearchParams } from "@/types/api";
+import { MOCK_PRODUCTS, INTENSITY_MAP, CUP_SIZE_MAP } from "./mock/products";
 
 interface ProductRow {
     id: number;
     name: string;
     price: number;
-    quantity: number; // inventory 테이블에서 가져올 실제 재고
+    quantity: number;
     thumbnail: string;
     detail_image: string;
     status: "ON_SALE" | "STOPPED" | "HIDDEN";
     is_deleted: boolean;
     created_at: string;
     updated_at: string;
+    intensity: string;
+    cupSize: string;
 }
 
 export async function GET(request: NextRequest) {
@@ -31,133 +34,84 @@ export async function GET(request: NextRequest) {
             sort: searchParams.get("sort") || "created_at,desc",
         };
 
-        // SQL 쿼리 구성 - 단순화: 상품과 재고만 조회
-        let baseQuery = `
-            SELECT p.*, inv.quantity
-            FROM products p
-            LEFT JOIN inventory inv ON inv.product_id = p.id
-            WHERE p.is_deleted = false
-        `;
+        // 목데이터 필터링
+        const filteredProducts = MOCK_PRODUCTS.filter(product => {
+            // 삭제되지 않고 판매 중인 상품만
+            if (product.is_deleted || product.status !== params.status) {
+                return false;
+            }
 
-        const queryParams: unknown[] = [];
-        let paramIndex = 1;
+            // 이름 검색
+            if (params.name && !product.name.toLowerCase().includes(params.name.toLowerCase())) {
+                return false;
+            }
 
-        // 필터 조건 추가
-        if (params.name) {
-            baseQuery += ` AND p.name ILIKE $${paramIndex}`;
-            queryParams.push(`%${params.name}%`);
-            paramIndex++;
-        }
+            // 강도 필터링 (import한 매핑 사용)
+            if (params.intensityId) {
+                const allowedIntensities = INTENSITY_MAP[params.intensityId];
+                if (allowedIntensities && !allowedIntensities.includes(product.intensity)) {
+                    return false;
+                }
+            }
 
-        if (params.status) {
-            baseQuery += ` AND p.status = $${paramIndex}`;
-            queryParams.push(params.status);
-            paramIndex++;
-        }
+            // 컵사이즈 필터링 (import한 매핑 사용)
+            if (params.cupSizeId) {
+                const allowedCupSizes = CUP_SIZE_MAP[params.cupSizeId];
+                if (allowedCupSizes && !allowedCupSizes.includes(product.cupSize)) {
+                    return false;
+                }
+            }
 
-        // 카테고리 필터링
-        if (params.intensityId) {
-            baseQuery += ` AND EXISTS (
-                SELECT 1 FROM product_categories pc 
-                WHERE pc.product_id = p.id AND pc.category_id = $${paramIndex}
-            )`;
-            queryParams.push(params.intensityId);
-            paramIndex++;
-        }
-
-        if (params.cupSizeId) {
-            baseQuery += ` AND EXISTS (
-                SELECT 1 FROM product_categories pc 
-                WHERE pc.product_id = p.id AND pc.category_id = $${paramIndex}
-            )`;
-            queryParams.push(params.cupSizeId);
-            paramIndex++;
-        }
+            return true;
+        });
 
         // 정렬 처리
         const sortParts = params.sort?.split(",") || ["created_at", "desc"];
         const [sortField, sortDirection] = sortParts;
-        const allowedSortFields = ["name", "price", "created_at"];
-        const validSortField = allowedSortFields.includes(sortField) ? sortField : "created_at";
-        const validSortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
-        baseQuery += ` ORDER BY p.${validSortField} ${validSortDirection}`;
+        filteredProducts.sort((a, b) => {
+            let comparison = 0;
+
+            switch (sortField) {
+                case "name":
+                    comparison = a.name.localeCompare(b.name);
+                    break;
+                case "price":
+                    comparison = a.price - b.price;
+                    break;
+                default:
+                    comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+                    break;
+            }
+
+            return sortDirection === "asc" ? comparison : -comparison;
+        });
 
         // 페이지네이션
         const page = params.page || 0;
         const size = params.size || 20;
-        const offset = page * size;
-        baseQuery += ` LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`;
-        queryParams.push(size, offset);
-
-        // 전체 개수 조회 - 단순화
-        let countQuery = `
-            SELECT COUNT(p.id)
-            FROM products p
-            WHERE p.is_deleted = false
-        `;
-
-        const countParams: unknown[] = [];
-        let countParamIndex = 1;
-
-        // count 쿼리에도 동일한 필터 조건 추가
-        if (params.name) {
-            countQuery += ` AND p.name ILIKE $${countParamIndex}`;
-            countParams.push(`%${params.name}%`);
-            countParamIndex++;
-        }
-
-        if (params.status) {
-            countQuery += ` AND p.status = $${countParamIndex}`;
-            countParams.push(params.status);
-            countParamIndex++;
-        }
-
-        if (params.intensityId) {
-            countQuery += ` AND EXISTS (
-                SELECT 1 FROM product_categories pc 
-                WHERE pc.product_id = p.id AND pc.category_id = $${countParamIndex}
-            )`;
-            countParams.push(params.intensityId);
-            countParamIndex++;
-        }
-
-        if (params.cupSizeId) {
-            countQuery += ` AND EXISTS (
-                SELECT 1 FROM product_categories pc 
-                WHERE pc.product_id = p.id AND pc.category_id = $${countParamIndex}
-            )`;
-            countParams.push(params.cupSizeId);
-            countParamIndex++;
-        }
-
-        // 쿼리 실행
-        const [productsResult, countResult] = await Promise.all([
-            db.query(baseQuery, queryParams), 
-            db.query(countQuery, countParams)
-        ]);
+        const totalElements = filteredProducts.length;
+        const totalPages = Math.ceil(totalElements / size);
+        const startIndex = page * size;
+        const endIndex = startIndex + size;
+        const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
         // 백엔드 Example Value 형식에 맞춰 응답 생성
-        const products = productsResult.rows.map((row: ProductRow) => {
+        const products = paginatedProducts.map((row: ProductRow) => {
             const quantity = row.quantity ?? 0;
-            
-            const product = {
+
+            return {
                 id: row.id,
                 name: row.name,
                 price: row.price,
                 quantity: quantity,
                 thumbnail: row.thumbnail,
-                detailImage: row.detail_image,  // 🔄 detailImage로 변경 (백엔드 형식)
-                intensity: "Medium",  // 기본값 (추후 카테고리 API 연동)
-                cupSize: "Large",     // 기본값 (추후 카테고리 API 연동)
-                isSoldOut: quantity === 0,  // 🔄 isSoldOut 추가 (백엔드 형식)
+                detailImage: row.detail_image,
+                intensity: row.intensity,
+                cupSize: row.cupSize,
+                isSoldOut: quantity === 0,
             };
-            
-            return product;
         });
-
-        const totalElements = Number.parseInt(countResult.rows[0].count);
-        const totalPages = Math.ceil(totalElements / size);
 
         const response = {
             content: products,
