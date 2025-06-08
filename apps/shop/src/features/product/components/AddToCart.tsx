@@ -18,7 +18,6 @@ type AddToCartProps = {
 export default function AddToCart({ productId, title, stockQuantity, withPopup = false, quantity }: AddToCartProps) {
     const { toast, ToastUI } = useToast();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const fetch = fetchClient();
     const inStock = stockQuantity > 0;
 
     const onButtonClick = () => {
@@ -55,6 +54,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
     };
 
     const addToCart = (quantity: number) => {
+        const fetch = fetchClient();
         fetch<AddCartItemResponse>("/cart/items", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
