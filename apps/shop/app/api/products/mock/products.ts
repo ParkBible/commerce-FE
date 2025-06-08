@@ -40,8 +40,8 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         quantity: 80,
         thumbnail: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=300&h=300&fit=crop&crop=center",
         detailImage: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&h=400&fit=crop&crop=center",
-        intensity: "Light",
-        cupSize: "Large",
+        intensity: "Medium",
+        cupSize: "Medium",
         isSoldOut: false,
     },
     {
@@ -84,8 +84,8 @@ export const MOCK_PRODUCTS: MockProduct[] = [
         quantity: 70,
         thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=300&fit=crop&crop=center",
         detailImage: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=400&fit=crop&crop=center",
-        intensity: "Light",
-        cupSize: "Large",
+        intensity: "Medium",
+        cupSize: "Small",
         isSoldOut: false,
     },
     {

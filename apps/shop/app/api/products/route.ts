@@ -1,35 +1,17 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-// import { db } from "@/lib/db"; // DB 제거
-import type { SearchParams } from "@/types/api";
 import { MOCK_PRODUCTS, INTENSITY_MAP, CUP_SIZE_MAP } from "./mock/products";
-
-interface ProductRow {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    thumbnail: string;
-    detailImage: string;
-    intensity: string;
-    cupSize: string;
-    isSoldOut: boolean;
-}
 
 export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
 
-        // 쿼리 파라미터 파싱
-        const params: SearchParams = {
-            name: searchParams.get("name") || undefined,
-            intensityId: searchParams.get("intensityId") ? Number.parseInt(searchParams.get("intensityId") || "0") : undefined,
-            cupSizeId: searchParams.get("cupSizeId") ? Number.parseInt(searchParams.get("cupSizeId") || "0") : undefined,
-            status: searchParams.get("status") || "ON_SALE",
-            page: Number.parseInt(searchParams.get("page") || "0"),
-            size: Number.parseInt(searchParams.get("size") || "20"),
-            sort: searchParams.get("sort") || "id,desc",
-        };
+        // 쿼리 파라미터 파싱 (스웨거 API 기준)
+        const name = searchParams.get("name") || undefined;
+        const intensityId = searchParams.get("intensityId") ? Number.parseInt(searchParams.get("intensityId") || "0") : undefined;
+        const cupSizeId = searchParams.get("cupSizeId") ? Number.parseInt(searchParams.get("cupSizeId") || "0") : undefined;
+        const page = Number.parseInt(searchParams.get("page") || "0");
+        const size = Number.parseInt(searchParams.get("size") || "20");
 
         // 문자열 필터 파라미터 추가
         const intensity = searchParams.get("intensity") || undefined;
@@ -38,13 +20,13 @@ export async function GET(request: NextRequest) {
         // 목데이터 필터링
         const filteredProducts = MOCK_PRODUCTS.filter(product => {
             // 이름 검색
-            if (params.name && !product.name.toLowerCase().includes(params.name.toLowerCase())) {
+            if (name && !product.name.toLowerCase().includes(name.toLowerCase())) {
                 return false;
             }
 
             // 강도 필터링
-            if (params.intensityId) {
-                const allowedIntensities = INTENSITY_MAP[params.intensityId];
+            if (intensityId) {
+                const allowedIntensities = INTENSITY_MAP[intensityId];
                 if (allowedIntensities && !allowedIntensities.includes(product.intensity)) {
                     return false;
                 }
@@ -53,8 +35,8 @@ export async function GET(request: NextRequest) {
             }
 
             // 컵사이즈 필터링
-            if (params.cupSizeId) {
-                const allowedCupSizes = CUP_SIZE_MAP[params.cupSizeId];
+            if (cupSizeId) {
+                const allowedCupSizes = CUP_SIZE_MAP[cupSizeId];
                 if (allowedCupSizes && !allowedCupSizes.includes(product.cupSize)) {
                     return false;
                 }
@@ -65,31 +47,10 @@ export async function GET(request: NextRequest) {
             return true;
         });
 
-        // 정렬 처리
-        const sortParts = params.sort?.split(",") || ["id", "desc"];
-        const [sortField, sortDirection] = sortParts;
-
-        filteredProducts.sort((a, b) => {
-            let comparison = 0;
-
-            switch (sortField) {
-                case "name":
-                    comparison = a.name.localeCompare(b.name);
-                    break;
-                case "price":
-                    comparison = a.price - b.price;
-                    break;
-                default:
-                    comparison = a.id - b.id;
-                    break;
-            }
-
-            return sortDirection === "asc" ? comparison : -comparison;
-        });
+        // 기본 정렬 (ID 기준 내림차순)
+        filteredProducts.sort((a, b) => b.id - a.id);
 
         // 페이지네이션
-        const page = params.page || 0;
-        const size = params.size || 20;
         const totalElements = filteredProducts.length;
         const totalPages = Math.ceil(totalElements / size);
         const startIndex = page * size;
