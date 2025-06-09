@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import SearchFilter from "./SearchFilter";
 import ProductList from "./ProductList";
 import { searchProducts } from "@/src/features/search/api/searchProductApi";
-import type { SearchResultResponse } from "@/src/features/search/types";
+import type { SearchResultResponse, Product } from "@/src/features/search/types";
 
 // 컵사이즈 매핑 (UI 텍스트 -> 실제 DB Categories ID)
 const getCupSizeId = (cupSize: string): string => {
@@ -17,12 +17,24 @@ const getCupSizeId = (cupSize: string): string => {
     return cupSizeMapping[cupSize] || "5";
 };
 
-export default function SearchPage() {
-    const searchParams = useSearchParams();
-    const query = searchParams.get("q") || "";
+interface SearchPageProps {
+    initialProducts?: Product[];
+    initialTotalElements?: number;
+    initialSearchTerm?: string;
+}
 
-    const [searchResults, setSearchResults] = useState<SearchResultResponse | null>(null);
-    const [loading, setLoading] = useState(true);
+export default function SearchPage({ initialProducts = [], initialTotalElements = 0, initialSearchTerm = "" }: SearchPageProps) {
+    const searchParams = useSearchParams();
+    const query = searchParams.get("q") || initialSearchTerm;
+
+    const [searchResults, setSearchResults] = useState<SearchResultResponse | null>({
+        content: initialProducts,
+        totalElements: initialTotalElements,
+        totalPages: Math.ceil(initialTotalElements / 20),
+        page: 0,
+        size: 20,
+    });
+    const [loading, setLoading] = useState(false);
     const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
     const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
 
