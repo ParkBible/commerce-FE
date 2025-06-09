@@ -61,12 +61,15 @@ const emptyReview: ReviewResponse = {
 /**
  * 제품 리뷰를 가져오는 API 함수
  */
-export async function getProductReviews(productId: string, page: number): Promise<ReviewResponse> {
+export async function getProductReviews(productId: string, page: number, sort?: string): Promise<ReviewResponse> {
     // 제품 ID 기반 목 데이터 생성 함수
     const mockFn = () => getMockReviews(page, 20);
 
+    // 정렬 파라미터 추가
+    const sortParam = sort ? `&sort=${sort}` : "";
+
     return fetchData({
-        endpoint: `/products/${productId}/reviews?page=${page}`, // 제품 리뷰 조회 API 주소
+        endpoint: `/products/${productId}/reviews?page=${page}${sortParam}`, // 제품 리뷰 조회 API 주소
         defaultValue: emptyReview, // 실패 시 반환할 기본값
         mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
     });
