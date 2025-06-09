@@ -6,7 +6,7 @@ import ChatButton from "@/src/features/chat/components/ChatButton";
 
 function Header() {
     return (
-        <div className="w-full bg-white">
+        <div className="w-full bg-white border-b border-gray-200">
             <header className="flex flex-wrap gap-8 items-center px-6 py-4 mx-auto max-w-7xl">
                 <div className="self-stretch my-auto text-2xl font-bold tracking-tight leading-snug text-center text-black whitespace-nowrap">
                     <Link href="/main" className="cursor-pointer">
@@ -34,8 +34,8 @@ function Header() {
                     </Link>
                 </nav>
             </header>
-            <Tags />
-            <SubNav />
+            {/* <Tags /> */}
+            {/* <SubNav /> */}
         </div>
     );
 }
