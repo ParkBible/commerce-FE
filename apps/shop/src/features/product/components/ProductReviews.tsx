@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReviewType } from "@/src/features/product/types";
 import StarIcon from "@/src/features/product/components/StarIcon";
+import ProductReviewCard from "@/src/features/productReviews/components/ProductReviewCard";
 
 interface RatingDistribution {
     oneStarCount: number;
@@ -112,31 +113,7 @@ export function ProductReviews({ productId, reviews, reviewStats }: ProductRevie
                 {/* 리뷰 목록 */}
                 <div className="space-y-4">
                     {reviews.slice(0, DEFAULT_REVIEWS_PER_PAGE).map(review => (
-                        <div key={`review-${review.id}`} className="p-6 bg-[#f7f7f8] rounded-lg">
-                            <div className="flex gap-4 mb-4">
-                                <div className="w-14 h-14 bg-gray-300 rounded-full overflow-hidden" />
-                                <div className="flex-1">
-                                    <div className="flex justify-between">
-                                        <h3 className="font-bold">{review.user.nickname}</h3>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="flex scale-75 origin-left">{renderStars(review.rating, review.id)}</div>
-                                        <span className="text-xs text-[#37383c] opacity-30">{review.date}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p className="text-sm text-[#2e2f33] opacity-90">{review.content}</p>
-
-                            {review.images && review.images.length > 0 && (
-                                <div className="flex gap-2 mt-4">
-                                    {review.images.map((image, index) => (
-                                        <div key={`review-img-${review.id}-${index}`} className="w-20 h-20 bg-gray-200 rounded-md overflow-hidden">
-                                            <img src={image} alt={`리뷰 이미지 ${index + 1}`} className="w-full h-full object-cover" />
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                        <ProductReviewCard key={review.reviewId} review={review} />
                     ))}
                 </div>
 

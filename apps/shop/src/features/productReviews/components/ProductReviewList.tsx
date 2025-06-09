@@ -1,10 +1,10 @@
 "use client";
 
 import ProductReviewCard from "./ProductReviewCard";
-import type { Review } from "@/src/shared/entities/review/types";
+import type { ReviewType } from "@/src/shared/entities/review/types";
 
 interface ProductReviewListProps {
-    reviews: Review[];
+    reviews: ReviewType[];
 }
 
 export default function ProductReviewList({ reviews }: ProductReviewListProps) {
@@ -13,7 +13,7 @@ export default function ProductReviewList({ reviews }: ProductReviewListProps) {
             {/* 리뷰 목록 */}
             <div className="space-y-6">
                 {reviews.map(review => (
-                    <ProductReviewCard key={review.id} review={review} />
+                    <ProductReviewCard key={review.reviewId} review={review} />
                 ))}
             </div>
         </div>

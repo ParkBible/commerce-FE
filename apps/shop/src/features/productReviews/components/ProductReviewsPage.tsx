@@ -1,10 +1,10 @@
 import ProductReviewList from "@/src/features/productReviews/components/ProductReviewList";
 import Pagination from "@/src/shared/components/shared/Pagination";
-import type { Review } from "@/src/shared/entities/review/types";
+import type { ReviewType } from "@/src/shared/entities/review/types";
 
 interface ProductReviewsPageProps {
     productTitle: string;
-    reviews: Review[];
+    reviews: ReviewType[];
     totalElements: number;
     totalPages: number;
     currentPage: number;

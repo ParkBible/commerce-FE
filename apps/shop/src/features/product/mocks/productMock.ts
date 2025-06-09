@@ -70,44 +70,37 @@ export function getMockReviews(page = 0, size = 20): ReviewResponse {
     return {
         content: [
             {
-                id: 1,
-                user: {
-                    userId: "user123",
-                    nickname: "커피러버",
-                },
+                reviewId: 1,
+                nickname: "커피러버",
                 rating: 4,
-                date: "2023-01-24",
+                createdAt: "2023-01-24",
                 content: "향이 정말 좋고 산미가 적절해요. 아침에 마시기 좋은 커피입니다.",
+                adminReply: {
+                    replyId: 1,
+                    content: "감사합니다! 앞으로도 좋은 커피로 보답하겠습니다.",
+                    createdAt: "2025-05-25",
+                },
             },
             {
-                id: 2,
-                user: {
-                    userId: "user456",
-                    nickname: "카페인중독자",
-                },
+                reviewId: 2,
+                nickname: "여름커피",
                 rating: 5,
-                date: "2023-02-15",
+                createdAt: "2023-02-15",
                 content: "시즌 한정이라 아쉽지만 매번 구매하는 제품입니다. 열대과일향이 특히 좋아요!",
             },
             {
-                id: 3,
-                user: {
-                    userId: "user789",
-                    nickname: "홈카페장인",
-                },
+                reviewId: 3,
+                nickname: "하와이팬",
                 rating: 4,
-                date: "2023-03-02",
+                createdAt: "2023-03-02",
                 content: "하와이 코나는 처음 마셔봤는데 기대 이상이네요. 부드러운 맛이 일품입니다.",
                 images: ["https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80"],
             },
             {
-                id: 4,
-                user: {
-                    userId: "user101",
-                    nickname: "커피매니아",
-                },
+                reviewId: 4,
+                nickname: "커피매니아",
                 rating: 3,
-                date: "2023-03-15",
+                createdAt: "2023-03-15",
                 content: "품질은 좋지만 가격이 조금 비싼 편입니다. 특별한 날에 마시기 좋아요.",
             },
         ],
