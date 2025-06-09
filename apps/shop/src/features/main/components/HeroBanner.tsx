@@ -8,14 +8,10 @@ function HeroBanner() {
                 aria-hidden="true"
             />
             <div className="relative flex flex-col justify-center w-full min-h-64">
-                <div className="mx-auto w-full max-w-screen-xl px-6 py-20">
-                    <div className="max-w-6xl mx-auto text-center">
-                        <h1 className="text-6xl font-bold tracking-tight leading-[4.5rem] text-white max-md:text-4xl">
-                            801 버츄오 커피
-                        </h1>
-                        <p className="mt-6 text-lg font-semibold leading-6 text-white">
-                            혁신적인 바코드 브루잉으로 열리는 차원이 다른 커피
-                        </p>
+                <div className="w-full px-6 py-20">
+                    <div className="mx-auto text-center">
+                        <h1 className="text-6xl font-bold tracking-tight leading-[4.5rem] text-white max-md:text-4xl">801 버츄오 커피</h1>
+                        <p className="mt-6 text-lg font-semibold leading-6 text-white">혁신적인 바코드 브루잉으로 열리는 차원이 다른 커피</p>
                     </div>
                 </div>
             </div>
