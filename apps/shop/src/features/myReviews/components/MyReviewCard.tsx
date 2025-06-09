@@ -6,7 +6,7 @@ import type { UserReview } from "@/src/features/myReviews/types";
 
 interface MyReviewCardProps {
     review: UserReview;
-    onEdit?: (reviewId: number) => void;
+    onEdit?: (review: UserReview) => void;
     onDelete?: (reviewId: number) => void;
 }
 
@@ -53,7 +53,7 @@ export default function MyReviewCard({ review, onEdit, onDelete }: MyReviewCardP
                 <div className="flex gap-2">
                     <button
                         type="button"
-                        onClick={() => review.reviewId && onEdit?.(review.reviewId)}
+                        onClick={() => review.reviewId && onEdit?.(review)}
                         className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
                         title="리뷰 수정"
                     >
@@ -77,9 +77,9 @@ export default function MyReviewCard({ review, onEdit, onDelete }: MyReviewCardP
 
             {/* 관리자 답변 */}
             {review.adminReply && (
-                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500">
+                <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#257A57]">
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm font-medium text-blue-600">관리자 답변</span>
+                        <span className="text-sm font-medium text-[#257A57]">관리자 답변</span>
                         <span className="text-xs text-gray-500">{formatDate(review.adminReply.createdAt)}</span>
                     </div>
                     <p className="text-sm text-gray-700">{review.adminReply.content}</p>

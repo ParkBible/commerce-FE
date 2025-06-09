@@ -3,18 +3,20 @@ import { getProduct, getProductReviews, getProductReviewStats, getRecommendedPro
 
 interface ProductDetailPageProps {
     params: Promise<{ id: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+export default async function ProductDetailPage({ params, searchParams }: ProductDetailPageProps) {
     const resolvedParams = await params;
+    const resolvedSearchParams = await searchParams;
     const id = resolvedParams.id;
+    const sort = (resolvedSearchParams.sort as string) || "";
 
-    const [product, reviews, reviewStats, recommendedProducts] = await Promise.all([
+    const [product, review, reviewStats] = await Promise.all([
         getProduct(id),
-        getProductReviews(id),
+        getProductReviews(id, 0, sort), // 정렬 파라미터 추가
         getProductReviewStats(id),
-        getRecommendedProducts(id),
     ]);
 
-    return <ProductPage product={product} reviews={reviews} reviewStats={reviewStats} recommendedProducts={recommendedProducts} />;
+    return <ProductPage product={product} reviews={review.content} reviewStats={reviewStats} />;
 }
