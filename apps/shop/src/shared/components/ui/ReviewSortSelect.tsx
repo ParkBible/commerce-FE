@@ -29,7 +29,7 @@ export default function ReviewSortSelect({ totalCount }: ReviewSortSelectProps) 
                 <select
                     value={currentSort}
                     onChange={e => handleSortChange(e.target.value)}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#257a57] focus:border-transparent"
                 >
                     <option value="">최신순</option>
                     <option value="-rating">별점 높은순</option>

@@ -47,7 +47,9 @@ export default function MyReviewsPage() {
             </div>
 
             {/* 정렬 선택 */}
-            <ReviewSortSelect totalCount={totalElements} />
+            <div className="mb-6">
+                <ReviewSortSelect totalCount={totalElements} />
+            </div>
 
             {/* 리뷰 목록 */}
             <MyReviewList reviews={reviews} hasMore={currentPage < totalPages - 1} />
