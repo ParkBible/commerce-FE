@@ -7,7 +7,6 @@ export function getMockUserReviews(page = 0, size = 10): UserReviewResponse {
     return {
         content: [
             {
-                id: "1",
                 reviewId: 1,
                 productId: 1,
                 productName: "스페셜 리저브 하와이 코나",
@@ -23,7 +22,6 @@ export function getMockUserReviews(page = 0, size = 10): UserReviewResponse {
                 },
             },
             {
-                id: "2",
                 reviewId: 2,
                 productId: 2,
                 productName: "에어로치노4",
@@ -31,10 +29,8 @@ export function getMockUserReviews(page = 0, size = 10): UserReviewResponse {
                 rating: 4,
                 content: "가격은 비싸지만 품질이 정말 좋네요. 밀크 폼이 부드럽고 크리미해서 만족합니다.",
                 createdAt: "2024-03-10T15:20:00",
-                adminReply: null,
             },
             {
-                id: "3",
                 reviewId: 3,
                 productId: 3,
                 productName: "버츄오 머그 컵 세트 스몰",
@@ -50,7 +46,6 @@ export function getMockUserReviews(page = 0, size = 10): UserReviewResponse {
                 },
             },
             {
-                id: "4",
                 reviewId: 4,
                 productId: 4,
                 productName: "바리스타 카푸치노 컵 세트",
@@ -58,10 +53,8 @@ export function getMockUserReviews(page = 0, size = 10): UserReviewResponse {
                 rating: 4,
                 content: "품질은 좋지만 생각보다 작네요. 그래도 커피샵 느낌이 나서 만족합니다.",
                 createdAt: "2024-02-28T14:30:00",
-                adminReply: null,
             },
             {
-                id: "5",
                 reviewId: 5,
                 productId: 5,
                 productName: "라이브스톡 브라질 원두",

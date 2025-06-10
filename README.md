@@ -4,9 +4,11 @@ Inner Circle 프로젝트 - 커머스 팀 (**801 베이스**)
 <br><br>
 
 ❗ `/apps` 디렉토리 내에 쇼핑몰과 백오피스 앱이 나누어진 모노레포 구조입니다.
-- **쇼핑몰 앱** (`/apps/shop`) - [Next.js](https://nextjs.org/) : SSR/SEO 최적화와 초기 렌더링 성능을 위해 사용
+- **쇼핑몰 앱** (`/apps/shop`) - [Next.js](https://nextjs.org/) : SSR/SEO 최적화와 초기 렌더링 성능을 위해 사용<br>
+https://commerce-fe-shop-delta.vercel.app/
 
-- **백오피스 앱** (`/apps/admin`) - [React](https://reactjs.org/) : 백오피스 특성상 SSR이 불필요하다고 판단하여 구조가 보다 자유로운 React 사용
+- **백오피스 앱** (`/apps/admin`) - [React](https://reactjs.org/) : 백오피스 특성상 SSR이 불필요하다고 판단하여 구조가 보다 자유로운 React 사용<br>
+https://commerce-fe-admin.vercel.app/
 
 - **공통 코드** - `/packages` 디렉토리에 위치. <br>
 현재 `/packages/utils`, `/packages/stores` 디렉토리가 패키지로 추가되어 있으며, 패키지를 추가할 시 각 앱 안에 있는 `package.json`의 dependencies에 패키지 이름을 추가한 뒤 `pnpm install`을 실행합니다.

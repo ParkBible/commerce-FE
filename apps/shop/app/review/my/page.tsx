@@ -8,7 +8,7 @@ export default function ReviewManagePage() {
         <div className="min-h-screen bg-white">
             {/* 메인 콘텐츠 */}
             <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="w-[70rem] mx-auto">
+                <div className="w-full mx-auto">
                     {/* 페이지 제목 */}
                     <div className="mb-12">
                         <h1 className="text-2xl font-bold text-black">리뷰 관리</h1>

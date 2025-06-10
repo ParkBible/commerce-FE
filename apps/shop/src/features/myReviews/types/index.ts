@@ -6,6 +6,7 @@ export type { AdminReply, UserReview };
 export interface UserReviewListRequest {
     monthRange: number | null; // 최근 몇 개월의 리뷰를 조회할지
     page: number; // 페이지 번호
+    sort?: string; // 정렬 옵션 (예: "-rating", "rating")
 }
 
 // 사용자 리뷰 목록 응답 타입
