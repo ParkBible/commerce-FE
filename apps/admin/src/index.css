@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

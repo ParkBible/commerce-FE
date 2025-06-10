@@ -1,14 +1,14 @@
-interface AdminReply {
+export interface AdminReply {
     content: string;
     createdAt: string;
 }
 
-interface Review {
+export interface Review {
     reviewId: number;
     rating: number;
     content: string;
     createdAt: string;
-    adminReply: AdminReply;
+    adminReply?: AdminReply | null;
     productId: number;
     productName: string;
     productThumbnail: string;
