@@ -26,7 +26,15 @@ export default function ReviewCreatePage() {
 
     return (
         <div>
-            <CreateReviewModal product={mockProduct} isOpen={true} onClickClose={handleClose} />
+            <CreateReviewModal
+                product={{
+                    productId: mockProduct.id,
+                    title: mockProduct.title,
+                    imageUrl: mockProduct.images[0],
+                }}
+                isOpen={true}
+                onClickClose={handleClose}
+            />
         </div>
     );
 }
