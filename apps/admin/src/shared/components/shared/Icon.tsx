@@ -150,7 +150,7 @@ export const EditIcon = ({ title = "편집 아이콘", ...props }: Omit<IconProp
 };
 
 // 삭제 아이콘
-export const TrashIcon = ({ title = "삭제 아이콘", ...props }: Omit<IconProps, "direction" | "size" | "strokeWidth">) => {
+export const TrashIcon = ({ title = "삭제 아이콘" }: Omit<IconProps, "direction" | "size" | "strokeWidth">) => {
     const uniqueId = useId();
     const titleId = `trash-icon-${uniqueId}`;
 
