@@ -1,7 +1,7 @@
 export interface CartItem {
     cartItemId: number;
     productId: number;
-    name: string;
+    productName: string;
     price: number;
     quantity: number;
     stockQuantity: number;
@@ -10,7 +10,7 @@ export interface CartItem {
 }
 
 export interface GetCartResponse {
-    items: CartItem[];
+    cartItems: CartItem[];
     totalPrice: number;
     deliveryPrice: number;
 }
