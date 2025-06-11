@@ -13,7 +13,7 @@ export default function OrderCheckoutPage() {
         {
             cartItemId: 1,
             productId: 1,
-            name: "상품 1",
+            productName: "상품 1",
             price: 10000,
             quantity: 2,
             stockQuantity: 5,
@@ -23,7 +23,7 @@ export default function OrderCheckoutPage() {
         {
             cartItemId: 2,
             productId: 2,
-            name: "상품 2",
+            productName: "상품 2",
             price: 20000,
             quantity: 1,
             stockQuantity: 3,
@@ -112,7 +112,7 @@ export default function OrderCheckoutPage() {
                                     <OrderCheckoutList
                                         items={cartItems.map(item => ({
                                             id: item.cartItemId,
-                                            name: item.name,
+                                            name: item.productName,
                                             price: item.price,
                                             quantity: item.quantity,
                                             image: item.thumbnail,
