@@ -76,29 +76,29 @@ export function Pagination({ currentPage, totalItems, onPageChange }: Pagination
             </div>
             <nav className="flex space-x-1">
                 {/* 처음 페이지 */}
-                <Button onClick={() => handlePageClick(1)} disabled={currentPage === 1}>
+                <Button onClick={() => handlePageClick(1)} disabled={currentPage === 1} aria-label="First page">
                     ≪
                 </Button>
 
                 {/* 이전 페이지 */}
-                <Button onClick={handlePrevious} disabled={currentPage === 1}>
+                <Button onClick={handlePrevious} disabled={currentPage === 1} aria-label="Previous page">
                     &lt;
                 </Button>
 
                 {/* 페이지 번호들 */}
                 {visiblePages.map(page => (
-                    <Button key={page} onClick={() => handlePageClick(page)} disabled={page === currentPage}>
+                    <Button key={page} onClick={() => handlePageClick(page)} disabled={page === currentPage} aria-label={`Page ${page}`}>
                         {page}
                     </Button>
                 ))}
 
                 {/* 다음 페이지 */}
-                <Button onClick={handleNext} disabled={currentPage === totalPages}>
+                <Button onClick={handleNext} disabled={currentPage === totalPages} aria-label="Next page">
                     &gt;
                 </Button>
 
                 {/* 마지막 페이지 */}
-                <Button onClick={() => handlePageClick(totalPages)} disabled={currentPage === totalPages}>
+                <Button onClick={() => handlePageClick(totalPages)} disabled={currentPage === totalPages} aria-label="Last page">
                     ≫
                 </Button>
             </nav>
@@ -111,7 +111,7 @@ const Button = ({ children, onClick, disabled }: { children: React.ReactNode; on
         type="button"
         onClick={onClick}
         disabled={disabled}
-        className={` flex justify-center w-8 px-3 py-1 text-sm rounded-md border border-gray-300 ${
+        className={`flex justify-center w-8 px-3 py-1 text-sm rounded-md border border-gray-300 ${
             disabled ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-white text-gray-500 hover:bg-gray-50"
         }`}
     >
