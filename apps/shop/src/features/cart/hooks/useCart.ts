@@ -13,7 +13,7 @@ async function fetchCart(): Promise<GetCartResponse> {
     const fetch = fetchClient();
 
     try {
-        const res = await fetch<GetCartResponse>("/carts");
+        const res = await fetch<GetCartResponse>("/cart-items");
 
         if (!res.data) {
             throw new Error("카트 데이터를 불러올 수 없습니다");

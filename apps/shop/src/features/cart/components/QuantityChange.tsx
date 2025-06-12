@@ -40,7 +40,7 @@ export default function QuantityChange({ cartItemId, initQuantity, stockQuantity
             quantity: newQuantity,
         };
 
-        fetch<UpdateCartItemResponse>(`/cart/items/${cartItemId}`, {
+        fetch<UpdateCartItemResponse>(`/cart-items/${cartItemId}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),

@@ -36,12 +36,9 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
 
     const deleteCartItems = useMutation({
         mutationFn: async (cartItemIds: number[]) => {
-            const requestBody: { cartItemIds: number[] } = { cartItemIds };
-
-            await fetch("/carts/delete", {
-                method: "POST",
+            await fetch(`/cart-items/delete?cartItemIds=${cartItemIds.join(",")}`, {
+                method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestBody),
             });
         },
         onSuccess: () => {
