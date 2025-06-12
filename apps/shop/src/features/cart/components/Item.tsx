@@ -5,7 +5,7 @@ import QuantityChange from "./QuantityChange";
 import { formatNumber } from "@/src/shared/utils/formatUtils";
 
 interface ItemProps {
-    productId: number;
+    cartItemId: number;
     name: string;
     price: number;
     quantity: number;
@@ -16,7 +16,7 @@ interface ItemProps {
     onDelete: () => void;
 }
 
-export default function Item({ productId, name, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
+export default function Item({ cartItemId, name, price, quantity, stockQuantity, image, selected, onSelectChange, onDelete }: ItemProps) {
     const totalPrice = quantity * price;
 
     const getQuantityMessage = () => {
@@ -48,7 +48,7 @@ export default function Item({ productId, name, price, quantity, stockQuantity, 
                                 ({quantity} x &#8361;{formatNumber(price)})
                             </p>
                         </div>
-                        <QuantityChange productId={productId} initQuantity={quantity} stockQuantity={stockQuantity} />
+                        <QuantityChange cartItemId={cartItemId} initQuantity={quantity} stockQuantity={stockQuantity} />
                     </div>
                     <div>{stockQuantity < 1 && <p className="text-red-500 text-xs font-bold mt-2">{getQuantityMessage()}</p>}</div>
                 </div>

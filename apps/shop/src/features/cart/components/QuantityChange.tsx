@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import type { UpdateCartItemRequest, UpdateCartItemResponse } from "../types/cart";
 
 type QuantityChangeProps = {
-    productId: number;
+    cartItemId: number;
     initQuantity: number;
     stockQuantity: number;
 };
 
-export default function QuantityChange({ productId, initQuantity, stockQuantity }: QuantityChangeProps) {
+export default function QuantityChange({ cartItemId, initQuantity, stockQuantity }: QuantityChangeProps) {
     const [quantity, setQuantity] = useState<number>(initQuantity);
     const { toast, ToastUI } = useToast();
     const fetch = fetchClient();
@@ -37,7 +37,7 @@ export default function QuantityChange({ productId, initQuantity, stockQuantity 
 
     const changeQuantity = (newQuantity: number) => {
         const requestBody: UpdateCartItemRequest = {
-            productId,
+            cartItemId,
             quantity: newQuantity,
         };
 

@@ -29,7 +29,7 @@ export interface AddCartItemResponse {
 
 // 수량 수정 (PATCH /cart/items/{cartItemid})
 export interface UpdateCartItemRequest {
-    productId: number;
+    cartItemId: number;
     quantity: number;
 }
 

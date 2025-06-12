@@ -90,7 +90,7 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
             {cartItems.map(item => (
                 <Item
                     key={item.cartItemId}
-                    productId={item.productId}
+                    cartItemId={item.cartItemId}
                     name={item.productName}
                     price={item.price}
                     quantity={item.quantity}
