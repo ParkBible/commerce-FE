@@ -37,11 +37,10 @@ export default function QuantityChange({ cartItemId, initQuantity, stockQuantity
 
     const changeQuantity = (newQuantity: number) => {
         const requestBody: UpdateCartItemRequest = {
-            cartItemId,
             quantity: newQuantity,
         };
 
-        fetch<UpdateCartItemResponse>("/cart/items", {
+        fetch<UpdateCartItemResponse>(`/cart/items/${cartItemId}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),
