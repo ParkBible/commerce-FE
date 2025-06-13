@@ -21,8 +21,10 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
     const breadcrumbItems = [
         { label: "버츄오", href: "/category/virtuo" },
         { label: "New 시즌 한정 커피", href: "/category/seasonal" },
-        { label: product.title, isCurrent: true },
+        { label: product.name, isCurrent: true },
     ];
+
+    const productId = product?.id?.toString() || "";
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
@@ -31,15 +33,15 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
                     <Breadcrumbs items={breadcrumbItems} />
 
                     <section className="py-10 flex flex-wrap lg:flex-nowrap gap-12 mb-16 justify-center">
-                        <ProductImage images={product.images} title={product.title} />
+                        <ProductImage thumbnail={product.thumbnail} detailImage={product.detailImage} title={product.name} />
                         <ProductInfo product={product} />
                     </section>
                 </div>
 
                 <ProductDetails product={product} />
-                <ProductVideo />
+                {/* <ProductVideo /> */}
                 <ProductReviews
-                    productId={product.id.toString()}
+                    productId={productId}
                     reviews={reviews}
                     totalRating={reviewStats.totalRating}
                     ratingCounts={reviewStats.ratingCounts}

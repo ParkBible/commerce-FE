@@ -11,6 +11,30 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
+    // 백엔드에서 제공하지 않는 정보들을 생성
+    const aromaFeatures = ["풍부한 향", "깊은 맛", "부드러운 질감"];
+    const bodyLevel = 3; // 기본값
+    const bitterLevel = 2; // 기본값
+    const acidLevel = 2; // 기본값
+    const roastLevel = 3; // 기본값
+
+    // 안전하게 product 속성들 추출
+    const productName = product?.name || "제품명 없음";
+    const productQuantity = product?.quantity || 0;
+    const productPrice = product?.price || 0;
+    const intensityLabel = product?.intensity?.label || "알 수 없음";
+    const cupSizeLabel = product?.cupSize?.label || "사이즈 불명";
+    const statusLabel = product?.status?.label || "상태 불명";
+
+    // 제품 상세정보 생성
+    const detailText = `○ 제품명: ${productName}
+        ○ 내용량: ${productQuantity}개입
+        ○ 가격: ₩${productPrice.toLocaleString()}
+        ○ 강도: ${intensityLabel}
+        ○ 사이즈: ${cupSizeLabel}
+        ○ 상태: ${statusLabel}
+    `;
+
     const getRatingBar = (level: number, maxLevel = 5) => {
         return (
             <div className="flex items-center gap-4">
@@ -31,7 +55,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             <div className="max-w-6xl mx-auto">
                 <div className="bg-white rounded-xl p-12">
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-bold text-black">{product.title}</h2>
+                        <h2 className="text-2xl font-bold text-black">{productName}</h2>
                         <p className="text-sm text-[#37383c] opacity-60">*캡슐에는 그림에 표시된 원료가 들어있지 않습니다.</p>
                     </div>
 
@@ -44,7 +68,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                     <CupSizeCircleIcon size="md" />
                                 </div>
                                 <div>
-                                    <p className="text-sm">{product.coffeeSize}</p>
+                                    <p className="text-sm">{cupSizeLabel}</p>
                                     <p className="text-sm">더블 에스프레소</p>
                                 </div>
                             </div>
@@ -54,7 +78,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <div>
                             <h3 className="text-xl font-bold mb-4">주요 아로마 특징</h3>
                             <div className="flex gap-6">
-                                {product.aromaFeatures?.map((feature, index) => (
+                                {aromaFeatures.map((feature, index) => (
                                     <p key={`feature-${feature.substring(0, 10)}-${index}`} className="text-sm whitespace-pre-line">
                                         {feature}
                                     </p>
@@ -69,19 +93,19 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                             <div>
                                 <h4 className="text-sm font-bold mb-2">바디감</h4>
-                                {getRatingBar(product.bodyLevel || 0)}
+                                {getRatingBar(bodyLevel)}
                             </div>
                             <div>
                                 <h4 className="text-sm font-bold mb-2">쓴맛</h4>
-                                {getRatingBar(product.bitterLevel || 0)}
+                                {getRatingBar(bitterLevel)}
                             </div>
                             <div>
                                 <h4 className="text-sm font-bold mb-2">산미</h4>
-                                {getRatingBar(product.acidLevel || 0)}
+                                {getRatingBar(acidLevel)}
                             </div>
                             <div>
                                 <h4 className="text-sm font-bold mb-2">로스팅</h4>
-                                {getRatingBar(product.roastLevel || 0)}
+                                {getRatingBar(roastLevel)}
                             </div>
                         </div>
                     </div>
@@ -92,7 +116,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             <h3 className="text-xl font-bold mb-4">제품 상세정보</h3>
                             <div className="text-sm leading-relaxed">
                                 <div className="space-y-2">
-                                    <pre className="font-sans whitespace-pre-line">{product.productDetails?.detailText}</pre>
+                                    <pre className="font-sans whitespace-pre-line">{detailText}</pre>
                                 </div>
                             </div>
                         </div>

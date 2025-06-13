@@ -1,96 +1,100 @@
-import { fetchData } from "@/src/shared/utils/api";
-import { getMockProduct, getMockReviews, getMockReviewStats, getMockRecommendedProducts } from "@/src/features/product/mocks/productMock";
-import type { ProductType, ReviewType, RecommendedProductType } from "@/src/features/product/types";
+import { fetchServer } from "@/src/shared/fetcher";
+import type { ProductType, ReviewType } from "@/src/features/product/types";
 
-/**
- * 제품 정보가 없을 때 반환할 기본 제품 정보
- */
-const emptyProduct: ProductType = {
-    id: 0,
-    title: "제품 정보를 찾을 수 없습니다",
-    description: "요청하신 제품 정보를 찾을 수 없습니다.",
-    price: 0,
-    pricePerUnit: "",
-    images: [],
-    tags: [],
-    badges: [],
-    coffeeSize: "",
-    aromaFeatures: [],
-    bodyLevel: 0,
-    bitterLevel: 0,
-    acidLevel: 0,
-    roastLevel: 0,
-    quantity: 0,
-    limitDescription: "",
-    additionalDescription: "",
-    productDetails: {
-        detailText: "",
-    },
-    stockQuantity: 0,
-};
-
-/**
- * 제품 상세 정보를 가져오는 API 함수
- */
-export async function getProduct(id: string): Promise<ProductType> {
-    // 제품 ID 기반 목 데이터 생성 함수
-    const mockFn = () => getMockProduct(id);
-
-    return fetchData({
-        endpoint: `/products/${id}`, // 제품 상세 조회 API 주소
-        defaultValue: emptyProduct, // 실패 시 반환할 기본값
-        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
-    });
+// API 응답 타입 정의
+interface ApiReviewResponse {
+    reviewId: number;
+    nickname: string;
+    rating: number;
+    content: string;
+    createdAt: string;
+    adminReply: {
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 }
 
-/**
- * 제품 리뷰를 가져오는 API 함수
- */
+interface ProductReviewListResponse {
+    averageRating: number;
+    ratingDistribution: Record<string, number>;
+    reviews: ApiReviewResponse[];
+    page: number;
+    size: number;
+    totalPages: number;
+    totalElements: number;
+}
+
+// 백엔드 API에서 직접 사용 (에러를 제대로 전파하기 위해 fetchServer 직접 사용)
+export async function getProduct(productId: string): Promise<ProductType> {
+    const fetch = fetchServer();
+    const response = await fetch<ProductType>(`/api/products/${productId}`);
+
+    if (response.data === null) {
+        throw new Error("상품 데이터를 가져올 수 없습니다.");
+    }
+
+    return response.data;
+}
+
 export async function getProductReviews(productId: string): Promise<ReviewType[]> {
-    // 제품 ID 기반 목 데이터 생성 함수
-    const mockFn = () => getMockReviews(productId);
+    try {
+        const fetch = fetchServer();
+        const response = await fetch<ProductReviewListResponse>(`/api/products/${productId}/reviews`);
 
-    return fetchData({
-        endpoint: `/products/${productId}/reviews`, // 제품 리뷰 조회 API 주소
-        defaultValue: [], // 실패 시 반환할 기본값
-        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
-    });
+        if (response.data === null) {
+            return [];
+        }
+
+        // API 응답에서 reviews 배열 추출하고 ReviewType으로 변환
+        const reviews = response.data.reviews || [];
+        return reviews.map((review: ApiReviewResponse) => ({
+            id: review.reviewId,
+            userName: review.nickname,
+            rating: review.rating,
+            date: new Date(review.createdAt).toISOString().split("T")[0],
+            content: review.content,
+            images: [], // API에서 이미지 정보가 없으므로 빈 배열
+        }));
+    } catch (error) {
+        console.error("리뷰 데이터 가져오기 실패:", error);
+        return []; // 리뷰는 실패해도 빈 배열 반환
+    }
 }
 
-type ReviewStats = {
+export async function getProductReviewStats(productId: string): Promise<{
     totalRating: number;
     ratingCounts: number[];
-};
+}> {
+    try {
+        const fetch = fetchServer();
+        const response = await fetch<ProductReviewListResponse>(`/api/products/${productId}/reviews`);
 
-/**
- * 제품 리뷰 통계를 가져오는 API 함수
- */
-export async function getProductReviewStats(productId: string): Promise<ReviewStats> {
-    const emptyStats: ReviewStats = {
-        totalRating: 0,
-        ratingCounts: [0, 0, 0, 0, 0],
-    };
+        if (response.data === null) {
+            return {
+                totalRating: 0,
+                ratingCounts: [0, 0, 0, 0, 0],
+            };
+        }
 
-    // 제품 ID 기반 목 데이터 생성 함수
-    const mockFn = () => getMockReviewStats(productId);
+        // ratingDistribution을 ratingCounts 배열로 변환 (5점부터 1점 순서)
+        const ratingCounts = [
+            (response.data.ratingDistribution as Record<string, number>)["5"] || 0,
+            (response.data.ratingDistribution as Record<string, number>)["4"] || 0,
+            (response.data.ratingDistribution as Record<string, number>)["3"] || 0,
+            (response.data.ratingDistribution as Record<string, number>)["2"] || 0,
+            (response.data.ratingDistribution as Record<string, number>)["1"] || 0,
+        ];
 
-    return fetchData({
-        endpoint: `/products/${productId}/reviews`, // 리뷰 통계 조회 API 주소
-        defaultValue: emptyStats, // 실패 시 반환할 기본값
-        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
-    });
-}
-
-/**
- * 추천 제품 목록을 가져오는 API 함수
- */
-export async function getRecommendedProducts(productId: string): Promise<RecommendedProductType[]> {
-    // 제품 ID 기반 목 데이터 생성 함수
-    const mockFn = () => getMockRecommendedProducts(productId);
-
-    return fetchData({
-        endpoint: `/products/${productId}/recommendations`, // 추천 제품 조회 API 주소
-        defaultValue: [], // 실패 시 반환할 기본값
-        mockDataFn: mockFn, // 개발기 환경에서 API 실패 시 호출할 목 데이터 생성 함수 (발표 끝나고 백엔드 서버가 폭파되면 이걸 대신 띄워야 함)
-    });
+        return {
+            totalRating: response.data.averageRating || 0,
+            ratingCounts,
+        };
+    } catch (error) {
+        console.error("리뷰 통계 데이터 가져오기 실패:", error);
+        return {
+            totalRating: 0,
+            ratingCounts: [0, 0, 0, 0, 0],
+        }; // 리뷰 통계는 실패해도 기본값 반환
+    }
 }

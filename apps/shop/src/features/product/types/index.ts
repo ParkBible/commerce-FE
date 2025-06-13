@@ -1,30 +1,29 @@
 // 공통 ReviewType을 shared/entities에서 가져옴
 export type { ReviewType } from "@/src/shared/entities/review/types";
 
+// 백엔드 Swagger 스펙에 맞는 ProductType
 export interface ProductType {
     id: number;
-    title: string;
-    description: string;
+    name: string;
     price: number;
-    pricePerUnit?: string;
-    images: string[];
-    tags: string[];
-    badges: Array<{
-        text: string;
-        bgColor: string;
-        textColor?: string;
-    }>;
-    coffeeSize?: string;
-    aromaFeatures?: string[];
-    bodyLevel?: number;
-    bitterLevel?: number;
-    acidLevel?: number;
-    roastLevel?: number;
-    quantity?: number;
-    limitDescription?: string;
-    additionalDescription?: string;
-    productDetails?: ProductDetails;
-    stockQuantity: number;
+    quantity: number;
+    thumbnail: string;
+    detailImage: string;
+    intensity: {
+        id: number;
+        label: string;
+    };
+    cupSize: {
+        id: number;
+        label: string;
+    };
+    status: {
+        code: string;
+        label: string;
+    };
+    isSoldOut: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface ProductDetails {
