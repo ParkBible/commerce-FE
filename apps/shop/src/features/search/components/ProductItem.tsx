@@ -5,41 +5,35 @@ import type { Product } from "@/src/features/search/types";
 
 interface ProductItemProps extends Product {}
 
-export default function ProductItem({ 
-    id, name, price, quantity, thumbnail, detail_image, intensity, cupSize, status 
-}: ProductItemProps) {
-    
-    // 동적으로 배지 생성 (프론트에서 처리)
+export default function ProductItem({ id, name, price, quantity, thumbnail, detailImage, intensity, cupSize, isSoldOut }: ProductItemProps) {
+    // 동적으로 배지 생성 (프론트에서 처리) - 모든 배지 제거
     const getBadges = () => {
-        const badges = [];
-        
-        // 컵 사이즈에 따른 카테고리 배지
-        if (cupSize?.includes("40ml") || cupSize === "Small") {
-            badges.push({ text: "에스프레소", type: "category" as const });
-        } else {
-            badges.push({ text: "머그", type: "category" as const });
-        }
-        
-        // 품절 여부에 따른 배지
-        if (quantity === 0 || status !== "ON_SALE") {
-            badges.push({ text: "품절", type: "decaf" as const });
-        }
-        
-        // 재고가 적을 때 배지 (10개 이하)
-        if (quantity > 0 && quantity <= 10) {
-            badges.push({ text: "한정", type: "best" as const });
-        }
-        
+        const badges: { text: string; type: "category" | "new" | "best" | "decaf" }[] = [];
+
+        // 모든 배지 제거
+        // if (cupSize?.includes("40ml") || cupSize === "Small") {
+        //     badges.push({ text: "에스프레소", type: "category" as const });
+        // } else {
+        //     badges.push({ text: "머그", type: "category" as const });
+        // }
+
+        // if (isSoldOut) {
+        //     badges.push({ text: "품절", type: "decaf" as const });
+        // }
+
+        // if (quantity > 0 && quantity <= 10) {
+        //     badges.push({ text: "한정", type: "best" as const });
+        // }
+
         return badges;
     };
 
     // intensity 문자열을 숫자로 변환
     const getIntensityNumber = (intensity: string): number => {
         const intensityMap: Record<string, number> = {
-            "Light": 3,
-            "Medium": 6,
-            "Strong": 9,
-            "Very Strong": 11,
+            Light: 3,
+            Medium: 6,
+            Strong: 9,
         };
         return intensityMap[intensity] || 6;
     };
@@ -63,7 +57,7 @@ export default function ProductItem({
                 <div className="flex justify-center items-center gap-4 mb-4">
                     <div className="flex flex-col items-center">
                         <div className="w-10 h-10 rounded-full bg-[#f7f7f8] flex items-center justify-center mb-1">
-                            <span className="text-[#37383c]/60 text-base">{intensityNumber}</span>
+                            <span className="text-[#37383c]/60 text-base font-medium">{intensityNumber}</span>
                         </div>
                         <span className="text-[#37383c]/60 text-xs">강도</span>
                     </div>
@@ -80,12 +74,7 @@ export default function ProductItem({
                     <p className="text-[#37383c]/60 text-sm">₩{price.toLocaleString()}</p>
                 </div>
                 <div className="flex justify-center">
-                    <AddToCart 
-                        productId={id} 
-                        title={name} 
-                        stockQuantity={quantity} 
-                        withPopup={true} 
-                    />
+                    <AddToCart productId={id} title={name} stockQuantity={quantity} withPopup={true} />
                 </div>
             </div>
         </div>
