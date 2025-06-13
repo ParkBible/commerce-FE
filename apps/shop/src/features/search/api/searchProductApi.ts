@@ -10,6 +10,28 @@ interface BackendSearchData {
 }
 
 /**
+ * 빈 검색 결과를 생성하는 헬퍼 함수
+ */
+function createEmptySearchResult(searchTerm: string, page: number, size: number): SearchResultResponse {
+    return {
+        content: [],
+        page: page,
+        size: size,
+        totalPages: 0,
+        totalElements: 0,
+        searchTerm: searchTerm,
+    };
+}
+
+/**
+ * 에러를 로깅하고 적절한 fallback을 제공하는 헬퍼 함수
+ */
+function handleSearchError(error: unknown, context: string, searchTerm: string, page: number, size: number): SearchResultResponse {
+    console.error(`[검색 API ${context}]:`, error);
+    return createEmptySearchResult(searchTerm, page, size);
+}
+
+/**
  * 상품 검색 API 함수
  */
 export async function searchProducts(searchTerm = "", page = 0, size = 10, intensityId?: string, cupSizeId?: string): Promise<SearchResultResponse> {
@@ -32,6 +54,8 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10, inten
         }
 
         const response = await fetcher<BackendSearchData>(`/api/products?${searchParams}`);
+
+        // API 응답 구조 검증
         if (response.data?.content && Array.isArray(response.data.content)) {
             const backendData = response.data;
 
@@ -47,26 +71,10 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10, inten
             return finalData;
         }
 
-        // API 응답 구조가 예상과 다른 경우 빈 결과 반환
-        console.log("API 응답 구조가 예상과 다름");
-        return {
-            content: [],
-            page: page,
-            size: size,
-            totalPages: 0,
-            totalElements: 0,
-            searchTerm: searchTerm,
-        };
+        // API 응답 구조가 예상과 다른 경우
+        return handleSearchError(new Error("API 응답 구조가 예상과 다름"), "응답 구조 오류", searchTerm, page, size);
     } catch (error) {
-        console.error("검색 API 오류:", error);
-        // 오류 발생 시 빈 결과 반환
-        return {
-            content: [],
-            page: page,
-            size: size,
-            totalPages: 0,
-            totalElements: 0,
-            searchTerm: searchTerm,
-        };
+        // 네트워크 오류 또는 기타 예외 상황
+        return handleSearchError(error, "네트워크 오류", searchTerm, page, size);
     }
 }
