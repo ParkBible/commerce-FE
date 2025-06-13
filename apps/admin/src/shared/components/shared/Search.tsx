@@ -1,22 +1,16 @@
-import React from "react";
+import type React from "react";
 
 type SearchProps = {
     placeholder: string;
     children?: React.ReactNode;
-    onEnterKeyPress?: (query: string) => void;
+    setSearchQuery?: (query: string) => void;
 };
 
-export default function Search({ placeholder, children, onEnterKeyPress }: SearchProps) {
-    const [query, setQuery] = React.useState("");
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
-    };
-
+export default function Search({ placeholder, children, setSearchQuery }: SearchProps) {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter" && onEnterKeyPress) {
+        if (event.key === "Enter" && setSearchQuery) {
             event.preventDefault();
-            onEnterKeyPress(query);
+            setSearchQuery(event.currentTarget.value);
         }
     };
 
@@ -30,7 +24,6 @@ export default function Search({ placeholder, children, onEnterKeyPress }: Searc
                             type="text"
                             placeholder={placeholder}
                             className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            onChange={handleChange}
                             onKeyDown={handleKeyDown}
                         />
                         <svg

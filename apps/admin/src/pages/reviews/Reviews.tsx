@@ -1,23 +1,41 @@
 import type { ReviewData } from "@/features/review/types/type";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table/table";
 import { useQuery } from "@tanstack/react-query";
-import { getMockReviews } from "@/mocks/reviewMock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createStars } from "@/shared/utils/createStars";
 import ReviewDetail from "@/features/review/components/ReviewDetail";
 import Search from "@/shared/components/shared/Search";
 import { Pagination } from "@/shared/components/ui/pagination";
+import { formatDateTime } from "@commerce-fe/utils";
+import { fetcher } from "@/shared/kyInstance";
 
 export default function ReviewsPage() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortingType, setSortingType] = useState<string>("");
+    const [query, setQuery] = useState<string>("");
+
     const { data } = useQuery<ReviewData>({
-        queryKey: ["reviews"],
-        queryFn: () => getMockReviews(), // 목 데이터 사용
-        // queryFn: () => fetcher("/admin/reviews"), // 실제 API (나중에 활성화)
+        queryKey: ["reviews", query, sortingType],
+        // queryFn: () => getMockReviews(), // 목 데이터 사용
+        queryFn: () => {
+            const searchParam = query ? `search=${query}&` : "";
+            const sortParam = sortingType ? `sort=${sortingType}` : "";
+            const isParamEmpty = !searchParam && !sortParam;
+
+            return fetcher(`admin/reviews${isParamEmpty ? "" : "?"}${searchParam}${sortParam}`);
+        },
     });
 
     const reviews = data?.content || [];
     const [openedReviewIds, setOpenedReviewIds] = useState<number[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
+
+    // query, sortingType이 변경될 때마다 현재 페이지를 1로 초기화하고, 열려있는 리뷰 ID 목록을 초기화합니다.
+    // 트리거용이라 biome-ignore를 사용했습니다.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    useEffect(() => {
+        setCurrentPage(1);
+        setOpenedReviewIds([]);
+    }, [query, sortingType]);
 
     const toggleReviewDetails = (reviewId: number) => {
         setOpenedReviewIds(prev => (prev.includes(reviewId) ? prev.filter(id => id !== reviewId) : [...prev, reviewId]));
@@ -27,9 +45,9 @@ export default function ReviewsPage() {
         setCurrentPage(page);
     };
 
-    const onSearch = (query: string) => {
-        // 검색 로직 구현 (예: API 호출 또는 필터링)
-        console.log("검색어:", query);
+    const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = event.target.value;
+        setSortingType(value);
     };
 
     return (
@@ -41,28 +59,19 @@ export default function ReviewsPage() {
                 </div>
             </div>
             <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-                <Search placeholder="상품명 또는 ID 검색" onEnterKeyPress={onSearch}>
+                <Search placeholder="상품명 또는 ID 검색" setSearchQuery={setQuery}>
                     <>
-                        {/* 카테고리 필터 */}
+                        {/* 정렬 옵션 */}
                         <div className="w-auto">
-                            <select className="rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">모든 카테고리</option>
-                                <option value="과일/채소">과일/채소</option>
-                                <option value="정육/계란">정육/계란</option>
-                                <option value="유제품">유제품</option>
-                                <option value="베이커리">베이커리</option>
-                                <option value="간식">간식</option>
-                                <option value="음료">음료</option>
-                                <option value="견과류">견과류</option>
-                            </select>
-                        </div>
-
-                        {/* 상태 필터 */}
-                        <div className="w-auto">
-                            <select className="rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">모든 상태</option>
-                                <option value="active">판매 중</option>
-                                <option value="inactive">판매 중지</option>
+                            <select
+                                className="rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                value={sortingType}
+                                onChange={handleSortingChange}
+                                aria-label="sorting options"
+                            >
+                                <option value="">최신순</option>
+                                <option value="-rating">별점 높은순</option>
+                                <option value="rating">별점 낮은순</option>
                             </select>
                         </div>
                     </>
@@ -94,7 +103,7 @@ export default function ReviewsPage() {
                                     <TableCell>{review.productName}</TableCell>
                                     <TableCell className="text-right">{createStars(review.rating)}</TableCell>
                                     <TableCell className="text-right">{`${review.user.nickname}(${review.user.userId})`}</TableCell>
-                                    <TableCell className="text-right">{review.createdAt}</TableCell>
+                                    <TableCell className="text-right">{formatDateTime(review.createdAt)}</TableCell>
                                     <TableCell className="text-right">{review.adminReply ? "답변 완료" : "미답변"}</TableCell>
                                 </TableRow>
                                 {openedReviewIds.includes(review.reviewId) && <ReviewDetail review={review} />}
