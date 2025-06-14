@@ -1,6 +1,7 @@
 "use client";
 
 import Item from "./Item";
+import EmptyCart from "./EmptyCart";
 import { useState } from "react";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
 import type { CartItem } from "@/src/features/cart/types/cart";
@@ -34,13 +35,10 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
     };
 
     const deleteCartItems = useMutation({
-        mutationFn: async (productIds: number[]) => {
-            const requestBody: { productIds: number[] } = { productIds };
-
-            await fetch("/cart/items", {
+        mutationFn: async (cartItemIds: number[]) => {
+            await fetch(`/cart-items/delete?cartItemIds=${cartItemIds.join(",")}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestBody),
             });
         },
         onSuccess: () => {
@@ -60,11 +58,15 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
     const onDelete = (id: number) => {
         deleteCartItems.mutate([id]);
     };
-
     const onDeleteAll = () => {
         if (selectedItemIds.length === 0) return;
         deleteCartItems.mutate(selectedItemIds);
     };
+
+    // 장바구니가 비어있는 경우 EmptyCart 컴포넌트 표시
+    if (cartItems.length === 0) {
+        return <EmptyCart />;
+    }
 
     return (
         <>
@@ -85,8 +87,8 @@ export default function CartProduct({ cartItems }: { cartItems: CartItem[] }) {
             {cartItems.map(item => (
                 <Item
                     key={item.cartItemId}
-                    productId={item.productId}
-                    name={item.name}
+                    cartItemId={item.cartItemId}
+                    name={item.productName}
                     price={item.price}
                     quantity={item.quantity}
                     stockQuantity={item.stockQuantity}

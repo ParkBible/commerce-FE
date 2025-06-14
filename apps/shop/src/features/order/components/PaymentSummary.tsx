@@ -18,7 +18,7 @@ export default function PaymentSummary({ cartItems }: PaymentSummaryProps) {
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.cartItemId} className="flex justify-between items-center mb-4">
-                            <span>{item.name}</span>
+                            <span>{item.productName}</span>
                             <span>₩ {item.price}</span>
                         </li>
                     ))}

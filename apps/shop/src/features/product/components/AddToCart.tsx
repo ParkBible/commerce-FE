@@ -55,7 +55,7 @@ export default function AddToCart({ productId, title, stockQuantity, withPopup =
 
     const addToCart = (quantity: number) => {
         const fetch = fetchClient();
-        fetch<AddCartItemResponse>("/cart/items", {
+        fetch<AddCartItemResponse>("/cart-items", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
