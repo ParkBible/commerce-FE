@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table/table";
+import { Pagination } from "@/shared/components/ui/pagination";
 
 // 상품 타입 정의
 interface Product {
@@ -112,6 +113,13 @@ export default function ProductsPage() {
         setProducts(products.filter(product => product.id !== productId));
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    // 페이지 변경 핸들러
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
     // 상품 상태 변경 기능
     const handleToggleStatus = (productId: string) => {
         setProducts(
@@ -135,7 +143,6 @@ export default function ProductsPage() {
                     + 상품 추가
                 </button>
             </div>
-
             {/* 필터링 및 검색 UI */}
             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                 <div className="flex flex-wrap gap-4">
@@ -188,7 +195,6 @@ export default function ProductsPage() {
                     </div>
                 </div>
             </div>
-
             {/* 상품 테이블 */}
             <div className="bg-white shadow-sm rounded-lg overflow-hidden">
                 <Table>
@@ -279,28 +285,8 @@ export default function ProductsPage() {
                     </TableBody>
                 </Table>
             </div>
-
             {/* 페이지네이션 */}
-            <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-500">10개 항목 중 1-10 표시</div>
-                <nav className="flex space-x-1">
-                    <button type="button" className="px-2 py-1 text-sm rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                        이전
-                    </button>
-                    <button type="button" className="px-3 py-1 text-sm rounded-md border border-gray-300 bg-blue-600 text-white">
-                        1
-                    </button>
-                    <button type="button" className="px-3 py-1 text-sm rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                        2
-                    </button>
-                    <button type="button" className="px-3 py-1 text-sm rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                        3
-                    </button>
-                    <button type="button" className="px-2 py-1 text-sm rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                        다음
-                    </button>
-                </nav>
-            </div>
+            <Pagination currentPage={currentPage} totalItems={products.length} onPageChange={handlePageChange} />
         </div>
     );
 }
