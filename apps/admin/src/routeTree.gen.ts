@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
 import { Route as authRouteImport } from './routes/(auth)/route'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedReviewsImport } from './routes/_authenticated/reviews'
 import { Route as AuthenticatedProductsImport } from './routes/_authenticated/products'
 import { Route as authLoginImport } from './routes/(auth)/login'
 
@@ -32,6 +33,12 @@ const authRouteRoute = authRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedReviewsRoute = AuthenticatedReviewsImport.update({
+  id: '/reviews',
+  path: '/reviews',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -79,6 +86,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProductsImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/reviews': {
+      id: '/_authenticated/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof AuthenticatedReviewsImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
@@ -105,11 +119,13 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
+  AuthenticatedReviewsRoute: typeof AuthenticatedReviewsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProductsRoute: AuthenticatedProductsRoute,
+  AuthenticatedReviewsRoute: AuthenticatedReviewsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
@@ -121,12 +137,14 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof authLoginRoute
   '/products': typeof AuthenticatedProductsRoute
+  '/reviews': typeof AuthenticatedReviewsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof authLoginRoute
   '/products': typeof AuthenticatedProductsRoute
+  '/reviews': typeof AuthenticatedReviewsRoute
 }
 
 export interface FileRoutesById {
@@ -135,20 +153,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/_authenticated/products': typeof AuthenticatedProductsRoute
+  '/_authenticated/reviews': typeof AuthenticatedReviewsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/login' | '/products'
+  fullPaths: '/' | '' | '/login' | '/products' | '/reviews'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/products'
+  to: '/' | '/login' | '/products' | '/reviews'
   id:
     | '__root__'
     | '/(auth)'
     | '/_authenticated'
     | '/(auth)/login'
     | '/_authenticated/products'
+    | '/_authenticated/reviews'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
@@ -187,6 +207,7 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/products",
+        "/_authenticated/reviews",
         "/_authenticated/"
       ]
     },
@@ -196,6 +217,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/products": {
       "filePath": "_authenticated/products.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reviews": {
+      "filePath": "_authenticated/reviews.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/": {
