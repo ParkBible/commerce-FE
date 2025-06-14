@@ -24,7 +24,7 @@ export default function Summary({ cartItems }: { cartItems: CartItem[] }) {
             {cartItems.map(item => (
                 <div key={item.cartItemId} className="flex justify-between w-full items-center mt-2">
                     <p className="text-sm text-left text-[#47484C]">
-                        {item.name}(x{item.quantity})
+                        {item.productName}(x{item.quantity})
                     </p>
                     <p>&#8361; {formatNumber(item.price)}</p>
                 </div>

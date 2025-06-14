@@ -9,12 +9,10 @@ import Loading from "@/src/shared/components/shared/Loading";
 import { ErrorBoundary } from "@/src/shared/components/shared/ErrorBoundary";
 
 function CartPageClient() {
-    const userId = 1;
-    const { data, isLoading, isError, error } = useCart(userId);
+    const { data, isLoading, isError, error } = useCart();
 
-    const items = data?.items ?? [];
+    const items = data?.cartItems ?? [];
     const inStockItems = items.filter(item => item.stockQuantity >= item.quantity);
-
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center max-w-screen-xl mx-auto px-2 lg:px-8">
             <CartSectionLayout>
@@ -26,7 +24,6 @@ function CartPageClient() {
                     <CartProduct cartItems={items} />
                 )}
             </CartSectionLayout>
-            <div className="self-stretch flex-grow-0 flex-shrink-0 h-3 bg-[#70737c]/[0.08]" />
             <CartSectionLayout>
                 <Summary cartItems={inStockItems} />
             </CartSectionLayout>
