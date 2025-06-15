@@ -1,0 +1,21 @@
+// sbp_016746348bdfb0b24690a12fbd686920e8b41f1e
+
+{
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "supabase-access-token-new",
+            "description": "Supabase personal access token",
+            "password": true
+        }
+    ],
+    "servers": {
+        "supabase": {
+            "command": "cmd",
+            "args": ["/c", "npx", "-y", "@supabase/mcp-server-supabase@latest"],
+            "env": {
+                "SUPABASE_ACCESS_TOKEN": "${input:supabase-access-token-new}"
+            }
+        }
+    }
+}
