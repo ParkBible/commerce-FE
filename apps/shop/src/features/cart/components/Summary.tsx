@@ -11,7 +11,8 @@ export default function Summary({ cartItems }: { cartItems: CartItem[] }) {
 
     const handleCheckout = () => {
         useCheckoutCartStore.getState().setCartItems(cartItems);
-        router.push("/order/checkout");
+        const cartItemIds = cartItems.map(item => item.cartItemId).join(",");
+        router.push(`/order/checkout?cartItemIds=${cartItemIds}`);
     };
 
     return (
@@ -24,7 +25,7 @@ export default function Summary({ cartItems }: { cartItems: CartItem[] }) {
             {cartItems.map(item => (
                 <div key={item.cartItemId} className="flex justify-between w-full items-center mt-2">
                     <p className="text-sm text-left text-[#47484C]">
-                        {item.name}(x{item.quantity})
+                        {item.productName}(x{item.quantity})
                     </p>
                     <p>&#8361; {formatNumber(item.price)}</p>
                 </div>

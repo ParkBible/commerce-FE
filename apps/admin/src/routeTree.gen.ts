@@ -11,13 +11,23 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ChatImport } from './routes/chat'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
 import { Route as authRouteImport } from './routes/(auth)/route'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedProductsImport } from './routes/_authenticated/products'
+import { Route as AuthenticatedReviewsImport } from './routes/_authenticated/reviews'
+import { Route as AuthenticatedChatManagementImport } from './routes/_authenticated/chat-management'
 import { Route as authLoginImport } from './routes/(auth)/login'
+import { Route as AuthenticatedProductsIndexImport } from './routes/_authenticated/products/index'
+import { Route as AuthenticatedProductsNewImport } from './routes/_authenticated/products/new'
 
 // Create/Update Routes
+
+const ChatRoute = ChatImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -35,16 +45,37 @@ const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
-const AuthenticatedProductsRoute = AuthenticatedProductsImport.update({
-  id: '/products',
-  path: '/products',
+const AuthenticatedReviewsRoute = AuthenticatedReviewsImport.update({
+  id: '/reviews',
+  path: '/reviews',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const AuthenticatedChatManagementRoute =
+  AuthenticatedChatManagementImport.update({
+    id: '/chat-management',
+    path: '/chat-management',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const authLoginRoute = authLoginImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => authRouteRoute,
+} as any)
+
+const AuthenticatedProductsIndexRoute = AuthenticatedProductsIndexImport.update(
+  {
+    id: '/products/',
+    path: '/products/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any,
+)
+
+const AuthenticatedProductsNewRoute = AuthenticatedProductsNewImport.update({
+  id: '/products/new',
+  path: '/products/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -65,6 +96,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRoute
     }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatImport
+      parentRoute: typeof rootRoute
+    }
     '/(auth)/login': {
       id: '/(auth)/login'
       path: '/login'
@@ -72,11 +110,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authLoginImport
       parentRoute: typeof authRouteImport
     }
-    '/_authenticated/products': {
-      id: '/_authenticated/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof AuthenticatedProductsImport
+    '/_authenticated/chat-management': {
+      id: '/_authenticated/chat-management'
+      path: '/chat-management'
+      fullPath: '/chat-management'
+      preLoaderRoute: typeof AuthenticatedChatManagementImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reviews': {
+      id: '/_authenticated/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof AuthenticatedReviewsImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/': {
@@ -84,6 +129,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/products/new': {
+      id: '/_authenticated/products/new'
+      path: '/products/new'
+      fullPath: '/products/new'
+      preLoaderRoute: typeof AuthenticatedProductsNewImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/products/': {
+      id: '/_authenticated/products/'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof AuthenticatedProductsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
   }
@@ -104,13 +163,19 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 )
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
+  AuthenticatedChatManagementRoute: typeof AuthenticatedChatManagementRoute
+  AuthenticatedReviewsRoute: typeof AuthenticatedReviewsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedProductsNewRoute: typeof AuthenticatedProductsNewRoute
+  AuthenticatedProductsIndexRoute: typeof AuthenticatedProductsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedProductsRoute: AuthenticatedProductsRoute,
+  AuthenticatedChatManagementRoute: AuthenticatedChatManagementRoute,
+  AuthenticatedReviewsRoute: AuthenticatedReviewsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedProductsNewRoute: AuthenticatedProductsNewRoute,
+  AuthenticatedProductsIndexRoute: AuthenticatedProductsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -119,48 +184,81 @@ const AuthenticatedRouteRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '': typeof AuthenticatedRouteRouteWithChildren
+  '/chat': typeof ChatRoute
   '/login': typeof authLoginRoute
-  '/products': typeof AuthenticatedProductsRoute
+  '/chat-management': typeof AuthenticatedChatManagementRoute
+  '/reviews': typeof AuthenticatedReviewsRoute
+  '/products/new': typeof AuthenticatedProductsNewRoute
+  '/products': typeof AuthenticatedProductsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
+  '/chat': typeof ChatRoute
   '/login': typeof authLoginRoute
-  '/products': typeof AuthenticatedProductsRoute
+  '/chat-management': typeof AuthenticatedChatManagementRoute
+  '/reviews': typeof AuthenticatedReviewsRoute
+  '/products/new': typeof AuthenticatedProductsNewRoute
+  '/products': typeof AuthenticatedProductsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/chat': typeof ChatRoute
   '/(auth)/login': typeof authLoginRoute
-  '/_authenticated/products': typeof AuthenticatedProductsRoute
+  '/_authenticated/chat-management': typeof AuthenticatedChatManagementRoute
+  '/_authenticated/reviews': typeof AuthenticatedReviewsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/products/new': typeof AuthenticatedProductsNewRoute
+  '/_authenticated/products/': typeof AuthenticatedProductsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/login' | '/products'
+  fullPaths:
+    | '/'
+    | ''
+    | '/chat'
+    | '/login'
+    | '/chat-management'
+    | '/reviews'
+    | '/products/new'
+    | '/products'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/products'
+  to:
+    | '/'
+    | '/chat'
+    | '/login'
+    | '/chat-management'
+    | '/reviews'
+    | '/products/new'
+    | '/products'
   id:
     | '__root__'
     | '/(auth)'
     | '/_authenticated'
+    | '/chat'
     | '/(auth)/login'
-    | '/_authenticated/products'
+    | '/_authenticated/chat-management'
+    | '/_authenticated/reviews'
     | '/_authenticated/'
+    | '/_authenticated/products/new'
+    | '/_authenticated/products/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  ChatRoute: typeof ChatRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  ChatRoute: ChatRoute,
 }
 
 export const routeTree = rootRoute
@@ -174,7 +272,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/(auth)",
-        "/_authenticated"
+        "/_authenticated",
+        "/chat"
       ]
     },
     "/(auth)": {
@@ -186,20 +285,38 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated/route.tsx",
       "children": [
-        "/_authenticated/products",
-        "/_authenticated/"
+        "/_authenticated/chat-management",
+        "/_authenticated/reviews",
+        "/_authenticated/",
+        "/_authenticated/products/new",
+        "/_authenticated/products/"
       ]
+    },
+    "/chat": {
+      "filePath": "chat.tsx"
     },
     "/(auth)/login": {
       "filePath": "(auth)/login.tsx",
       "parent": "/(auth)"
     },
-    "/_authenticated/products": {
-      "filePath": "_authenticated/products.tsx",
+    "/_authenticated/chat-management": {
+      "filePath": "_authenticated/chat-management.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reviews": {
+      "filePath": "_authenticated/reviews.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/products/new": {
+      "filePath": "_authenticated/products/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/products/": {
+      "filePath": "_authenticated/products/index.ts",
       "parent": "/_authenticated"
     }
   }

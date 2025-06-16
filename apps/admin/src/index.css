@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+button {
+    user-select: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

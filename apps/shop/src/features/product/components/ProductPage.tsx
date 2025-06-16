@@ -11,8 +11,14 @@ interface ProductPageProps {
     product: ProductType;
     reviews: ReviewType[];
     reviewStats: {
-        totalRating: number;
-        ratingCounts: number[];
+        averageRating: number;
+        ratingDistribution: {
+            oneStarCount: number;
+            twoStarsCount: number;
+            threeStarsCount: number;
+            fourStarsCount: number;
+            fiveStarsCount: number;
+        };
     };
     recommendedProducts: RecommendedProductType[];
 }
@@ -40,13 +46,8 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
 
                 <ProductDetails product={product} />
                 {/* <ProductVideo /> */}
-                <ProductReviews
-                    productId={productId}
-                    reviews={reviews}
-                    totalRating={reviewStats.totalRating}
-                    ratingCounts={reviewStats.ratingCounts}
-                />
-                {/* <RecommendedProducts products={recommendedProducts} /> */}
+                <ProductReviews productId={productId} reviews={reviews} reviewStats={reviewStats} />
+                <RecommendedProducts products={recommendedProducts} />
             </main>
         </div>
     );

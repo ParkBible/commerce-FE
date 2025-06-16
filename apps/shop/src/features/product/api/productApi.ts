@@ -37,10 +37,13 @@ export async function getProduct(productId: string): Promise<ProductType> {
     return response.data;
 }
 
-export async function getProductReviews(productId: string): Promise<ReviewType[]> {
+export async function getProductReviews(productId: string, sort?: string): Promise<ReviewType[]> {
     try {
         const fetch = fetchServer();
-        const response = await fetch<ProductReviewListResponse>(`/api/products/${productId}/reviews`);
+
+        // 정렬 파라미터가 있으면 쿼리에 추가
+        const sortParam = sort ? `?sort=${sort}` : "";
+        const response = await fetch<ProductReviewListResponse>(`/api/products/${productId}/reviews${sortParam}`);
 
         if (response.data === null) {
             return [];
@@ -49,12 +52,13 @@ export async function getProductReviews(productId: string): Promise<ReviewType[]
         // API 응답에서 reviews 배열 추출하고 ReviewType으로 변환
         const reviews = response.data.reviews || [];
         return reviews.map((review: ApiReviewResponse) => ({
-            id: review.reviewId,
-            userName: review.nickname,
+            reviewId: review.reviewId,
+            nickname: review.nickname,
             rating: review.rating,
-            date: new Date(review.createdAt).toISOString().split("T")[0],
+            createdAt: review.createdAt,
             content: review.content,
             images: [], // API에서 이미지 정보가 없으므로 빈 배열
+            adminReply: review.adminReply || undefined,
         }));
     } catch (error) {
         console.error("리뷰 데이터 가져오기 실패:", error);
@@ -63,8 +67,14 @@ export async function getProductReviews(productId: string): Promise<ReviewType[]
 }
 
 export async function getProductReviewStats(productId: string): Promise<{
-    totalRating: number;
-    ratingCounts: number[];
+    averageRating: number;
+    ratingDistribution: {
+        oneStarCount: number;
+        twoStarsCount: number;
+        threeStarsCount: number;
+        fourStarsCount: number;
+        fiveStarsCount: number;
+    };
 }> {
     try {
         const fetch = fetchServer();
@@ -72,29 +82,38 @@ export async function getProductReviewStats(productId: string): Promise<{
 
         if (response.data === null) {
             return {
-                totalRating: 0,
-                ratingCounts: [0, 0, 0, 0, 0],
+                averageRating: 0,
+                ratingDistribution: {
+                    oneStarCount: 0,
+                    twoStarsCount: 0,
+                    threeStarsCount: 0,
+                    fourStarsCount: 0,
+                    fiveStarsCount: 0,
+                },
             };
         }
 
-        // ratingDistribution을 ratingCounts 배열로 변환 (5점부터 1점 순서)
-        const ratingCounts = [
-            (response.data.ratingDistribution as Record<string, number>)["5"] || 0,
-            (response.data.ratingDistribution as Record<string, number>)["4"] || 0,
-            (response.data.ratingDistribution as Record<string, number>)["3"] || 0,
-            (response.data.ratingDistribution as Record<string, number>)["2"] || 0,
-            (response.data.ratingDistribution as Record<string, number>)["1"] || 0,
-        ];
-
         return {
-            totalRating: response.data.averageRating || 0,
-            ratingCounts,
+            averageRating: response.data.averageRating || 0,
+            ratingDistribution: {
+                oneStarCount: (response.data.ratingDistribution as Record<string, number>)["1"] || 0,
+                twoStarsCount: (response.data.ratingDistribution as Record<string, number>)["2"] || 0,
+                threeStarsCount: (response.data.ratingDistribution as Record<string, number>)["3"] || 0,
+                fourStarsCount: (response.data.ratingDistribution as Record<string, number>)["4"] || 0,
+                fiveStarsCount: (response.data.ratingDistribution as Record<string, number>)["5"] || 0,
+            },
         };
     } catch (error) {
         console.error("리뷰 통계 데이터 가져오기 실패:", error);
         return {
-            totalRating: 0,
-            ratingCounts: [0, 0, 0, 0, 0],
+            averageRating: 0,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 0,
+                fiveStarsCount: 0,
+            },
         }; // 리뷰 통계는 실패해도 기본값 반환
     }
 }

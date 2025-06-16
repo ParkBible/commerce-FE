@@ -2,18 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { type CustomError, fetchClient } from "@/src/shared/fetcher";
 import type { GetCartResponse } from "@/src/features/cart/types/cart";
 
-export function useCart(userId: number) {
+export function useCart() {
     return useQuery<GetCartResponse>({
-        queryKey: ["cart", userId],
-        queryFn: () => fetchCart(userId),
+        queryKey: ["cart"],
+        queryFn: () => fetchCart(),
     });
 }
 
-async function fetchCart(userId: number): Promise<GetCartResponse> {
+async function fetchCart(): Promise<GetCartResponse> {
     const fetch = fetchClient();
 
     try {
-        const res = await fetch<GetCartResponse>(`/cart?userId=${userId}`);
+        const res = await fetch<GetCartResponse>("/cart-items");
 
         if (!res.data) {
             throw new Error("카트 데이터를 불러올 수 없습니다");

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
+import { FilterButton } from "./FilterButton";
 
 interface SearchFilterProps {
     resultCount?: number;
@@ -54,39 +55,14 @@ export default function SearchFilter({
                 </button>
                 {isIntensityOpen && (
                     <div className="flex flex-wrap gap-2">
-                        <button
-                            type="button"
-                            onClick={() => handleIntensityClick("연함")}
-                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "연함"
-                                    ? "bg-white text-black border border-black font-bold"
-                                    : "text-[#2e2f33]/88 border border-gray-200/30"
-                            }`}
-                        >
-                            연함
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => handleIntensityClick("중간")}
-                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "중간"
-                                    ? "bg-white text-black border border-black font-bold"
-                                    : "text-[#2e2f33]/88 border border-gray-200/30"
-                            }`}
-                        >
-                            중간
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => handleIntensityClick("진함")}
-                            className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                selectedIntensity === "진함"
-                                    ? "bg-white text-black border border-black font-bold"
-                                    : "text-[#2e2f33]/88 border border-gray-200/30"
-                            }`}
-                        >
-                            진함
-                        </button>
+                        {["연함", "중간", "진함"].map(intensity => (
+                            <FilterButton
+                                key={intensity}
+                                label={intensity}
+                                isSelected={selectedIntensity === intensity}
+                                onClick={() => handleIntensityClick(intensity)}
+                            />
+                        ))}
                     </div>
                 )}
             </div>
@@ -104,18 +80,12 @@ export default function SearchFilter({
                 {isCupSizeOpen && (
                     <div className="flex flex-wrap gap-2">
                         {["Small", "Medium", "Large"].map(cupSize => (
-                            <button
+                            <FilterButton
                                 key={cupSize}
-                                type="button"
+                                label={cupSize}
+                                isSelected={selectedCupSize === cupSize}
                                 onClick={() => handleCupSizeClick(cupSize)}
-                                className={`py-2.5 px-4 rounded-md text-sm transition-colors ${
-                                    selectedCupSize === cupSize
-                                        ? "bg-white text-black border border-black font-bold"
-                                        : "text-[#2e2f33]/88 border border-gray-200/30"
-                                }`}
-                            >
-                                {cupSize}
-                            </button>
+                            />
                         ))}
                     </div>
                 )}

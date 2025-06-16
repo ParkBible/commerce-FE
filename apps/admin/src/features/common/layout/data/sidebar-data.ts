@@ -1,4 +1,4 @@
-import { LayoutDashboard, ShoppingBag, FileText, Settings, Users } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, FileText, Settings, Users, MessageSquareText, MessagesSquare } from "lucide-react";
 
 export const sidebarData = {
     navGroups: [
@@ -27,6 +27,18 @@ export const sidebarData = {
                     title: "고객 관리",
                     href: "/customers",
                     icon: Users,
+                    variant: "ghost",
+                },
+                {
+                    title: "리뷰 관리",
+                    href: "/reviews",
+                    icon: MessageSquareText,
+                    variant: "ghost",
+                },
+                {
+                    title: "사용자 채팅 관리",
+                    href: "/chat-management",
+                    icon: MessagesSquare,
                     variant: "ghost",
                 },
                 {

@@ -1,7 +1,7 @@
 export interface CartItem {
     cartItemId: number;
     productId: number;
-    name: string;
+    productName: string;
     price: number;
     quantity: number;
     stockQuantity: number;
@@ -10,12 +10,12 @@ export interface CartItem {
 }
 
 export interface GetCartResponse {
-    items: CartItem[];
+    cartItems: CartItem[];
     totalPrice: number;
     deliveryPrice: number;
 }
 
-// 상품 추가 (POST /cart/items?userId={})
+// 상품 추가 (POST /cart-items)
 export interface AddCartItemRequest {
     productId: number;
     quantity: number;
@@ -27,9 +27,8 @@ export interface AddCartItemResponse {
     requiresQuantityAdjustment: boolean;
 }
 
-// 수량 수정 (PATCH /cart/items/{cartItemid})
+// 수량 수정 (PATCH /cart-items/{cartItemid})
 export interface UpdateCartItemRequest {
-    productId: number;
     quantity: number;
 }
 
@@ -40,7 +39,7 @@ export interface UpdateCartItemResponse {
     requiresQuantityAdjustment: boolean;
 }
 
-// 삭제 (DELETE /carts)
+// 삭제 (DELETE /cart-items/delete)
 export interface DeleteCartItemsRequest {
     productIds: number[];
 }
