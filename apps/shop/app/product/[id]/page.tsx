@@ -19,9 +19,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
     const sort = (resolvedSearchParams.sort as string) || "";
 
     try {
-        const [product, reviews, reviewStats] = await Promise.all([getProduct(id), getProductReviews(id, sort), getProductReviewStats(id)]);
+        const [product, review, reviewStats] = await Promise.all([
+            getProduct(id),
+            getProductReviews(id, 0, sort), // page를 0으로 전달
+            getProductReviewStats(id),
+        ]);
 
-        return <ProductPage product={product} reviews={reviews} reviewStats={reviewStats} recommendedProducts={[]} />;
+        return <ProductPage product={product} reviews={review.content} reviewStats={reviewStats} recommendedProducts={[]} />;
     } catch (error: unknown) {
         // 상품을 찾을 수 없는 경우 404 페이지 표시
         if (error instanceof Error && "code" in error && (error as { code: string }).code === "PRODUCT_NOT_FOUND") {

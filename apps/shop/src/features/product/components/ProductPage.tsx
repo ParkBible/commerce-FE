@@ -6,20 +6,12 @@ import { ProductVideo } from "./ProductVideo";
 import { ProductReviews } from "./ProductReviews";
 import { RecommendedProducts } from "./RecommendedProducts";
 import type { ProductType, RecommendedProductType, ReviewType } from "@/src/features/product/types";
+import type { ReviewStats } from "@/src/features/product/mocks/productMock";
 
 interface ProductPageProps {
     product: ProductType;
     reviews: ReviewType[];
-    reviewStats: {
-        averageRating: number;
-        ratingDistribution: {
-            oneStarCount: number;
-            twoStarsCount: number;
-            threeStarsCount: number;
-            fourStarsCount: number;
-            fiveStarsCount: number;
-        };
-    };
+    reviewStats: ReviewStats;
     recommendedProducts: RecommendedProductType[];
 }
 
@@ -29,8 +21,6 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
         { label: "New 시즌 한정 커피", href: "/category/seasonal" },
         { label: product.name, isCurrent: true },
     ];
-
-    const productId = product?.id?.toString() || "";
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
@@ -46,8 +36,8 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
 
                 <ProductDetails product={product} />
                 {/* <ProductVideo /> */}
-                <ProductReviews productId={productId} reviews={reviews} reviewStats={reviewStats} />
-                <RecommendedProducts products={recommendedProducts} />
+                <ProductReviews productId={product.id.toString()} reviews={reviews} reviewStats={reviewStats} />
+                {/* <RecommendedProducts products={recommendedProducts} /> */}
             </main>
         </div>
     );

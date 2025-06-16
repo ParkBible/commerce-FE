@@ -1,113 +1,373 @@
 import type { ProductType, ReviewType, RecommendedProductType } from "@/src/features/product/types";
 import type { ReviewResponse } from "@/src/shared/entities/review/types";
 
+// 기존 커피 목 데이터 배열 (스웨거 기준)
+const MOCK_PRODUCTS = [
+    {
+        id: 1,
+        name: "에스프레소",
+        price: 2500,
+        quantity: 100,
+        thumbnail: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 3, label: "진한맛" },
+        cupSize: { id: 5, label: "스몰" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 2,
+        name: "아메리카노",
+        price: 3000,
+        quantity: 150,
+        thumbnail: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 8, label: "라지" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 3,
+        name: "카페라떼",
+        price: 4000,
+        quantity: 80,
+        thumbnail: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 7, label: "미디움" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 4,
+        name: "카푸치노",
+        price: 4200,
+        quantity: 120,
+        thumbnail: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 7, label: "미디움" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 5,
+        name: "마키아토",
+        price: 4500,
+        quantity: 60,
+        thumbnail: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 3, label: "진한맛" },
+        cupSize: { id: 5, label: "스몰" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 6,
+        name: "바닐라라떼",
+        price: 4800,
+        quantity: 90,
+        thumbnail: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 1, label: "연한맛" },
+        cupSize: { id: 8, label: "라지" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 7,
+        name: "헤이즐넛 라떼",
+        price: 5000,
+        quantity: 70,
+        thumbnail: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 5, label: "스몰" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 8,
+        name: "아이스아메리카노",
+        price: 3200,
+        quantity: 85,
+        thumbnail: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 8, label: "라지" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 9,
+        name: "콜드브루",
+        price: 3800,
+        quantity: 95,
+        thumbnail: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 3, label: "진한맛" },
+        cupSize: { id: 7, label: "미디움" },
+        status: { code: "AVAILABLE", label: "판매중" },
+        isSoldOut: false,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+    {
+        id: 10,
+        name: "플랫 화이트",
+        price: 3500,
+        quantity: 0,
+        thumbnail: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&h=300&fit=crop&crop=center",
+        detailImage: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&h=400&fit=crop&crop=center",
+        intensity: { id: 2, label: "중간맛" },
+        cupSize: { id: 8, label: "라지" },
+        status: { code: "SOLD_OUT", label: "품절" },
+        isSoldOut: true,
+        createdAt: "2024-01-01T00:00:00Z",
+        updatedAt: "2024-01-01T00:00:00Z",
+    },
+];
+
 /**
  * 제품 상세 정보 목 데이터를 반환하는 함수
  */
 export function getMockProduct(id?: string): ProductType {
-    // id를 활용하여 다른 제품 반환 로직을 추가할 수 있음
-    return {
-        id: 1,
-        title: "스페셜 리저브 하와이 코나",
-        description: "이국적인 열대 과일향과 고소한 견과류향이 어우러진 싱글 오리진 커피",
-        price: 35000,
-        pricePerUnit: "1 슬리브 (10 캡슐) / 캡슐 1개당 가격 : ₩ 3,500",
-        images: [
-            "https://cdn.builder.io/api/v1/image/assets/TEMP/e6efa1b8d524b91891b772502f42519490e0b876",
-            "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-        ],
-        tags: ["버츄오", "시즌 한정", "에스프레소"],
-        badges: [
-            {
-                text: "더블 에스프레소",
-                bgColor: "rgba(55, 56, 60, 0.16)",
-            },
-            {
-                text: "신제품",
-                bgColor: "#ffc000",
-            },
-            {
-                text: "시즌 한정",
-                bgColor: "#7030a0",
-                textColor: "#ffffff",
-            },
-        ],
-        coffeeSize: "80ml",
-        aromaFeatures: ["과일향\n이그조틱", "견과류향\n트로피컬 ", "곡물향"],
-        bodyLevel: 3,
-        bitterLevel: 2,
-        acidLevel: 2,
-        roastLevel: 2,
-        stockQuantity: 50,
-        limitDescription: "*스페셜 리저브 하와이 코나는 한정 수량 준비되어 매진될 수 있습니다.",
-        additionalDescription: "*재활용 알루미늄 85% 포함된 캡슐 사용",
-        productDetails: {
-            detailText: `
-                ○ 제품명: 스페셜 리저브 하와이 코나
-                ○ 식품유형: 커피
-                ○ 원산지: 스위스
-                ○ 품질유지기한: 제품 측면 별도 표기(읽는법: 일.월.년순)
-                ○ 내용량: 10개입(102g)
-                ○ 원재료명: 커피원두 100%
-                ○ 반품 및 교환: 801 전용 클럽 080-734-1111 (매일, 9시~18시/ 수신자 부담)
-                ○ 보관방법: 직사광선을 피하여 건조하고 서늘한 실온에 보관
-                ○ 포장재질: 바디-알루미늄/코팅-폴리프로필렌(내면)
+    const productId = id ? Number.parseInt(id, 10) : 1;
+    const product = MOCK_PRODUCTS.find(p => p.id === productId);
 
-                ※ 재활용한 알루미늄 85% 포함된 캡슐 사용
-                ※ 수입 식품 안전 관리 특별법에 의한 수입신고를 필함
-                ※ 본 제품은 공정거래위원회 고시 소비자 분쟁 해결 기준에 의거, 교환 또는 보상 받으실 수 있습니다.
-                ※ 부정, 불량식품 신고는 국번없이 1399
-            `,
-        },
-    };
+    // 해당 ID 제품이 없으면 에러를 던짐
+    if (!product) {
+        const error = new Error(`Product with id ${productId} not found`) as Error & { code: string };
+        error.code = "PRODUCT_NOT_FOUND";
+        throw error;
+    }
+
+    return product;
 }
+
+// 제품별 리뷰 목 데이터
+const PRODUCT_REVIEWS: Record<number, ReviewType[]> = {
+    1: [
+        // 에스프레소
+        {
+            reviewId: 1,
+            nickname: "에스프레소매니아",
+            rating: 5,
+            createdAt: "2023-12-15",
+            content: "진짜 진한 에스프레소! 크레마가 훌륭해요.",
+            adminReply: {
+                replyId: 1,
+                content: "진한 에스프레소를 좋아해주셔서 감사합니다!",
+                createdAt: "2023-12-16",
+            },
+        },
+        {
+            reviewId: 2,
+            nickname: "아침커피",
+            rating: 4,
+            createdAt: "2023-12-10",
+            content: "아침에 마시기 좋아요. 진한 맛이 하루를 시작하기에 완벽!",
+        },
+        {
+            reviewId: 3,
+            nickname: "커피초보",
+            rating: 3,
+            createdAt: "2023-12-05",
+            content: "좀 쓴 편이지만 진짜 에스프레소 맛이네요.",
+        },
+    ],
+    2: [
+        // 아메리카노
+        {
+            reviewId: 4,
+            nickname: "아메리카노러버",
+            rating: 5,
+            createdAt: "2023-12-14",
+            content: "깔끔하고 부드러운 아메리카노. 매일 마셔도 질리지 않아요!",
+        },
+        {
+            reviewId: 5,
+            nickname: "직장인김씨",
+            rating: 4,
+            createdAt: "2023-12-12",
+            content: "사무실에서 마시기 딱 좋아요. 적당한 쓴맛이 좋습니다.",
+            adminReply: {
+                replyId: 2,
+                content: "업무할 때 도움이 되어 기쁩니다!",
+                createdAt: "2023-12-13",
+            },
+        },
+        {
+            reviewId: 6,
+            nickname: "커피중독자",
+            rating: 5,
+            createdAt: "2023-12-08",
+            content: "하루에 3잔씩 마셔도 부담없어요. 최고!",
+        },
+    ],
+    3: [
+        // 카페라떼
+        {
+            reviewId: 7,
+            nickname: "라떼사랑",
+            rating: 5,
+            createdAt: "2023-12-13",
+            content: "부드럽고 크리미한 맛이 일품! 우유와 커피의 조화가 완벽해요.",
+        },
+        {
+            reviewId: 8,
+            nickname: "달콤한하루",
+            rating: 4,
+            createdAt: "2023-12-11",
+            content: "달달하면서도 커피 맛이 살아있어요. 디저트랑 같이 마시면 더 좋아요!",
+        },
+        {
+            reviewId: 9,
+            nickname: "카페사장",
+            rating: 4,
+            createdAt: "2023-12-07",
+            content: "카페에서 파는 라떼랑 비슷한 맛이에요. 집에서도 카페 기분!",
+        },
+    ],
+    4: [
+        // 카푸치노
+        {
+            reviewId: 10,
+            nickname: "카푸치노킹",
+            rating: 5,
+            createdAt: "2023-12-12",
+            content: "거품이 정말 부드러워요! 카푸치노 특유의 맛이 살아있습니다.",
+        },
+        {
+            reviewId: 11,
+            nickname: "이탈리아여행자",
+            rating: 4,
+            createdAt: "2023-12-09",
+            content: "이탈리아에서 마신 카푸치노가 생각나네요. 향이 정말 좋아요!",
+        },
+        {
+            reviewId: 12,
+            nickname: "폼아트러버",
+            rating: 5,
+            createdAt: "2023-12-06",
+            content: "거품으로 라떼아트 연습하기 좋아요. 맛도 훌륭하고!",
+        },
+    ],
+    5: [
+        // 마키아토
+        {
+            reviewId: 13,
+            nickname: "마키아토전문가",
+            rating: 5,
+            createdAt: "2023-12-11",
+            content: "진한 에스프레소에 우유 거품이 조화로워요. 정통 마키아토 맛!",
+        },
+        {
+            reviewId: 14,
+            nickname: "커피탐험가",
+            rating: 4,
+            createdAt: "2023-12-08",
+            content: "처음 마셔봤는데 생각보다 맛있네요. 달지 않아서 좋아요.",
+        },
+        {
+            reviewId: 15,
+            nickname: "강한커피선호",
+            rating: 5,
+            createdAt: "2023-12-04",
+            content: "강한 커피 맛을 원하는 분들께 추천! 만족스러워요.",
+        },
+    ],
+};
 
 /**
  * 제품 리뷰 목 데이터를 반환하는 함수
  */
-export function getMockReviews(page = 0, size = 20): ReviewResponse {
-    // productId를 활용하여 다른 리뷰 반환 로직을 추가할 수 있음
+export function getMockReviews(page = 0, size = 20, productId?: string): ReviewResponse {
+    const id = productId ? Number.parseInt(productId, 10) : 1;
+
+    // 해당 제품이 존재하는지 확인
+    const product = MOCK_PRODUCTS.find(p => p.id === id);
+
+    // 제품이 존재하지 않으면 빈 리뷰 반환
+    if (!product) {
+        return {
+            content: [],
+            page: page,
+            size: size,
+            totalPages: 0,
+            totalElements: 0,
+        };
+    }
+
+    // 제품이 존재하면 해당 제품의 리뷰 확인
+    const productReviews = PRODUCT_REVIEWS[id];
+
+    // 리뷰가 정의되어 있으면 반환
+    if (productReviews) {
+        return {
+            content: productReviews,
+            page: page,
+            size: size,
+            totalPages: 1,
+            totalElements: productReviews.length,
+        };
+    }
+
+    // 제품은 존재하지만 리뷰가 정의되지 않은 경우 (6번 이상 제품)
+    // 기본 리뷰 템플릿 사용
+    const productName = product.name;
+    const defaultReviews = [
+        {
+            reviewId: id * 10 + 1,
+            nickname: "커피러버",
+            rating: 4,
+            createdAt: "2023-12-10",
+            content: `${productName} 정말 맛있어요! 매일 마시고 싶은 맛입니다.`,
+        },
+        {
+            reviewId: id * 10 + 2,
+            nickname: "맛집탐방가",
+            rating: 5,
+            createdAt: "2023-12-08",
+            content: `${productName}는 진짜 맛있네요. 친구들한테도 추천했어요!`,
+            adminReply: {
+                replyId: id * 10,
+                content: "추천해주셔서 감사합니다!",
+                createdAt: "2023-12-09",
+            },
+        },
+        {
+            reviewId: id * 10 + 3,
+            nickname: "일상커피",
+            rating: 4,
+            createdAt: "2023-12-05",
+            content: `${productName} 향이 정말 좋아요. 기분이 좋아집니다.`,
+        },
+    ];
+
     return {
-        content: [
-            {
-                reviewId: 1,
-                nickname: "커피러버",
-                rating: 4,
-                createdAt: "2023-01-24",
-                content: "향이 정말 좋고 산미가 적절해요. 아침에 마시기 좋은 커피입니다.",
-                adminReply: {
-                    replyId: 1,
-                    content: "감사합니다! 앞으로도 좋은 커피로 보답하겠습니다.",
-                    createdAt: "2025-05-25",
-                },
-            },
-            {
-                reviewId: 2,
-                nickname: "여름커피",
-                rating: 5,
-                createdAt: "2023-02-15",
-                content: "시즌 한정이라 아쉽지만 매번 구매하는 제품입니다. 열대과일향이 특히 좋아요!",
-            },
-            {
-                reviewId: 3,
-                nickname: "하와이팬",
-                rating: 4,
-                createdAt: "2023-03-02",
-                content: "하와이 코나는 처음 마셔봤는데 기대 이상이네요. 부드러운 맛이 일품입니다.",
-                images: ["https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80"],
-            },
-            {
-                reviewId: 4,
-                nickname: "커피매니아",
-                rating: 3,
-                createdAt: "2023-03-15",
-                content: "품질은 좋지만 가격이 조금 비싼 편입니다. 특별한 날에 마시기 좋아요.",
-            },
-        ],
+        content: defaultReviews,
         page: page,
         size: size,
         totalPages: 1,
-        totalElements: 4,
+        totalElements: defaultReviews.length,
     };
 }
 
@@ -126,17 +386,97 @@ export type ReviewStats = {
  * 제품 리뷰 통계 목 데이터를 반환하는 함수
  */
 export function getMockReviewStats(productId?: string): ReviewStats {
-    // productId를 활용하여 다른 통계 반환 로직을 추가할 수 있음
-    return {
-        averageRating: 4.6,
-        ratingDistribution: {
-            oneStarCount: 1,
-            twoStarsCount: 3,
-            threeStarsCount: 11,
-            fourStarsCount: 33,
-            fiveStarsCount: 100,
+    const id = productId ? Number.parseInt(productId, 10) : 1;
+
+    // 해당 제품이 존재하는지 확인
+    const product = MOCK_PRODUCTS.find(p => p.id === id);
+
+    // 제품이 존재하지 않으면 빈 통계 반환
+    if (!product) {
+        return {
+            averageRating: 0,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 0,
+                fiveStarsCount: 0,
+            },
+        };
+    }
+
+    // 제품별로 다른 통계 반환
+    const statsMap: Record<number, ReviewStats> = {
+        1: {
+            // 에스프레소
+            averageRating: 4.0,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 1,
+                fourStarsCount: 1,
+                fiveStarsCount: 1,
+            },
+        },
+        2: {
+            // 아메리카노
+            averageRating: 4.7,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 1,
+                fiveStarsCount: 2,
+            },
+        },
+        3: {
+            // 카페라떼
+            averageRating: 4.3,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 2,
+                fiveStarsCount: 1,
+            },
+        },
+        4: {
+            // 카푸치노
+            averageRating: 4.7,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 1,
+                fiveStarsCount: 2,
+            },
+        },
+        5: {
+            // 마키아토
+            averageRating: 4.7,
+            ratingDistribution: {
+                oneStarCount: 0,
+                twoStarsCount: 0,
+                threeStarsCount: 0,
+                fourStarsCount: 1,
+                fiveStarsCount: 2,
+            },
         },
     };
+
+    // 기본 통계 (6번 이상 제품용)
+    const defaultStats: ReviewStats = {
+        averageRating: 4.5,
+        ratingDistribution: {
+            oneStarCount: 0,
+            twoStarsCount: 1,
+            threeStarsCount: 2,
+            fourStarsCount: 5,
+            fiveStarsCount: 12,
+        },
+    };
+
+    return statsMap[id] || defaultStats;
 }
 
 /**
