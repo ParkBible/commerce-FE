@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import type { ProductType } from "@/src/features/product/types";
 import { CupSizeCircleIcon } from "@/src/shared/components/shared/Icon";
@@ -75,7 +74,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         </div>
 
                         {/* 아로마 특징 섹션 */}
-                        <div>
+                        {/* <div>
                             <h3 className="text-xl font-bold mb-4">주요 아로마 특징</h3>
                             <div className="flex gap-6">
                                 {aromaFeatures.map((feature, index) => (
@@ -84,11 +83,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                     </p>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* 커피 정보 섹션 */}
-                    <div className="mt-8">
+                    {/* <div className="mt-8">
                         <h3 className="text-xl font-bold mb-4">커피 정보</h3>
                         <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                             <div>
@@ -108,10 +107,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                 {getRatingBar(roastLevel)}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* 제품 상세정보 섹션 - isExpanded 상태에 따라 표시 */}
-                    {isExpanded && (
+                    {/* {isExpanded && (
                         <div className="mt-10">
                             <h3 className="text-xl font-bold mb-4">제품 상세정보</h3>
                             <div className="text-sm leading-relaxed">
@@ -120,10 +119,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                 </div>
                             </div>
                         </div>
-                    )}
+                    )} */}
 
                     {/* 추가 상세정보 버튼 */}
-                    <div className="mt-10 flex justify-center">
+                    {/* <div className="mt-10 flex justify-center">
                         <button
                             type="button"
                             onClick={() => setIsExpanded(!isExpanded)}
@@ -142,7 +141,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                 <path d="M8 10L4 6H12L8 10Z" fill="currentColor" />
                             </svg>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

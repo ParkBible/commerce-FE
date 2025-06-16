@@ -373,6 +373,7 @@ export function getMockReviews(page = 0, size = 20, productId?: string): ReviewR
 
 export type ReviewStats = {
     averageRating: number;
+    totalCount?: number;
     ratingDistribution: {
         oneStarCount: number;
         twoStarsCount: number;

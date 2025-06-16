@@ -35,7 +35,7 @@ export function ProductPage({ product, reviews, reviewStats, recommendedProducts
                 </div>
 
                 <ProductDetails product={product} />
-                {/* <ProductVideo /> */}
+                <ProductVideo detailImage={product.detailImage} />
                 <ProductReviews productId={product.id.toString()} reviews={reviews} reviewStats={reviewStats} />
                 {/* <RecommendedProducts products={recommendedProducts} /> */}
             </main>
