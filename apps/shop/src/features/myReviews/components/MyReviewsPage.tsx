@@ -27,7 +27,7 @@ export default function MyReviewsPage() {
     }
 
     if (error) {
-        return <ErrorComponent message={error?.message || "리뷰 불러오기 실패"} />;
+        return <ErrorComponent error={error} />;
     }
     const reviews = data?.content || [];
     const totalPages = data?.totalPages || 0;
@@ -52,7 +52,7 @@ export default function MyReviewsPage() {
             </div>
 
             {/* 리뷰 목록 */}
-            <MyReviewList reviews={reviews} hasMore={currentPage < totalPages - 1} />
+            <MyReviewList reviews={reviews} />
 
             {/* 페이지네이션 */}
             <Pagination page={currentPage} totalPages={totalPages || 0} />
