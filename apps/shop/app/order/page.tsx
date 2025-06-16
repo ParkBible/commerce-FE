@@ -1,5 +1,6 @@
-import { getOrderHistory } from "@/src/features/order/api/orderApi";
-import { OrderHistoryPage } from "@/src/features/order/OrderHistoryPage";
+import { OrderHistoryPage } from "@/src/features/order/components/OrderHistoryPage";
+import ErrorComponent from "@/src/shared/components/shared/ErrorComponent";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export const metadata = {
     title: "주문 내역",
@@ -7,6 +8,9 @@ export const metadata = {
 };
 
 export default async function OrderPage() {
-    const orders = await getOrderHistory();
-    return <OrderHistoryPage initialOrders={orders} />;
+    return (
+        <ErrorBoundary errorComponent={ErrorComponent}>
+            <OrderHistoryPage />
+        </ErrorBoundary>
+    );
 }
