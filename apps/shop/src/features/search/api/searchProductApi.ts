@@ -53,7 +53,7 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10, inten
             searchParams.append("cupSizeId", cupSizeId);
         }
 
-        const response = await fetcher<BackendSearchData>(`/api/products?${searchParams}`);
+        const response = await fetcher<BackendSearchData>(`/products?${searchParams}`);
 
         // API 응답 구조 검증
         if (response.data?.content && Array.isArray(response.data.content)) {

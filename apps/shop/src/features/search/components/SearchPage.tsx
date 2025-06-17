@@ -7,12 +7,12 @@ import ProductList from "./ProductList";
 import { searchProducts } from "@/src/features/search/api/searchProductApi";
 import type { SearchResultResponse, Product } from "@/src/features/search/types";
 
-// 컵사이즈 매핑 (UI 텍스트 -> 실제 DB Categories ID)
+// 컵사이즈 매핑 (UI 텍스트 -> 필터 ID)
 const getCupSizeId = (cupSize: string): string => {
     const cupSizeMapping: Record<string, string> = {
-        Small: "5", // DB id:5 - SHORT
-        Medium: "7", // DB id:7 - GRANDE
-        Large: "8", // DB id:8 - VENTI
+        Small: "5", // 25-80ml 범위
+        Medium: "7", // 150-230ml 범위
+        Large: "8", // 355ml 이상
     };
     return cupSizeMapping[cupSize] || "5";
 };
@@ -38,11 +38,11 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
     const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
     const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
 
-    // 강도 매핑 (UI 텍스트 -> 실제 DB Categories ID)
+    // 강도 매핑 (UI 텍스트 -> 필터 ID)
     const strengthMapping: Record<string, string> = {
-        연함: "1", // DB id:1 - 연함
-        중간: "2", // DB id:2 - 중간
-        진함: "3", // DB id:3 - 진함
+        연함: "1", // 레벨 1-3 (연함)
+        중간: "2", // 레벨 4-6 (중간)
+        진함: "3", // 레벨 7-9 (진함)
     };
 
     const fetchSearchResults = useCallback(async () => {
