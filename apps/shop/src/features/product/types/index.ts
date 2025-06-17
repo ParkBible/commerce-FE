@@ -9,21 +9,9 @@ export interface ProductType {
     quantity: number;
     thumbnail: string;
     detailImage: string;
-    intensity: {
-        id: number;
-        label: string;
-    };
-    cupSize: {
-        id: number;
-        label: string;
-    };
-    status: {
-        code: string;
-        label: string;
-    };
+    intensity: string;
+    cupSize: string;
     isSoldOut: boolean;
-    createdAt: string;
-    updatedAt: string;
 }
 
 export interface ProductDetails {

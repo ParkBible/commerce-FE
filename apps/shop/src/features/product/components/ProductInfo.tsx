@@ -9,9 +9,9 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
     // 백엔드 데이터로부터 UI에 필요한 정보 생성 (안전하게 처리)
-    const intensityLabel = product?.intensity?.label || "알 수 없음";
-    const statusLabel = product?.status?.label || "상태 불명";
-    const cupSizeLabel = product?.cupSize?.label || "사이즈 불명";
+    const intensityLabel = product?.intensity || "알 수 없음";
+    const statusLabel = product?.isSoldOut ? "품절" : "판매중";
+    const cupSizeLabel = product?.cupSize || "사이즈 불명";
     const isSoldOut = product?.isSoldOut || false;
     const productPrice = product?.price || 0;
 

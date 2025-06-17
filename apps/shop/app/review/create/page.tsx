@@ -10,14 +10,11 @@ const mockProduct: ProductType = {
     name: "801 프리미엄 블렌드 커피 캡슐",
     price: 11500,
     detailImage: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-    intensity: { id: 4, label: "미디엄" },
+    intensity: "Medium",
     quantity: 100,
     thumbnail: "https://cdn.builder.io/api/v1/image/assets/TEMP/4c7bfa7b14aca451340208bfc07390f055298c80",
-    cupSize: { id: 1, label: "미디엄" },
-    status: { code: "ACTIVE", label: "판매중" },
+    cupSize: "Large",
     isSoldOut: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
 };
 
 export default function ReviewCreatePage() {

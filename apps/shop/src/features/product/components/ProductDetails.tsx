@@ -8,23 +8,24 @@ interface ProductDetailsProps {
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
-    const [isExpanded, setIsExpanded] = useState(false);
+    // 안전하게 product 속성들 추출
+    const productName = product?.name || "제품명 없음";
+    const cupSizeLabel = product?.cupSize || "사이즈 불명";
+    // const productQuantity = product?.quantity || 0;
+    // const productPrice = product?.price || 0;
+    // const intensityLabel = product?.intensity || "알 수 없음";
+    // const statusLabel = product?.isSoldOut ? "품절" : "판매중";
 
+    /*
+    const [isExpanded, setIsExpanded] = useState(false);
+    
     // 백엔드에서 제공하지 않는 정보들을 생성
     const aromaFeatures = ["풍부한 향", "깊은 맛", "부드러운 질감"];
     const bodyLevel = 3; // 기본값
     const bitterLevel = 2; // 기본값
     const acidLevel = 2; // 기본값
     const roastLevel = 3; // 기본값
-
-    // 안전하게 product 속성들 추출
-    const productName = product?.name || "제품명 없음";
-    const productQuantity = product?.quantity || 0;
-    const productPrice = product?.price || 0;
-    const intensityLabel = product?.intensity?.label || "알 수 없음";
-    const cupSizeLabel = product?.cupSize?.label || "사이즈 불명";
-    const statusLabel = product?.status?.label || "상태 불명";
-
+    
     // 제품 상세정보 생성
     const detailText = `○ 제품명: ${productName}
         ○ 내용량: ${productQuantity}개입
@@ -33,7 +34,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         ○ 사이즈: ${cupSizeLabel}
         ○ 상태: ${statusLabel}
     `;
-
+    
     const getRatingBar = (level: number, maxLevel = 5) => {
         return (
             <div className="flex items-center gap-4">
@@ -48,6 +49,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </div>
         );
     };
+    */
 
     return (
         <section className="bg-[#fafafa] py-16">

@@ -33,21 +33,9 @@ const emptyProduct: ProductType = {
     quantity: 0,
     thumbnail: "",
     detailImage: "",
-    intensity: {
-        id: 0,
-        label: "정보 없음",
-    },
-    cupSize: {
-        id: 0,
-        label: "정보 없음",
-    },
-    status: {
-        code: "UNAVAILABLE",
-        label: "사용 불가",
-    },
+    intensity: "Unknown",
+    cupSize: "Unknown",
     isSoldOut: true,
-    createdAt: "",
-    updatedAt: "",
 };
 
 /**
