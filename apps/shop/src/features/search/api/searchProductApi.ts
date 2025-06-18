@@ -34,7 +34,13 @@ function handleSearchError(error: unknown, context: string, searchTerm: string, 
 /**
  * 상품 검색 API 함수
  */
-export async function searchProducts(searchTerm = "", page = 0, size = 10, intensityId?: string, cupSizeId?: string): Promise<SearchResultResponse> {
+export async function searchProducts(
+    searchTerm = "",
+    page = 0,
+    size = 10,
+    intensityIds?: string,
+    cupSizeIds?: string,
+): Promise<SearchResultResponse> {
     try {
         const fetcher = fetchServer();
 
@@ -46,11 +52,11 @@ export async function searchProducts(searchTerm = "", page = 0, size = 10, inten
         });
 
         // 필터 파라미터 추가
-        if (intensityId) {
-            searchParams.append("intensityId", intensityId);
+        if (intensityIds) {
+            searchParams.append("intensityId", intensityIds);
         }
-        if (cupSizeId) {
-            searchParams.append("cupSizeId", cupSizeId);
+        if (cupSizeIds) {
+            searchParams.append("cupSizeId", cupSizeIds);
         }
 
         const response = await fetcher<BackendSearchData>(`/products?${searchParams}`);
