@@ -48,7 +48,7 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
                         </span>
                     ))}
                 </div>
-                <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                <div className="aspect-[3/2] bg-gray-50 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                     <Image src={thumbnail} alt={name} fill className="object-cover" />
                 </div>
                 <div className="flex justify-center items-center gap-4 mb-4">

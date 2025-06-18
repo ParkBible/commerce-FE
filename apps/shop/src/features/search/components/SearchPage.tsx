@@ -93,7 +93,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
             <main className="flex-1 bg-white py-8">
                 <div className="max-w-[75rem] mx-auto">
                     {/* 필터 및 상품 목록 */}
-                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-14">
+                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
                         {/* 필터 */}
                         <SearchFilter
                             resultCount={searchResults?.totalElements}
