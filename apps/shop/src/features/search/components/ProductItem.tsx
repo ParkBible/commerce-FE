@@ -28,18 +28,15 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
         return badges;
     };
 
-    // intensity 문자열을 숫자로 변환
-    const getIntensityNumber = (intensity: string): number => {
-        const intensityMap: Record<string, number> = {
-            Light: 3,
-            Medium: 6,
-            Strong: 9,
-        };
-        return intensityMap[intensity] || 6;
+    // intensity 숫자 문자열을 변환 (실제 API 데이터 구조에 맞게)
+    const getIntensityDisplay = (intensity: string): number => {
+        const num = Number.parseInt(intensity, 10);
+        // 1-9 범위의 유효한 숫자인지 확인, 아니면 0으로 표시
+        return !Number.isNaN(num) && num >= 1 && num <= 9 ? num : 0;
     };
 
     const badges = getBadges();
-    const intensityNumber = getIntensityNumber(intensity);
+    const intensityDisplay = getIntensityDisplay(intensity);
 
     return (
         <div className="border border-gray-200/70 rounded-xl p-4">
@@ -51,13 +48,13 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
                         </span>
                     ))}
                 </div>
-                <div className="h-40 bg-gray-100 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                <div className="aspect-[3/2] bg-gray-50 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                     <Image src={thumbnail} alt={name} fill className="object-cover" />
                 </div>
                 <div className="flex justify-center items-center gap-4 mb-4">
                     <div className="flex flex-col items-center">
                         <div className="w-10 h-10 rounded-full bg-[#f7f7f8] flex items-center justify-center mb-1">
-                            <span className="text-[#37383c]/60 text-base font-medium">{intensityNumber}</span>
+                            <span className="text-[#37383c]/60 text-base font-medium">{intensityDisplay}</span>
                         </div>
                         <span className="text-[#37383c]/60 text-xs">강도</span>
                     </div>

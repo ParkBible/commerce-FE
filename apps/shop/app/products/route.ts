@@ -24,29 +24,29 @@ export async function GET(request: NextRequest) {
                 return false;
             }
 
-            // 강도 필터링 - ID와 문자열 케이스를 명확히 분리
+            // 강도 필터링 - 실제 API 데이터 구조에 맞게 수정
             if (intensityId) {
-                // Case 1: intensityId (숫자)가 제공된 경우 - DB 카테고리 ID 기준 필터링
+                // intensityId (1=연함, 2=중간, 3=진함)를 실제 숫자 레벨과 매핑
                 const allowedIntensities = INTENSITY_MAP[intensityId];
                 if (!allowedIntensities || !allowedIntensities.includes(product.intensity)) {
                     return false;
                 }
             } else if (intensity) {
-                // Case 2: intensity (문자열)이 제공된 경우 - 직접 문자열 매칭
+                // intensity가 직접 숫자 문자열로 전달된 경우
                 if (product.intensity !== intensity) {
                     return false;
                 }
             }
 
-            // 컵사이즈 필터링 - ID와 문자열 케이스를 명확히 분리
+            // 컵사이즈 필터링 - 실제 API 데이터 구조에 맞게 수정
             if (cupSizeId) {
-                // Case 1: cupSizeId (숫자)가 제공된 경우 - DB 카테고리 ID 기준 필터링
+                // cupSizeId (5=Small, 7=Medium, 8=Large)를 실제 ml 단위와 매핑
                 const allowedCupSizes = CUP_SIZE_MAP[cupSizeId];
                 if (!allowedCupSizes || !allowedCupSizes.includes(product.cupSize)) {
                     return false;
                 }
             } else if (cupSize) {
-                // Case 2: cupSize (문자열)이 제공된 경우 - 직접 문자열 매칭
+                // cupSize가 직접 ml 단위로 전달된 경우
                 if (product.cupSize !== cupSize) {
                     return false;
                 }
