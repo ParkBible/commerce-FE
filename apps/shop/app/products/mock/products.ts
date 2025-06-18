@@ -90,7 +90,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     },
     {
         id: 8,
-        name: "네스프레소 아이스아메리카노 355ml",
+        name: "아이스아메리카노 355ml",
         price: 3200,
         quantity: 85,
         thumbnail: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=300&h=300&fit=crop&crop=center",
@@ -123,17 +123,25 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     },
 ];
 
-// 실제 API 데이터에 맞는 필터링 매핑
-// UI에서는 "연함/중간/진함"을 보여주지만, 내부적으로는 숫자 레벨로 필터링
+// 카테고리 API 목데이터와 일치하는 필터링 매핑
+// 실제 카테고리 ID와 상품 데이터 매핑
 export const INTENSITY_MAP: Record<number, string[]> = {
-    1: ["1", "2", "3"], // 연함 (레벨 1-3)
-    2: ["4", "5", "6"], // 중간 (레벨 4-6)
-    3: ["7", "8", "9"], // 진함 (레벨 7-9)
+    7: ["1"], // 카테고리 id:7 = 강도 1
+    8: ["2"], // 카테고리 id:8 = 강도 2
+    9: ["3"], // 카테고리 id:9 = 강도 3
+    10: ["4"], // 카테고리 id:10 = 강도 4
+    11: ["5"], // 카테고리 id:11 = 강도 5
+    12: ["6"], // 카테고리 id:12 = 강도 6
+    13: ["7"], // 카테고리 id:13 = 강도 7
+    14: ["8"], // 카테고리 id:14 = 강도 8
+    15: ["9"], // 카테고리 id:15 = 강도 9
 };
 
-// UI에서는 "Small/Medium/Large"를 보여주지만, 내부적으로는 ml 단위로 필터링
 export const CUP_SIZE_MAP: Record<number, string[]> = {
-    5: ["25ml", "40ml", "80ml"], // Small (25-80ml)
-    7: ["150ml", "230ml"], // Medium (150-230ml)
-    8: ["355ml"], // Large (355ml 이상)
+    1: ["25ml"], // 카테고리 id:1 = 25ml
+    2: ["40ml"], // 카테고리 id:2 = 40ml
+    3: ["80ml"], // 카테고리 id:3 = 80ml
+    4: ["150ml"], // 카테고리 id:4 = 150ml
+    5: ["230ml"], // 카테고리 id:5 = 230ml
+    6: ["355ml"], // 카테고리 id:6 = 355ml
 };

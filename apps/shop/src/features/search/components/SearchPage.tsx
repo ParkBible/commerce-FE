@@ -37,9 +37,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
     // 카테고리 로드
     const loadCategories = useCallback(async () => {
         const categoriesData = await getProductCategories();
-        if (categoriesData) {
-            setCategories(categoriesData);
-        }
+        setCategories(categoriesData);
     }, []);
 
     const fetchSearchResults = useCallback(async () => {
