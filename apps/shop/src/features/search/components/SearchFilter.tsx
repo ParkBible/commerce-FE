@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 import { FilterButton } from "./FilterButton";
+import type { CategoryItem } from "@/src/features/search/api/categoriesApi";
 
 interface SearchFilterProps {
     resultCount?: number;
@@ -9,6 +10,9 @@ interface SearchFilterProps {
     onIntensityChange?: (intensity: string | null) => void;
     onCupSizeChange?: (cupSize: string | null) => void;
     searchTerm?: string;
+    // 동적 필터 데이터
+    intensities?: CategoryItem[];
+    cupSizes?: CategoryItem[];
 }
 
 export default function SearchFilter({
@@ -18,6 +22,8 @@ export default function SearchFilter({
     onIntensityChange,
     onCupSizeChange,
     searchTerm,
+    intensities = [],
+    cupSizes = [],
 }: SearchFilterProps) {
     const [isIntensityOpen, setIsIntensityOpen] = useState(true);
     const [isCupSizeOpen, setIsCupSizeOpen] = useState(true);
@@ -55,12 +61,12 @@ export default function SearchFilter({
                 </button>
                 {isIntensityOpen && (
                     <div className="flex flex-wrap gap-2">
-                        {["연함", "중간", "진함"].map(intensity => (
+                        {intensities.map(intensity => (
                             <FilterButton
-                                key={intensity}
-                                label={intensity}
-                                isSelected={selectedIntensity === intensity}
-                                onClick={() => handleIntensityClick(intensity)}
+                                key={intensity.id}
+                                label={intensity.label}
+                                isSelected={selectedIntensity === intensity.id}
+                                onClick={() => handleIntensityClick(intensity.id)}
                             />
                         ))}
                     </div>
@@ -79,12 +85,12 @@ export default function SearchFilter({
                 </button>
                 {isCupSizeOpen && (
                     <div className="flex flex-wrap gap-2">
-                        {["Small", "Medium", "Large"].map(cupSize => (
+                        {cupSizes.map(cupSize => (
                             <FilterButton
-                                key={cupSize}
-                                label={cupSize}
-                                isSelected={selectedCupSize === cupSize}
-                                onClick={() => handleCupSizeClick(cupSize)}
+                                key={cupSize.id}
+                                label={cupSize.label}
+                                isSelected={selectedCupSize === cupSize.id}
+                                onClick={() => handleCupSizeClick(cupSize.id)}
                             />
                         ))}
                     </div>

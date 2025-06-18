@@ -5,17 +5,10 @@ import { useSearchParams } from "next/navigation";
 import SearchFilter from "./SearchFilter";
 import ProductList from "./ProductList";
 import { searchProducts } from "@/src/features/search/api/searchProductApi";
+import { getProductCategories, type CategoriesResponse, type CategoryItem } from "@/src/features/search/api/categoriesApi";
 import type { SearchResultResponse, Product } from "@/src/features/search/types";
 
-// 컵사이즈 매핑 (UI 텍스트 -> 실제 DB Categories ID)
-const getCupSizeId = (cupSize: string): string => {
-    const cupSizeMapping: Record<string, string> = {
-        Small: "5", // DB id:5 - SHORT
-        Medium: "7", // DB id:7 - GRANDE
-        Large: "8", // DB id:8 - VENTI
-    };
-    return cupSizeMapping[cupSize] || "5";
-};
+// 그룹핑 로직 제거 - 개별 선택 방식으로 변경
 
 interface SearchPageProps {
     initialProducts?: Product[];
@@ -38,21 +31,23 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
     const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
     const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
 
-    // 강도 매핑 (UI 텍스트 -> 실제 DB Categories ID)
-    const strengthMapping: Record<string, string> = {
-        연함: "1", // DB id:1 - 연함
-        중간: "2", // DB id:2 - 중간
-        진함: "3", // DB id:3 - 진함
-    };
+    // 카테고리 상태
+    const [categories, setCategories] = useState<CategoriesResponse | null>(null);
+
+    // 카테고리 로드
+    const loadCategories = useCallback(async () => {
+        const categoriesData = await getProductCategories();
+        setCategories(categoriesData);
+    }, []);
 
     const fetchSearchResults = useCallback(async () => {
         setLoading(true);
         try {
-            // UI 텍스트를 API 파라미터로 변환
-            const intensityId = selectedIntensity ? strengthMapping[selectedIntensity] : undefined;
-            const cupSizeId = selectedCupSize ? getCupSizeId(selectedCupSize) : undefined;
+            // 개별 ID를 직접 사용 (그룹핑 없음)
+            const intensityIds = selectedIntensity || undefined;
+            const cupSizeIds = selectedCupSize || undefined;
 
-            const results = await searchProducts(query, 0, 20, intensityId, cupSizeId);
+            const results = await searchProducts(query, 0, 20, intensityIds, cupSizeIds);
             setSearchResults(results);
         } catch (error) {
             console.error("검색 실패:", error);
@@ -61,9 +56,18 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
         }
     }, [query, selectedIntensity, selectedCupSize]);
 
+    // 초기 카테고리 로드
     useEffect(() => {
-        fetchSearchResults();
-    }, [fetchSearchResults]);
+        loadCategories();
+    }, [loadCategories]);
+
+    // 검색 실행
+    useEffect(() => {
+        // 카테고리가 로드된 후에만 검색 실행
+        if (categories) {
+            fetchSearchResults();
+        }
+    }, [fetchSearchResults, categories]);
 
     const handleIntensityChange = (intensity: string | null) => {
         setSelectedIntensity(intensity);
@@ -73,11 +77,11 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
         setSelectedCupSize(cupSize);
     };
 
-    if (loading) {
+    if (loading || !categories) {
         return (
             <div className="w-full min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <p className="text-lg">검색 중...</p>
+                    <p className="text-lg">{!categories ? "카테고리 로딩 중..." : "검색 중..."}</p>
                 </div>
             </div>
         );
@@ -98,6 +102,8 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
                             onIntensityChange={handleIntensityChange}
                             onCupSizeChange={handleCupSizeChange}
                             searchTerm={query}
+                            intensities={categories?.intensities || []}
+                            cupSizes={categories?.cupSizes || []}
                         />
 
                         {/* 상품 목록 */}
