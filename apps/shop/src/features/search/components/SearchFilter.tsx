@@ -40,7 +40,7 @@ export default function SearchFilter({
         onCupSizeChange?.(newCupSize);
     };
     return (
-        <div className="w-full lg:w-80 lg:flex-shrink-0">
+        <div className="w-full lg:w-64 lg:flex-shrink-0">
             <h3 className="text-lg font-bold mb-8 flex items-center justify-between">
                 <span className="flex items-center gap-2">
                     <span className="text-sm font-normal text-[#37383c]/60 bg-gray-100 px-2 py-1 rounded">
