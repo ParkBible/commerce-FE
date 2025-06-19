@@ -6,108 +6,86 @@ import { useState } from "react";
 import { useOrderList } from "../hooks/useOrderList";
 import { cva } from "class-variance-authority";
 import type { OrderListItem } from "../types/orderListItem";
-import { RefundModal } from "./RefundModal";
+import { CancelOrderModal } from "./CancelOrderModal";
 import Image from "next/image";
 import { getOrderStatusLabel } from "@/src/shared/utils/getOrderStatusLabel";
+import type { OrderStatus } from "../types";
 
-interface ButtonConfig {
-    text: string;
-    variant?: "outline" | "default";
-    isGreen?: boolean;
-    onClick?: () => void;
+interface OrderHistoryListProps {
+    status: OrderStatus | null;
+    period: 3 | 6 | 12 | null;
 }
-// 공통 버튼 스타일 클래스
-const buttonStyle = cva("flex-1 h-10 text-sm font-semibold", {
-    variants: {
-        color: {
-            default: "",
-            green: "bg-[#257a57] border-[#257a57] hover:bg-[#1a5f42] hover:border-[#1a5f42]",
-        },
-    },
-});
 
-export const OrderHistoryList = () => {
-    const [page, setPage] = useState(1);
-    const { data: orders, totalPages } = useOrderList(page);
+export const OrderHistoryList = ({ status, period }: OrderHistoryListProps) => {
+    const { data: orders, hasNextPage, fetchNextPage } = useOrderList({ status, period });
     const [cancelOrderData, setCancelOrderData] = useState<OrderListItem | null>(null);
 
     // 주문 상태별 버튼 구성 정의
-    const getButtonsByStatus = (order: OrderListItem): ButtonConfig[] => {
-        switch (order.orderStatus) {
-            case "WAITING_FOR_PAYMENT":
-                return [
-                    { text: "주문 취소", variant: "outline", onClick: () => setCancelOrderData(order) },
-                    { text: "배송 조회", isGreen: true },
-                ];
-            case "SHIPPED":
-                return [{ text: "배송 조회", isGreen: true }];
-            case "DELIVERED":
-                return [
-                    { text: "반품 신청", variant: "outline", onClick: () => setCancelOrderData(order) },
-                    { text: "배송 조회", variant: "outline" },
-                ];
-            case "REFUNDED":
-                return [
-                    { text: "반품 정보", variant: "outline" },
-                    { text: "장바구니 담기", variant: "outline" },
-                ];
-            default:
-                return [];
-        }
-    };
 
     return (
         <div className="flex flex-col w-full gap-4">
-            {orders?.map(order => (
-                <div key={order.orderNumber} className="w-full p-6 border border-gray-300/30 rounded-xl">
-                    <div className="flex justify-between items-center mb-4">
-                        <div className="flex items-center gap-2">
-                            <span className="font-bold text-base">{getOrderStatusLabel(order.orderStatus)}</span>
-                            {order?.orderedAt && <span className="text-emerald-700 text-sm">{order.orderedAt}</span>}
+            {orders?.pages.map(({ data }) =>
+                data?.content.map(order => (
+                    <div key={order.orderNumber} className="w-full p-6 border border-gray-300/30 rounded-xl">
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="flex items-center gap-2">
+                                <span className="font-bold text-base">{getOrderStatusLabel(order.orderStatus)}</span>
+                                {order?.orderedAt && <span className="text-emerald-700 text-sm">{order.orderedAt}</span>}
+                            </div>
+                            <Link href={`/order/${order.orderNumber}`}>
+                                <button type="button" className="p-1.5">
+                                    <ArrowIcon direction="right" title="주문 상세 보기" />
+                                </button>
+                            </Link>
                         </div>
-                        <Link href="/order/123456456789">
-                            <button type="button" className="p-1.5">
-                                <ArrowIcon direction="right" title="주문 상세 보기" />
-                            </button>
-                        </Link>
-                    </div>
 
-                    <div className="flex gap-4 mb-4">
-                        <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden relative">
-                            {/* <Image src={order.mainProductThumbnail} alt={`${order.orderName} 이미지`} fill sizes="5rem" className="object-cover" /> */}
+                        <div className="flex gap-4 mb-4">
+                            <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden relative">
+                                <Image
+                                    src={order.mainProductThumbnail}
+                                    alt={`${order.orderName} 이미지`}
+                                    fill
+                                    sizes="5rem"
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div className="flex flex-col justify-between">
+                                <h3 className="font-bold text-sm">{order.orderName}</h3>
+                                <div className="text-emerald-700 font-bold text-sm">{formatCurrency(order.finalTotalPrice)}</div>
+                            </div>
                         </div>
-                        <div className="flex flex-col justify-between">
-                            <h3 className="font-bold text-sm">{order.orderName}</h3>
-                            <div className="text-emerald-700 font-bold text-sm">{formatCurrency(order.finalTotalPrice)}</div>
-                        </div>
-                    </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        {getButtonsByStatus(order).map(button => (
-                            <Button
-                                key={`${order.orderName}-${button.text}`}
-                                variant={button.variant}
-                                className={buttonStyle({ color: button.isGreen ? "green" : "default" })}
-                                onClick={button.onClick}
-                                type="button"
-                            >
-                                {button.text}
-                            </Button>
-                        ))}
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                            {order.cancellable && (
+                                <Button variant="outline" className="w-full" onClick={() => setCancelOrderData(order)}>
+                                    주문 취소
+                                </Button>
+                            )}
+
+                            {/* <Button
+                                    key={`${order.orderName}-${button.text}`}
+                                    variant={button.variant}
+                                    className={buttonStyle({ color: button.isGreen ? "green" : "default" })}
+                                    onClick={button.onClick}
+                                    type="button"
+                                >
+                                    {button.text}
+                                </Button> */}
+                        </div>
                     </div>
-                </div>
-            ))}
+                )),
+            )}
 
             <Button
                 variant="outline"
                 className="w-48 h-12 mx-auto flex items-center justify-center gap-1 text-sm font-semibold"
-                onClick={() => setPage(page + 1)}
-                disabled={orders?.length === 0 || totalPages <= page}
+                onClick={() => fetchNextPage()}
+                disabled={!hasNextPage}
             >
                 더보기
                 <ArrowIcon direction="down" size="sm" strokeWidth={1.5} title="더 많은 주문 내역 보기" />
             </Button>
-            {cancelOrderData && <RefundModal order={cancelOrderData} onClickClose={() => setCancelOrderData(null)} />}
+            {cancelOrderData && <CancelOrderModal order={cancelOrderData} onClickClose={() => setCancelOrderData(null)} />}
         </div>
     );
 };

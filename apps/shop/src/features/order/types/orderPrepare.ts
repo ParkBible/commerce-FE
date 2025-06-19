@@ -6,6 +6,7 @@ export type OrderPrepareResponse = {
     shippingFee: number;
     finalTotalPrice: number;
     items: {
+        cartItemId: number;
         productId: number;
         name: string;
         thumbnail: string;
@@ -14,6 +15,7 @@ export type OrderPrepareResponse = {
         itemSubtotal: number;
     }[];
     shippingInfo: {
+        addressId: number;
         recipientName: string;
         recipientPhone: string;
         zipCode: string;
