@@ -6,6 +6,9 @@ import Link from "next/link";
 import type { OrderDetailData } from "../types/orderDetail";
 import CreateReviewModal from "@/src/features/reviewCreate/components/CreateReviewModal";
 import { useState } from "react";
+import { useModal } from "@/src/shared/hooks/useModal";
+import { ShippingTracking } from "./ShippingTracking";
+import { Button } from "@/src/shared/components/shared/button";
 
 type OrderDetailItem = OrderDetailData["items"][number] & {
     reviewWritten?: boolean;
@@ -15,11 +18,12 @@ interface OrderProductProps {
     products: OrderDetailItem[];
     reviewable: boolean;
     orderNumber: string;
+    trackingNumber: string | null;
 }
 
-export const OrderProduct = ({ products, reviewable, orderNumber }: OrderProductProps) => {
+export const OrderProduct = ({ products, reviewable, orderNumber, trackingNumber }: OrderProductProps) => {
     const [reviewingProduct, setReviewingProduct] = useState<OrderDetailItem | null>(null);
-
+    const { openModal, closeModal, Modal } = useModal();
     return (
         <>
             <div className="mb-10">
@@ -77,14 +81,13 @@ export const OrderProduct = ({ products, reviewable, orderNumber }: OrderProduct
                         </div>
                     ))}
                 </div>
-                <div className="mt-6">
-                    <button
-                        type="button"
-                        className="w-full py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-                    >
-                        배송 조회
-                    </button>
-                </div>
+                {trackingNumber && (
+                    <div className="mt-6">
+                        <Button type="button" onClick={() => openModal()} size="full" className="bg-emerald-700 text-white">
+                            배송 조회
+                        </Button>
+                    </div>
+                )}
             </div>
             {reviewingProduct && (
                 <CreateReviewModal
@@ -97,6 +100,11 @@ export const OrderProduct = ({ products, reviewable, orderNumber }: OrderProduct
                     isOpen={!!reviewingProduct}
                     onClickClose={() => setReviewingProduct(null)}
                 />
+            )}
+            {trackingNumber && (
+                <Modal title="배송 조회" onClickClose={closeModal}>
+                    <ShippingTracking trackingNumber={trackingNumber} />
+                </Modal>
             )}
         </>
     );
