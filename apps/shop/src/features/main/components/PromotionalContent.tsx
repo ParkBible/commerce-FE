@@ -29,15 +29,13 @@ export default function CoffeeLetter() {
                         <span className="hidden md:block">
                             언제든지 편안하게,
                             <br />
-                            카페인 걱정 없는 여유로운 시간은 어떨까요?
+                            여유로운 시간은 어떨까요?
                         </span>
                         {/* Mobile version */}
                         <span className="block md:hidden">
                             언제든지 편안하게,
                             <br />
-                            카페인 걱정 없는 여유로운 시간은
-                            <br />
-                            어떨까요?
+                            여유로운 시간은 어떨까요?
                         </span>
                     </h3>
                     <p className="mt-4 text-sm font-medium text-neutral-600">하루 중 언제라도 따뜻한 한 잔으로 여유를 즐기세요</p>

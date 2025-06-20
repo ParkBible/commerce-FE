@@ -14,10 +14,10 @@ const Products = async () => {
             {/* <FilterBar /> */}
             <section className="mt-10 w-full">
                 {/* 목 데이터 섹션 */}
-                <div className="mb-12">
+                {/* <div className="mb-12">
                     <h2 className="text-2xl font-bold mb-6 ml-20">추천 상품</h2>
                     <ProductGrid products={mockProducts} showArrows={false} />
-                </div>
+                </div> */}
                 
                 {/* 신상품 섹션 */}
                 <div className="mb-12">
