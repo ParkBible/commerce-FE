@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { CupSizeCircleIcon } from "@/src/shared/components/shared/Icon";
 import AddToCart from "@/src/features/product/components/AddToCart";
 import type { Product } from "@/src/features/search/types";
@@ -6,6 +7,13 @@ import type { Product } from "@/src/features/search/types";
 interface ProductItemProps extends Product {}
 
 export default function ProductItem({ id, name, price, quantity, thumbnail, detailImage, intensity, cupSize, isSoldOut }: ProductItemProps) {
+    const router = useRouter();
+
+    // 상품 카드 클릭 핸들러
+    const handleCardClick = () => {
+        router.push(`/product/${id}`);
+    };
+
     // 동적으로 배지 생성 (프론트에서 처리) - 모든 배지 제거
     const getBadges = () => {
         const badges: { text: string; type: "category" | "new" | "best" | "decaf" }[] = [];
@@ -39,7 +47,10 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
     const intensityDisplay = getIntensityDisplay(intensity);
 
     return (
-        <div className="border border-gray-200/70 rounded-xl p-4">
+        <div 
+            className="border border-gray-200/70 rounded-xl p-4 cursor-pointer hover:shadow-lg transition-shadow duration-200"
+            onClick={handleCardClick}
+        >
             <div className="mb-4">
                 <div className="flex gap-2 mb-6">
                     {badges.map(badge => (
@@ -48,7 +59,7 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
                         </span>
                     ))}
                 </div>
-                <div className="aspect-[3/2] bg-gray-50 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
+                <div className="aspect-[136/117] bg-gray-50 flex items-center justify-center mb-4 relative overflow-hidden rounded-md">
                     <Image src={thumbnail} alt={name} fill className="object-cover" />
                 </div>
                 <div className="flex justify-center items-center gap-4 mb-4">
@@ -70,7 +81,7 @@ export default function ProductItem({ id, name, price, quantity, thumbnail, deta
                     <h3 className="text-[#37383c] text-lg mb-2">{name}</h3>
                     <p className="text-[#37383c]/60 text-sm">₩{price.toLocaleString()}</p>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center" onClick={(e) => e.stopPropagation()}>
                     <AddToCart productId={id} title={name} stockQuantity={quantity} withPopup={true} />
                 </div>
             </div>
