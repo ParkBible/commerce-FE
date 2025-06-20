@@ -1,4 +1,4 @@
-import { FileText, MessageSquareText, MessagesSquare, Settings, ShoppingBag } from "lucide-react";
+import { FileText, MessageSquareText, MessagesSquare, ShoppingBag } from "lucide-react";
 
 export const sidebarData = {
     navGroups: [
@@ -27,13 +27,6 @@ export const sidebarData = {
                     title: "리뷰 관리",
                     href: "/reviews",
                     icon: MessageSquareText,
-                    variant: "ghost",
-                },
-
-                {
-                    title: "설정",
-                    href: "/settings",
-                    icon: Settings,
                     variant: "ghost",
                 },
             ],
