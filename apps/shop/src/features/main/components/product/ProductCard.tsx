@@ -67,7 +67,7 @@ export const ProductCard = ({ productId, badges, image, features, name, descript
                                 {badges.slice(0, 2).map((badge, index) => (
                                     <span
                                         key={`badge-${index}`}
-                                        className={`px-2 py-1 rounded text-xs font-medium ${badge.variant === "yellow"
+                                        className={`px-2 py-1 rounded text-xs font-medium text-center min-w-20 inline-block ${badge.variant === "yellow"
                                             ? "bg-yellow-100 text-yellow-800"
                                             : badge.variant === "red"
                                                 ? "bg-red-100 text-red-800"
