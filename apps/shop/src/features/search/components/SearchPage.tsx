@@ -28,7 +28,8 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
         page: 0,
         size: 20,
     });
-    const [loading, setLoading] = useState(false);
+    const [productsLoading, setProductsLoading] = useState(false); // 상품 목록만을 위한 로딩 상태
+    const [categoriesLoading, setCategoriesLoading] = useState(true); // 카테고리 로딩 상태
     const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
     const [selectedCupSize, setSelectedCupSize] = useState<string | null>(null);
 
@@ -37,12 +38,17 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
 
     // 카테고리 로드
     const loadCategories = useCallback(async () => {
-        const categoriesData = await getProductCategories();
-        setCategories(categoriesData);
+        setCategoriesLoading(true);
+        try {
+            const categoriesData = await getProductCategories();
+            setCategories(categoriesData);
+        } finally {
+            setCategoriesLoading(false);
+        }
     }, []);
 
     const fetchSearchResults = useCallback(async () => {
-        setLoading(true);
+        setProductsLoading(true); // 상품 목록만 로딩 표시
         try {
             // 개별 ID를 직접 사용 (그룹핑 없음)
             const intensityIds = selectedIntensity || undefined;
@@ -53,7 +59,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
         } catch (error) {
             console.error("검색 실패:", error);
         } finally {
-            setLoading(false);
+            setProductsLoading(false);
         }
     }, [query, selectedIntensity, selectedCupSize]);
 
@@ -78,7 +84,8 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
         setSelectedCupSize(cupSize);
     };
 
-    if (loading || !categories) {
+    // 카테고리가 로딩 중일 때만 전체 로딩 화면 표시
+    if (categoriesLoading || !categories) {
         return (
             <div className="w-full min-h-screen flex items-center justify-center">
                 <div className="text-center">
@@ -95,7 +102,7 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
                 <div className="max-w-[75rem] mx-auto">
                     {/* 필터 및 상품 목록 */}
                     <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-                        {/* 필터 */}
+                        {/* 필터 - 항상 표시 */}
                         <SearchFilter
                             resultCount={searchResults?.totalElements}
                             selectedIntensity={selectedIntensity}
@@ -107,8 +114,16 @@ export default function SearchPage({ initialProducts = [], initialTotalElements 
                             cupSizes={categories?.cupSizes || []}
                         />
 
-                        {/* 상품 목록 */}
-                        <ProductList products={searchResults?.content || []} />
+                        {/* 상품 목록 - 로딩 중일 때 별도 처리 */}
+                        <div className="flex-1 min-w-0">
+                            {productsLoading ? (
+                                <div className="flex items-center justify-center h-64">
+                                    <Loading message="상품을 검색하는 중..." />
+                                </div>
+                            ) : (
+                                <ProductList products={searchResults?.content || []} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </main>

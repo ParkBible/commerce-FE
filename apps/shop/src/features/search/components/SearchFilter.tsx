@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { memo } from "react";
 import { ArrowIcon } from "@/src/shared/components/shared/Icon";
 import { FilterButton } from "./FilterButton";
 import type { CategoryItem } from "@/src/features/search/api/categoriesApi";
@@ -15,7 +16,7 @@ interface SearchFilterProps {
     cupSizes?: CategoryItem[];
 }
 
-export default function SearchFilter({
+const SearchFilter = memo(function SearchFilter({
     resultCount,
     selectedIntensity,
     selectedCupSize,
@@ -98,4 +99,6 @@ export default function SearchFilter({
             </div>
         </div>
     );
-}
+});
+
+export default SearchFilter;
