@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function CoffeeLetter() {
     return (
-        <article className="flex flex-col md:flex-row items-center gap-10 py-16 px-6 pt-48 pb-12 transition-all duration-300 animate-fade-in animate-slide-up opacity-100">
+        <article className="flex flex-col md:flex-row items-center gap-10 py-16 px-6 pl-20 pt-48 pb-12 transition-all duration-300 animate-fade-in animate-slide-up opacity-100">
             <section className="overflow-hidden grow shrink self-stretch my-auto leading-snug text-black whitespace-nowrap rounded-xl min-w-60 w-[35rem] max-md:max-w-full">
                 <div className="flex relative flex-col items-start px-14 py-24 w-full min-h-[23rem] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img
