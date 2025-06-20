@@ -22,14 +22,14 @@ export default function SelectShippingInfo({ shipingInfo, onChangeDeliveryMessag
     return (
         <div className="p-4 border border-gray-200 rounded-2xl">
             <h4 className="text-lg font-bold">배송지</h4>
-            {addresses.length > 0 && shipingInfo ? (
+            {shipingInfo ? (
                 <>
                     <div className="flex justify-between items-center mb-5">
                         <div className="flex items-center gap-2">
                             <h3 className="font-bold text-base">{shipingInfo?.alias}</h3>
                             {shipingInfo?.isDefault && <span className="text-sm text-gray-500 bg-gray-100 rounded-sm px-2 py-1">기본 배송지</span>}
                         </div>
-                        <Button variant="outline" onClick={openModal}>
+                        <Button variant="outline" onClick={openModal} type="button">
                             배송지 변경
                         </Button>
                     </div>
@@ -44,8 +44,10 @@ export default function SelectShippingInfo({ shipingInfo, onChangeDeliveryMessag
                     </div>
                 </>
             ) : (
-                <div className="flex justify-center items-center h-full">
-                    <p className="text-gray-500">배송지를 추가해주세요.</p>
+                <div className="text-center py-2">
+                    <Button variant="outline" onClick={openModal} type="button" size="full">
+                        배송지 선택
+                    </Button>
                 </div>
             )}
             <Modal title="배송지 변경" onClickClose={closeModal}>
