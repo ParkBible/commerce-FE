@@ -1,7 +1,7 @@
 # ☕ Commerce-FE
-**시연 영상** : https://youtu.be/wmvD142fEGA?si=Ekg60SnWKJotvaJ5
 
-Inner Circle 프로젝트 - 커머스 팀 (**801 베이스**)
+Inner Circle 프로젝트 - 커머스 팀 (**801 베이스**)<br>
+**시연 영상** : https://youtu.be/wmvD142fEGA?si=Ekg60SnWKJotvaJ5
 <br><br>
 
 ❗ `/apps` 디렉토리 내에 쇼핑몰과 백오피스 앱이 나누어진 모노레포 구조입니다.
